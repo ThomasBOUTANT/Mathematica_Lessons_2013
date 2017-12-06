@@ -1,0 +1,105 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      2890,         95]
+NotebookOptionsPosition[      2218,         70]
+NotebookOutlinePosition[      2563,         85]
+CellTagsIndexPosition[      2520,         82]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Courbe de Van Koch", "Title",
+ CellChangeTimes->{{3.5633520958782067`*^9, 3.563352101806217*^9}},
+ Background->RGBColor[1, 0.9, 0.8]],
+
+Cell["Exo 1 :", "Subtitle",
+ CellChangeTimes->{{3.5633521530367064`*^9, 3.563352160259519*^9}, {
+  3.563352193518777*^9, 3.5633521985419855`*^9}},
+ Background->RGBColor[1, 1, 0.85]],
+
+Cell["Exo 2 :", "Subtitle",
+ CellChangeTimes->{{3.563352169525935*^9, 3.563352202753993*^9}},
+ Background->RGBColor[1, 1, 0.85]],
+
+Cell["Exo 3 :", "Subtitle",
+ CellChangeTimes->{{3.563352170524337*^9, 3.5633522083700027`*^9}},
+ Background->RGBColor[1, 1, 0.85]],
+
+Cell["Exo 4 :", "Subtitle",
+ CellChangeTimes->{{3.563352171257538*^9, 3.5633522128940105`*^9}},
+ Background->RGBColor[1, 1, 0.85]],
+
+Cell["Exo 5 :", "Subtitle",
+ CellChangeTimes->{{3.5633521724743404`*^9, 3.5633521823491573`*^9}, {
+  3.563352215280815*^9, 3.5633522200856233`*^9}},
+ Background->RGBColor[1, 1, 0.85]],
+
+Cell["Exo 6 :", "Subtitle",
+ CellChangeTimes->{{3.563352173160742*^9, 3.5633521823491573`*^9}, {
+  3.563352222238427*^9, 3.5633522271056356`*^9}},
+ Background->RGBColor[1, 1, 0.85]],
+
+Cell["Exo 7 :", "Subtitle",
+ CellChangeTimes->{{3.5633522390864563`*^9, 3.5633522681649075`*^9}},
+ Background->RGBColor[1, 1, 0.85]],
+
+Cell["Exo 8 :", "Subtitle",
+ CellChangeTimes->{{3.563352241613661*^9, 3.563352273718517*^9}},
+ Background->RGBColor[1, 1, 0.85]],
+
+Cell["Exo 9 :", "Subtitle",
+ CellChangeTimes->{{3.5633522426588626`*^9, 3.563352278414125*^9}},
+ Background->RGBColor[1, 1, 0.85]],
+
+Cell["Exo 10 :", "Subtitle",
+ CellChangeTimes->{{3.5633522432672634`*^9, 3.563352283499734*^9}},
+ Background->RGBColor[1, 1, 0.85]]
+}, Open  ]]
+},
+WindowSize->{707, 505},
+WindowMargins->{{24, Automatic}, {Automatic, 30}},
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 139, 2, 99, "Title"],
+Cell[721, 26, 181, 3, 65, "Subtitle"],
+Cell[905, 31, 128, 2, 65, "Subtitle"],
+Cell[1036, 35, 130, 2, 65, "Subtitle"],
+Cell[1169, 39, 130, 2, 65, "Subtitle"],
+Cell[1302, 43, 183, 3, 65, "Subtitle"],
+Cell[1488, 48, 181, 3, 65, "Subtitle"],
+Cell[1672, 53, 132, 2, 65, "Subtitle"],
+Cell[1807, 57, 128, 2, 65, "Subtitle"],
+Cell[1938, 61, 130, 2, 65, "Subtitle"],
+Cell[2071, 65, 131, 2, 65, "Subtitle"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

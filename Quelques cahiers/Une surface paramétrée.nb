@@ -1,0 +1,113 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      3220,        103]
+NotebookOptionsPosition[      2698,         82]
+NotebookOutlinePosition[      3181,        100]
+CellTagsIndexPosition[      3138,         97]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Une surface param\[EAcute]tr\[EAcute]e", "Title"],
+
+Cell["Marc Lorenzi - 24 janvier 2008", "Author",
+ CellChangeTimes->{{3.41018178834375*^9, 3.41018179225*^9}}],
+
+Cell[TextData[{
+ StyleBox["But",
+  FontWeight->"Bold"],
+ " : R\[EAcute]cr\[EAcute]ation.  Obtenir un affichage r\[EAcute]aliste d'une \
+surface."
+}], "Text",
+ CellChangeTimes->{{3.410181660453125*^9, 3.410181661578125*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ParametricPlot3D", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"2", "+", 
+        RowBox[{"Cos", "[", "u", "]"}]}], ")"}], "*", 
+      RowBox[{"Cos", "[", "v", "]"}]}], ",", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"2", "+", 
+        RowBox[{"Cos", "[", 
+         RowBox[{"3", "*", "u"}], "]"}]}], ")"}], "*", 
+      RowBox[{"Sin", "[", "v", "]"}]}], ",", 
+     RowBox[{"3", "*", 
+      RowBox[{"Sin", "[", "u", "]"}]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"u", ",", "0", ",", 
+     RowBox[{"2", "Pi"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"v", ",", "0", ",", 
+     RowBox[{"2", "Pi"}]}], "}"}], ",", 
+   RowBox[{"PlotPoints", "\[Rule]", "50"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"ImageSize", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"500", ",", "500"}], "}"}]}], ",", 
+   RowBox[{"PlotStyle", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"RGBColor", "[", 
+       RowBox[{"0.3", ",", "0.2", ",", "0"}], "]"}], ",", 
+      RowBox[{"Specularity", "[", 
+       RowBox[{"White", ",", "5"}], "]"}]}], "}"}]}], ",", 
+   RowBox[{"Lighting", "\[Rule]", "\"\<Neutral\>\""}], ",", 
+   RowBox[{"Background", "\[Rule]", "Black"}], ",", 
+   RowBox[{"Mesh", "\[Rule]", "None"}], ",", 
+   RowBox[{"Boxed", "\[Rule]", "False"}], ",", 
+   RowBox[{"Axes", "\[Rule]", "False"}], ",", 
+   RowBox[{"SphericalRegion", "\[Rule]", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.41018094734375*^9, 3.410180967890625*^9}, {
+  3.4101810003125*^9, 3.410181016265625*^9}, {3.410181054125*^9, 
+  3.410181560265625*^9}, {3.41018160628125*^9, 3.4101816515625*^9}, {
+  3.410181692484375*^9, 3.410181767328125*^9}}]
+}, Open  ]]
+},
+ScreenStyleEnvironment->"Working",
+WindowSize->{666, 579},
+WindowMargins->{{73, Automatic}, {Automatic, 0}},
+CellLabelAutoDelete->True,
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 55, 0, 65, "Title"],
+Cell[637, 24, 109, 1, 23, "Author"],
+Cell[749, 27, 223, 6, 29, "Text"],
+Cell[975, 35, 1707, 44, 142, "Input"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

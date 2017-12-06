@@ -1,0 +1,705 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     19412,        695]
+NotebookOptionsPosition[     16602,        608]
+NotebookOutlinePosition[     17022,        624]
+CellTagsIndexPosition[     16979,        621]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+Transform\[EAcute]e de Fourier discr\[EGrave]te\
+\>", "Title"],
+
+Cell[BoxData[
+ RowBox[{"Quit", "[", "]"}]], "Input"],
+
+Cell["\<\
+Ce notebook a pour objet une \[EAcute]tude succincte de la transformation de \
+Fourier discr\[EGrave]te (en abr\[EAcute]g\[EAcute] TFD, ou DFT pour les \
+anglo-saxons). On commence par d\[EAcute]finir matriciellement cette \
+transformation. Puis on regarde comment elle est associ\[EAcute]e au probl\
+\[EGrave]me de la \"r\[EAcute]cup\[EAcute]ration\" des fr\[EAcute]quences \
+caract\[EAcute]ristiques d'un signal p\[EAcute]riodique.
+Enfin, on montre sur un exemple comment on peut gr\[AHat]ce \[AGrave] la DFT \
+\[EAcute]liminer certains types de bruits (sifflements, par exemple) superpos\
+\[EAcute]s \[AGrave] un signal.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Une matrice remarquable"
+}], "Section"],
+
+Cell[TextData[{
+ "Une matrice va jouer un r\[OHat]le central dans toute la suite. Cette \
+matrice, que l'on notera ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["W", "n"], TraditionalForm]]],
+ ",  est une matrice sym\[EAcute]trique complexe de taille ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"n", "\[Times]", "n"}], TraditionalForm]]],
+ ". Elle contient les puissances des racines ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " i\[EGrave]mes de l'unit\[EAcute]. La matrice ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["W", "n"], TraditionalForm]]],
+ " est ensuite normalis\[EAcute]e en la divisant par ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ ". "
+}], "Text"],
+
+Cell[TextData[{
+ "Pour \[EHat]tre pr\[EAcute]cis, on trouve \[AGrave] la ligne ",
+ Cell[BoxData[
+  FormBox["i", TraditionalForm]]],
+ ", colonne ",
+ Cell[BoxData[
+  FormBox["j", TraditionalForm]]],
+ " de la matrice ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["W", "n"], TraditionalForm]]],
+ " le nombre complexe ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    FractionBox["1", "n"], 
+    SuperscriptBox["\[Zeta]", 
+     RowBox[{"-", "ij"}]]}], TraditionalForm]]],
+ ", o\[UGrave] ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Zeta]", "=", 
+    SuperscriptBox["\[ExponentialE]", 
+     RowBox[{"2", 
+      RowBox[{"\[ImaginaryI]\[Pi]", "/", "n"}]}]]}], TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"0", "\[LessEqual]", "i"}], ",", 
+    RowBox[{"j", "\[LessEqual]", 
+     RowBox[{"n", "-", "1"}]}]}], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"w", "[", "n_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"Exp", "[", 
+      RowBox[{
+       RowBox[{"-", "2."}], "*", "I", "*", "i", "*", "j", "*", 
+       RowBox[{"Pi", "/", "n"}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "0", ",", 
+       RowBox[{"n", "-", "1"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"j", ",", "0", ",", 
+       RowBox[{"n", "-", "1"}]}], "}"}]}], "]"}], "/", "n"}]}]], "Input"],
+
+Cell[TextData[{
+ "Voici par exemple la matrice ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["W", "4"], TraditionalForm]]],
+ ". La fonction ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " ",
+ StyleBox["Chop", "Input"],
+ " utilis\[EAcute]e ci-dessous remplace par 0 tous les nombres \
+inf\[EAcute]rieurs \[AGrave] ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["10", 
+    RowBox[{"-", "10"}]], TraditionalForm]]],
+ " en valeur absolue. Elle permet ainsi d'avoir des r\[EAcute]sultats num\
+\[EAcute]riques \"propres\" lors de calculs approch\[EAcute]s."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Chop", "[", 
+   RowBox[{"w", "[", "4", "]"}], "]"}], "//", "MatrixForm"}]], "Input"],
+
+Cell[TextData[{
+ "La matrice ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["W", "n"], TraditionalForm]]],
+ " poss\[EGrave]de la propri\[EAcute]t\[EAcute] remarquable suivante : son \
+inverse est presque \[EAcute]gal \[AGrave] sa matrice conjugu\[EAcute]e."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"7", "*", 
+   RowBox[{"Chop", "[", 
+    RowBox[{
+     RowBox[{"w", "[", "7", "]"}], ".", 
+     RowBox[{"Conjugate", "[", 
+      RowBox[{"w", "[", "7", "]"}], "]"}]}], "]"}]}], "//", 
+  "MatrixForm"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Cons\[EAcute]quence"
+}], "Section"],
+
+Cell[TextData[{
+ "Appelons ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", 
+    RowBox[{"m", ",", "n"}]], TraditionalForm]]],
+ " la ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]]],
+ "i\[EGrave]me colonne de la matrice conjugu\[EAcute]e de ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["W", "n"], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"x", "[", 
+   RowBox[{"m_", ",", "n_"}], "]"}], ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"Exp", "[", 
+     RowBox[{"2.", "*", "I", "*", "k", "*", "m", "*", 
+      RowBox[{"Pi", "/", "n"}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", "0", ",", 
+      RowBox[{"n", "-", "1"}]}], "}"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"x", "[", 
+   RowBox[{"3", ",", "10"}], "]"}], "//", "MatrixForm"}]], "Input"],
+
+Cell[TextData[{
+ "Alors, ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["W", "n"], 
+    SubscriptBox["x", 
+     RowBox[{"m", ",", "n"}]]}], TraditionalForm]]],
+ " est un vecteur tr\[EGrave]s simple."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Chop", "[", 
+   RowBox[{
+    RowBox[{"w", "[", "10", "]"}], ".", 
+    RowBox[{"x", "[", 
+     RowBox[{"3", ",", "10"}], "]"}]}], "]"}], "//", "MatrixForm"}]], "Input"],
+
+Cell["\<\
+Nous allons maintenant voir en quoi ce fait permet l'analyse des \
+fr\[EAcute]quences des signaux p\[EAcute]riodiques.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " \[CapitalEAcute]chantillonnage d'un signal p\[EAcute]riodique"
+}], "Section"],
+
+Cell[TextData[{
+ "Dans tout ce qui suit, on appellera ",
+ StyleBox["signal",
+  FontSlant->"Italic"],
+ " toute fonction \[AGrave] valeurs complexes. L'\[EAcute]tude des signaux \
+\[AGrave] valeurs r\[EAcute]elles n'est pas vraiment plus difficile, mais \
+elle fait intervenir quelques petits probl\[EGrave]mes \
+suppl\[EAcute]mentaires."
+}], "Text"],
+
+Cell[TextData[{
+ "On suppose donn\[EAcute] un signal ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"f", "(", "t", ")"}], TraditionalForm]]],
+ " p\[EAcute]riodique, de p\[EAcute]riode ",
+ Cell[BoxData[
+  FormBox["T", TraditionalForm]]],
+ ". On se donne un entier ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " et on pr\[EAcute]l\[EGrave]ve la valeur du signal \[AGrave] des \
+intervalles de temps constants \[EAcute]gaux \[AGrave] ",
+ Cell[BoxData[
+  FormBox[
+   FractionBox["T", "n"], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"echantillonner", "[", 
+   RowBox[{"f_", ",", "T_", ",", "n_"}], "]"}], ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"f", "[", 
+     RowBox[{"k", "*", 
+      RowBox[{"T", "/", "n"}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", "0", ",", 
+      RowBox[{"n", "-", "1"}]}], "}"}]}], "]"}]}]], "Input"],
+
+Cell[TextData[{
+ "Prenons un signal simple. On fabrique une combinaison lin\[EAcute]aire \
+d'exponentielles complexes. Nous appellerons les multiplicateurs apparaissant \
+dans les exposants (3,5,1,9) sur l'exemple les ",
+ StyleBox["fr\[EAcute]quences caract\[EAcute]ristiques",
+  FontWeight->"Bold"],
+ " de ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ ". Les multiplicateurs devant les exponentielles seront appel\[EAcute]s les ",
+ StyleBox["intensit\[EAcute]s correspondantes",
+  FontWeight->"Bold"],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", "[", "t_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"Exp", "[", 
+    RowBox[{"20", "*", "I", "*", "t"}], "]"}], "-", 
+   RowBox[{"Exp", "[", 
+    RowBox[{"18", "*", "I", "*", "t"}], "]"}], "+", 
+   RowBox[{"0.2", "*", 
+    RowBox[{"Exp", "[", 
+     RowBox[{"21", "*", "I", "*", "t"}], "]"}]}]}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"s", "=", 
+   RowBox[{"echantillonner", "[", 
+    RowBox[{"f", ",", 
+     RowBox[{"2", "*", "Pi"}], ",", "300"}], "]"}]}], ";"}]], "Input"],
+
+Cell["\<\
+Voici une image de l'\[EAcute]chantillonnage (le signal \[EAcute]tant \
+complexe, on trace ici sa partie r\[EAcute]elle. On peut bien s\[UHat]r aussi \
+tracer son module ou sa partie imaginaire).\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", 
+  RowBox[{
+   RowBox[{"Re", "[", "s", "]"}], ",", 
+   RowBox[{"Joined", "\[Rule]", "True"}]}], "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Transform\[EAcute]e de Fourier discr\[EGrave]te"
+}], "Section"],
+
+Cell[TextData[{
+ "Calculer la transform\[EAcute]e de Fourier discr\[EGrave]te de ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ ", c'est \[EAcute]chantillonner ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ " sur un intervalle p\[EAcute]riode, puis appliquer la matrice ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["W", "n"], TraditionalForm]]],
+ " au vecteur ainsi form\[EAcute]."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"dft", "[", 
+   RowBox[{"f_", ",", "T_", ",", "n_"}], "]"}], ":=", 
+  RowBox[{"Chop", "[", 
+   RowBox[{
+    RowBox[{"w", "[", "n", "]"}], ".", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"f", "[", 
+       RowBox[{"k", "*", 
+        RowBox[{"T", "/", "n"}]}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"k", ",", "0", ",", 
+        RowBox[{"n", "-", "1"}]}], "}"}]}], "]"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"d", "=", 
+  RowBox[{"dft", "[", 
+   RowBox[{"f", ",", 
+    RowBox[{"2", "*", "Pi"}], ",", "30"}], "]"}]}]], "Input"],
+
+Cell[TextData[{
+ "On comprend tout l'int\[EAcute]r\[EHat]t de la DFT : ",
+ StyleBox["on vient de r\[EAcute]cup\[EAcute]rer les intensit\[EAcute]s \
+associ\[EAcute]es aux fr\[EAcute]quences caract\[EAcute]ristiques du signal ",
+  FontWeight->"Bold"],
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]],
+  FontWeight->"Bold"],
+ StyleBox[".",
+  FontWeight->"Bold"]
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"f", "[", "t", "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Transform\[EAcute]e de Fourier inverse"
+}], "Section"],
+
+Cell["\<\
+On peut retrouver le signal de d\[EAcute]part \[AGrave] partir du vecteur de \
+la TFD. Il suffit de combiner les coefficients du vecteur de la DFT avec des \
+exponentielles complexes.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"inverseDft", "[", 
+   RowBox[{"d_", ",", "n_", ",", "t_"}], "]"}], ":=", 
+  RowBox[{"d", ".", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"Exp", "[", 
+      RowBox[{"I", "*", "k", "*", "t"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", "0", ",", 
+       RowBox[{"n", "-", "1"}]}], "}"}]}], "]"}]}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"Re", "[", 
+    RowBox[{"inverseDft", "[", 
+     RowBox[{"d", ",", "30", ",", "t"}], "]"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}]}], "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Une application : \[EAcute]limination du bruit dans un signal."
+}], "Section"],
+
+Cell["\<\
+Nous allons d'abord fabriquer du bruit : ce sera une fonction \
+p\[EAcute]riodique al\[EAcute]atoire de \"grande fr\[EAcute]quence\" par \
+rapport aux signaux qui nous int\[EAcute]ressent.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"t1", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"0.3`", " ", 
+     RowBox[{"RandomReal", "[", "]"}]}], ",", 
+    RowBox[{"{", "30", "}"}]}], "]"}]}]], "Input"],
+
+Cell["\<\
+La fonction bruit ci-dessous produit un signal dont les fr\[EAcute]quences s'\
+\[EAcute]chelonnent entre 30 et 60 Hertz.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"bruit", "[", "t_", "]"}], "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"t1", "*", 
+     RowBox[{"Exp", "[", 
+      RowBox[{"I", "*", "t", "*", 
+       RowBox[{"(", 
+        RowBox[{"30", "+", 
+         RowBox[{"Range", "[", "30", "]"}]}], ")"}]}], "]"}]}], "]"}]}], 
+  ";"}]], "Input"],
+
+Cell[TextData[{
+ "On superpose ce bruit \[AGrave] la fonction ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ " d\[EAcute]finie ci-dessous : les fr\[EAcute]quences \
+caract\[EAcute]ristiques de ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ " sont 18Hz et 20Hz, alors que les fr\[EAcute]quences \
+caract\[EAcute]ristiques du bruit sont sup\[EAcute]rieures \[AGrave] 30Hz."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "t_", "]"}], "=", 
+   RowBox[{
+    RowBox[{"Exp", "[", 
+     RowBox[{"20", "*", "I", "*", "t"}], "]"}], "-", 
+    RowBox[{"Exp", "[", 
+     RowBox[{"18", "*", "I", "*", "t"}], "]"}]}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"Re", "[", 
+    RowBox[{"f", "[", "t", "]"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"g", "[", "t_", "]"}], "=", 
+   RowBox[{
+    RowBox[{"f", "[", "t", "]"}], "+", 
+    RowBox[{"bruit", "[", "t", "]"}]}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"Re", "[", 
+    RowBox[{"g", "[", "t", "]"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}]}], "]"}]], "Input"],
+
+Cell["\<\
+Avec un peu d'imagination, on reconna\[IHat]t encore le signal de \
+d\[EAcute]part, mais c'est tout juste. Calculons la DFT de ce signal.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"d", "=", 
+   RowBox[{"Chop", "[", 
+    RowBox[{"dft", "[", 
+     RowBox[{"g", ",", 
+      RowBox[{"2", "*", "Pi"}], ",", "70"}], "]"}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", 
+  RowBox[{"d", ",", 
+   RowBox[{"Joined", "\[Rule]", "True"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]], "Input"],
+
+Cell[TextData[StyleBox["On vient de r\[EAcute]ussir \[AGrave] dissocier le \
+signal et le bruit !",
+ FontWeight->"Bold"]], "Text"],
+
+Cell[TextData[{
+ "Les deux pics sur la gauche du spectre correspondent aux deux \
+fr\[EAcute]quences caract\[EAcute]ristiques du signal ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ " (18 et 20Hz). Ce qui se trouve sur la droite du spectre est d\[UHat] au \
+bruit."
+}], "Text"],
+
+Cell[TextData[{
+ "Il ne reste qu'\[AGrave] supprimer le bruit, c'est \[AGrave] dire \[AGrave] \
+annuler les coefficients de ",
+ Cell[BoxData[
+  FormBox["d", TraditionalForm]]],
+ " dont l'indice est sup\[EAcute]rieur \[AGrave], par exemple, 30."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"Do", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"d", "[", 
+     RowBox[{"[", "i", "]"}], "]"}], "=", "0"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"i", ",", "30", ",", "70"}], "}"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", 
+  RowBox[{"d", ",", 
+   RowBox[{"Joined", "\[Rule]", "True"}]}], "]"}]], "Input"],
+
+Cell["\<\
+On applique maintenant la DFT inverse pour revenir au signal :\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"signalLisse", "[", "t_", "]"}], "=", 
+   RowBox[{"Chop", "[", 
+    RowBox[{"inverseDft", "[", 
+     RowBox[{"d", ",", "70", ",", "t"}], "]"}], "]"}]}], ";"}]], "Input"],
+
+Cell["\<\
+Le r\[EAcute]sultat ci-dessous ne n\[EAcute]cessite, je pense, aucun \
+commentaire. Le signal d'origine est retrouv\[EAcute].\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"Re", "[", 
+    RowBox[{"signalLisse", "[", "t", "]"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}]}], "]"}]], "Input"],
+
+Cell["\<\
+\[CapitalEAcute]videmment, dans la r\[EAcute]alit\[EAcute], les choses \
+souvent souvent (toujours) beaucoup plus compliqu\[EAcute]es. En particulier, \
+lorsque les fr\[EAcute]quences caract\[EAcute]ristiques du bruit et du signal \
+se recoupent, la s\[EAcute]paration est bien plus d\[EAcute]licate\
+\>", "Text"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{666, 579},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 72, 2, 65, "Title"],
+Cell[654, 26, 52, 1, 41, "Input"],
+Cell[709, 29, 647, 10, 119, "Text"],
+Cell[CellGroupData[{
+Cell[1381, 43, 84, 4, 75, "Section"],
+Cell[1468, 49, 679, 21, 65, "Text"],
+Cell[2150, 72, 861, 33, 59, "Text"],
+Cell[3014, 107, 495, 15, 41, "Input"],
+Cell[3512, 124, 569, 18, 68, "Text"],
+Cell[4084, 144, 119, 3, 41, "Input"],
+Cell[4206, 149, 267, 7, 47, "Text"],
+Cell[4476, 158, 244, 8, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4757, 171, 80, 4, 75, "Section"],
+Cell[4840, 177, 337, 14, 31, "Text"],
+Cell[5180, 193, 365, 11, 41, "Input"],
+Cell[5548, 206, 112, 3, 41, "Input"],
+Cell[5663, 211, 222, 9, 31, "Text"],
+Cell[5888, 222, 202, 6, 41, "Input"],
+Cell[6093, 230, 142, 3, 47, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6272, 238, 122, 4, 75, "Section"],
+Cell[6397, 244, 348, 8, 65, "Text"],
+Cell[6748, 254, 524, 17, 57, "Text"],
+Cell[7275, 273, 355, 11, 41, "Input"],
+Cell[7633, 286, 527, 13, 83, "Text"],
+Cell[8163, 301, 341, 10, 41, "Input"],
+Cell[8507, 313, 173, 5, 41, "Input"],
+Cell[8683, 320, 219, 4, 47, "Text"],
+Cell[8905, 326, 152, 4, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9094, 335, 108, 4, 75, "Section"],
+Cell[9205, 341, 407, 12, 47, "Text"],
+Cell[9615, 355, 445, 14, 41, "Input"],
+Cell[10063, 371, 140, 4, 41, "Input"],
+Cell[10206, 377, 370, 10, 47, "Text"],
+Cell[10579, 389, 54, 1, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10670, 395, 99, 4, 75, "Section"],
+Cell[10772, 401, 207, 4, 47, "Text"],
+Cell[10982, 407, 366, 11, 41, "Input"],
+Cell[11351, 420, 272, 8, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11660, 433, 123, 4, 75, "Section"],
+Cell[11786, 439, 212, 4, 47, "Text"],
+Cell[12001, 445, 195, 6, 41, "Input"],
+Cell[12199, 453, 144, 3, 47, "Text"],
+Cell[12346, 458, 331, 11, 41, "Input"],
+Cell[12680, 471, 397, 10, 47, "Text"],
+Cell[13080, 483, 259, 8, 41, "Input"],
+Cell[13342, 493, 226, 7, 41, "Input"],
+Cell[13571, 502, 185, 6, 41, "Input"],
+Cell[13759, 510, 226, 7, 41, "Input"],
+Cell[13988, 519, 161, 3, 47, "Text"],
+Cell[14152, 524, 196, 6, 41, "Input"],
+Cell[14351, 532, 172, 4, 41, "Input"],
+Cell[14526, 538, 130, 2, 29, "Text"],
+Cell[14659, 542, 285, 7, 47, "Text"],
+Cell[14947, 551, 256, 6, 47, "Text"],
+Cell[15206, 559, 219, 7, 41, "Input"],
+Cell[15428, 568, 122, 3, 41, "Input"],
+Cell[15553, 573, 86, 2, 29, "Text"],
+Cell[15642, 577, 215, 6, 41, "Input"],
+Cell[15860, 585, 149, 3, 29, "Text"],
+Cell[16012, 590, 236, 7, 41, "Input"],
+Cell[16251, 599, 323, 5, 65, "Text"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

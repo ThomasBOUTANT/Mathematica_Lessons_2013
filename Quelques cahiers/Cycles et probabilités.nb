@@ -1,0 +1,616 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     15928,        606]
+NotebookOptionsPosition[     14039,        545]
+NotebookOutlinePosition[     14494,        562]
+CellTagsIndexPosition[     14451,        559]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Cycles et Probabilit\[EAcute]s", "Title"],
+
+Cell["\<\
+
+Tout est parti d'une r\[EAcute]flexion en l'air, pour rire, histoire d'amuser \
+la galerie au milieu d'un cours de maths.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " D\[EAcute]nombrements de cycles"
+}], "Section"],
+
+Cell[TextData[{
+ "Soit ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"n", "\[Element]", "N"}], TraditionalForm]]],
+ ". \[CapitalEAcute]tant donn\[EAcute] un entier ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ " entre 2 et ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ ", le nombre de cycles de longueur ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ " dans ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["S", "n"], TraditionalForm]]],
+ " est ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SuperscriptBox[
+      SubscriptBox["C", "n"], "k"], "(", 
+     RowBox[{"k", "-", "1"}], ")"}], "!"}], TraditionalForm]]],
+ ". Ainsi, le nombre de cycles dans ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["S", "n"], TraditionalForm]]],
+ " est "
+}], "Text"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"p", "(", "n", ")"}], "=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       UnderoverscriptBox["\[Sum]", 
+        RowBox[{"k", "=", "2"}], "n"], 
+       RowBox[{
+        SuperscriptBox[
+         SubscriptBox["C", "n"], "k"], "(", 
+        RowBox[{"k", "-", "1"}], ")"}]}], "!=", 
+      RowBox[{
+       UnderoverscriptBox["\[Sum]", 
+        RowBox[{"k", "=", "2"}], "n"], 
+       FractionBox[
+        RowBox[{"n", "!"}], 
+        RowBox[{
+         RowBox[{"k", "(", 
+          RowBox[{"n", "-", "k"}], ")"}], "!"}]]}]}], "=", 
+     RowBox[{
+      UnderoverscriptBox["\[Sum]", 
+       RowBox[{"k", "=", "0"}], 
+       RowBox[{"n", "-", "2"}]], 
+      FractionBox[
+       RowBox[{"n", "!"}], 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"n", "-", "k"}], ")"}], 
+        RowBox[{"k", "!"}]}]]}]}]}], TraditionalForm]]],
+ "."
+}], "Text",
+ TextAlignment->Center],
+
+Cell[TextData[{
+ "On \[EAcute]tudie dans ce qui suit la quantit\[EAcute] ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"\[Gamma]", "(", "n", ")"}], "=", 
+    RowBox[{
+     RowBox[{
+      FractionBox["1", 
+       RowBox[{"n", "!"}]], 
+      RowBox[{"p", "(", "n", ")"}]}], "+", 
+     FractionBox["1", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"n", "-", "1"}], ")"}], "!"}]]}]}], TraditionalForm]]],
+ ". Au terme ",
+ Cell[BoxData[
+  FormBox[
+   FractionBox["1", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"n", "-", "1"}], ")"}], "!"}]], TraditionalForm]]],
+ " pr\[EGrave]s (n\[EAcute]gligeable par rapport au reste, on le verra), la \
+quantit\[EAcute] ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Gamma]", "(", "n", ")"}], TraditionalForm]]],
+ " est la probabilit\[EAcute] pour qu'une permutation des entiers de 1 \
+\[AGrave] ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " soit un cycle."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"\[Gamma]", "[", "n_", "]"}], ":=", 
+  RowBox[{"Sum", "[", 
+   RowBox[{
+    RowBox[{"1", "/", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"k", "!"}], "*", 
+       RowBox[{"(", 
+        RowBox[{"n", "-", "k"}], ")"}]}], ")"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", "0", ",", 
+      RowBox[{"n", "-", "1"}]}], "}"}]}], "]"}]}]], "Input"],
+
+Cell[TextData[{
+ "Quelques exp\[EAcute]riences font conjecturer que ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Gamma]", "(", "n", ")"}], TraditionalForm]]],
+ " tend vers 0 comme ",
+ Cell[BoxData[
+  FormBox[
+   FractionBox["1", "n"], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"k", "*", 
+     RowBox[{"\[Gamma]", "[", "k", "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", "2.", ",", "100."}], "}"}]}], "]"}], "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Une relation de r\[EAcute]currence"
+}], "Section"],
+
+Cell[TextData[{
+ "On d\[EAcute]finit ci-dessous une suite ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    SubscriptBox["e", "n"], ")"}], TraditionalForm]]],
+ ". Rappelons que ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["e", "n"], TraditionalForm]]],
+ " tend vers le nombre ",
+ Cell[BoxData[
+  FormBox["e", TraditionalForm]]],
+ " lorsque ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " tend vers l'infini. Mieux : ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["e", "n"], "=", 
+    RowBox[{
+     RowBox[{"e", "+", 
+      RowBox[{"o", "(", 
+       FractionBox["1", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"n", "-", "1"}], ")"}], "!"}]], ")"}]}], "=", 
+     RowBox[{"e", "+", 
+      RowBox[{"o", "(", 
+       FractionBox["1", 
+        SuperscriptBox["n", "p"]], ")"}]}]}]}], TraditionalForm]]],
+ ", ceci pour tout entier naturel ",
+ Cell[BoxData[
+  FormBox["p", TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"e", "[", "n_", "]"}], ":=", 
+  RowBox[{"Sum", "[", 
+   RowBox[{
+    RowBox[{"1", "/", 
+     RowBox[{"k", "!"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", "0", ",", 
+      RowBox[{"n", "-", "1"}]}], "}"}]}], "]"}]}]], "Input"],
+
+Cell[TextData[{
+ "On montre facilement en formant ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["\[Gamma]", "n"], "-", 
+    RowBox[{
+     FractionBox["1", "n"], 
+     SubscriptBox["e", "n"]}]}], TraditionalForm]]],
+ "puis en regroupant les termes, que :"
+}], "Text"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   SubscriptBox["\[Gamma]", "n"], "=", 
+   RowBox[{
+    FractionBox["1", "n"], 
+    RowBox[{"(", 
+     RowBox[{
+      SubscriptBox["e", "n"], "+", 
+      SubscriptBox["\[Gamma]", 
+       RowBox[{"n", "-", "1"}]]}], ")"}]}]}], TraditionalForm]], "Text",
+ TextAlignment->Center],
+
+Cell["Sur un exemple :", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"\[Gamma]", "[", "666", "]"}], "-", 
+  RowBox[{
+   RowBox[{"\[Gamma]", "[", "665", "]"}], "/", "666"}], "-", 
+  RowBox[{
+   RowBox[{"e", "[", "666", "]"}], "/", "666"}]}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " D\[EAcute]veloppement asymptotique"
+}], "Section"],
+
+Cell[TextData[{
+ "Il est relativement facile avec cette formule de montrer que ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Gamma]", "n"], TraditionalForm]]],
+ " est \[EAcute]quivalent \[AGrave] ",
+ Cell[BoxData[
+  FormBox[
+   FractionBox["e", "n"], TraditionalForm]]],
+ " lorsque ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " tend vers l'infini . Mieux que cela, on peut avoir un \
+d\[EAcute]veloppement asymptotique de ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Gamma]", "n"], TraditionalForm]]],
+ ", en rempla\[CCedilla]ant, de proche en proche, dans la formule ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Gamma]", 
+    RowBox[{"n", "-", "1"}]], TraditionalForm]]],
+ " en fonction de ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Gamma]", 
+    RowBox[{"n", "-", "2"}]], TraditionalForm]]],
+ ", etc. Le DA en question est ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["\[Gamma]", "n"], "=", 
+    RowBox[{
+     RowBox[{"f", "(", 
+      RowBox[{"n", ",", "p"}], ")"}], "+", 
+     RowBox[{"o", "(", 
+      FractionBox["1", 
+       SuperscriptBox["n", "p"]], ")"}]}]}], TraditionalForm]]],
+ ", o\[UGrave]"
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", "[", 
+   RowBox[{"n_", ",", "p_"}], "]"}], ":=", 
+  RowBox[{"E", "*", 
+   RowBox[{"Sum", "[", 
+    RowBox[{
+     RowBox[{"1", "/", 
+      RowBox[{"Product", "[", 
+       RowBox[{
+        RowBox[{"n", "-", "j"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"j", ",", "0", ",", 
+          RowBox[{"k", "-", "1"}]}], "}"}]}], "]"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", "1", ",", "p"}], "}"}]}], "]"}]}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"f", "[", 
+  RowBox[{"n", ",", "4"}], "]"}]], "Input"],
+
+Cell[TextData[{
+ "On pr\[EAcute]f\[EAcute]rerait avoir un d\[EAcute]veloppement suivant des \
+puissances de ",
+ Cell[BoxData[
+  FormBox[
+   FractionBox["1", "n"], TraditionalForm]]],
+ " :"
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"Series", "[", 
+  RowBox[{
+   RowBox[{"f", "[", 
+    RowBox[{"n", ",", "4"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"n", ",", "\[Infinity]", ",", "4"}], "}"}]}], "]"}]], "Input"],
+
+Cell[TextData[{
+ "A titre d'exemple, on compare la valeur de ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Gamma]", "100"], TraditionalForm]]],
+ " avec celle du d\[EAcute]veloppement asymptotique \[AGrave] 5 termes \
+correspondant. L'erreur est de l'ordre de ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["100", 
+    RowBox[{"-", "5"}]], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"\[Gamma]", "[", "100`20", "]"}], "-", 
+  RowBox[{"f", "[", 
+   RowBox[{"100", ",", "4"}], "]"}]}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Les nombres de Bell"
+}], "Section"],
+
+Cell[TextData[{
+ StyleBox["Le plus remarquable est \[AGrave] venir",
+  FontWeight->"Bold"],
+ " : les coefficients trouv\[EAcute]s dans le D.A. de ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Gamma]", "(", "n", ")"}], TraditionalForm]]],
+ " sont en fait des nombres connus, appel\[EAcute]s les Nombres de Bell (nous \
+les noterons ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["b", "n"], TraditionalForm]]],
+ " dans la suite). Parmi les nombreuses situations o\[UGrave] ces nombres \
+interviennent, citons en deux :\n- Le ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ "i\[EGrave]me nombre de Bell est le nombre de partitions (ou encore le \
+nombre de relations d'\[EAcute]quivalence) d'un ensemble \[AGrave] ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " \[EAcute]l\[EAcute]ments.\n-  Le ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ "i\[EGrave]me coefficient du d\[EAcute]veloppement de Taylor en 0 de la \
+fonction qui \[AGrave] ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " associe  ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"exp", "(", 
+    SuperscriptBox["e", "x"], ")"}], TraditionalForm]]],
+ " est : ",
+ Cell[BoxData[
+  FormBox[
+   FractionBox[
+    SubscriptBox["b", "n"], 
+    RowBox[{"n", "!"}]], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"s", "=", 
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"Exp", "[", 
+     RowBox[{"Exp", "[", "x", "]"}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "0", ",", "9"}], "}"}]}], "]"}]}]], "Input"],
+
+Cell["\<\
+On r\[EAcute]cup\[EGrave]re les coefficients ci-dessus et on les multiplie \
+par les factorielles des indices correspondants.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"Table", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"k", "!"}], "*", 
+    RowBox[{"Coefficient", "[", 
+     RowBox[{"s", ",", 
+      RowBox[{"x", "^", "k"}]}], "]"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{"k", ",", "1", ",", "9"}], "}"}]}], "]"}]], "Input"],
+
+Cell["Attention, magique ...", "Text"],
+
+Cell[BoxData[
+ RowBox[{"Series", "[", 
+  RowBox[{
+   RowBox[{"f", "[", 
+    RowBox[{"n", ",", "10"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"n", ",", "\[Infinity]", ",", "10"}], "}"}]}], "]"}]], "Input"],
+
+Cell[TextData[{
+ "Les nombres de Bell v\[EAcute]rifient une relation de r\[EAcute]currence \
+simple : ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["b", "0"], "=", "1"}], TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["b", 
+     RowBox[{"n", "+", "1"}]], 
+    RowBox[{
+     UnderoverscriptBox["\[Sum]", 
+      RowBox[{"k", "=", "0"}], "n"], 
+     RowBox[{
+      SuperscriptBox[
+       SubscriptBox["C", "n"], "k"], 
+      SubscriptBox["b", "k"]}]}]}], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"bell", "[", "0", "]"}], ":=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"bell", "[", "n_", "]"}], ":=", 
+  RowBox[{"Sum", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Binomial", "[", 
+      RowBox[{
+       RowBox[{"n", "-", "1"}], ",", "k"}], "]"}], "*", 
+     RowBox[{"bell", "[", "k", "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", "0", ",", 
+      RowBox[{"n", "-", "1"}]}], "}"}]}], "]"}]}]}], "Input"],
+
+Cell["\<\
+La complexit\[EAcute] de la fonction \"bell\" (programme vite fait mal fait) \
+\[EAcute]tant tr\[EGrave]s mauvaise, mieux vaut ne pas trop lui en demander.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"k", ",", 
+      RowBox[{"bell", "[", "k", "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", "0", ",", "15"}], "}"}]}], "]"}], "//", 
+  "TableForm"}]], "Input"],
+
+Cell[TextData[{
+ "Voil\[AGrave]. J'ai bien travaill\[EAcute] et je me mets une bonne note. A \
+creuser ... En particulier, il faudrait MONTRER que ce sont effectivement les \
+nombres de Bell qui apparaissent dans le DA de ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Gamma]", "(", "n", ")"}], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[TextData[{
+ StyleBox["R\[EAcute]f\[EAcute]rences",
+  FontSize->14,
+  FontSlant->"Italic"],
+ StyleBox[" : Eric Weisstein, CRC Concise Encyclopedia of Mathematics. \
+Consulter l'article \"Bell Numbers\", c'est ... remarquable. Le livre en \
+question est au CDI. On ne peut pas le rater, c'est le plus \[EAcute]pais de \
+tous (environ 3000 pages de tout ce qu'on devrait savoir, et qu'on ne sait \
+pas).",
+  FontSize->14]
+}], "Text",
+ FontColor->GrayLevel[1],
+ Background->RGBColor[0, 0, 1]]
+}, Open  ]]
+}, Open  ]]
+},
+ScreenStyleEnvironment->"Working",
+WindowSize->{666, 579},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 47, 0, 65, "Title"],
+Cell[629, 24, 146, 4, 65, "Text"],
+Cell[CellGroupData[{
+Cell[800, 32, 92, 4, 75, "Section"],
+Cell[895, 38, 771, 31, 49, "Text"],
+Cell[1669, 71, 934, 34, 40, "Text"],
+Cell[2606, 107, 927, 32, 77, "Text"],
+Cell[3536, 141, 386, 13, 41, "Input"],
+Cell[3925, 156, 269, 10, 39, "Text"],
+Cell[4197, 168, 245, 7, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4479, 180, 95, 4, 75, "Section"],
+Cell[4577, 186, 936, 36, 61, "Text"],
+Cell[5516, 224, 267, 9, 41, "Input"],
+Cell[5786, 235, 278, 10, 39, "Text"],
+Cell[6067, 247, 311, 11, 48, "Text"],
+Cell[6381, 260, 32, 0, 29, "Text"],
+Cell[6416, 262, 215, 6, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6668, 273, 95, 4, 75, "Section"],
+Cell[6766, 279, 1151, 39, 100, "Text"],
+Cell[7920, 320, 467, 15, 41, "Input"],
+Cell[8390, 337, 77, 2, 41, "Input"],
+Cell[8470, 341, 200, 7, 39, "Text"],
+Cell[8673, 350, 205, 6, 41, "Input"],
+Cell[8881, 358, 377, 12, 49, "Text"],
+Cell[9261, 372, 143, 4, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9441, 381, 80, 4, 75, "Section"],
+Cell[9524, 387, 1271, 39, 150, "Text"],
+Cell[10798, 428, 232, 7, 41, "Input"],
+Cell[11033, 437, 149, 3, 47, "Text"],
+Cell[11185, 442, 277, 9, 41, "Input"],
+Cell[11465, 453, 38, 0, 29, "Text"],
+Cell[11506, 455, 207, 6, 41, "Input"],
+Cell[11716, 463, 537, 21, 33, "Text"],
+Cell[12256, 486, 479, 15, 62, "Input"],
+Cell[12738, 503, 179, 3, 47, "Text"],
+Cell[12920, 508, 265, 9, 41, "Input"],
+Cell[13188, 519, 327, 8, 47, "Text"],
+Cell[13518, 529, 493, 12, 103, "Text"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

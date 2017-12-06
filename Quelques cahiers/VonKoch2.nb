@@ -1,0 +1,226 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      5826,        216]
+NotebookOptionsPosition[      4675,        173]
+NotebookOutlinePosition[      5095,        189]
+CellTagsIndexPosition[      5052,        186]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+La courbe de Vonkoch
+(M\[EAcute]thode 2)\
+\>", "Title"],
+
+Cell["\<\
+On code une suite de segments dans le plan par un mot de l'alphabet {A,G,D}. \
+L'interpr\[EAcute]tation en est
+- G : Rotation de \[Pi]/3 (Gauche)
+- D : Rotation de -2\[Pi]/3 (Droite)
+- A : Segment de longueur 1 (Avancer)\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["La fonction de r\[EAcute]\[EAcute]criture", "Section"],
+
+Cell[CellGroupData[{
+
+Cell["la fonction", "Subsection"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", 
+    RowBox[{"{", "}"}], "]"}], ":=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "A", "]"}], ":=", 
+   RowBox[{"{", 
+    RowBox[{"A", ",", "G", ",", "A", ",", "D", ",", "A", ",", "G", ",", "A"}],
+     "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"f", "[", "x_", "]"}], ":=", "x"}]}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Exemples", "Subsection"],
+
+Cell[BoxData[
+ RowBox[{"Map", "[", 
+  RowBox[{"f", ",", 
+   RowBox[{"{", "A", "}"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Flatten", "[", "%", "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Map", "[", 
+  RowBox[{"f", ",", "%"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Flatten", "[", "%", "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["La courbe de VonKoch", "Section"],
+
+Cell["\<\
+On it\[EGrave]re la fonction d\[EAcute]finie pr\[EAcute]c\[EAcute]demment\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"vonkoch", "[", "n_", "]"}], ":=", 
+  RowBox[{"Nest", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Map", "[", 
+       RowBox[{"f", ",", "#"}], "]"}], "]"}], "&"}], ",", 
+    RowBox[{"{", "A", "}"}], ",", "n"}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"vonkoch", "[", "3", "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Trac\[EAcute]", "Section"],
+
+Cell["\<\
+C'est la partie la moins dr\[OHat]le. On traduit la liste obtenue par r\
+\[EAcute]\[EAcute]critures en directives graphiques.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"plotVonkoch", "[", "n_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"x", "=", "0.`"}], ",", 
+      RowBox[{"y", "=", "0.`"}], ",", "L", ",", 
+      RowBox[{"L1", "=", 
+       RowBox[{"{", 
+        RowBox[{"{", 
+         RowBox[{"0.`", ",", "0.`"}], "}"}], "}"}]}], ",", 
+      RowBox[{"\[Theta]", "=", "0.`"}], ",", 
+      RowBox[{"dx", "=", "1"}], ",", 
+      RowBox[{"dy", "=", "1"}]}], "}"}], ",", 
+    RowBox[{
+     RowBox[{"L", "=", 
+      RowBox[{"vonkoch", "[", "n", "]"}]}], ";", 
+     RowBox[{"Do", "[", 
+      RowBox[{
+       RowBox[{"Switch", "[", 
+        RowBox[{
+         RowBox[{"L", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], 
+         ",", "\[IndentingNewLine]", "A", ",", 
+         RowBox[{
+          RowBox[{"x", "=", 
+           RowBox[{"x", "+", 
+            RowBox[{"dx", " ", 
+             RowBox[{"Cos", "[", "\[Theta]", "]"}]}]}]}], ";", 
+          RowBox[{"y", "=", 
+           RowBox[{"y", "+", 
+            RowBox[{"dy", " ", 
+             RowBox[{"Sin", "[", "\[Theta]", "]"}]}]}]}], ";", 
+          RowBox[{"PrependTo", "[", 
+           RowBox[{"L1", ",", 
+            RowBox[{"{", 
+             RowBox[{"x", ",", "y"}], "}"}]}], "]"}]}], ",", 
+         "\[IndentingNewLine]", "G", ",", 
+         RowBox[{"\[Theta]", "=", 
+          RowBox[{"\[Theta]", "+", 
+           FractionBox["\[Pi]", "3"]}]}], ",", "\[IndentingNewLine]", "D", 
+         ",", 
+         RowBox[{"\[Theta]", "=", 
+          RowBox[{"\[Theta]", "-", 
+           FractionBox[
+            RowBox[{"2", " ", "\[Pi]"}], "3"]}]}]}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", 
+         RowBox[{"Length", "[", "L", "]"}]}], "}"}]}], "]"}], ";", 
+     RowBox[{"ListPlot", "[", 
+      RowBox[{"L1", ",", 
+       RowBox[{"Joined", "\[Rule]", "True"}], ",", 
+       RowBox[{"AspectRatio", "\[Rule]", "Automatic"}]}], "]"}]}]}], 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"plotVonkoch", "[", "5", "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{666, 579},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 65, 3, 111, "Title"],
+Cell[647, 27, 244, 6, 83, "Text"],
+Cell[CellGroupData[{
+Cell[916, 37, 60, 0, 75, "Section"],
+Cell[CellGroupData[{
+Cell[1001, 41, 33, 0, 36, "Subsection"],
+Cell[1037, 43, 420, 13, 82, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1494, 61, 30, 0, 36, "Subsection"],
+Cell[1527, 63, 103, 3, 41, "Input"],
+Cell[1633, 68, 60, 1, 41, "Input"],
+Cell[1696, 71, 79, 2, 41, "Input"],
+Cell[1778, 75, 60, 1, 41, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1887, 82, 39, 0, 75, "Section"],
+Cell[1929, 84, 97, 2, 29, "Text"],
+Cell[2029, 88, 294, 9, 41, "Input"],
+Cell[2326, 99, 60, 1, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2423, 105, 32, 0, 75, "Section"],
+Cell[2458, 107, 149, 3, 29, "Text"],
+Cell[2610, 112, 1970, 54, 211, "Input"],
+Cell[4583, 168, 64, 1, 41, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

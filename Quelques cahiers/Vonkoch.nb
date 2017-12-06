@@ -1,0 +1,523 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     14113,        513]
+NotebookOptionsPosition[     11998,        440]
+NotebookOutlinePosition[     12454,        457]
+CellTagsIndexPosition[     12411,        454]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["La courbe de VonKoch", "Title"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Fonctions utiles"
+}], "Section"],
+
+Cell[BoxData[
+ RowBox[{"Quit", "[", "]"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Passage d'un point \[AGrave] son affixe et vice-versa"
+}], "Subsection"],
+
+Cell["\<\
+Voici deux fonctions tr\[EGrave]s simples permettant le passage des points \
+aux complexes et vice-versa. Un point est symbolis\[EAcute] par une liste de \
+deux nombres r\[EAcute]els.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"affixe", "[", 
+   RowBox[{"{", 
+    RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+  RowBox[{"x", " ", "+", " ", 
+   RowBox[{"\[ImaginaryI]", " ", "y"}]}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"affixe", "[", 
+  RowBox[{"{", 
+   RowBox[{"6", ",", "5"}], "}"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"image", "[", "z_", "]"}], ":=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"Re", "[", "z", "]"}], ",", 
+    RowBox[{"Im", "[", "z", "]"}]}], "}"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"image", "[", 
+  RowBox[{"3", "+", 
+   RowBox[{"5", "\[ImaginaryI]"}]}], "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Transformations affines"
+}], "Subsection"],
+
+Cell["\<\
+Pour tracer la courbe de Von Koch, nous allons avoir besoin de faire des \
+homoth\[EAcute]ties et des rotations.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Homoth\[EAcute]tie", "Subsubsection"],
+
+Cell[TextData[{
+ "Voici tout d'abord l'expression d'une homoth\[EAcute]tie de centre ",
+ Cell[BoxData[
+  FormBox["\[CapitalOmega]", TraditionalForm]]],
+ " et de rapport ",
+ Cell[BoxData[
+  FormBox["\[Lambda]", TraditionalForm]]],
+ ". On utilise la capacit\[EAcute] de ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " \[AGrave] effectuer les op\[EAcute]rations \[EAcute]l\[EAcute]mentaires \
+(addition, soustraction, produit par un r\[EAcute]el) directement sur les \
+listes."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"homothetie", "[", 
+    RowBox[{"\[CapitalOmega]_", ",", "\[Lambda]_", ",", "M_"}], "]"}], ":=", 
+   RowBox[{"\[CapitalOmega]", "+", 
+    RowBox[{"\[Lambda]", 
+     RowBox[{"(", 
+      RowBox[{"M", "-", "\[CapitalOmega]"}], ")"}]}]}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"homothetie", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2"}], "}"}], ",", 
+   RowBox[{"1", "/", "4"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "4"}], "}"}]}], "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Rotation", "Subsubsection"],
+
+Cell[TextData[{
+ "Pour effectuer une rotation d'angle ",
+ Cell[BoxData[
+  FormBox["\[Theta]", TraditionalForm]]],
+ ", on passe aux complexes, on multiplie par ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[ExponentialE]", "\[ImaginaryI]\[Theta]"], 
+   TraditionalForm]]],
+ ", puis on revient aux points."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"rotation", "[", 
+   RowBox[{"\[CapitalOmega]_", ",", "\[Theta]_", ",", "M_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"\[Omega]", ",", "m", ",", "z"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"\[Omega]", "=", 
+      RowBox[{"affixe", "[", "\[CapitalOmega]", "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"m", "=", 
+      RowBox[{"affixe", "[", "M", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"z", "=", 
+      RowBox[{"\[Omega]", "+", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"m", "-", "\[Omega]"}], ")"}], "*", 
+        RowBox[{"Exp", "[", 
+         RowBox[{"\[ImaginaryI]", " ", "\[Theta]"}], "]"}]}]}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"image", "[", "z", "]"}]}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"rotation", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0"}], "}"}], ",", 
+   RowBox[{"Pi", "/", "6"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1"}], "}"}]}], "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Transformations de Vonkoch"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Transformation de base"
+}], "Subsection"],
+
+Cell["\<\
+La fonction ci-dessous prend deux points en param\[EGrave]tres, et renvoie \
+une liste de 5 points. Comme un dessin vaut mieux qu'un long discours, eh \
+bien on fait un dessin.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"transfo1", "[", 
+   RowBox[{"A_", ",", "B_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"P1", ",", "P2", ",", "P3"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      SubscriptBox["P", "1"], "=", 
+      RowBox[{"homothetie", "[", 
+       RowBox[{"A", ",", 
+        RowBox[{"1", "/", "3"}], ",", "B"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      SubscriptBox["P", "3"], "=", 
+      RowBox[{"homothetie", "[", 
+       RowBox[{"A", ",", 
+        RowBox[{"2", "/", "3"}], ",", "B"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      SubscriptBox["P", "2"], "=", 
+      RowBox[{"rotation", "[", 
+       RowBox[{
+        SubscriptBox["P", "1"], ",", 
+        RowBox[{"\[Pi]", "/", "3"}], ",", 
+        SubscriptBox["P", "3"]}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"A", ",", 
+       SubscriptBox["P", "1"], ",", 
+       SubscriptBox["P", "2"], ",", 
+       SubscriptBox["P", "3"], ",", "B"}], "}"}]}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"result", "=", 
+  RowBox[{"transfo1", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "0"}], "}"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", 
+  RowBox[{"result", ",", 
+   RowBox[{"Joined", "\[Rule]", "True"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"0", ",", "1"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "1"}], "}"}]}], "}"}]}], ",", 
+   RowBox[{"AspectRatio", "\[Rule]", "1"}], ",", 
+   RowBox[{"PlotStyle", "\[Rule]", 
+    RowBox[{"{", "Blue", "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.410178034296875*^9, 3.410178049640625*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Composition des transformations de base"
+}], "Subsection"],
+
+Cell["\<\
+On complique un peu en \[EAcute]crivant une fonction qui prend en param\
+\[EGrave]tre une liste de points, puis appelle la fonction pr\[EAcute]c\
+\[EAcute]dente sur chaque couple de points successifs. On stocke \
+\[EAcute]videmment tous les points calcul\[EAcute]s dans une nouvelle liste \
+de points.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"transfo2", "[", "L_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"S", ",", "i"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"S", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"S", "=", 
+        RowBox[{"Join", "[", 
+         RowBox[{"S", ",", 
+          RowBox[{"transfo1", "[", 
+           RowBox[{
+            RowBox[{"L", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], ",", 
+            RowBox[{"L", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", "+", "1"}], "]"}], "]"}]}], "]"}]}], "]"}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", 
+         RowBox[{
+          RowBox[{"Length", "[", "L", "]"}], "-", "1"}]}], "}"}]}], "]"}], 
+     ";", "\[IndentingNewLine]", "S"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"result2", "=", 
+   RowBox[{"transfo2", "[", "result", "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", 
+  RowBox[{"result2", ",", 
+   RowBox[{"Joined", "\[Rule]", "True"}], ",", 
+   RowBox[{"AspectRatio", "\[Rule]", "1"}], ",", 
+   RowBox[{"Background", "\[Rule]", "White"}], ",", 
+   RowBox[{"PlotStyle", "\[Rule]", 
+    RowBox[{"{", "Blue", "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.410178060796875*^9, 3.41017806590625*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Courbe de VonKoch"
+}], "Subsection"],
+
+Cell["\<\
+On appelle plusieurs fois de suite la fonction pr\[EAcute]c\[EAcute]dente sur \
+la liste des sommets d'un triangle \[EAcute]quilat\[EAcute]ral.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"vonkoch", "[", "n_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"A", ",", "B", ",", "C", ",", "L", ",", "i"}], "}"}], ",", 
+    RowBox[{
+     RowBox[{"A", "=", 
+      RowBox[{"{", 
+       RowBox[{"1.`", ",", "0.`"}], "}"}]}], ";", 
+     RowBox[{"B", "=", 
+      RowBox[{"image", "[", 
+       SuperscriptBox["\[ExponentialE]", 
+        FractionBox[
+         RowBox[{"2.`", " ", "\[ImaginaryI]", " ", "\[Pi]"}], "3.`"]], 
+       "]"}]}], ";", 
+     RowBox[{"C", "=", 
+      RowBox[{"image", "[", 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{"-", 
+         FractionBox[
+          RowBox[{"2.`", " ", "\[ImaginaryI]", " ", "\[Pi]"}], "3.`"]}]], 
+       "]"}]}], ";", 
+     RowBox[{"L", "=", 
+      RowBox[{"{", 
+       RowBox[{"A", ",", "C", ",", "B", ",", "A"}], "}"}]}], ";", 
+     RowBox[{"Do", "[", 
+      RowBox[{
+       RowBox[{"L", "=", 
+        RowBox[{"transfo2", "[", "L", "]"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}], ";", 
+     RowBox[{"ListPlot", "[", 
+      RowBox[{"L", ",", 
+       RowBox[{"Joined", "\[Rule]", "True"}], ",", 
+       RowBox[{"PlotRange", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "}"}]}], ",", 
+       RowBox[{"AspectRatio", "\[Rule]", "1"}], ",", 
+       RowBox[{"Background", "\[Rule]", "White"}], ",", 
+       RowBox[{"PlotStyle", "\[Rule]", 
+        RowBox[{"{", "Blue", "}"}]}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"400", ",", "400"}], "}"}]}]}], "]"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.410178074984375*^9, 3.410178085515625*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Le flocon de Neige"
+}], "Section"],
+
+Cell[BoxData[
+ RowBox[{"vonkoch", "[", "4", "]"}]], "Input"],
+
+Cell["\<\
+Ce n'est pas No\[EDoubleDot]l, mais \[CCedilla]a ne fait rien. Une fois \
+toutes les courbes ci-dessous calcul\[EAcute]es, r\[EAcute]unir toutes les \
+cellules en double-cliquant sur le crochet de droite. Puis faire clic-clic \
+sur le dessin du triangle (le seul que vous devriez alors voir \[AGrave] l'\
+\[EAcute]cran).\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"Animate", "[", 
+  RowBox[{
+   RowBox[{"vonkoch", "[", "k", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"k", ",", 
+     RowBox[{"Range", "[", 
+      RowBox[{"0", ",", "5"}], "]"}]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.410178094234375*^9, 3.410178100015625*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+ScreenStyleEnvironment->"Working",
+WindowSize->{666, 579},
+WindowMargins->{{18, Automatic}, {Automatic, 7}},
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 37, 0, 65, "Title"],
+Cell[CellGroupData[{
+Cell[641, 26, 77, 4, 75, "Section"],
+Cell[721, 32, 52, 1, 41, "Input"],
+Cell[CellGroupData[{
+Cell[798, 37, 152, 7, 36, "Subsection"],
+Cell[953, 46, 207, 4, 47, "Text"],
+Cell[1163, 52, 203, 6, 41, "Input"],
+Cell[1369, 60, 106, 3, 41, "Input"],
+Cell[1478, 65, 192, 6, 41, "Input"],
+Cell[1673, 73, 112, 3, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1822, 81, 122, 7, 36, "Subsection"],
+Cell[1947, 90, 136, 3, 47, "Text"],
+Cell[CellGroupData[{
+Cell[2108, 97, 43, 0, 27, "Subsubsection"],
+Cell[2154, 99, 493, 13, 65, "Text"],
+Cell[2650, 114, 299, 8, 41, "Input"],
+Cell[2952, 124, 218, 7, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3207, 136, 33, 0, 27, "Subsubsection"],
+Cell[3243, 138, 319, 10, 47, "Text"],
+Cell[3565, 150, 843, 23, 122, "Input"],
+Cell[4411, 175, 217, 7, 41, "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4689, 189, 87, 4, 75, "Section"],
+Cell[CellGroupData[{
+Cell[4801, 197, 121, 7, 36, "Subsection"],
+Cell[4925, 206, 200, 4, 47, "Text"],
+Cell[5128, 212, 1083, 32, 122, "Input"],
+Cell[6214, 246, 215, 7, 41, "Input"],
+Cell[6432, 255, 528, 14, 62, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6997, 274, 138, 7, 36, "Subsection"],
+Cell[7138, 283, 325, 6, 65, "Text"],
+Cell[7466, 291, 979, 28, 162, "Input"],
+Cell[8448, 321, 114, 3, 41, "Input"],
+Cell[8565, 326, 372, 8, 62, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8974, 339, 116, 7, 36, "Subsection"],
+Cell[9093, 348, 167, 3, 47, "Text"],
+Cell[9263, 353, 1871, 52, 161, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11183, 411, 79, 4, 75, "Section"],
+Cell[11265, 417, 60, 1, 41, "Input"],
+Cell[11328, 420, 344, 6, 65, "Text"],
+Cell[11675, 428, 295, 8, 41, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

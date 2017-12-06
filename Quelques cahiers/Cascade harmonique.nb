@@ -1,0 +1,842 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     22964,        832]
+NotebookOptionsPosition[     20102,        740]
+NotebookOutlinePosition[     20524,        756]
+CellTagsIndexPosition[     20481,        753]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Petite introduction au chaos", "Title"],
+
+Cell[BoxData[
+ RowBox[{"Quit", "[", "]"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " La suite logistique"
+}], "Section"],
+
+Cell["\<\
+Ce qui va suivre est une petite introduction \[AGrave] une famille de ph\
+\[EAcute]nom\[EGrave]nes, difficiles \[AGrave] \[EAcute]tudier, plus connus \
+sous le nom de ph\[EAcute]nom\[EGrave]nes chaotiques. Partant d'une suite r\
+\[EAcute]currente tr\[EGrave]s simple, on fait appara\[IHat]tre des \
+comportements apparemment tr\[EGrave]s irr\[EAcute]guliers.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Une suite r\[EAcute]currente tr\[EGrave]s simple"
+}], "Subsection"],
+
+Cell[TextData[{
+ "On se donne un r\[EAcute]el ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"0", "\[LessEqual]", "k", "\[LessEqual]", "4"}], TraditionalForm]]],
+ ". On consid\[EGrave]re la suite ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    SubscriptBox["u", "n"], ")"}], TraditionalForm]]],
+ " d\[EAcute]finie par la donn\[EAcute]e de ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["u", "0"], TraditionalForm]]],
+ "et la relation de r\[EAcute]currence ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["u", 
+     RowBox[{"n", "+", "1"}]], "=", 
+    RowBox[{"k", " ", 
+     RowBox[{
+      SubscriptBox["u", "n"], "(", 
+      RowBox[{"1", "-", 
+       SubscriptBox["u", "n"]}], ")"}]}]}], TraditionalForm]]],
+ ". On va s'int\[EAcute]resser dans ce qui suit au comportement de la suite \
+selon les valeurs du param\[EGrave]tre ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[TextData[{
+ "Il est facile de voir que si ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ " est compris entre 0 et 4, alors, pour ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["u", "0"], "\[Element]", 
+    RowBox[{"[", 
+     RowBox[{"0", ",", "1"}], "]"}]}], TraditionalForm]]],
+ ", tous les ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["u", "n"], TraditionalForm]]],
+ " restent entre 0 et 1."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", 
+    RowBox[{"k_", ",", "x_"}], "]"}], "=", 
+   RowBox[{"k", "*", "x", "*", 
+    RowBox[{"(", 
+     RowBox[{"1", "-", "x"}], ")"}]}]}], ";"}]], "Input"],
+
+Cell[TextData[{
+ "On trace quelques exemples de graphes de ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ " pour diverses valeurs de ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ ". On obtient bien entendu des morceaux de paraboles."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"Evaluate", "[", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"f", "[", 
+       RowBox[{"k", ",", "x"}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"k", ",", "0", ",", "4", ",", "0.5"}], "}"}]}], "]"}], "]"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", "1"}], "}"}], ",", 
+   RowBox[{"Background", "\[Rule]", 
+    RowBox[{"GrayLevel", "[", "0", "]"}]}]}], "]"}]], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Visualisation du comportement de la suite"
+}], "Subsection"],
+
+Cell[TextData[{
+ "La fonction ci-dessous prend en param\[EGrave]tres une fonction g, un r\
+\[EAcute]el ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["u", "0"], TraditionalForm]]],
+ " et un entier ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ ". Elle renvoie une liste de points qui seront ensuite utilis\[EAcute]s pour \
+tracer une ligne bris\[EAcute]e, symbolisant les ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " premi\[EGrave]rs termes de la suite de premier terme ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["u", "0"], TraditionalForm]]],
+ "d\[EAcute]finie par la r\[EAcute]currence ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["u", 
+     RowBox[{"n", "+", "1"}]], "=", 
+    RowBox[{"g", "(", 
+     SubscriptBox["u", "n"], ")"}]}], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"suitePoints", "[", 
+   RowBox[{"g_", ",", "u0_", ",", "n_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"L", ",", 
+      RowBox[{"u", "=", "u0"}], ",", "v"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"L", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"u", "=", "u0"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"v", " ", "=", 
+         RowBox[{"g", "[", "u", "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"L", "=", 
+         RowBox[{"Join", "[", 
+          RowBox[{"L", ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"u", ",", "v"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"v", ",", "v"}], "}"}]}], "}"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"u", "=", "v"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", "n", "}"}]}], "]"}], ";", "\[IndentingNewLine]", "L"}]}], 
+   "]"}]}]], "Input"],
+
+Cell[TextData[{
+ "On utilise la fonction pr\[EAcute]c\[EAcute]dente pour tracer sur un m\
+\[EHat]me graphe la fonction ",
+ Cell[BoxData[
+  FormBox["g", TraditionalForm]]],
+ ", la fonction identit\[EAcute], et la ligne bris\[EAcute]e d\[EAcute]finie \
+pr\[EAcute]c\[EAcute]demment. La complexit\[EAcute] apparente de la fonction \
+est surtout due aux nombreuses options graphiques choisies pour \"faire plus \
+joli\"."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"escalier", "[", 
+   RowBox[{"g_", ",", "u0_", ",", "n_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"L", "=", 
+      RowBox[{"suitePoints", "[", 
+       RowBox[{"g", ",", "u0", ",", "n"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"PrependTo", "[", 
+      RowBox[{"L", ",", 
+       RowBox[{"{", 
+        RowBox[{"u0", ",", "0"}], "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"g1", "=", 
+      RowBox[{"Plot", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"x", ",", 
+          RowBox[{"g", "[", "x", "]"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"x", ",", "0", ",", "1"}], "}"}], ",", 
+        RowBox[{"DisplayFunction", "\[Rule]", "Identity"}], ",", 
+        RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+        RowBox[{"PlotStyle", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", "Black", "}"}], ",", 
+           RowBox[{"{", "Black", "}"}]}], "}"}]}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"g2", "=", 
+      RowBox[{"Graphics", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"RGBColor", "[", 
+          RowBox[{"0", ",", "0", ",", "1"}], "]"}], ",", 
+         RowBox[{"Line", "[", "L", "]"}]}], "}"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Show", "[", 
+      RowBox[{"g1", ",", "g2", ",", 
+       RowBox[{"DisplayFunction", "\[Rule]", "$DisplayFunction"}], ",", 
+       RowBox[{"AspectRatio", "\[Rule]", "1"}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.41017213146875*^9, 3.41017217825*^9}}],
+
+Cell["Voici un exemple.", "Text"],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"escalier", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"f", "[", 
+       RowBox[{"k", ",", "#"}], "]"}], "&"}], ",", "u0", ",", "20"}], "]"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{"u0", ",", "0", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"k", ",", "0", ",", "4"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.410171972484375*^9, 3.41017201675*^9}}],
+
+Cell[TextData[{
+ "On va maintenant examiner le comportement de la suite pour certaines \
+valeurs de ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ "."
+}], "Text"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Les cas de convergence"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " ",
+ "Le cas ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"0", "\[LessEqual]", "k", "\[LessEqual]", "1"}], TraditionalForm]]]
+}], "Subsection"],
+
+Cell[TextData[{
+ "Pour ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ " inf\[EAcute]rieur \[AGrave] 1, la suite converge vers 0, ceci quel que \
+soit son premier terme."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"escalier", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"f", "[", 
+     RowBox[{"0.8", ",", "#"}], "]"}], "&"}], ",", "0.7", ",", "20"}], 
+  "]"}]], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " ",
+ "Le cas ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"1", "\[LessEqual]", "k", "<", "2"}], TraditionalForm]]]
+}], "Subsection"],
+
+Cell[TextData[{
+ "Dans ce cas, la suite cro\[IHat]t \[AGrave] partir du rang 1, et converge \
+vers une limite qui d\[EAcute]pend de ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]]
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"escalier", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"f", "[", 
+     RowBox[{"1.7", ",", "#"}], "]"}], "&"}], ",", "0.9", ",", "20"}], 
+  "]"}]], "Input"],
+
+Cell[TextData[{
+ "La valeur de la limite en question est \[EAcute]videmment l'unique point \
+fixe de ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ " diff\[EAcute]rent de 0."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"f", "[", 
+     RowBox[{"k", ",", "x"}], "]"}], "\[Equal]", "x"}], ",", 
+   RowBox[{"{", "x", "}"}]}], "]"}]], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " ",
+ "Le cas ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"k", "=", "2"}], TraditionalForm]]]
+}], "Subsection"],
+
+Cell[TextData[{
+ "On a l\[AGrave] un cas limite. La suite converge tr\[EGrave]s rapidement \
+vers ",
+ Cell[BoxData[
+  FormBox[
+   FractionBox["1", "2"], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"escalier", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"f", "[", 
+     RowBox[{"2.", ",", "#"}], "]"}], "&"}], ",", "0.03", ",", "10"}], 
+  "]"}]], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " ",
+ "Le cas ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"2", "<", "k", "\[LessEqual]", "3"}], TraditionalForm]]]
+}], "Subsection"],
+
+Cell[TextData[{
+ "La suite converge toujours vers ",
+ Cell[BoxData[
+  FormBox[
+   FractionBox[
+    RowBox[{"k", "-", "1"}], "k"], TraditionalForm]]],
+ ", mais son comportement diff\[EGrave]re : les termes oscillent de part et \
+d'autre de la limite. Lorsque ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"k", "=", "3"}], TraditionalForm]]],
+ ", on a bien convergence vers ",
+ Cell[BoxData[
+  FormBox[
+   FractionBox["2", "3"], TraditionalForm]]],
+ ", mais cette convergence est particuli\[EGrave]rement lente."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"escalier", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"f", "[", 
+     RowBox[{"2.8", ",", "#"}], "]"}], "&"}], ",", "0.3", ",", "10"}], 
+  "]"}]], "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Apparition de bifurcations"
+}], "Section"],
+
+Cell[TextData[{
+ "Pour des valeurs de ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ " strictement sup\[EAcute]rieures \[AGrave] 3, la suite ne converge plus, \
+sauf pour des valeurs de ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["u", "0"], TraditionalForm]]],
+ "tr\[EGrave]s particuli\[EGrave]res. Essayons de voir ce qui se passe."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"f", "[", 
+      RowBox[{"3.3", ",", "x"}], "]"}], ",", "x"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", "1"}], "}"}], ",", 
+   RowBox[{"AspectRatio", "\[Rule]", "1"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.41017220221875*^9, 3.41017220478125*^9}}],
+
+Cell[TextData[{
+ "Il est facile de voir que la d\[EAcute]riv\[EAcute]e de ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ " en ses deux points fixe est strictement sup\[EAcute]rieure \[AGrave] 1 en \
+valeur absolue. Ces points sont donc instables."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"D", "[", 
+   RowBox[{
+    RowBox[{"f", "[", 
+     RowBox[{"3.3", ",", "x"}], "]"}], ",", "x"}], "]"}], "/.", 
+  RowBox[{"x", "\[Rule]", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", 
+     RowBox[{"2.2", "/", "3.2"}]}], "}"}]}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"escalier", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"f", "[", 
+     RowBox[{"3.3", ",", "#"}], "]"}], "&"}], ",", "0.3", ",", "20"}], 
+  "]"}]], "Input"],
+
+Cell[TextData[{
+ "La suite poss\[EGrave]de deux valeurs d'adh\[EAcute]rence. Il est naturel \
+de consid\[EAcute]rer ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"f", " ", "o", " ", "f"}], TraditionalForm]]],
+ ". On voit que la suite correspondante converge vers l'un des 4 points fixes \
+de ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"f", " ", "o", " ", "f"}], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"escalier", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"f", "[", 
+     RowBox[{"3.2", ",", 
+      RowBox[{"f", "[", 
+       RowBox[{"3.2", ",", "#"}], "]"}]}], "]"}], "&"}], ",", "0.9", ",", 
+   "20"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"pt2", "=", 
+  RowBox[{"Solve", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"f", "[", 
+      RowBox[{"k", ",", 
+       RowBox[{"f", "[", 
+        RowBox[{"k", ",", "x"}], "]"}]}], "]"}], "\[Equal]", "x"}], ",", 
+    RowBox[{"{", "x", "}"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"pt2", "/.", 
+  RowBox[{"k", "\[Rule]", "3.3"}]}]], "Input"],
+
+Cell[TextData[{
+ "Lorsqu'on continue \[AGrave] augmenter la valeur de ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ ", la suite poss\[EGrave]de 4 valeurs d'adh\[EAcute]rence :"
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"escalier", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"f", "[", 
+     RowBox[{"3.4", ",", "#"}], "]"}], "&"}], ",", "0.3", ",", "200"}], 
+  "]"}]], "Input"],
+
+Cell[TextData[{
+ "En continuant \[AGrave] augmenter la valeur de ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ ", on obtient des suites poss\[EAcute]dant, 8, 16, 32 ... valeurs d'adh\
+\[EAcute]rence. Puis, on n'observe plus rien de r\[EAcute]gulier (\[AGrave] \
+premi\[EGrave]re vue)"
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"escalier", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"f", "[", 
+     RowBox[{"3.7", ",", "#"}], "]"}], "&"}], ",", "0.3", ",", "100"}], 
+  "]"}]], "Input"],
+
+Cell[TextData[{
+ "Rien n'emp\[EHat]che de continuer \[AGrave] exp\[EAcute]riemnter sur \
+d'autres valeurs de ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ ". Mais on peut tenter autre chose."
+}], "Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " La cascade harmonique"
+}], "Section"],
+
+Cell[TextData[{
+ "On va s'int\[EAcute]resser \[AGrave] un autre type de sch\[EAcute]ma : il \
+s'agit de tracer, en fonction de ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ ", les valeurs d'adh\[EAcute]rence de la suite. Cette op\[EAcute]ration est \
+r\[EAcute]alis\[EAcute]e par la fonction cascade ci-dessous."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"g", "[", 
+    RowBox[{"{", 
+     RowBox[{"k_", ",", "x_"}], "}"}], "]"}], "=", 
+   RowBox[{"{", 
+    RowBox[{"k", ",", 
+     RowBox[{"f", "[", 
+      RowBox[{"k", ",", "x"}], "]"}]}], "}"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"cascade", "[", 
+   RowBox[{"kmin_", ",", "kmax_", ",", "nk_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"k", ",", "L", ",", "L1", ",", "u"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"L", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"u", "=", 
+         RowBox[{
+          RowBox[{"Nest", "[", 
+           RowBox[{"g", ",", 
+            RowBox[{"{", 
+             RowBox[{"k", ",", "0.43427"}], "}"}], ",", "50"}], "]"}], "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"L1", "=", 
+         RowBox[{"NestList", "[", 
+          RowBox[{"g", ",", 
+           RowBox[{"{", 
+            RowBox[{"k", ",", "u"}], "}"}], ",", "100"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"L", "=", 
+         RowBox[{"Join", "[", 
+          RowBox[{"L", ",", "L1"}], "]"}]}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "kmin", ",", "kmax", ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"kmax", "-", "kmin"}], ")"}], "/", "nk"}]}], "}"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", "L"}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"c", "=", 
+   RowBox[{"cascade", "[", 
+    RowBox[{"0.", ",", "4.", ",", "400"}], "]"}]}], ";", 
+  RowBox[{"ListPlot", "[", 
+   RowBox[{"c", ",", 
+    RowBox[{"ImageSize", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"400", ",", "400"}], "}"}]}], ",", 
+    RowBox[{"PlotStyle", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"PointSize", "[", "0.001", "]"}], "}"}]}], ",", 
+    RowBox[{"AspectRatio", "\[Rule]", "1"}], ",", 
+    RowBox[{"Background", "\[Rule]", "White"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.410172085546875*^9, 3.41017209109375*^9}}],
+
+Cell[TextData[{
+ "On retrouve sur ce dessin les constatations faites dans les paragraphes pr\
+\[EAcute]c\[EAcute]dents. Resserrons l'intervalle de variation de ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ " pour observer plus de d\[EAcute]tails."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"c", "=", 
+   RowBox[{"cascade", "[", 
+    RowBox[{"3.", ",", "4.", ",", "400"}], "]"}]}], ";", 
+  RowBox[{"ListPlot", "[", 
+   RowBox[{"c", ",", 
+    RowBox[{"ImageSize", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"400", ",", "400"}], "}"}]}], ",", 
+    RowBox[{"PlotStyle", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"PointSize", "[", "0.001", "]"}], "}"}]}], ",", 
+    RowBox[{"AspectRatio", "\[Rule]", "1"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.410172101109375*^9, 3.41017210253125*^9}}],
+
+Cell[TextData[{
+ "Il semble (et c'est bien le cas) qu'il y ait beaucoup de choses \[AGrave] \
+dire pour certaines grandes valeurs de ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ ". Il est hors de question de d\[EAcute]velopper cela ici. Donnons juste en \
+exemple un zoom pour les valeurs de ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ " comprises entre 3.82 et 3.86. On y voit appara\[IHat]tre des points \
+d'ordre 3, c'est \[AGrave] dire des suites avec 3 valeurs d'adh\[EAcute]rence."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"c", "=", 
+   RowBox[{"cascade", "[", 
+    RowBox[{"3.82", ",", "3.86", ",", "400"}], "]"}]}], ";", 
+  RowBox[{"ListPlot", "[", 
+   RowBox[{"c", ",", 
+    RowBox[{"ImageSize", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"400", ",", "400"}], "}"}]}], ",", 
+    RowBox[{"PlotStyle", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"PointSize", "[", "0.001", "]"}], "}"}]}], ",", 
+    RowBox[{"AspectRatio", "\[Rule]", "1"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.410172113453125*^9, 3.410172113625*^9}}]
+}, Closed]]
+}, Open  ]]
+},
+WindowSize->{666, 579},
+WindowMargins->{{32, Automatic}, {Automatic, 13}},
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 45, 0, 65, "Title"],
+Cell[627, 24, 52, 1, 41, "Input"],
+Cell[CellGroupData[{
+Cell[704, 29, 80, 4, 75, "Section"],
+Cell[787, 35, 382, 6, 65, "Text"],
+Cell[CellGroupData[{
+Cell[1194, 45, 147, 7, 36, "Subsection"],
+Cell[1344, 54, 955, 33, 70, "Text"],
+Cell[2302, 89, 428, 16, 70, "Text"],
+Cell[2733, 107, 208, 7, 70, "Input"],
+Cell[2944, 116, 260, 8, 70, "Text"],
+Cell[3207, 126, 463, 14, 70, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[3707, 145, 140, 7, 28, "Subsection"],
+Cell[3850, 154, 804, 26, 70, "Text"],
+Cell[4657, 182, 1113, 30, 70, "Input"],
+Cell[5773, 214, 429, 9, 70, "Text"],
+Cell[6205, 225, 1702, 45, 70, "Input"],
+Cell[7910, 272, 33, 0, 70, "Text"],
+Cell[7946, 274, 435, 13, 70, "Input"],
+Cell[8384, 289, 169, 6, 70, "Text"]
+}, Closed]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8602, 301, 83, 4, 75, "Section"],
+Cell[CellGroupData[{
+Cell[8710, 309, 217, 11, 36, "Subsection"],
+Cell[8930, 322, 188, 6, 70, "Text"],
+Cell[9121, 330, 177, 6, 70, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[9335, 341, 206, 11, 28, "Subsection"],
+Cell[9544, 354, 195, 5, 70, "Text"],
+Cell[9742, 361, 177, 6, 70, "Input"],
+Cell[9922, 369, 193, 6, 70, "Text"],
+Cell[10118, 377, 192, 6, 70, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[10347, 388, 185, 11, 28, "Subsection"],
+Cell[10535, 401, 189, 7, 70, "Text"],
+Cell[10727, 410, 177, 6, 70, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[10941, 421, 206, 11, 28, "Subsection"],
+Cell[11150, 434, 516, 16, 70, "Text"],
+Cell[11669, 452, 177, 6, 70, "Input"]
+}, Closed]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11895, 464, 87, 4, 75, "Section"],
+Cell[11985, 470, 353, 10, 70, "Text"],
+Cell[12341, 482, 362, 10, 70, "Input"],
+Cell[12706, 494, 266, 6, 70, "Text"],
+Cell[12975, 502, 268, 9, 70, "Input"],
+Cell[13246, 513, 177, 6, 70, "Input"],
+Cell[13426, 521, 389, 12, 70, "Text"],
+Cell[13818, 535, 240, 8, 70, "Input"],
+Cell[14061, 545, 284, 9, 70, "Input"],
+Cell[14348, 556, 83, 2, 70, "Input"],
+Cell[14434, 560, 196, 5, 70, "Text"],
+Cell[14633, 567, 178, 6, 70, "Input"],
+Cell[14814, 575, 304, 7, 70, "Text"],
+Cell[15121, 584, 178, 6, 70, "Input"],
+Cell[15302, 592, 211, 6, 70, "Text"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[15550, 603, 82, 4, 45, "Section"],
+Cell[15635, 609, 332, 7, 70, "Text"],
+Cell[15970, 618, 256, 9, 70, "Input"],
+Cell[16229, 629, 1381, 37, 70, "Input"],
+Cell[17613, 668, 590, 15, 70, "Input"],
+Cell[18206, 685, 267, 6, 70, "Text"],
+Cell[18476, 693, 536, 14, 70, "Input"],
+Cell[19015, 709, 518, 11, 70, "Text"],
+Cell[19536, 722, 538, 14, 70, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

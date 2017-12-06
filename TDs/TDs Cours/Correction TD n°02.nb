@@ -1,0 +1,337 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     10363,        327]
+NotebookOptionsPosition[      9281,        293]
+NotebookOutlinePosition[      9704,        309]
+CellTagsIndexPosition[      9661,        306]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"Quit", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.496030905172469*^9, 3.496030906217725*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"affixe", "[", 
+    RowBox[{"{", 
+     RowBox[{"x_", ",", "y_"}], "}"}], "]"}], "=", 
+   RowBox[{"x", "+", 
+    RowBox[{"I", "*", "y"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.49603052887907*^9, 3.496030559514865*^9}}],
+
+Cell[BoxData[
+ RowBox[{"affixe", "[", 
+  RowBox[{"{", 
+   RowBox[{"3", ",", "8"}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.496030846224147*^9, 3.496030850899539*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"image", "[", "z_", "]"}], "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Re", "[", "z", "]"}], ",", 
+     RowBox[{"Im", "[", "z", "]"}]}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.496030540926607*^9, 3.496030562254009*^9}, 
+   3.496030867715808*^9}],
+
+Cell[BoxData[
+ RowBox[{"image", "[", 
+  RowBox[{"2", "+", 
+   RowBox[{"7", "*", "I"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.49603085471872*^9, 3.496030859394278*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"similitude", "[", 
+   RowBox[{"\[Omega]_", ",", "\[Lambda]_", ",", "\[Theta]_", ",", "m_"}], 
+   "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"w", ",", "z", ",", "z1"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"w", "=", 
+      RowBox[{"affixe", "[", "\[Omega]", "]"}]}], ";", "\[IndentingNewLine]", 
+     
+     RowBox[{"z", "=", 
+      RowBox[{"affixe", "[", "m", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"z1", "=", 
+      RowBox[{"w", "+", 
+       RowBox[{"\[Lambda]", "*", 
+        RowBox[{"Exp", "[", 
+         RowBox[{"I", "*", "\[Theta]"}], "]"}], "*", 
+        RowBox[{"(", 
+         RowBox[{"z", "-", "w"}], ")"}]}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"image", "[", "z1", "]"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.496030567724747*^9, 3.496030643408359*^9}, {
+  3.496030938419113*^9, 3.496030939026722*^9}}],
+
+Cell[BoxData[
+ RowBox[{"similitude", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0"}], "}"}], ",", "2", ",", 
+   RowBox[{"Pi", "/", "3"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "0"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.496030897448501*^9, 3.496030928203421*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"homothetie", "[", 
+   RowBox[{"\[Omega]_", ",", "\[Lambda]_", ",", "m_"}], "]"}], ":=", 
+  RowBox[{"similitude", "[", 
+   RowBox[{"\[Omega]", ",", "\[Lambda]", ",", "0", ",", "m"}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.496030670606188*^9, 3.496030700941779*^9}}],
+
+Cell[BoxData[
+ RowBox[{"homothetie", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "1"}], "}"}], ",", "2", ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "0"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.496030950181069*^9, 3.496030959289505*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"rotation", "[", 
+   RowBox[{"\[Omega]_", ",", "\[Theta]_", ",", "m_"}], "]"}], ":=", 
+  RowBox[{"similitude", "[", 
+   RowBox[{"\[Omega]", ",", "1", ",", "\[Theta]", ",", "m"}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.496030703026543*^9, 3.496030723425934*^9}}],
+
+Cell[BoxData[
+ RowBox[{"rotation", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0"}], "}"}], ",", 
+   RowBox[{"Pi", "/", "3"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "0"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.496030967219276*^9, 3.496030970476131*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"transfo1", "[", 
+   RowBox[{"a_", ",", "b_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"p1", ",", "p2", ",", "p3"}], "}"}], ",", "\[IndentingNewLine]", 
+    
+    RowBox[{
+     RowBox[{"p1", "=", 
+      RowBox[{"homothetie", "[", 
+       RowBox[{"a", ",", 
+        RowBox[{"1", "/", "3"}], ",", "b"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"p3", "=", 
+      RowBox[{"homothetie", "[", 
+       RowBox[{"a", ",", 
+        RowBox[{"2", "/", "3"}], ",", "b"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"p2", "=", 
+      RowBox[{"rotation", "[", 
+       RowBox[{"p1", ",", 
+        RowBox[{"Pi", "/", "3"}], ",", "p3"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"a", ",", "p1", ",", "p2", ",", "p3", ",", "b"}], "}"}]}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.496030733199735*^9, 3.496030790326057*^9}}],
+
+Cell[BoxData[
+ RowBox[{"transfo1", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0"}], "}"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", 
+  RowBox[{
+   RowBox[{"transfo1", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0"}], "}"}]}], "]"}], ",", 
+   RowBox[{"Joined", "\[Rule]", "True"}], ",", 
+   RowBox[{"AspectRatio", "\[Rule]", "1"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.496030801816139*^9, 3.496030826705608*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"transfo2", "[", "s_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"s1", ",", "ak", ",", "bk"}], "}"}], ",", "\[IndentingNewLine]", 
+    
+    RowBox[{
+     RowBox[{"s1", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"ak", "=", 
+         RowBox[{"s", "[", 
+          RowBox[{"[", "k", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"bk", "=", 
+         RowBox[{"s", "[", 
+          RowBox[{"[", 
+           RowBox[{"k", "+", "1"}], "]"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"s1", "=", 
+         RowBox[{"Join", "[", 
+          RowBox[{"s1", ",", 
+           RowBox[{"transfo1", "[", 
+            RowBox[{"ak", ",", "bk"}], "]"}]}], "]"}]}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", 
+         RowBox[{
+          RowBox[{"Length", "[", "s", "]"}], "-", "1"}]}], "}"}]}], "]"}], 
+     ";", "\[IndentingNewLine]", "s1"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.496030985133963*^9, 3.496031056774974*^9}, {
+  3.496031149361003*^9, 3.496031149516378*^9}, {3.496031219778874*^9, 
+  3.496031221283209*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"j", "=", 
+   RowBox[{"Exp", "[", 
+    RowBox[{"2.", "*", "I", "*", 
+     RowBox[{"Pi", "/", "3"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"a", "=", 
+   RowBox[{"image", "[", "1.", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"b", "=", 
+   RowBox[{"image", "[", "j", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"c", "=", 
+   RowBox[{"image", "[", 
+    RowBox[{"j", "^", "2"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.496031065554348*^9, 3.496031126585924*^9}, {
+  3.496031168690282*^9, 3.496031171333048*^9}, {3.496031341861236*^9, 
+  3.496031343307428*^9}}],
+
+Cell[BoxData[
+ RowBox[{"transfo2", "[", 
+  RowBox[{"{", 
+   RowBox[{"b", ",", "a", ",", "c", ",", "b"}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.496031130413887*^9, 3.496031141953289*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", 
+  RowBox[{"%", ",", 
+   RowBox[{"Joined", "\[Rule]", "True"}], ",", 
+   RowBox[{"AspectRatio", "\[Rule]", "1"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.49603123032314*^9, 3.496031242766874*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"vonkoch", "[", "0", "]"}], "=", 
+   RowBox[{"{", 
+    RowBox[{"b", ",", "a", ",", "c", ",", "b"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"vonkoch", "[", "n_", "]"}], ":=", 
+   RowBox[{"transfo2", "[", 
+    RowBox[{"vonkoch", "[", 
+     RowBox[{"n", "-", "1"}], "]"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.496031253214501*^9, 3.496031298842126*^9}, 
+   3.496031333821895*^9}],
+
+Cell[BoxData[
+ RowBox[{"vonkoch", "[", "2", "]"}]], "Input",
+ CellChangeTimes->{{3.496031300267526*^9, 3.496031322348972*^9}, {
+  3.496031423240214*^9, 3.496031423479404*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"ListPlot", "[", 
+    RowBox[{
+     RowBox[{"vonkoch", "[", "n", "]"}], ",", 
+     RowBox[{"Joined", "\[Rule]", "True"}], ",", 
+     RowBox[{"AspectRatio", "\[Rule]", "1"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "}"}]}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"n", ",", "0", ",", "5", ",", "1"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.496031354709953*^9, 3.496031398121972*^9}}]
+},
+WindowSize->{1362, 614},
+WindowMargins->{{150, Automatic}, {Automatic, 52}},
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "PastelColor.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 118, 2, 41, "Input"],
+Cell[678, 24, 268, 8, 41, "Input"],
+Cell[949, 34, 172, 4, 41, "Input"],
+Cell[1124, 40, 306, 9, 41, "Input"],
+Cell[1433, 51, 170, 4, 41, "Input"],
+Cell[1606, 57, 939, 24, 122, "Input"],
+Cell[2548, 83, 295, 8, 41, "Input"],
+Cell[2846, 93, 305, 7, 41, "Input"],
+Cell[3154, 102, 260, 7, 41, "Input"],
+Cell[3417, 111, 301, 7, 41, "Input"],
+Cell[3721, 120, 283, 8, 41, "Input"],
+Cell[4007, 130, 954, 28, 122, "Input"],
+Cell[4964, 160, 182, 6, 41, "Input"],
+Cell[5149, 168, 405, 11, 41, "Input"],
+Cell[5557, 181, 1283, 35, 182, "Input"],
+Cell[6843, 218, 656, 18, 102, "Input"],
+Cell[7502, 238, 194, 4, 41, "Input"],
+Cell[7699, 244, 237, 5, 41, "Input"],
+Cell[7939, 251, 471, 14, 62, "Input"],
+Cell[8413, 267, 175, 3, 41, "Input"],
+Cell[8591, 272, 686, 19, 41, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

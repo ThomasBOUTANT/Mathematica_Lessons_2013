@@ -1,0 +1,344 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      9682,        334]
+NotebookOptionsPosition[      8555,        292]
+NotebookOutlinePosition[      9010,        309]
+CellTagsIndexPosition[      8967,        306]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Un exemple d'animation", "Title"],
+
+Cell["Marc Lorenzi - 15 juillet 2004", "Author"],
+
+Cell[TextData[{
+ StyleBox["But",
+  FontWeight->"Bold"],
+ " : r\[EAcute]cr\[EAcute]atif. D\[EAcute]finir un objet graphique repr\
+\[EAcute]sentant un cube, puis animer cet objet."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"Quit", "[", "]"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " D\[EAcute]finir le cube"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Les sommets"
+}], "Subsection"],
+
+Cell[BoxData[
+ RowBox[{"sommets", "=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0", ",", "0"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1", ",", "0"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "1", ",", "0"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "0", ",", "0"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0", ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1", ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "1", ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "0", ",", "1"}], "}"}]}], "}"}]}]], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Les faces"
+}], "Subsection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"poly", "[", "s_", "]"}], ":=", 
+   RowBox[{"Polygon", "[", 
+    RowBox[{"sommets", "[", 
+     RowBox[{"[", "s", "]"}], "]"}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"cube", "=", 
+  RowBox[{"Graphics3D", "[", 
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"poly", "[", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}], "]"}], ",", 
+     RowBox[{"poly", "[", 
+      RowBox[{"{", 
+       RowBox[{"5", ",", "6", ",", "7", ",", "8"}], "}"}], "]"}], ",", 
+     RowBox[{"poly", "[", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "6", ",", "5"}], "}"}], "]"}], ",", 
+     RowBox[{"poly", "[", 
+      RowBox[{"{", 
+       RowBox[{"2", ",", "3", ",", "7", ",", "6"}], "}"}], "]"}], ",", 
+     RowBox[{"poly", "[", 
+      RowBox[{"{", 
+       RowBox[{"3", ",", "4", ",", "8", ",", "7"}], "}"}], "]"}], ",", 
+     RowBox[{"poly", "[", 
+      RowBox[{"{", 
+       RowBox[{"4", ",", "1", ",", "5", ",", "8"}], "}"}], "]"}]}], 
+    "\[IndentingNewLine]", "}"}], "]"}]}]], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Suppression des ar\[EHat]tes"
+}], "Subsection"],
+
+Cell[BoxData[
+ RowBox[{"cube", "=", 
+  RowBox[{"cube", "/.", 
+   RowBox[{
+    RowBox[{"Polygon", "[", "x__", "]"}], "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"EdgeForm", "[", "]"}], ",", 
+      RowBox[{"Polygon", "[", "x", "]"}]}], "}"}]}]}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"cube", "//", "FullForm"}]], "Input"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   RowBox[{"Graphics3D", "[", 
+    RowBox[{"List", "[", 
+     RowBox[{
+      RowBox[{"List", "[", 
+       RowBox[{
+        RowBox[{"EdgeForm", "[", "]"}], ",", 
+        RowBox[{"Polygon", "[", 
+         RowBox[{"List", "[", 
+          RowBox[{
+           RowBox[{"List", "[", 
+            RowBox[{"0", ",", "0", ",", "0"}], "]"}], ",", 
+           RowBox[{"List", "[", 
+            RowBox[{"0", ",", "1", ",", "0"}], "]"}], ",", 
+           RowBox[{"List", "[", 
+            RowBox[{"1", ",", "1", ",", "0"}], "]"}], ",", 
+           RowBox[{"List", "[", 
+            RowBox[{"1", ",", "0", ",", "0"}], "]"}]}], "]"}], "]"}]}], "]"}],
+       ",", 
+      RowBox[{"List", "[", 
+       RowBox[{
+        RowBox[{"EdgeForm", "[", "]"}], ",", 
+        RowBox[{"Polygon", "[", 
+         RowBox[{"List", "[", 
+          RowBox[{
+           RowBox[{"List", "[", 
+            RowBox[{"0", ",", "0", ",", "1"}], "]"}], ",", 
+           RowBox[{"List", "[", 
+            RowBox[{"0", ",", "1", ",", "1"}], "]"}], ",", 
+           RowBox[{"List", "[", 
+            RowBox[{"1", ",", "1", ",", "1"}], "]"}], ",", 
+           RowBox[{"List", "[", 
+            RowBox[{"1", ",", "0", ",", "1"}], "]"}]}], "]"}], "]"}]}], "]"}],
+       ",", 
+      RowBox[{"List", "[", 
+       RowBox[{
+        RowBox[{"EdgeForm", "[", "]"}], ",", 
+        RowBox[{"Polygon", "[", 
+         RowBox[{"List", "[", 
+          RowBox[{
+           RowBox[{"List", "[", 
+            RowBox[{"0", ",", "0", ",", "0"}], "]"}], ",", 
+           RowBox[{"List", "[", 
+            RowBox[{"0", ",", "1", ",", "0"}], "]"}], ",", 
+           RowBox[{"List", "[", 
+            RowBox[{"0", ",", "1", ",", "1"}], "]"}], ",", 
+           RowBox[{"List", "[", 
+            RowBox[{"0", ",", "0", ",", "1"}], "]"}]}], "]"}], "]"}]}], "]"}],
+       ",", 
+      RowBox[{"List", "[", 
+       RowBox[{
+        RowBox[{"EdgeForm", "[", "]"}], ",", 
+        RowBox[{"Polygon", "[", 
+         RowBox[{"List", "[", 
+          RowBox[{
+           RowBox[{"List", "[", 
+            RowBox[{"0", ",", "1", ",", "0"}], "]"}], ",", 
+           RowBox[{"List", "[", 
+            RowBox[{"1", ",", "1", ",", "0"}], "]"}], ",", 
+           RowBox[{"List", "[", 
+            RowBox[{"1", ",", "1", ",", "1"}], "]"}], ",", 
+           RowBox[{"List", "[", 
+            RowBox[{"0", ",", "1", ",", "1"}], "]"}]}], "]"}], "]"}]}], "]"}],
+       ",", 
+      RowBox[{"List", "[", 
+       RowBox[{
+        RowBox[{"EdgeForm", "[", "]"}], ",", 
+        RowBox[{"Polygon", "[", 
+         RowBox[{"List", "[", 
+          RowBox[{
+           RowBox[{"List", "[", 
+            RowBox[{"1", ",", "1", ",", "0"}], "]"}], ",", 
+           RowBox[{"List", "[", 
+            RowBox[{"1", ",", "0", ",", "0"}], "]"}], ",", 
+           RowBox[{"List", "[", 
+            RowBox[{"1", ",", "0", ",", "1"}], "]"}], ",", 
+           RowBox[{"List", "[", 
+            RowBox[{"1", ",", "1", ",", "1"}], "]"}]}], "]"}], "]"}]}], "]"}],
+       ",", 
+      RowBox[{"List", "[", 
+       RowBox[{
+        RowBox[{"EdgeForm", "[", "]"}], ",", 
+        RowBox[{"Polygon", "[", 
+         RowBox[{"List", "[", 
+          RowBox[{
+           RowBox[{"List", "[", 
+            RowBox[{"1", ",", "0", ",", "0"}], "]"}], ",", 
+           RowBox[{"List", "[", 
+            RowBox[{"0", ",", "0", ",", "0"}], "]"}], ",", 
+           RowBox[{"List", "[", 
+            RowBox[{"0", ",", "0", ",", "1"}], "]"}], ",", 
+           RowBox[{"List", "[", 
+            RowBox[{"1", ",", "0", ",", "1"}], "]"}]}], "]"}], "]"}]}], 
+       "]"}]}], "]"}], "]"}],
+   ShowSpecialCharacters->False,
+   ShowStringCharacters->True,
+   NumberMarks->True],
+  FullForm]], "Input",
+ CellChangeTimes->{3.410172291046875*^9}]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Animer le cube"
+}], "Section"],
+
+Cell[BoxData[
+ RowBox[{"Animate", "[", 
+  RowBox[{
+   RowBox[{"Show", "[", 
+    RowBox[{"cube", ",", 
+     RowBox[{"Boxed", "\[Rule]", "False"}], ",", 
+     RowBox[{"ViewPoint", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"3", "*", 
+         RowBox[{"Cos", "[", "t", "]"}]}], ",", 
+        RowBox[{"3", "*", 
+         RowBox[{"Sin", "[", "t", "]"}]}], ",", 
+        RowBox[{
+         RowBox[{"3", "*", 
+          RowBox[{"Sin", "[", 
+           RowBox[{"3", "*", "t"}], "]"}]}], "-", 
+         RowBox[{"0.5", "*", 
+          RowBox[{"Sin", "[", 
+           RowBox[{"2", "*", "t"}], "]"}]}]}]}], "}"}]}], ",", 
+     RowBox[{"SphericalRegion", "\[Rule]", "True"}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"500", ",", "300"}], "}"}]}], ",", 
+     RowBox[{"Background", "\[Rule]", 
+      RowBox[{"GrayLevel", "[", "0", "]"}]}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}], ",", "0.01"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.41017232384375*^9, 3.410172409625*^9}, {3.410172522*^9, 
+  3.410172583125*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+ScreenStyleEnvironment->"Working",
+WindowSize->{666, 579},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 39, 0, 65, "Title"],
+Cell[621, 24, 48, 0, 23, "Author"],
+Cell[672, 26, 190, 5, 29, "Text"],
+Cell[865, 33, 52, 1, 41, "Input"],
+Cell[CellGroupData[{
+Cell[942, 38, 84, 4, 75, "Section"],
+Cell[CellGroupData[{
+Cell[1051, 46, 110, 7, 36, "Subsection"],
+Cell[1164, 55, 650, 19, 70, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[1851, 79, 108, 7, 28, "Subsection"],
+Cell[1962, 88, 198, 6, 70, "Input"],
+Cell[2163, 96, 883, 23, 70, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[3083, 124, 127, 7, 28, "Subsection"],
+Cell[3213, 133, 270, 8, 70, "Input"],
+Cell[3486, 143, 60, 1, 70, "Input"],
+Cell[3549, 146, 3730, 100, 70, "Input"]
+}, Closed]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7328, 252, 75, 4, 75, "Section"],
+Cell[7406, 258, 1121, 30, 102, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

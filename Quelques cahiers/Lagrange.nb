@@ -1,0 +1,495 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     13820,        485]
+NotebookOptionsPosition[     12270,        433]
+NotebookOutlinePosition[     12725,        450]
+CellTagsIndexPosition[     12682,        447]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Interpolation de Lagrange", "Title"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Polyn\[OHat]mes de Lagrange"
+}], "Section"],
+
+Cell[TextData[{
+ "\[CapitalEAcute]tant donn\[EAcute]e un liste ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"L", "=", 
+    RowBox[{"{", 
+     RowBox[{
+      SubscriptBox["a", "1"], ",", "...", ",", 
+      SubscriptBox["a", "n"]}], "}"}]}], TraditionalForm]]],
+ " et un entier ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"k", "\[Element]", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "...", ",", "n"}], "}"}]}], TraditionalForm]]],
+ ", on appelle ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ "i\[EGrave]me polyn\[OHat]me de Lagrange le polyn\[OHat]me ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SubscriptBox["P", 
+      RowBox[{"k", ",", "L"}]], "(", "X", ")"}], "=", 
+    RowBox[{
+     UnderscriptBox["\[Product]", 
+      RowBox[{"j", "\[NotEqual]", "k"}]], 
+     FractionBox[
+      RowBox[{"X", "-", 
+       SubscriptBox["a", "j"]}], 
+      RowBox[{
+       SubscriptBox["a", "k"], "-", 
+       SubscriptBox["a", "j"]}]]}]}], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[TextData[{
+ "La fonction ",
+ StyleBox["Lagrange", "Input"],
+ " ci-dessous prend en param\[EGrave]tres une variable ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " et une liste ",
+ Cell[BoxData[
+  FormBox["L", TraditionalForm]]],
+ " de nombres distincts deux \[AGrave] deux. Elle renvoie la liste des polyn\
+\[OHat]mes de Lagrange correspondants."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Lagrange", "[", 
+   RowBox[{"x_", ",", "L_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"m", ",", "i", ",", "t", ",", "n"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"n", "=", 
+      RowBox[{"Length", "[", "L", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"m", "=", 
+      RowBox[{"Product", "[", 
+       RowBox[{
+        RowBox[{"x", "-", 
+         RowBox[{"L", "[", 
+          RowBox[{"[", "i", "]"}], "]"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"t", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"m", "/", 
+         RowBox[{"(", 
+          RowBox[{"x", "-", 
+           RowBox[{"L", "[", 
+            RowBox[{"[", "i", "]"}], "]"}]}], ")"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ";", 
+     RowBox[{"Expand", "[", 
+      RowBox[{"t", "/", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"t", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "/.", 
+          RowBox[{"x", "\[Rule]", " ", 
+           RowBox[{"L", "[", 
+            RowBox[{"[", "i", "]"}], "]"}]}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.41017522428125*^9, 3.41017522534375*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Lagrange", "[", 
+   RowBox[{"x", ",", 
+    RowBox[{"Range", "[", 
+     RowBox[{
+      RowBox[{"-", "3"}], ",", "3"}], "]"}]}], "]"}], "//", 
+  "TableForm"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"Evaluate", "[", 
+    RowBox[{"Lagrange", "[", 
+     RowBox[{"x", ",", 
+      RowBox[{"Range", "[", 
+       RowBox[{
+        RowBox[{"-", "4"}], ",", "4"}], "]"}]}], "]"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", 
+     RowBox[{"-", "4.1"}], ",", "4.1"}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"AspectRatio", "\[Rule]", "1"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"PlotRange", "\[Rule]", "All"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"ImageSize", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"400", ",", "400"}], "}"}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{"PlotStyle", "\[Rule]", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Hue", "[", 
+       RowBox[{"k", "/", "7"}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"k", ",", "0", ",", "6"}], "}"}]}], "]"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.410175196671875*^9, 3.410175196953125*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " ",
+ "Subdivisions particuli\[EGrave]res"
+}], "Section"],
+
+Cell[TextData[{
+ "Voici une subdivision r\[EAcute]guli\[EGrave]re de l'intervalle ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"[", 
+    RowBox[{"a", ",", "b"}], "]"}], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"subdivisionReguliere", "[", 
+    RowBox[{"a_", ",", "b_", ",", "n_"}], "]"}], ":=", "\[IndentingNewLine]", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"a", "+", 
+      RowBox[{"k", " ", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"b", "-", "a"}], ")"}], "/", "n"}]}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", "0", ",", "n"}], "}"}]}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"subdivisionReguliere", "[", 
+  RowBox[{
+   RowBox[{"-", "1"}], ",", "1", ",", "10"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"N", "[", "%", "]"}]], "Input"],
+
+Cell["Et voici une \"subdivision de Tchebychev\".", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"subdivisionTchebychev", "[", 
+   RowBox[{"a_", ",", "b_", ",", "n_"}], "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"a", "+", "b"}], ")"}], "/", "2"}], "+", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"b", "-", "a"}], ")"}], "/", "2"}], " ", 
+      RowBox[{"Cos", "[", 
+       RowBox[{"k", " ", 
+        RowBox[{"Pi", " ", "/", "n"}]}], "]"}]}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", "0", ",", "n"}], "}"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"subdivisionTchebychev", "[", 
+  RowBox[{
+   RowBox[{"-", "1"}], ",", "1", ",", "6"}], "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " ",
+ "Interpoler une fonction"
+}], "Section"],
+
+Cell[TextData[{
+ "\[CapitalEAcute]tant donn\[EAcute]s une fonction ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ " et une liste ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"L", "=", 
+    RowBox[{"{", 
+     RowBox[{
+      SubscriptBox["a", "1"], ",", "...", ",", 
+      SubscriptBox["a", "n"]}], "}"}]}], TraditionalForm]]],
+ " de ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " r\[EAcute]els, il existe un et un seul polyn\[OHat]me de degr\[EAcute] inf\
+\[EAcute]rieur ou \[EAcute]gal \[AGrave] ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"n", "-", "1"}], TraditionalForm]]],
+ " prenant les m\[EHat]mes valeurs que ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ " aux points ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", "i"], TraditionalForm]]],
+ ". Ce polyn\[OHat]me s'\[EAcute]crit comme une combinaison des \
+polyn\[OHat]mes de Lagrange."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"interpoler", "[", 
+   RowBox[{"f_", ",", "x_", ",", "L_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "Lag", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Lag", "=", 
+      RowBox[{"Lagrange", "[", 
+       RowBox[{"x", ",", "L"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Sum", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"f", "[", 
+         RowBox[{"L", "[", 
+          RowBox[{"[", "k", "]"}], "]"}], "]"}], " ", 
+        RowBox[{"Lag", "[", 
+         RowBox[{"[", "k", "]"}], "]"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", 
+         RowBox[{"Length", "[", "L", "]"}]}], "}"}]}], "]"}]}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.410175250734375*^9, 3.41017528821875*^9}}],
+
+Cell[BoxData[
+ RowBox[{"h", "=", 
+  RowBox[{"interpoler", "[", 
+   RowBox[{"Sin", ",", "x", ",", 
+    RowBox[{"subdivisionReguliere", "[", 
+     RowBox[{
+      RowBox[{"-", "Pi"}], ",", "Pi", ",", "3"}], "]"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Expand", "[", "h", "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"h", ",", 
+     RowBox[{"Sin", "[", "x", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", 
+     RowBox[{
+      RowBox[{"-", "2"}], "Pi"}], ",", 
+     RowBox[{"2", "Pi"}]}], "}"}], ",", 
+   RowBox[{"ImageSize", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"400", ",", "300"}], "}"}]}], ",", 
+   RowBox[{"PlotStyle", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"Red", ",", "Blue"}], "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.41017530228125*^9, 3.410175320875*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Le ph\[EAcute]nom\[EGrave]ne de Runge"
+}], "Section"],
+
+Cell[TextData[{
+ "Sous certaines conditions, les polyn\[OHat]mes d'interpolation approchent \
+mal la fonction ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ ", m\[EHat]me en raffinant la subdivision."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "x_", "]"}], "=", 
+   RowBox[{"1", "/", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"x", "^", "2"}], "+", "1"}], ")"}]}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"plots", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"Plot", "[", 
+     RowBox[{
+      RowBox[{"Evaluate", "[", 
+       RowBox[{"interpoler", "[", 
+        RowBox[{"f", ",", "x", ",", 
+         RowBox[{"subdivisionReguliere", "[", 
+          RowBox[{
+           RowBox[{"-", "3."}], ",", "3.", ",", "k"}], "]"}]}], "]"}], "]"}], 
+      ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", 
+        RowBox[{"-", "3"}], ",", "3"}], "}"}], ",", 
+      RowBox[{"PlotRange", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "2"}], ",", "1"}], "}"}]}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", "5", ",", "50", ",", "5"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.41017572975*^9, 3.410175737921875*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Animate", "[", 
+  RowBox[{
+   RowBox[{"Show", "[", 
+    RowBox[{"plots", "[", 
+     RowBox[{"[", "k", "]"}], "]"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"k", ",", 
+     RowBox[{"Range", "[", 
+      RowBox[{"1", ",", "10"}], "]"}]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.410175328578125*^9, 3.410175329875*^9}, {
+  3.410175788875*^9, 3.410175794578125*^9}}],
+
+Cell[BoxData[
+ RowBox[{"plots", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"Plot", "[", 
+     RowBox[{
+      RowBox[{"Evaluate", "[", 
+       RowBox[{"interpoler", "[", 
+        RowBox[{"f", ",", "x", ",", 
+         RowBox[{"subdivisionTchebychev", "[", 
+          RowBox[{
+           RowBox[{"-", "3."}], ",", "3.", ",", "k"}], "]"}]}], "]"}], "]"}], 
+      ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", 
+        RowBox[{"-", "3"}], ",", "3"}], "}"}], ",", 
+      RowBox[{"PlotRange", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "2"}], ",", "1"}], "}"}]}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", "5", ",", "20", ",", "2"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.4101754586875*^9, 3.410175495609375*^9}, {
+  3.41017565478125*^9, 3.41017565671875*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Animate", "[", 
+  RowBox[{
+   RowBox[{"Show", "[", 
+    RowBox[{"plots", "[", 
+     RowBox[{"[", "k", "]"}], "]"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"k", ",", 
+     RowBox[{"Range", "[", 
+      RowBox[{"1", ",", "8"}], "]"}]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.410175355375*^9, 3.41017536371875*^9}, {
+   3.410175398765625*^9, 3.410175431375*^9}, 3.410175470203125*^9, {
+   3.410175525921875*^9, 3.410175559125*^9}, {3.410175621640625*^9, 
+   3.410175626484375*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+ScreenStyleEnvironment->"Working",
+WindowSize->{666, 579},
+WindowMargins->{{3, Automatic}, {Automatic, 6}},
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 42, 0, 65, "Title"],
+Cell[CellGroupData[{
+Cell[646, 26, 88, 4, 75, "Section"],
+Cell[737, 32, 975, 35, 65, "Text"],
+Cell[1715, 69, 371, 11, 48, "Text"],
+Cell[2089, 82, 1504, 44, 142, "Input"],
+Cell[3596, 128, 202, 7, 41, "Input"],
+Cell[3801, 137, 947, 24, 122, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4785, 166, 100, 5, 75, "Section"],
+Cell[4888, 173, 200, 7, 29, "Text"],
+Cell[5091, 182, 438, 13, 62, "Input"],
+Cell[5532, 197, 126, 3, 41, "Input"],
+Cell[5661, 202, 54, 1, 41, "Input"],
+Cell[5718, 205, 59, 0, 29, "Text"],
+Cell[5780, 207, 588, 18, 62, "Input"],
+Cell[6371, 227, 126, 3, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6534, 235, 89, 5, 75, "Section"],
+Cell[6626, 242, 873, 29, 65, "Text"],
+Cell[7502, 273, 804, 23, 82, "Input"],
+Cell[8309, 298, 231, 6, 41, "Input"],
+Cell[8543, 306, 59, 1, 41, "Input"],
+Cell[8605, 309, 556, 17, 62, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9198, 331, 98, 4, 75, "Section"],
+Cell[9299, 337, 219, 6, 47, "Text"],
+Cell[9521, 345, 199, 7, 41, "Input"],
+Cell[9723, 354, 775, 22, 82, "Input"],
+Cell[10501, 378, 396, 11, 41, "Input"],
+Cell[10900, 391, 825, 23, 82, "Input"],
+Cell[11728, 416, 514, 13, 41, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

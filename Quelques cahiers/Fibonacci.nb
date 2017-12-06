@@ -1,0 +1,396 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     10957,        386]
+NotebookOptionsPosition[      9434,        335]
+NotebookOutlinePosition[     10095,        358]
+CellTagsIndexPosition[     10052,        355]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Nombres de Fibonacci", "Title"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " L'algorithme na\[IDoubleDot]f"
+}], "Section"],
+
+Cell["\<\
+On utilise la d\[EAcute]finition des nombres de Fibonacci par \
+r\[EAcute]currence. La fonction r\[EAcute]cursive ainsi cr\[EAcute]\[EAcute]e \
+est de complexit\[EAcute] exponentielle, et ne peut \[EHat]tre \
+utilis\[EAcute]e que pour des valeurs tr\[EGrave]s petites de l'argument. Le \
+temps de calcul est multipli\[EAcute] par le nombre d'or lorsque l'argument \
+de la fonction est augment\[EAcute] de 1.\
+\>", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"fib1", "[", "0", "]"}], "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"fib1", "[", "1", "]"}], "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"fib1", "[", "n_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"fib1", "[", 
+    RowBox[{"n", "-", "1"}], "]"}], "+", 
+   RowBox[{"fib1", "[", 
+    RowBox[{"n", "-", "2"}], "]"}]}]}]}], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Timing", "[", 
+  RowBox[{"fib1", "[", "25", "]"}], "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " L'algorithme \"it\[EAcute]ratif\""
+}], "Section"],
+
+Cell[TextData[{
+ "On utilise encore la r\[EAcute]currence, mais on proc\[EGrave]de diff\
+\[EAcute]remment. On initialise deux variables u et v \[AGrave] 0 et 1 \
+respectivement. Puis on effectue n fois l'op\[EAcute]ration ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"u", "\[LeftArrow]", "v"}], ",", 
+    RowBox[{"v", "\[LeftArrow]", 
+     RowBox[{"u", "+", "v"}]}]}], TraditionalForm]]],
+ ".\nL'algorithme est cette fois-ci de complexit\[EAcute] lin\[EAcute]aire en \
+le nombre d'additions."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{" ", 
+  RowBox[{
+   RowBox[{"fib2", "[", "n_", "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"u", "=", "0"}], ",", 
+       RowBox[{"v", "=", "1"}]}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Do", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"u", ",", "v"}], "}"}], "=", 
+         RowBox[{"{", 
+          RowBox[{"v", ",", 
+           RowBox[{"u", "+", "v"}]}], "}"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", "u"}]}], "]"}]}]}]], "Input"],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"10", "^", "k"}], ",", 
+       RowBox[{"First", "[", 
+        RowBox[{"Timing", "[", 
+         RowBox[{"fib2", "[", 
+          RowBox[{"10", "^", "k"}], "]"}], "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", "1", ",", "5"}], "}"}]}], "]"}], "//", "TableForm"}], 
+  "Input"]], "Input"],
+
+Cell["\<\
+Il est bon de remarquer que ce n'est pas la r\[EAcute]cursivit\[EAcute] que \
+l'on met en cause, mais la fa\[CCedilla]on de l'utiliser. Ainsi, il est tout \
+\[AGrave] fait possible d'\[EAcute]crire r\[EAcute]cursivement la fonction \
+ci-dessus, avec un temps de calcul du m\[EHat]me ordre de grandeur :\
+\>", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"fibb", "[", 
+    RowBox[{"s_", ",", "0"}], "]"}], ":=", "s"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"fibb", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"a_", ",", "b_"}], "}"}], ",", "n_"}], "]"}], ":=", 
+   RowBox[{"fibb", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"b", ",", 
+       RowBox[{"a", "+", "b"}]}], "}"}], ",", 
+     RowBox[{"n", "-", "1"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"fibb", "[", "n_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"fibb", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1"}], "}"}], ",", "n"}], "]"}], "[", 
+   RowBox[{"[", "1", "]"}], "]"}]}]}], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$IterationLimit", "=", "1000000"}], ";"}]], "Input"],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"10", "^", "k"}], ",", 
+       RowBox[{"First", "[", 
+        RowBox[{"Timing", "[", 
+         RowBox[{"fibb", "[", 
+          RowBox[{"10", "^", "k"}], "]"}], "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", "1", ",", "5"}], "}"}]}], "]"}], "//", "TableForm"}], 
+  "Input"]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ "  L'algorithme rus\[EAcute] "
+}], "Section",
+ TextAlignment->Left,
+ TextJustification->0],
+
+Cell[TextData[{
+ "On travaille dans l'anneau ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[DoubleStruckCapitalZ]", "[", "\[CapitalPhi]", "]"}], 
+   TraditionalForm]]],
+ " o\[UGrave] ",
+ Cell[BoxData[
+  FormBox["\[CapitalPhi]", TraditionalForm]]],
+ " est le nombre d'or. On mod\[EAcute]lise un \[EAcute]l\[EAcute]ment de cet \
+anneau par une liste ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"{", 
+    RowBox[{"a", ",", "b"}], "}"}], TraditionalForm]]],
+ " \[AGrave] 2 \[EAcute]l\[EAcute]ments, repr\[EAcute]sentant la quantit\
+\[EAcute] ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"a", "+", 
+    RowBox[{"b", " ", "\[CapitalPhi]"}]}], TraditionalForm]]],
+ ". On impl\[EAcute]mente la multiplication dans l'anneau. On remarque \
+ensuite que ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"\[ForAll]", " ", 
+     RowBox[{"n", " ", "\[Element]", " ", 
+      FormBox[
+       SuperscriptBox["\[DoubleStruckCapitalN]", "*"],
+       TraditionalForm]}]}], ",", " ", 
+    FormBox[
+     RowBox[{
+      SuperscriptBox["\[CapitalPhi]", "n"], " ", "=", " ", 
+      RowBox[{
+       SubscriptBox["F", 
+        RowBox[{"n", "-", "1"}]], "+", 
+       RowBox[{
+        SubscriptBox["F", "n"], "\[CapitalPhi]"}]}]}],
+     TraditionalForm]}], TraditionalForm]]],
+ ".\nIl suffit alors de calculer la quantit\[EAcute] ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[CapitalPhi]", "n"], TraditionalForm]]],
+ " par exponentiation dichotomique pour obtenir le ni\[EGrave]me nombre de \
+Fibonacci. La complexit\[EAcute] de cet algorithme est logarithmique en le \
+nombre d'op\[EAcute]rations (additions, multiplications)."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"produit", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"a_", ",", "b_"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"c_", ",", "d_"}], "}"}]}], "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"a", " ", "c"}], "+", 
+     RowBox[{"b", " ", "d"}]}], ",", 
+    RowBox[{
+     RowBox[{"a", " ", "d"}], "+", 
+     RowBox[{"b", " ", "c"}], "+", 
+     RowBox[{"b", " ", "d"}]}]}], "}"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"produit", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"a", ",", "b"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1"}], "}"}]}], "]"}]], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"puissance", "[", 
+    RowBox[{"x_", ",", "0"}], "]"}], ":=", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"puissance", "[", 
+    RowBox[{"x_", ",", 
+     RowBox[{"n_", "/;", 
+      RowBox[{
+       RowBox[{"Mod", "[", 
+        RowBox[{"n", ",", "2"}], "]"}], "\[Equal]", "0"}]}]}], "]"}], ":=", 
+   RowBox[{"puissance", "[", 
+    RowBox[{
+     RowBox[{"produit", "[", 
+      RowBox[{"x", ",", "x"}], "]"}], ",", 
+     RowBox[{"n", "/", "2"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"puissance", "[", 
+   RowBox[{"x_", ",", "n_"}], "]"}], ":=", 
+  RowBox[{"produit", "[", 
+   RowBox[{"x", ",", 
+    RowBox[{"puissance", "[", 
+     RowBox[{
+      RowBox[{"produit", "[", 
+       RowBox[{"x", ",", "x"}], "]"}], ",", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"n", "-", "1"}], ")"}], "/", "2"}]}], "]"}]}], 
+   "]"}]}]}], "Input"],
+
+Cell[BoxData[
+ RowBox[{"\[CapitalPhi]", "=", 
+  RowBox[{"{", 
+   RowBox[{"0", ",", "1"}], "}"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"puissance", "[", 
+  RowBox[{"\[CapitalPhi]", ",", "100"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"fib3", "[", "n_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"puissance", "[", 
+    RowBox[{"\[CapitalPhi]", ",", "n"}], "]"}], "[", 
+   RowBox[{"[", "2", "]"}], "]"}]}]], "Input"],
+
+Cell["\<\
+Pour des raisons \[EAcute]videntes, on ne fait pas appara\[IHat]tre la valeur \
+du millioni\[EGrave]me nombre de Fibonacci.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"10", "^", "k"}], ",", 
+      RowBox[{"First", "[", 
+       RowBox[{"Timing", "[", 
+        RowBox[{"fib3", "[", 
+         RowBox[{"10", "^", "k"}], "]"}], "]"}], "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", "1", ",", "6"}], "}"}]}], "]"}], "//", 
+  "TableForm"}]], "Input"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowToolbars->{},
+WindowSize->{666, 579},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic},
+PrintingOptions->{"PrintCellBrackets"->False,
+"PrintMultipleHorizontalPages"->False,
+"PrintRegistrationMarks"->True,
+"PrintingMargins"->{{54, 54}, {72, 72}}},
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 37, 0, 65, "Title"],
+Cell[CellGroupData[{
+Cell[641, 26, 90, 4, 75, "Section"],
+Cell[734, 32, 431, 7, 83, "Text"],
+Cell[1168, 41, 421, 13, 82, "Input"],
+Cell[1592, 56, 91, 2, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1720, 63, 94, 4, 75, "Section"],
+Cell[1817, 69, 512, 12, 65, "Text"],
+Cell[2332, 83, 661, 21, 82, "Input"],
+Cell[2996, 106, 432, 14, 41, "Input"],
+Cell[3431, 122, 326, 5, 65, "Text"],
+Cell[3760, 129, 722, 25, 82, "Input"],
+Cell[4485, 156, 87, 2, 41, "Input"],
+Cell[4575, 160, 432, 14, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5044, 179, 133, 6, 75, "Section"],
+Cell[5180, 187, 1605, 47, 119, "Text"],
+Cell[6788, 236, 474, 16, 62, "Input"],
+Cell[7265, 254, 181, 6, 41, "Input"],
+Cell[7449, 262, 981, 32, 82, "Input"],
+Cell[8433, 296, 108, 3, 41, "Input"],
+Cell[8544, 301, 99, 2, 41, "Input"],
+Cell[8646, 305, 208, 6, 41, "Input"],
+Cell[8857, 313, 147, 3, 29, "Text"],
+Cell[9007, 318, 399, 13, 41, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

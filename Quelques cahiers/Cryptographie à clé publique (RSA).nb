@@ -1,0 +1,1568 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     42283,       1558]
+NotebookOptionsPosition[     37403,       1405]
+NotebookOutlinePosition[     38137,       1430]
+CellTagsIndexPosition[     38094,       1427]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["R.S.A.", "Title"],
+
+Cell[TextData[StyleBox["Marc Lorenzi\nNovembre 2005",
+ FontSlant->"Italic"]], "Author"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Introduction"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Cryptographie - cl\[EAcute]s priv\[EAcute]es"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Alice d\[EAcute]sire envoyer des messages \[AGrave] Bob. Ces messages \
+devant rester confidentiels, ils vont \[EHat]tre ",
+ StyleBox["crypt\[EAcute]s",
+  FontSlant->"Italic"],
+ ".\nUn message est tout simplement un \[EAcute]l\[EAcute]ment d'un certain \
+ensemble ",
+ Cell[BoxData[
+  FormBox["\[ScriptCapitalM]", TraditionalForm]]],
+ ". On appelle ",
+ StyleBox["cl\[EAcute] de cryptage",
+  FontSlant->"Italic"],
+ " toute application bijective (pour simplifier) de ",
+ Cell[BoxData[
+  FormBox["\[ScriptCapitalM]", TraditionalForm]]],
+ " vers lui-m\[EHat]me. Ainsi, si Alice veut envoyer un message ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"m", "\[Element]", "\[ScriptCapitalM]"}], TraditionalForm]]],
+ " \[AGrave] Bob, ils choisissent une cl\[EAcute] de cryptage ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ ". Puis Alice calcule ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"m", "'"}], "=", 
+    RowBox[{"f", "(", "m", ")"}]}], TraditionalForm]]],
+ " et exp\[EAcute]die ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"m", "'"}], TraditionalForm]]],
+ ", le ",
+ StyleBox["message crypt\[EAcute]",
+  FontSlant->"Italic"],
+ ", \[AGrave] Bob. Celui-ci applique alors la ",
+ StyleBox["cl\[EAcute] de d\[EAcute]cryptage",
+  FontSlant->"Italic"],
+ " ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["f", 
+    RowBox[{"-", "1"}]], TraditionalForm]]],
+ ", o\[UGrave] ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["f", 
+    RowBox[{"-", "1"}]], TraditionalForm]]],
+ " est la fonction r\[EAcute]ciproque de ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ " : il calcule simplement ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SuperscriptBox["f", 
+      RowBox[{"-", "1"}]], "(", 
+     RowBox[{"m", "'"}], ")"}], "=", 
+    RowBox[{"m", Cell[""]}]}], TraditionalForm]]],
+ ", et retrouve ainsi le ",
+ StyleBox["message en clair",
+  FontSlant->"Italic"],
+ "."
+}], "Text"],
+
+Cell[TextData[{
+ "Bien \[EAcute]videmment, Bob peut aussi envoyer des messages \[AGrave] \
+Alice en utilisant la cl\[EAcute] ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ " : Alice les d\[EAcute]ccryptera gr\[AHat]ce \[AGrave] la cl\[EAcute] ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["f", 
+    RowBox[{"-", "1"}]], TraditionalForm]]],
+ ". Nous sommes en pr\[EAcute]sence d'un syst\[EGrave]me de cryptage ",
+ StyleBox["\[AGrave] cl\[EAcute]s sym\[EAcute]triques",
+  FontSlant->"Italic"],
+ " : les deux interlocuteurs cryptent (et d\[EAcute]cryptent) avec la \
+m\[EHat]me cl\[EAcute]."
+}], "Text"],
+
+Cell[TextData[{
+ "Le probl\[EGrave]me est \[EAcute]videmment pour Alice et Bob de s'entendre \
+sur la cl\[EAcute] ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ ". La seule solution existant jusqu'\[AGrave] une \[EAcute]poque \
+r\[EAcute]cente (1976) \[EAcute]tait pour Alice et Bob de se communiquer secr\
+\[EGrave]tement la fonction ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ " : le probl\[EGrave]me de la transmission s\[UHat]re des messages \
+\[EAcute]tait donc report\[EAcute] sur le probl\[EGrave]me de la transmission \
+s\[UHat]re des cl\[EAcute]s."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Cryptographie \[AGrave] cl\[EAcute] publique"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Le principe th\[EAcute]orique de la cryptographie \[AGrave] cl\[EAcute] \
+publique a \[EAcute]t\[EAcute] d\[EAcute]couvert par Diffie en 1975. L'id\
+\[EAcute]e sous-jacente est simple : ce n'est pas parce que l'on \
+conna\[IHat]t une fonction ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ " que l'on sait calculer sa r\[EAcute]ciproque."
+}], "Text"],
+
+Cell[TextData[{
+ "Bob choisit une fonction de cryptage ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ " et la rend publique : tout le monde y a acc\[EGrave]s. Alice conna\[IHat]t \
+donc ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ " et peut ainsi envoyer ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"f", "(", "m", ")"}], TraditionalForm]]],
+ " \[AGrave] Bob qui s'empresse de retrouver le message ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]]],
+ " en appliquant ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["f", 
+    RowBox[{"-", "1"}]], TraditionalForm]]],
+ ". On voit tout de suite o\[UGrave] est le probl\[EGrave]me : tout le monde \
+peut faire comme Bob ! A moins que seul Bob connaisse ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["f", 
+    RowBox[{"-", "1"}]], TraditionalForm]]],
+ " ..."
+}], "Text"],
+
+Cell[TextData[{
+ "Pour qu'un tel syst\[EGrave]me fonctionne il faut donc disposer d'une \
+fonction ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ " telle que ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ " soit facilement calculable \[AGrave] partir de ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["f", 
+    RowBox[{"-", "1"}]], TraditionalForm]]],
+ ", mais que ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["f", 
+    RowBox[{"-", "1"}]], TraditionalForm]]],
+ " soit impossible (?) \[AGrave] calculer \[AGrave] partir de ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[TextData[{
+ "Le principe g\[EAcute]n\[EAcute]ral est donc le suivant : Bob choisit une \
+fonction ",
+ Cell[BoxData[
+  FormBox["g", TraditionalForm]]],
+ " telle que ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["g", 
+    RowBox[{"-", "1"}]], TraditionalForm]]],
+ " soit calculable \[AGrave] partir de ",
+ Cell[BoxData[
+  FormBox["g", TraditionalForm]]],
+ ", mais pas le contraire. Puis il publie la fonction ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"f", "=", 
+    SuperscriptBox["g", 
+     RowBox[{"-", "1"}]]}], TraditionalForm]]],
+ " et garde \"priv\[EAcute]e\" la fonction ",
+ Cell[BoxData[
+  FormBox["g", TraditionalForm]]],
+ ". Toute personne d\[EAcute]sirant envoyer un message ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]]],
+ " \[AGrave] Bob le crypte avec cette fonction ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ ". Bob le d\[EAcute]crypte avec la fonction ",
+ Cell[BoxData[
+  FormBox["g", TraditionalForm]]],
+ ", qu'il est le seul \[AGrave] conna\[IHat]tre."
+}], "Text"],
+
+Cell[TextData[{
+ "Cette fois-ci, si Bob d\[EAcute]sire envoyer un message \[AGrave] Alice, il \
+faut d'abord que Alice cr\[EAcute]e sa propre cl\[EAcute] de cryptage ",
+ Cell[BoxData[
+  FormBox["g", TraditionalForm]]],
+ ", puis publie cette cl\[EAcute] (et garde \[EAcute]videmment \
+secr\[EGrave]te la fonction de d\[EAcute]cryptage ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["g", 
+    RowBox[{"-", "1"}]], TraditionalForm]]],
+ ") : nous sommes en pr\[EAcute]sence d'un syst\[EGrave]me cryptographique ",
+ StyleBox["\[AGrave] cl\[EAcute]s asym\[EAcute]triques",
+  FontSlant->"Italic"],
+ "."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " RSA"
+}], "Subsection"],
+
+Cell["\<\
+Le syst\[EGrave]me RSA est le plus connu des syst\[EGrave]mes \
+cryptographiques \[AGrave] cl\[EAcute]s publiques (ce n'est pas le seul). RSA \
+a vu le jour en 1977 et porte le nom de ses inventeurs : Ron Rivest, Adi \
+Shamir et Leonard Adleman.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " D\[EAcute]tails pratiques"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Les messages que nous allons manipuler seront des cha\[IHat]nes de caract\
+\[EGrave]res.",
+ StyleBox[" Mathematica",
+  FontSlant->"Italic"],
+ " code les caract\[EGrave]res sur 16 bits. On d\[EAcute]finit le nombre de \
+lettres de l'alphabet \[EAcute]gal \[AGrave] 65536"
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"nbLettres", "=", "65536"}]], "Input"],
+
+Cell["\<\
+Voici la cha\[IHat]ne de caract\[EGrave]res qui sera utilis\[EAcute]e dans \
+les tests. Il s'agit du plus grand secret de tous les temps.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"pythagore", "=", 
+  "\"\<In omni triangulo rectangulo, quadratum lateris quod recto angulo \
+opponitur, aequale est duobus simul reliquorum laterum quadratis.\>\""}]], \
+"Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Convertir une cha\[IHat]ne en nombres"
+}], "Subsection"],
+
+Cell[TextData[{
+ "La fonction ci-dessous convertit une cha\[IHat]ne ",
+ Cell[BoxData[
+  FormBox["s", TraditionalForm]]],
+ " en nombre entier. S'il y a un second param\[EGrave]tre ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ ", elle renvoie la liste des chiffres de cet entier en base ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"chaineVersNombre", "[", "s_", "]"}], ":=", 
+   RowBox[{"FromDigits", "[", 
+    RowBox[{
+     RowBox[{"ToCharacterCode", "[", "s", "]"}], ",", "nbLettres"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"chaineVersNombre", "[", 
+   RowBox[{"s_", ",", "n_"}], "]"}], ":=", 
+  RowBox[{"IntegerDigits", "[", 
+   RowBox[{
+    RowBox[{"chaineVersNombre", "[", "s", "]"}], ",", "n"}], 
+   "]"}]}]}], "Input"],
+
+Cell[BoxData[
+ RowBox[{"x", "=", 
+  RowBox[{"chaineVersNombre", "[", "pythagore", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"x", "=", 
+  RowBox[{"chaineVersNombre", "[", 
+   RowBox[{"pythagore", ",", "1234567"}], "]"}]}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Convertir des nombres en cha\[IHat]ne"
+}], "Subsection"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"nombreVersChaine", "[", "x_", "]"}], ":=", 
+   RowBox[{"FromCharacterCode", "[", 
+    RowBox[{"IntegerDigits", "[", 
+     RowBox[{"x", ",", "nbLettres"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"nombreVersChaine", "[", 
+   RowBox[{"x_", ",", "n_"}], "]"}], ":=", 
+  RowBox[{"nombreVersChaine", "[", 
+   RowBox[{"FromDigits", "[", 
+    RowBox[{"x", ",", "n"}], "]"}], "]"}]}]}], "Input"],
+
+Cell[BoxData[
+ RowBox[{"nombreVersChaine", "[", 
+  RowBox[{"x", ",", "7654321"}], "]"}]], "Input"],
+
+Cell["\<\
+Ben oui, si on convertit dans un sens en base 1234567, il vaut mieux r\
+\[EAcute]utiliser la m\[EHat]me base pour la conversion inverse !\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"nombreVersChaine", "[", 
+  RowBox[{"x", ",", "1234567"}], "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " RSA"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Bob cr\[EAcute]e ses cl\[EAcute]s RSA"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Bob d\[EAcute]sire recevoir confidentiellement des messages d'Alice (ou de \
+qui il veut). Il commence par choisir secr\[EGrave]tement deux nombres \
+premiers ",
+ Cell[BoxData[
+  FormBox["p", TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox["q", TraditionalForm]]],
+ ".",
+ Cell[BoxData[
+  FormBox[Cell[""], TraditionalForm]]]
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"p", "=", "137"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"q", "=", "151"}]], "Input"],
+
+Cell[TextData[{
+ "Bob calcule ensuite le nombre ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ ",  produit de ",
+ Cell[BoxData[
+  FormBox["p", TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox["q", TraditionalForm]]],
+ ". Si les entiers ",
+ Cell[BoxData[
+  FormBox["p", TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox["q", TraditionalForm]]],
+ " sont suffisamment grands (ce n'est pas franchement le cas dans notre \
+exemple), la connaissance de l'entier ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " seul ne permettra pas de retrouver ses facteurs ",
+ Cell[BoxData[
+  FormBox["p", TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox["q", TraditionalForm]]],
+ ". Puis Bob rend public l'entier ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"n", "=", 
+  RowBox[{"p", "*", "q"}]}]], "Input"],
+
+Cell[TextData[{
+ "Bob choisit ensuite un nombre ",
+ Cell[BoxData[
+  FormBox["e", TraditionalForm]]],
+ " qui est un premier avec ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"\[CurlyPhi]", "(", "n", ")"}], "=", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"p", "-", "1"}], ")"}], 
+     RowBox[{"(", 
+      RowBox[{"q", "-", "1"}], ")"}]}]}], TraditionalForm]]],
+ ". Par exemple, Bob peut choisit un entier \[AGrave] peu pr\[EGrave]s au \
+hasard entre 1 et ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"p", "-", "1"}], ")"}], 
+    RowBox[{"(", 
+     RowBox[{"q", "-", "1"}], ")"}]}], TraditionalForm]]],
+ " et regarder s'il convient.  Apr\[EGrave]s un tr\[EGrave]s petit nombre \
+d'essais, Bob trouve son bonheur. Puis Bob rend public le nombre ",
+ Cell[BoxData[
+  FormBox["e", TraditionalForm]]],
+ ". Ce nombre servira aux correspondants de Bob pour ",
+ StyleBox["encrypter",
+  FontSlant->"Italic"],
+ " leurs messages."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"e", "=", "142117"}]], "Input"],
+
+Cell["\<\
+On v\[EAcute]rifie que cet entier convient ...\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"egcd", "=", 
+  RowBox[{"ExtendedGCD", "[", 
+   RowBox[{"e", ",", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"p", "-", "1"}], ")"}], "*", 
+     RowBox[{"(", 
+      RowBox[{"q", "-", "1"}], ")"}]}]}], "]"}]}]], "Input"],
+
+Cell[TextData[{
+ "Enfin, Bob calcule le nombre ",
+ Cell[BoxData[
+  FormBox["d", TraditionalForm]]],
+ ", inverse de ",
+ Cell[BoxData[
+  FormBox["e", TraditionalForm]]],
+ " modulo ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"p", "-", "1"}], ")"}], 
+    RowBox[{"(", 
+     RowBox[{"q", "-", "1"}], ")"}]}], TraditionalForm]]],
+ ". Calculer est un bien grand mot, puisque la ligne \
+pr\[EAcute]c\[EAcute]dente lui donne la r\[EAcute]ponse. Bob garde secret ce \
+nombre ",
+ Cell[BoxData[
+  FormBox["d", TraditionalForm]]],
+ " : il lui servira \[AGrave] ",
+ StyleBox["d\[EAcute]crypter",
+  FontSlant->"Italic"],
+ " les messages qu'il re\[CCedilla]oit."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"d", "=", 
+  RowBox[{"egcd", "[", 
+   RowBox[{"[", 
+    RowBox[{"2", ",", "1"}], "]"}], "]"}]}]], "Input"],
+
+Cell["V\[EAcute]rification ...", "Text"],
+
+Cell[BoxData[
+ RowBox[{"Mod", "[", 
+  RowBox[{
+   RowBox[{"d", "*", "e"}], ",", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"p", "-", "1"}], ")"}], "*", 
+    RowBox[{"(", 
+     RowBox[{"q", "-", "1"}], ")"}]}]}], "]"}]], "Input"],
+
+Cell[TextData[{
+ "En r\[EAcute]sum\[EAcute], la cl\[EAcute] (publique) de cryptage est le \
+couple ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{"n", ",", "e"}], ")"}], TraditionalForm]]],
+ ", et la cl\[EAcute] (priv\[EAcute]e) de d\[EAcute]cryptage est le couple ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{"n", ",", "d"}], ")"}], TraditionalForm]]],
+ ". Plus exactement, les fonctions (cl\[EAcute]s) de cryptage et de \
+d\[EAcute]cryptage sont fabriqu\[EAcute]es de fa\[CCedilla]on simple \
+\[AGrave] partir de ces deux couples. Il st d'usage de confondre le couple et \
+la cl\[EAcute] (fonction) qu'il permet de g\[EAcute]n\[EAcute]rer."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Automatisation du proc\[EAcute]d\[EAcute]"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Voici une fonction renvoyant une liste ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"{", 
+    RowBox[{"n", ",", "e", ",", "d"}], "}"}], TraditionalForm]]],
+ ". Elle fonctionne un peu diff\[EAcute]remment de ce qui a \[EAcute]t\
+\[EAcute] d\[EAcute]crit : elle prend ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"e", "=", "65537"}], TraditionalForm]]],
+ ". Puis elle choisit au hasard deux nombres premiers ",
+ Cell[BoxData[
+  FormBox["p", TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox["q", TraditionalForm]]],
+ ", de sorte que le nombre ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"n", "=", 
+    RowBox[{"p", " ", "q"}]}], TraditionalForm]]],
+ " ait environ ",
+ Cell[BoxData[
+  FormBox["L", TraditionalForm]]],
+ " bits, et que ",
+ Cell[BoxData[
+  FormBox["e", TraditionalForm]]],
+ " soit premier avec ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"p", "-", "1"}], TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"q", "-", "1"}], TraditionalForm]]],
+ ".  Pui elle fabrique une cl\[EAcute] RSA \[AGrave] partir de ",
+ Cell[BoxData[
+  FormBox["p", TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox["q", TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"creerCle", "[", "L_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "p", ",", "q", ",", "d", ",", "e", ",", "n", ",", "N1", ",", "N2"}], 
+     "}"}], ",", 
+    RowBox[{
+     RowBox[{"e", "=", "65537"}], ";", 
+     RowBox[{"N1", "=", 
+      SuperscriptBox["2", 
+       RowBox[{"Floor", "[", 
+        RowBox[{
+         FractionBox["L", "2"], "-", "1"}], "]"}]]}], ";", 
+     RowBox[{"N2", "=", 
+      RowBox[{
+       SuperscriptBox["2", 
+        RowBox[{"Floor", "[", 
+         FractionBox["L", "2"], "]"}]], "-", "1"}]}], ";", 
+     RowBox[{"p", "=", 
+      RowBox[{"RandomInteger", "[", 
+       RowBox[{"{", 
+        RowBox[{"N1", ",", "N2"}], "}"}], "]"}]}], ";", 
+     RowBox[{"While", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"!", 
+         RowBox[{"PrimeQ", "[", "p", "]"}]}], "||", 
+        RowBox[{
+         RowBox[{"GCD", "[", 
+          RowBox[{
+           RowBox[{"p", "-", "1"}], ",", "e"}], "]"}], "\[NotEqual]", "1"}]}],
+        ",", 
+       RowBox[{"p", "=", 
+        RowBox[{"p", "+", "1"}]}]}], "]"}], ";", 
+     RowBox[{"q", "=", 
+      RowBox[{"RandomInteger", "[", 
+       RowBox[{"{", 
+        RowBox[{"N1", ",", "N2"}], "}"}], "]"}]}], ";", 
+     RowBox[{"While", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"!", 
+         RowBox[{"PrimeQ", "[", "q", "]"}]}], "||", 
+        RowBox[{
+         RowBox[{"GCD", "[", 
+          RowBox[{
+           RowBox[{"q", "-", "1"}], ",", "e"}], "]"}], "\[NotEqual]", "1"}]}],
+        ",", 
+       RowBox[{"q", "=", 
+        RowBox[{"q", "+", "1"}]}]}], "]"}], ";", 
+     RowBox[{"n", "=", 
+      RowBox[{"p", " ", "q"}]}], ";", 
+     RowBox[{"n1", "=", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"p", "-", "1"}], ")"}], " ", 
+       RowBox[{"(", 
+        RowBox[{"q", "-", "1"}], ")"}]}]}], ";", 
+     RowBox[{"d", "=", 
+      RowBox[{"Mod", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"ExtendedGCD", "[", 
+          RowBox[{"e", ",", "n1"}], "]"}], "\[LeftDoubleBracket]", 
+         RowBox[{"2", ",", "1"}], "\[RightDoubleBracket]"}], ",", "n1"}], 
+       "]"}]}], ";", 
+     RowBox[{"{", 
+      RowBox[{"n", ",", "e", ",", "d"}], "}"}]}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{"nB", ",", "eB", ",", "dB"}], "}"}], "=", 
+  RowBox[{"creerCle", "[", "128", "]"}]}]], "Input"],
+
+Cell[TextData[{
+ "Bob a \[EAcute]t\[EAcute] trop optimiste : sa cl\[EAcute] est facilement ",
+ StyleBox["cass\[EAcute]e ",
+  FontSlant->"Italic"],
+ "par Eve ... ",
+ "La sp\[EAcute]cialit\[EAcute] de Eve est de casser les cl\[EAcute]s RSA. \
+Elle s'est \[EAcute]crit pour cela une fonction ",
+ StyleBox["Mathematica :",
+  FontSlant->"Italic"]
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"casserRSA", "[", 
+   RowBox[{"n_", ",", "e_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"fact", ",", "p", ",", "q", ",", "n1", ",", "egcd", ",", "d"}], 
+     "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"fact", "=", 
+      RowBox[{"FactorInteger", "[", "n", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"p", "=", 
+      RowBox[{"fact", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1"}], "]"}], "]"}]}], ";", 
+     RowBox[{"q", "=", 
+      RowBox[{"fact", "[", 
+       RowBox[{"[", 
+        RowBox[{"2", ",", "1"}], "]"}], "]"}]}], ";", 
+     RowBox[{"n1", "=", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"p", "-", "1"}], ")"}], "*", 
+       RowBox[{"(", 
+        RowBox[{"q", "-", "1"}], ")"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"egcd", "=", 
+      RowBox[{"ExtendedGCD", "[", 
+       RowBox[{"e", ",", "n1"}], "]"}]}], ";", 
+     RowBox[{"d", "=", 
+      RowBox[{"Mod", "[", 
+       RowBox[{
+        RowBox[{"egcd", "[", 
+         RowBox[{"[", 
+          RowBox[{"2", ",", "1"}], "]"}], "]"}], ",", "n1"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"n", ",", "d"}], "}"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input"],
+
+Cell["\<\
+Eve applique sa fonction sur la cl\[EAcute] publique de Bob :\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"casserRSA", "[", 
+  RowBox[{"nB", ",", "eB"}], "]"}]], "Input"],
+
+Cell["\<\
+Et la voici en possession de la cl\[EAcute] priv\[EAcute]e de dernier.\
+\>", "Text"],
+
+Cell["\<\
+Avec ce qui suit, Bob devrait \[EHat]tre plus tranquille (???)\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{"nB", ",", "eB", ",", "dB"}], "}"}], "=", 
+  RowBox[{"creerCle", "[", "256", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"casserRSA", "[", 
+  RowBox[{"nB", ",", "eB"}], "]"}]], "Input"],
+
+Cell["Inutile (?) d'insister ...", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Crypter, d\[EAcute]crypter"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Rappelons que  Bob a rendus ",
+ StyleBox["publics",
+  FontSlant->"Italic"],
+ " les nombres ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox["e", TraditionalForm]]],
+ ". Tout le monde conna\[IHat]t maintenant ces deux nombres. En revanche, ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"p", ",", "q", ",", "d"}], TraditionalForm]]],
+ " sont ",
+ StyleBox["priv\[EAcute]s",
+  FontSlant->"Italic"],
+ " et seul Bob y a acc\[EGrave]s."
+}], "Text"],
+
+Cell[TextData[{
+ "Alice d\[EAcute]sire envoyer un message ",
+ Cell[BoxData[
+  FormBox["s", TraditionalForm]]],
+ " \[AGrave] Bob. Elle commence par transformer ",
+ Cell[BoxData[
+  FormBox["s", TraditionalForm]]],
+ " en des \"chiffres\" en base ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ ". Puis elle \[EAcute]l\[EGrave]ve ces \"chiffres\" \[AGrave] la puissance ",
+ Cell[BoxData[
+  FormBox["e", TraditionalForm]]],
+ " modulo ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ ". Alice envoie la liste de nombres obtenue \[AGrave] Bob."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"RSA", "[", 
+   RowBox[{"s_", ",", "e_", ",", "n_"}], "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{"nombreVersChaine", "[", 
+   RowBox[{
+    RowBox[{"PowerMod", "[", 
+     RowBox[{
+      RowBox[{"chaineVersNombre", "[", 
+       RowBox[{"s", ",", "n"}], "]"}], ",", "e", ",", "n"}], "]"}], ",", 
+    "n"}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"grotehapy", "=", 
+  RowBox[{"RSA", "[", 
+   RowBox[{"pythagore", ",", "eB", ",", "nB"}], "]"}]}]], "Input"],
+
+Cell[TextData[{
+ "Bob d\[EAcute]sire maintenant d\[EAcute]crypter le message. Il fait \
+exactement ce qu'a fait Alice, sauf qu'il utilise ",
+ Cell[BoxData[
+  FormBox["d", TraditionalForm]]],
+ " \[AGrave] la place de ",
+ Cell[BoxData[
+  FormBox["e", TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"RSA", "[", 
+  RowBox[{"grotehapy", ",", "dB", ",", "nB"}], "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Explications math\[EAcute]matiques"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Pourquoi cela fonctionne"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Soient ",
+ Cell[BoxData[
+  FormBox["p", TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox["q", TraditionalForm]]],
+ " deux nombres premiers distincts. Soit ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"n", "=", 
+    RowBox[{"p", " ", "q"}]}], TraditionalForm]]],
+ ". Posons ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"\[CurlyPhi]", "(", "n", ")"}], "=", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"p", "-", "1"}], ")"}], 
+     RowBox[{"(", 
+      RowBox[{"q", "-", "1"}], ")"}]}]}], TraditionalForm]]],
+ ". La fonction ",
+ Cell[BoxData[
+  FormBox["\[CurlyPhi]", TraditionalForm]]],
+ " n'est autre que la fonction indicatrice d'Euler. Soient enfin ",
+ Cell[BoxData[
+  FormBox["d", TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox["e", TraditionalForm]]],
+ " tels que ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"d", " ", "e"}], "\[Congruent]", 
+    RowBox[{"1", 
+     RowBox[{"(", 
+      RowBox[{"mod", " ", 
+       RowBox[{"\[CurlyPhi]", "(", "n", ")"}]}], ")"}]}]}], TraditionalForm]]],
+ ". On a donc ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"e", " ", "d"}], "=", 
+    RowBox[{"1", "+", 
+     RowBox[{"k", " ", 
+      RowBox[{"\[CurlyPhi]", "(", "n", ")"}]}]}]}], TraditionalForm]]],
+ " o\[UGrave] ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ " est un nombre entier."
+}], "Text"],
+
+Cell[TextData[{
+ "Soit ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " un entier compris entre 0 et ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"n", "-", "1"}], TraditionalForm]]],
+ ". Soit ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"y", "=", 
+    RowBox[{
+     SuperscriptBox["x", "e"], "(", 
+     RowBox[{"mod", " ", "n"}], ")"}]}], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[TextData[{
+ "\[Rule] Supposons dans un premier temps que ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " est premier avec ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ ". Alors ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SuperscriptBox["y", "d"], "=", 
+    RowBox[{
+     SuperscriptBox["x", 
+      RowBox[{"e", " ", "d"}]], "=", 
+     RowBox[{
+      SuperscriptBox["x", 
+       RowBox[{"1", "+", 
+        RowBox[{"k", " ", 
+         RowBox[{"\[CurlyPhi]", "(", "n", ")"}]}]}]], "=", 
+      RowBox[{
+       SuperscriptBox[
+        RowBox[{"(", 
+         SuperscriptBox["x", 
+          RowBox[{"\[CurlyPhi]", "(", "n", ")"}]], ")"}], "k"], "x"}]}]}]}], 
+   TraditionalForm]]],
+ ". Le th\[EAcute]or\[EGrave]me d'Euler nous apprend que ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SuperscriptBox["x", 
+     RowBox[{"\[CurlyPhi]", "(", "n", ")"}]], "\[Congruent]", 
+    RowBox[{"1", 
+     RowBox[{"(", 
+      RowBox[{"mod", " ", "n"}], ")"}]}]}], TraditionalForm]]],
+ ". Donc ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SuperscriptBox["y", "d"], "\[Congruent]", 
+    RowBox[{"x", "(", 
+     RowBox[{"mod", " ", "n"}], ")"}]}], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[TextData[{
+ "\[Rule] Si ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " n'est pas premier avec ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ ", alors ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " est divisible par ",
+ Cell[BoxData[
+  FormBox["p", TraditionalForm]]],
+ " ou par ",
+ Cell[BoxData[
+  FormBox["q", TraditionalForm]]],
+ " (mais pas par les deux). Par exemple, ",
+ Cell[BoxData[
+  FormBox["p", TraditionalForm]]],
+ " divise ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " est premier avec ",
+ Cell[BoxData[
+  FormBox["q", TraditionalForm]]],
+ ". On a donc ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"x", "\[Congruent]", 
+    RowBox[{"0", 
+     RowBox[{"(", 
+      RowBox[{"mod", " ", "p"}], ")"}]}]}], TraditionalForm]]],
+ ". Dans un premier temps, ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SuperscriptBox["x", 
+     RowBox[{
+      RowBox[{"k", " ", 
+       RowBox[{"\[CurlyPhi]", "(", "n", ")"}]}], "+", "1"}]], "\[Congruent]", 
+    "0", "\[Congruent]", 
+    RowBox[{"x", "(", 
+     RowBox[{"mod", " ", "p"}], ")"}]}], TraditionalForm]]],
+ ". En fait, toutes les puissances de ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " (sauf ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["x", "0"], TraditionalForm]]],
+ ") sont congrues \[AGrave] 0 modulo ",
+ Cell[BoxData[
+  FormBox["p", TraditionalForm]]],
+ ". De plus, ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     RowBox[{"k", " ", 
+      RowBox[{"\[CurlyPhi]", "(", "n", ")"}]}], "+", "1"}], "=", 
+    RowBox[{
+     RowBox[{"K", " ", 
+      RowBox[{"(", 
+       RowBox[{"q", "-", "1"}], ")"}]}], "+", "1"}]}], TraditionalForm]]],
+ " donc ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SuperscriptBox["x", 
+     RowBox[{
+      RowBox[{"k\[CurlyPhi]", "(", "n", ")"}], "+", "1"}]], "=", 
+    RowBox[{
+     RowBox[{
+      SuperscriptBox[
+       RowBox[{"(", 
+        SuperscriptBox["x", 
+         RowBox[{"q", "-", "1"}]], ")"}], "K"], "x"}], "\[Congruent]", 
+     RowBox[{"x", "(", 
+      RowBox[{"mod", " ", "q"}], ")"}]}]}], TraditionalForm]]],
+ " puisque ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " est premier avec ",
+ Cell[BoxData[
+  FormBox["q", TraditionalForm]]],
+ " (c'est le petit th\[EAcute]or\[EGrave]me de Fermat). Ainsi, ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SuperscriptBox["y", "d"], "-", "x"}], TraditionalForm]]],
+ " est \[AGrave] la fois un multiple de ",
+ Cell[BoxData[
+  FormBox["p", TraditionalForm]]],
+ " et un multiple de ",
+ Cell[BoxData[
+  FormBox["q", TraditionalForm]]],
+ ". Comme ",
+ Cell[BoxData[
+  FormBox["p", TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox["q", TraditionalForm]]],
+ " sont premiers et distincts, ils sont premiers entre-eux, et ainsi ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SuperscriptBox["y", "d"], "-", "x"}], TraditionalForm]]],
+ " est un multiple de ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"p", " ", "q"}], TraditionalForm]]],
+ ". Donc, ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SuperscriptBox["y", "d"], "\[Congruent]", 
+    RowBox[{"x", "(", 
+     RowBox[{"mod", " ", "n"}], ")"}]}], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[TextData[{
+ "\[Rule] Enfin, si ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"x", "=", "0"}], TraditionalForm]]],
+ ", on a trivialement ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"y", "=", "0"}], TraditionalForm]]],
+ " puis ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SuperscriptBox["y", "d"], "=", 
+    RowBox[{"0", "=", "x"}]}], TraditionalForm]]],
+ "."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Pourquoi le syst\[EGrave]me est s\[UHat]r (?)\
+\>", "Subsection"],
+
+Cell[TextData[{
+ "Une analyse de RSA ne se fait certainement pas en quelques lignes. Le probl\
+\[EGrave]me est le suivant : connaissant ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox["e", TraditionalForm]]],
+ ", peut-on trouver ",
+ Cell[BoxData[
+  FormBox["d", TraditionalForm]]],
+ " ? Plusieurs pistes math\[EAcute]matiques s'offrent \[AGrave] nous :"
+}], "Text"],
+
+Cell[TextData[{
+ "\[Rule] On peut penser factoriser ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " pour obtenir ",
+ Cell[BoxData[
+  FormBox["p", TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox["q", TraditionalForm]]],
+ ". Ensuite, il est facile de calculer ",
+ Cell[BoxData[
+  FormBox["d", TraditionalForm]]],
+ " \[AGrave] l'aide de l'algorithme d'Euclide. A l'heure actuelle, on ne sait \
+pas factoriser les nombres lorsqu'ils sont trop grand."
+}], "Text"],
+
+Cell[TextData[{
+ "\[Rule] On peut penser calculer ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[CurlyPhi]", "(", "n", ")"}], TraditionalForm]]],
+ " par des m\[EAcute]thodes d\[EAcute]tourn\[EAcute]es, puis appliquer \
+l'algorithme d'Euclide pour trouver ",
+ Cell[BoxData[
+  FormBox["d", TraditionalForm]]],
+ ". Mais il est facile de prouver que si ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " est un entier qui est le produit de deux nombres premiers distincts, on \
+sait factoriser ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " si et seulement si on sait calculer ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[CurlyPhi]", "(", "n", ")"}], TraditionalForm]]],
+ ". On est donc ramen\[EAcute]s \[AGrave] l'id\[EAcute]e (mauvaise) pr\
+\[EAcute]c\[EAcute]dente."
+}], "Text"],
+
+Cell[TextData[{
+ "\[Rule] Autre id\[EAcute]e : le probl\[EGrave]me est en fait de trouver ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " en commaissant ",
+ Cell[BoxData[
+  FormBox["e", TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["x", "e"], TraditionalForm]]],
+ " modulo ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " : ce n'est finalement qu'un probl\[EGrave]me de calcul de racine ",
+ Cell[BoxData[
+  FormBox["e", TraditionalForm]]],
+ "-i\[EGrave]me ... eh bien \[AGrave] l'heure o\[UGrave] ce papier est \
+\[EAcute]crit, aucun algorithme de calcul de racine ",
+ Cell[BoxData[
+  FormBox["e", TraditionalForm]]],
+ "-i\[EGrave]me n'est connu (?), sauf \[AGrave] conna\[IHat]tre la \
+factorisation de ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[TextData[{
+ "\[Rule] Il existe d'autres attaques possibles (les ressources des \
+cryptanalystes sont immenses et insoups\[CCedilla]onn\[EAcute]es). A chaque \
+fois qu'une attaque r\[EAcute]ussit (et cela arrive), on corrige le tir pour \
+RSA. Ainsi, le choix de ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"e", "=", "65537", " "}], TraditionalForm]]],
+ " n'est pas arbitraire. On a pu montrer que si ",
+ Cell[BoxData[
+  FormBox["e", TraditionalForm]]],
+ " est un nombre de Fermat premier, alors certaines attaques connues \
+\[EAcute]chouaient. On a \[EAcute]galement montr\[EAcute] que si ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"e", "=", "3"}], TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox["5", TraditionalForm]]],
+ " ou ",
+ Cell[BoxData[
+  FormBox["17", TraditionalForm]]],
+ ", de nouvelles attaques existaient."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["M\[EAcute]thodes non math\[EAcute]matiques :", "Subsection"],
+
+Cell["\<\
+Nous parlerons ici \[AGrave] mots couverts de m\[EAcute]thodes de cassage de \
+cl\[EAcute]s tr\[EGrave]s efficaces, souvent utilis\[EAcute]es, mais indignes \
+d'un gentleman. Citons-en quelques-unes :
+- virus informatique (choix de pr\[EAcute]dilection pour r\[EAcute]cup\
+\[EAcute]rer les cl\[EAcute]s priv\[EAcute]es, voire les messages en clair)
+- torturer Bob (horrible)
+- soir\[EAcute]e bien arros\[EAcute]e (consommer avec mod\[EAcute]ration)
+- week-end \[AGrave] Las Vegas avec Alice (sympa) ...\
+\>", "Text"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Envoi de messages avec signature"
+}], "Section"],
+
+Cell["\<\
+Le protocole pr\[EAcute]c\[EAcute]dent pose un probl\[EGrave]me : Bob n'a \
+aucune certitude que le message qu'il a re\[CCedilla]u provient bien d'Alice. \
+Si c'est le th\[EAcute]or\[EGrave]me de Pythagore, ce n'est pas grave, \
+d'autant que ce n'est plus vraiment un secret pour l'humanit\[EAcute]. Cela \
+pourrait \[EHat]tre ennuyeux si Eve envoyait \[AGrave] Bob le message : \
+\"Bonjour, c'est Alice. Appuie sur le gros bouton rouge marqu\[EAcute] \
+MISSILE LAUNCH\". Il existe une parade \[AGrave] cela.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Alice cr\[EAcute]e sa cl\[EAcute] RSA"
+}], "Subsection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{"nA", ",", "eA", ",", "dA"}], "}"}], "=", 
+  RowBox[{"creerCle", "[", "256", "]"}]}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Alice envoie un message \"sign\[EAcute] num\[EAcute]riquement\""
+}], "Subsection"],
+
+Cell["\<\
+Alice veut envoyer un message \[AGrave] Bob. Elle commence par crypter le \
+message avec sa cl\[EAcute] de d\[EAcute]cryptage (!!) . Puis elle recrypte \
+le tout avec la cl\[EAcute] de cryptage de Bob.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"toryphage", "=", 
+  RowBox[{"RSA", "[", 
+   RowBox[{
+    RowBox[{"RSA", "[", 
+     RowBox[{"pythagore", ",", "dA", ",", "nA"}], "]"}], ",", "eB", ",", 
+    "nB"}], "]"}]}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Bob d\[EAcute]crypte le message et v\[EAcute]rifie sa provenance"
+}], "Subsection"],
+
+Cell["\<\
+Bob n'a plus qu'\[AGrave] d\[EAcute]crypter ... en deux temps. Avec sa cl\
+\[EAcute] priv\[EAcute]e, il fait sauter le premier cadenas (il est le seul \
+au monde \[AGrave] pouvoir faire cela). Puis, avec la cl\[EAcute] publique \
+d'Alice, il fait sauter le sceau d'Alice (tout le monde peut faire sauter ce \
+sceau, mais Alice est la seule au monde \[AGrave] pouvoir l'apposer) et \
+retrouve le message en clair.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"RSA", "[", 
+  RowBox[{
+   RowBox[{"RSA", "[", 
+    RowBox[{"toryphage", ",", "dB", ",", "nB"}], "]"}], ",", "eA", ",", 
+   "nA"}], "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+ScreenStyleEnvironment->"Working",
+PrintingStyleEnvironment->"Printout",
+WindowSize->{666, 579},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic},
+PrintingOptions->{"PrintCellBrackets"->False,
+"PrintMultipleHorizontalPages"->False,
+"PrintRegistrationMarks"->True,
+"PrintingMargins"->{{54, 54}, {72, 72}}},
+Magnification->1.5,
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 23, 0, 98, "Title"],
+Cell[605, 24, 87, 1, 54, "Author"],
+Cell[CellGroupData[{
+Cell[717, 29, 73, 4, 113, "Section"],
+Cell[CellGroupData[{
+Cell[815, 37, 143, 7, 54, "Subsection"],
+Cell[961, 46, 1901, 64, 308, "Text"],
+Cell[2865, 112, 608, 15, 149, "Text"],
+Cell[3476, 129, 586, 13, 172, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4099, 147, 143, 7, 54, "Subsection"],
+Cell[4245, 156, 375, 8, 120, "Text"],
+Cell[4623, 166, 827, 27, 178, "Text"],
+Cell[5453, 195, 608, 22, 99, "Text"],
+Cell[6064, 219, 1000, 32, 178, "Text"],
+Cell[7067, 253, 607, 15, 148, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7711, 273, 102, 7, 54, "Subsection"],
+Cell[7816, 282, 269, 5, 119, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8122, 292, 124, 7, 54, "Subsection"],
+Cell[8249, 301, 300, 7, 94, "Text"],
+Cell[8552, 310, 61, 1, 58, "Input"],
+Cell[8616, 313, 161, 3, 68, "Text"],
+Cell[8780, 318, 202, 4, 194, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9019, 327, 136, 7, 54, "Subsection"],
+Cell[9158, 336, 362, 11, 96, "Text"],
+Cell[9523, 349, 467, 14, 167, "Input"],
+Cell[9993, 365, 100, 2, 58, "Input"],
+Cell[10096, 369, 130, 3, 58, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10263, 377, 136, 7, 54, "Subsection"],
+Cell[10402, 386, 465, 13, 167, "Input"],
+Cell[10870, 401, 98, 2, 58, "Input"],
+Cell[10971, 405, 161, 3, 68, "Text"],
+Cell[11135, 410, 98, 2, 58, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11282, 418, 64, 4, 113, "Section"],
+Cell[CellGroupData[{
+Cell[11371, 426, 136, 7, 54, "Subsection"],
+Cell[11510, 435, 360, 12, 94, "Text"],
+Cell[11873, 449, 51, 1, 58, "Input"],
+Cell[11927, 452, 51, 1, 58, "Input"],
+Cell[11981, 455, 791, 30, 148, "Text"],
+Cell[12775, 487, 72, 2, 58, "Input"],
+Cell[12850, 491, 967, 31, 173, "Text"],
+Cell[13820, 524, 54, 1, 58, "Input"],
+Cell[13877, 527, 70, 2, 42, "Text"],
+Cell[13950, 531, 245, 8, 58, "Input"],
+Cell[14198, 541, 686, 24, 121, "Text"],
+Cell[14887, 567, 129, 4, 58, "Input"],
+Cell[15019, 573, 40, 0, 42, "Text"],
+Cell[15062, 575, 229, 8, 58, "Input"],
+Cell[15294, 585, 678, 16, 170, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16009, 606, 140, 7, 54, "Subsection"],
+Cell[16152, 615, 1164, 43, 173, "Text"],
+Cell[17319, 660, 2238, 70, 334, "Input"],
+Cell[19560, 732, 146, 4, 58, "Input"],
+Cell[19709, 738, 353, 9, 95, "Text"],
+Cell[20065, 749, 1290, 38, 275, "Input"],
+Cell[21358, 789, 85, 2, 42, "Text"],
+Cell[21446, 793, 87, 2, 58, "Input"],
+Cell[21536, 797, 94, 2, 42, "Text"],
+Cell[21633, 801, 86, 2, 42, "Text"],
+Cell[21722, 805, 146, 4, 58, "Input"],
+Cell[21871, 811, 87, 2, 58, "Input"],
+Cell[21961, 815, 42, 0, 42, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22040, 820, 125, 7, 54, "Subsection"],
+Cell[22168, 829, 491, 18, 95, "Text"],
+Cell[22662, 849, 560, 17, 122, "Text"],
+Cell[23225, 868, 360, 10, 140, "Input"],
+Cell[23588, 880, 131, 3, 58, "Input"],
+Cell[23722, 885, 285, 9, 69, "Text"],
+Cell[24010, 896, 99, 2, 58, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24158, 904, 95, 4, 113, "Section"],
+Cell[CellGroupData[{
+Cell[24278, 912, 123, 7, 54, "Subsection"],
+Cell[24404, 921, 1346, 52, 147, "Text"],
+Cell[25753, 975, 372, 16, 43, "Text"],
+Cell[26128, 993, 1181, 43, 102, "Text"],
+Cell[27312, 1038, 3179, 122, 320, "Text"],
+Cell[30494, 1162, 364, 16, 44, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[30895, 1183, 75, 2, 54, "Subsection"],
+Cell[30973, 1187, 404, 12, 95, "Text"],
+Cell[31380, 1201, 472, 15, 121, "Text"],
+Cell[31855, 1218, 785, 22, 173, "Text"],
+Cell[32643, 1242, 815, 26, 149, "Text"],
+Cell[33461, 1270, 834, 23, 196, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34332, 1298, 66, 0, 54, "Subsection"],
+Cell[34401, 1300, 526, 9, 221, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34976, 1315, 93, 4, 113, "Section"],
+Cell[35072, 1321, 532, 8, 195, "Text"],
+Cell[CellGroupData[{
+Cell[35629, 1333, 136, 7, 54, "Subsection"],
+Cell[35768, 1342, 146, 4, 58, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[35951, 1351, 162, 7, 80, "Subsection"],
+Cell[36116, 1360, 225, 4, 93, "Text"],
+Cell[36344, 1366, 206, 6, 86, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[36587, 1377, 163, 7, 80, "Subsection"],
+Cell[36753, 1386, 436, 7, 170, "Text"],
+Cell[37192, 1395, 171, 5, 58, "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

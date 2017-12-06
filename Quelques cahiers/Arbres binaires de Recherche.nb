@@ -1,0 +1,975 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     27222,        965]
+NotebookOptionsPosition[     24473,        873]
+NotebookOutlinePosition[     25114,        895]
+CellTagsIndexPosition[     25071,        892]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Arbres binaires de recherche", "Title"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Quit", "[", "]"}], ";"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Visualisation d'un arbre binaire"
+}], "Section"],
+
+Cell[TextData[{
+ "La fonction ",
+ StyleBox["arbreVersGraphique",
+  FontWeight->"Bold"],
+ " prend un arbre binaire ",
+ StyleBox["t",
+  FontWeight->"Bold"],
+ " en param\[EGrave]tre en renvoie une liste de directives graphiques \
+permettant la repr\[EAcute]sentation graphique de ",
+ StyleBox["t",
+  FontWeight->"Bold"],
+ ". Le second param\[EGrave]tre est un couple de points repr\[EAcute]sentant \
+les coordonn\[EAcute]es des coins inf\[EAcute]rieur gauche et \
+sup\[EAcute]rieur droit du rectangle de visualisation.\n\[Bullet] Si t = nil \
+on renvoie simplement la liste vide.\n\[Bullet] Sinon, on renvoie une liste \
+compos\[EAcute]e de\n\t\[Bullet] La repr\[EAcute]sentation textuelle de la \
+racine de ",
+ StyleBox["t",
+  FontWeight->"Bold"],
+ "\n\t\[Bullet] Des branches vers les fils de la racine (on ne renvoie pas la \
+branche lorsque le fils vaut nil).\n\t\[Bullet] La liste de directives \
+graphiques correspondant aux repr\[EAcute]sentations graphiques des fils de \
+la racine.\nToutes les branches ont la m\[EHat]me hauteur : on descend de 1 \
+\[AGrave] chaque niveau de r\[EAcute]cursion."
+}], "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"arbreVersGraphique", "[", 
+     RowBox[{"nil", ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"_", ",", "_"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"_", ",", "_"}], "}"}]}], "}"}]}], "]"}], ":=", 
+    RowBox[{"{", "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"arbreVersGraphique", "[", 
+     RowBox[{
+      RowBox[{"arbre", "[", 
+       RowBox[{"x_", ",", "nil", ",", "nil"}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"a_", ",", "b_"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"c_", ",", "d_"}], "}"}]}], "}"}]}], "]"}], ":=", 
+    RowBox[{"{", 
+     RowBox[{"Text", "[", 
+      RowBox[{"x", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"a", "+", "c"}], ")"}], "/", "2"}], ",", "d"}], "}"}]}], 
+      "]"}], "}"}]}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"arbreVersGraphique", "[", 
+     RowBox[{
+      RowBox[{"arbre", "[", 
+       RowBox[{"x_", ",", "t1_", ",", "nil"}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"a_", ",", "b_"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"c_", ",", "d_"}], "}"}]}], "}"}]}], "]"}], ":=", 
+    RowBox[{"Join", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Text", "[", 
+         RowBox[{"x", ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"a", "+", "c"}], ")"}], "/", "2"}], ",", "d"}], "}"}]}],
+          "]"}], ",", 
+        RowBox[{"Line", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"a", "+", "c"}], ")"}], "/", "2"}], ",", "d"}], "}"}], 
+           ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"3", "a"}], "+", "c"}], ")"}], "/", "4"}], ",", 
+             RowBox[{"d", "-", "1"}]}], "}"}]}], "}"}], "]"}]}], "}"}], ",", 
+      RowBox[{"arbreVersGraphique", "[", 
+       RowBox[{"t1", ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"a", ",", "b"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"a", "+", "c"}], ")"}], "/", "2"}], ",", 
+            RowBox[{"d", "-", "1"}]}], "}"}]}], "}"}]}], "]"}]}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"arbreVersGraphique", "[", 
+    RowBox[{
+     RowBox[{"arbre", "[", 
+      RowBox[{"x_", ",", "nil", ",", "t2_"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"a_", ",", "b_"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"c_", ",", "d_"}], "}"}]}], "}"}]}], "]"}], ":=", 
+   RowBox[{"Join", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Text", "[", 
+        RowBox[{"x", ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"a", "+", "c"}], ")"}], "/", "2"}], ",", "d"}], "}"}]}], 
+        "]"}], ",", 
+       RowBox[{"Line", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"a", "+", "c"}], ")"}], "/", "2"}], ",", "d"}], "}"}], 
+          ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"a", "+", 
+               RowBox[{"3", "c"}]}], ")"}], "/", "4"}], ",", 
+            RowBox[{"d", "-", "1"}]}], "}"}]}], "}"}], "]"}]}], "}"}], ",", 
+     RowBox[{"arbreVersGraphique", "[", 
+      RowBox[{"t2", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"a", "+", "c"}], ")"}], "/", "2"}], ",", "b"}], "}"}], 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{"c", ",", 
+           RowBox[{"d", "-", "1"}]}], "}"}]}], "}"}]}], "]"}]}], "]"}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"arbreVersGraphique", "[", 
+   RowBox[{
+    RowBox[{"arbre", "[", 
+     RowBox[{"x_", ",", "t1_", ",", "t2_"}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"a_", ",", "b_"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"c_", ",", "d_"}], "}"}]}], "}"}]}], "]"}], ":=", 
+  RowBox[{"Join", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Text", "[", 
+       RowBox[{"x", ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"a", "+", "c"}], ")"}], "/", "2"}], ",", "d"}], "}"}]}], 
+       "]"}], ",", 
+      RowBox[{"Line", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"a", "+", "c"}], ")"}], "/", "2"}], ",", "d"}], "}"}], 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"3", "a"}], "+", "c"}], ")"}], "/", "4"}], ",", 
+           RowBox[{"d", "-", "1"}]}], "}"}]}], "}"}], "]"}], ",", 
+      RowBox[{"Line", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"a", "+", "c"}], ")"}], "/", "2"}], ",", "d"}], "}"}], 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"a", "+", 
+              RowBox[{"3", "c"}]}], ")"}], "/", "4"}], ",", 
+           RowBox[{"d", "-", "1"}]}], "}"}]}], "}"}], "]"}]}], "}"}], ",", 
+    RowBox[{"arbreVersGraphique", "[", 
+     RowBox[{"t1", ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"a", ",", "b"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"a", "+", "c"}], ")"}], "/", "2"}], ",", 
+          RowBox[{"d", "-", "1"}]}], "}"}]}], "}"}]}], "]"}], ",", 
+    RowBox[{"arbreVersGraphique", "[", 
+     RowBox[{"t2", ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"a", "+", "c"}], ")"}], "/", "2"}], ",", "b"}], "}"}], 
+        ",", 
+        RowBox[{"{", 
+         RowBox[{"c", ",", 
+          RowBox[{"d", "-", "1"}]}], "}"}]}], "}"}]}], "]"}]}], 
+   "]"}]}]}], "Input"],
+
+Cell[TextData[{
+ "La fonction ",
+ StyleBox["voirArbre",
+  FontWeight->"Bold"],
+ " affiche la repr\[EAcute]sentation graphique d'un arbre binaire."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"voirArbre", "[", "t_", "]"}], ":=", 
+  RowBox[{"Show", "[", 
+   RowBox[{
+    RowBox[{"Graphics", "[", 
+     RowBox[{"arbreVersGraphique", "[", 
+      RowBox[{"t", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"0.", ",", "0."}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1.", ",", "1."}], "}"}]}], "}"}]}], "]"}], "]"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+    RowBox[{"Background", "\[Rule]", 
+     RowBox[{"GrayLevel", "[", "1", "]"}]}], ",", 
+    RowBox[{"ImageSize", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"400", ",", "300"}], "}"}]}], ",", 
+    RowBox[{"AspectRatio", "\[Rule]", "0.75"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.410171575484375*^9, 3.41017157575*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Insertion dans un ABR"
+}], "Section"],
+
+Cell[TextData[{
+ "Ins\[EAcute]rer un objet ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]],
+  FontWeight->"Bold"],
+ " dans l'arbre vide, c'est renvoyer l'arbre ",
+ StyleBox["arbre[x,nil,nil]",
+  FontWeight->"Bold"],
+ ". Ins\[EAcute]rer dans un arbre non vide, c'est ins\[EAcute]rer dans le \
+fils gauche ou le fils droit, selon que l'objet est inf\[EAcute]rieur ou sup\
+\[EAcute]rieur \[AGrave] la racine de l'arbre."
+}], "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"inserer", "[", 
+    RowBox[{"x_", ",", "nil"}], "]"}], ":=", 
+   RowBox[{"arbre", "[", 
+    RowBox[{"x", ",", "nil", ",", "nil"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"inserer", "[", 
+    RowBox[{"x_", ",", 
+     RowBox[{"arbre", "[", 
+      RowBox[{"y_", ",", "t1_", ",", "t2_"}], "]"}]}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"arbre", "[", 
+     RowBox[{"y", ",", 
+      RowBox[{"inserer", "[", 
+       RowBox[{"x", ",", "t1"}], "]"}], ",", "t2"}], "]"}], "/;", " ", 
+    RowBox[{"x", "\[LessEqual]", "y"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"inserer", "[", 
+    RowBox[{"x_", ",", 
+     RowBox[{"arbre", "[", 
+      RowBox[{"y_", ",", "t1_", ",", "t2_"}], "]"}]}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"arbre", "[", 
+     RowBox[{"y", ",", "t1", ",", 
+      RowBox[{"inserer", "[", 
+       RowBox[{"x", ",", "t2"}], "]"}]}], "]"}], "/;", " ", 
+    RowBox[{"x", ">", "y"}]}]}], ";"}]}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Minimum et maximum d'un ABR"
+}], "Section"],
+
+Cell["\<\
+Le minimum d'un ABR est le noeud \"le plus \[AGrave] gauche\" dans l'arbre. \
+Le maximum est le noeud \"le plus \[AGrave] droite\".\
+\>", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"minimum", "[", "nil", "]"}], "=", 
+   RowBox[{"+", "\[Infinity]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"minimum", "[", 
+    RowBox[{"arbre", "[", 
+     RowBox[{"y_", ",", "nil", ",", "_"}], "]"}], "]"}], ":=", "y"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"minimum", "[", 
+   RowBox[{"arbre", "[", 
+    RowBox[{"_", ",", "t1_", ",", "_"}], "]"}], "]"}], ":=", 
+  RowBox[{"minimum", "[", "t1", "]"}]}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"maximum", "[", "nil", "]"}], "=", 
+   RowBox[{"-", "\[Infinity]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"maximum", "[", 
+    RowBox[{"arbre", "[", 
+     RowBox[{"y_", ",", "_", ",", "nil"}], "]"}], "]"}], ":=", "y"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"maximum", "[", 
+   RowBox[{"arbre", "[", 
+    RowBox[{"_", ",", "_", ",", "t2_"}], "]"}], "]"}], ":=", 
+  RowBox[{"maximum", "[", "t2", "]"}]}]}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Fonctions simples sur les ABR"
+}], "Section"],
+
+Cell["\<\
+Fonctions, simples, le plus souvent r\[EAcute]cursives. Elles \
+refl\[EGrave]tent la d\[EAcute]finition de ce qu'elles calculent.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Subsection"],
+ StyleBox[" Hauteur",
+  FontWeight->"Bold"]
+}], "Subsection"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"hauteur", "[", "nil", "]"}], ":=", "0"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"hauteur", "[", 
+   RowBox[{"arbre", "[", 
+    RowBox[{"_", ",", "t1_", ",", "t2_"}], "]"}], "]"}], ":=", 
+  RowBox[{"1", "+", 
+   RowBox[{"Max", "[", 
+    RowBox[{
+     RowBox[{"hauteur", "[", "t1", "]"}], ",", 
+     RowBox[{"hauteur", "[", "t2", "]"}]}], "]"}]}]}]}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Subsection"],
+ StyleBox[" Racine, fils gauche, fils droit",
+  FontWeight->"Bold"]
+}], "Subsection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"racine", "[", 
+   RowBox[{"arbre", "[", 
+    RowBox[{"y_", ",", "_", ",", "_"}], "]"}], "]"}], ":=", "y"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"gauche", "[", 
+   RowBox[{"arbre", "[", 
+    RowBox[{"_", ",", "t1_", ",", "_"}], "]"}], "]"}], ":=", "t1"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"droit", "[", 
+   RowBox[{"arbre", "[", 
+    RowBox[{"_", ",", "_", ",", "t2_"}], "]"}], "]"}], ":=", "t2"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Subsection"],
+ StyleBox[" Nombre de noeuds et de feuilles",
+  FontWeight->"Bold"]
+}], "Subsection"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"nombreNoeuds", "[", "nil", "]"}], "=", "0"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"nombreNoeuds", "[", 
+   RowBox[{"arbre", "[", 
+    RowBox[{"_", ",", "t1_", ",", "t2_"}], "]"}], "]"}], ":=", 
+  RowBox[{"1", "+", 
+   RowBox[{"nombreNoeuds", "[", "t1", "]"}], "+", 
+   RowBox[{"nombreNoeuds", "[", "t2", "]"}]}]}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"nombreFeuilles", "[", "nil", "]"}], "=", "0"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"nombreFeuilles", "[", 
+    RowBox[{"arbre", "[", 
+     RowBox[{"x_", ",", "nil", ",", "nil"}], "]"}], "]"}], ":=", "1"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"nombreFeuilles", "[", 
+   RowBox[{"arbre", "[", 
+    RowBox[{"_", ",", "t1_", ",", "t2_"}], "]"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"nombreFeuilles", "[", "t1", "]"}], "+", 
+   RowBox[{"nombreFeuilles", "[", "t2", "]"}]}]}]}], "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " ABR al\[EAcute]atoire"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Subsection"],
+ StyleBox[" ",
+  FontWeight->"Bold"],
+ "P",
+ StyleBox["ermutation al\[EAcute]atoire des entiers de 1 \[AGrave] n",
+  FontWeight->"Bold"]
+}], "Subsection"],
+
+Cell[TextData[{
+ "On initialise un tableau ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]],
+  FontWeight->"Bold"],
+ " \[AGrave] la suite des entiers de 1 \[AGrave] ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]],
+  FontWeight->"Bold"],
+ ". Pour ",
+ Cell[BoxData[
+  FormBox["i", TraditionalForm]]],
+ " variant de 1 \[AGrave] ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]],
+  FontWeight->"Bold"],
+ " :\n\[Bullet] On choisit au hasard un indice ",
+ Cell[BoxData[
+  FormBox["j", TraditionalForm]],
+  FontWeight->"Bold"],
+ " compris entre 1 et ",
+ Cell[BoxData[
+  FormBox["i", TraditionalForm]],
+  FontWeight->"Bold"],
+ ".\n\[Bullet] On permute les \[EAcute]l\[EAcute]ments d'indices ",
+ Cell[BoxData[
+  FormBox["i", TraditionalForm]],
+  FontWeight->"Bold"],
+ " et ",
+ Cell[BoxData[
+  FormBox["j", TraditionalForm]],
+  FontWeight->"Bold"],
+ " du tableau ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]],
+  FontWeight->"Bold"],
+ ".\nEn fin de boucle, ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]],
+  FontWeight->"Bold"],
+ " contient une permutation al\[EAcute]atoire des ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]],
+  FontWeight->"Bold"],
+ " premiers entiers.",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{Cell[""], Cell[""]}], TraditionalForm]]]
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"permutationAleatoire", "[", "n_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"v", ",", "i", ",", "j"}], "}"}], ",", 
+    RowBox[{
+     RowBox[{"v", "=", 
+      RowBox[{"Range", "[", "n", "]"}]}], ";", 
+     RowBox[{"Do", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"j", "=", 
+         RowBox[{"RandomInteger", "[", 
+          RowBox[{"{", 
+           RowBox[{"1", ",", "i"}], "}"}], "]"}]}], ";", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+           "v", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], ",", 
+           RowBox[{
+           "v", "\[LeftDoubleBracket]", "j", "\[RightDoubleBracket]"}]}], 
+          "}"}], "=", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+           "v", "\[LeftDoubleBracket]", "j", "\[RightDoubleBracket]"}], ",", 
+           RowBox[{
+           "v", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}]}], 
+          "}"}]}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}], ";", "v"}]}], 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"permutationAleatoire", "[", "100", "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Subsection"],
+ StyleBox[" ",
+  FontWeight->"Bold"],
+ "ABR al\[EAcute]atoire"
+}], "Subsection"],
+
+Cell["\<\
+On ins\[EGrave]re dans un arbre initialement vide les \
+\[EAcute]l\[EAcute]ments d'une permutation al\[EAcute]atoire.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"arbreAleatoire", "[", "n_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"t", ",", "v", ",", "i"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"t", "=", "nil"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"v", "=", 
+      RowBox[{"permutationAleatoire", "[", "n", "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", 
+      RowBox[{
+       RowBox[{"t", "=", 
+        RowBox[{"inserer", "[", 
+         RowBox[{
+          RowBox[{"v", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], ",", "t"}], "]"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", "t"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"voirArbre", "[", 
+  RowBox[{"arbreAleatoire", "[", "100", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.41017159778125*^9, 3.4101716024375*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Suppression d'un noeud dans un ABR"
+}], "Section"],
+
+Cell[TextData[{
+ "Pour supprimer un noeud ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " dans un arbre de recherche ",
+ Cell[BoxData[
+  FormBox["t", TraditionalForm]]],
+ ", on distingue plusieurs cas :\n\[Bullet] Si ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"t", "=", "nil"}], TraditionalForm]]],
+ ", il n'y a rien \[AGrave] supprimer. On tombe sur ce cas lorsque \
+l'\[EAcute]l\[EAcute]ment \[AGrave] supprimer n'existe pas.\n\[Bullet] Si ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " n'est pas la racine de ",
+ Cell[BoxData[
+  FormBox["t", TraditionalForm]]],
+ ", on rappelle r\[EAcute]cursivement la fonction sur le fils gauche ou le \
+fils droit, selon que ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " est inf\[EAcute]rieur ou sup\[EAcute]rieur \[AGrave] la racine.\n\[Bullet] \
+Si ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " est la racine de ",
+ Cell[BoxData[
+  FormBox["t", TraditionalForm]]],
+ " mais n'a pas de fils gauche, on renvoie le fils droit.\n\[Bullet] Si ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " est la racine de ",
+ Cell[BoxData[
+  FormBox["t", TraditionalForm]]],
+ " et a un fils gauche diff\[EAcute]rent de ",
+ Cell[BoxData[
+  FormBox["nil", TraditionalForm]]],
+ ", on calcule le minimum ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]]],
+ " du fils droit de ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ ", qui est en fait le successeur de ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " dans l'arbre. On remplace ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " par ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]]],
+ ", et on \[EAcute]limine ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]]],
+ " du fils droit de ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " en appelant r\[EAcute]cursivement la fonction sur le fils droit."
+}], "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"supprimer", "[", 
+    RowBox[{"x_", ",", "nil"}], "]"}], ":=", "nil"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"supprimer", "[", 
+    RowBox[{"x_", ",", 
+     RowBox[{"arbre", "[", 
+      RowBox[{"y_", ",", "t1_", ",", "t2_"}], "]"}]}], "]"}], ":=", " ", 
+   RowBox[{
+    RowBox[{"arbre", "[", 
+     RowBox[{"y", ",", 
+      RowBox[{"supprimer", "[", 
+       RowBox[{"x", ",", "t1"}], "]"}], ",", "t2"}], "]"}], "/;", 
+    RowBox[{"x", "<", "y"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"supprimer", "[", 
+    RowBox[{"x_", ",", 
+     RowBox[{"arbre", "[", 
+      RowBox[{"y_", ",", "t1_", ",", "t2_"}], "]"}]}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"arbre", "[", 
+     RowBox[{"y", ",", "t1", ",", 
+      RowBox[{"supprimer", "[", 
+       RowBox[{"x", ",", "t2"}], "]"}]}], "]"}], "/;", 
+    RowBox[{"x", ">", "y"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"supprimer", "[", 
+    RowBox[{"x_", ",", 
+     RowBox[{"arbre", "[", 
+      RowBox[{"x_", ",", "t1_", ",", "nil"}], "]"}]}], "]"}], ":=", "t1"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"supprimer", "[", 
+   RowBox[{"x_", ",", 
+    RowBox[{"arbre", "[", 
+     RowBox[{"x_", ",", "t1_", ",", "t2_"}], "]"}]}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "m", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"m", "=", 
+      RowBox[{"minimum", "[", "t2", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"arbre", "[", 
+      RowBox[{"m", ",", "t1", ",", 
+       RowBox[{"supprimer", "[", 
+        RowBox[{"m", ",", "t2"}], "]"}]}], "]"}]}]}], "]"}]}]}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Test de correction d'un ABR"
+}], "Section"],
+
+Cell[TextData[{
+ "Cette fonction renvoie ",
+ Cell[BoxData[
+  FormBox["True", TraditionalForm]]],
+ " lorsque son argument est un ABR, et False sinon."
+}], "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"arbreQ", "[", "nil", "]"}], ":=", "True"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"arbreQ", "[", 
+    RowBox[{"arbre", "[", 
+     RowBox[{"x_", ",", "t1_", ",", "t2_"}], "]"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"arbreQ", "[", "t1", "]"}], " ", "&&", " ", 
+    RowBox[{"arbreQ", "[", "t2", "]"}], " ", "&&", " ", 
+    RowBox[{
+     RowBox[{"maximum", "[", "t1", "]"}], "\[LessEqual]", "x"}], " ", "&&", 
+    " ", 
+    RowBox[{
+     RowBox[{"minimum", "[", "t2", "]"}], "\[GreaterEqual]", "x"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"arbreQ", "[", "_", "]"}], ":=", "False"}]}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Un exemple"
+}], "Section"],
+
+Cell[BoxData[
+ RowBox[{"t", "=", "nil"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"t", "=", 
+  RowBox[{"arbreAleatoire", "[", "20", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"voirArbre", "[", "t", "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"voirArbre", "[", 
+  RowBox[{"supprimer", "[", 
+   RowBox[{"15", ",", "t"}], "]"}], "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{666, 579},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic},
+PrintingOptions->{"PrintCellBrackets"->False,
+"PrintMultipleHorizontalPages"->False,
+"PrintRegistrationMarks"->True,
+"PrintingMargins"->{{54, 54}, {72, 72}}},
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 45, 0, 65, "Title"],
+Cell[627, 24, 70, 2, 41, "Input"],
+Cell[CellGroupData[{
+Cell[722, 30, 93, 4, 75, "Section"],
+Cell[818, 36, 1113, 24, 227, "Text"],
+Cell[1934, 62, 6855, 224, 382, "Input"],
+Cell[8792, 288, 158, 5, 29, "Text"],
+Cell[8953, 295, 789, 21, 82, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9779, 321, 82, 4, 75, "Section"],
+Cell[9864, 327, 432, 11, 65, "Text"],
+Cell[10299, 340, 1019, 31, 82, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11355, 376, 88, 4, 75, "Section"],
+Cell[11446, 382, 155, 3, 47, "Text"],
+Cell[11604, 387, 505, 15, 82, "Input"],
+Cell[12112, 404, 505, 15, 82, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12654, 424, 90, 4, 75, "Section"],
+Cell[12747, 430, 153, 3, 29, "Text"],
+Cell[CellGroupData[{
+Cell[12925, 437, 106, 5, 36, "Subsection"],
+Cell[13034, 444, 422, 13, 62, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13493, 462, 130, 5, 36, "Subsection"],
+Cell[13626, 469, 152, 4, 41, "Input"],
+Cell[13781, 475, 154, 4, 41, "Input"],
+Cell[13938, 481, 153, 4, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14128, 490, 130, 5, 36, "Subsection"],
+Cell[14261, 497, 391, 11, 62, "Input"],
+Cell[14655, 510, 578, 17, 102, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15282, 533, 82, 4, 75, "Section"],
+Cell[CellGroupData[{
+Cell[15389, 541, 199, 8, 36, "Subsection"],
+Cell[15591, 551, 1269, 48, 83, "Text"],
+Cell[16863, 601, 1135, 34, 82, "Input"],
+Cell[18001, 637, 75, 1, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18113, 643, 125, 6, 36, "Subsection"],
+Cell[18241, 651, 141, 3, 29, "Text"],
+Cell[18385, 656, 756, 21, 122, "Input"],
+Cell[19144, 679, 168, 3, 41, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19361, 688, 95, 4, 75, "Section"],
+Cell[19459, 694, 1853, 60, 155, "Text"],
+Cell[21315, 756, 1705, 51, 182, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23057, 812, 88, 4, 75, "Section"],
+Cell[23148, 818, 161, 5, 29, "Text"],
+Cell[23312, 825, 686, 20, 102, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24035, 850, 71, 4, 75, "Section"],
+Cell[24109, 856, 51, 1, 41, "Input"],
+Cell[24163, 859, 91, 2, 41, "Input"],
+Cell[24257, 863, 62, 1, 41, "Input"],
+Cell[24322, 866, 123, 3, 41, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

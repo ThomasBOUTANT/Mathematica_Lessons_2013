@@ -1,0 +1,307 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      5055,        221]*)
+(*NotebookOutlinePosition[      5766,        245]*)
+(*  CellTagsIndexPosition[      5722,        241]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell["Factoriser, d\[EAcute]velopper, simplifier", "Title"],
+
+Cell[TextData[{
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " n'est pas qu'une calculatrice. C'est aussi un logiciel de calcul formel \
+qui permet de manipuler des expressions alg\[EAcute]briques. Nous allons voir \
+comment les op\[EAcute]rations \[EAcute]l\[EAcute]mentaires de \
+l'alg\[EGrave]bre (factoriser, d\[EAcute]velopper, simplifier) peuvent \
+\[EHat]tre mises en oeuvre avec ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  "."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " Expressions alg\[EAcute]briques"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "D\[EAcute]velopper"
+}], "Subsection"],
+
+Cell[BoxData[
+    \(Expand[\((a + b)\)^5]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Ordonner suivant les puissances d'une variable"
+}], "Subsection"],
+
+Cell[BoxData[
+    \(P = 
+      x^3 - 3  c\ x^2 - 2  b\ x^2\  + 6  b\ c\ x + a\ x^2\  - 3  a\ c\ x\  - 
+        2  a\ b\ x + 6  a\ b\ c\)], "Input"],
+
+Cell[BoxData[
+    \(Collect[P, x]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Factoriser"
+}], "Subsection"],
+
+Cell[BoxData[
+    \(Factor[P]\)], "Input"],
+
+Cell[BoxData[
+    \(Clear[P]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Expressions comportant des racines"
+}], "Subsection"],
+
+Cell[BoxData[
+    \(Expand[\((Sqrt[a] + 3  Sqrt[b])\)^5]\)], "Input"],
+
+Cell[BoxData[
+    \(Factor[%]\)], "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " Fonctions trigonom\[EAcute]triques"
+}], "Section"],
+
+Cell[BoxData[
+    \(Expand[Sin[a + b]]\)], "Input"],
+
+Cell[TextData[{
+  "La fonction ",
+  StyleBox["Expand", "Input"],
+  " ne fonctionne pas. Eh oui, penser \[AGrave] utiliser les formules de \
+trigo c'est difficile, m\[EHat]me pour ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  ". Mettons-le sur la voie :"
+}], "Text"],
+
+Cell[BoxData[
+    \(TrigExpand[Sin[a + b]]\)], "Input"],
+
+Cell[BoxData[
+    \(TrigExpand[Sin[5\ x]]\)], "Input"],
+
+Cell[BoxData[
+    \(TrigReduce[Sin[a] Sin[b]]\)], "Input"],
+
+Cell[BoxData[
+    \(TrigReduce[Cos[x]^4]\)], "Input"],
+
+Cell[BoxData[
+    \(TrigFactor[Sin[p] - Sin[q]]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " Exponentielle, Logarithme"
+}], "Section"],
+
+Cell["\<\
+De m\[EHat]me, il n'est pas toujours \[EAcute]vident de d\[EAcute]velopper ou \
+factoriser des formules faisant intervenir des puissances, des \
+exponentielles, des logarithmes. Il existe pour cela des fonctions adapt\
+\[EAcute]es.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(ExpToTrig[Exp[a + b]]\)], "Input"],
+
+Cell[BoxData[
+    \(TrigExpand[%]\)], "Input"],
+
+Cell[BoxData[
+    \(TrigToExp[%]\)], "Input"],
+
+Cell[BoxData[
+    \(Expand[\((Exp[a] + Exp[b])\)^3]\)], "Input"],
+
+Cell[BoxData[
+    \(Simplify[%]\)], "Input"],
+
+Cell[BoxData[
+    \(PowerExpand[Log[a\ b]]\)], "Input"]
+}, Closed]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1024}, {0, 687}},
+ScreenStyleEnvironment->"Brackets",
+WindowSize->{529, 649},
+WindowMargins->{{Automatic, 4}, {Automatic, 2}},
+StyleDefinitions -> "Style.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 59, 0, 67, "Title"],
+Cell[1816, 53, 468, 11, 86, "Text"],
+
+Cell[CellGroupData[{
+Cell[2309, 68, 95, 4, 67, "Section"],
+
+Cell[CellGroupData[{
+Cell[2429, 76, 129, 8, 52, "Subsection"],
+Cell[2561, 86, 54, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[2652, 92, 157, 8, 36, "Subsection"],
+Cell[2812, 102, 147, 3, 70, "Input"],
+Cell[2962, 107, 46, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[3045, 113, 121, 8, 36, "Subsection"],
+Cell[3169, 123, 42, 1, 50, "Input"],
+Cell[3214, 126, 41, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[3292, 132, 145, 8, 36, "Subsection"],
+Cell[3440, 142, 69, 1, 50, "Input"],
+Cell[3512, 145, 42, 1, 50, "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3603, 152, 98, 4, 67, "Section"],
+Cell[3704, 158, 51, 1, 50, "Input"],
+Cell[3758, 161, 276, 8, 49, "Text"],
+Cell[4037, 171, 55, 1, 50, "Input"],
+Cell[4095, 174, 54, 1, 50, "Input"],
+Cell[4152, 177, 58, 1, 50, "Input"],
+Cell[4213, 180, 53, 1, 50, "Input"],
+Cell[4269, 183, 60, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[4366, 189, 89, 4, 47, "Section"],
+Cell[4458, 195, 255, 5, 67, "Text"],
+Cell[4716, 202, 54, 1, 50, "Input"],
+Cell[4773, 205, 46, 1, 50, "Input"],
+Cell[4822, 208, 45, 1, 50, "Input"],
+Cell[4870, 211, 64, 1, 50, "Input"],
+Cell[4937, 214, 44, 1, 50, "Input"],
+Cell[4984, 217, 55, 1, 50, "Input"]
+}, Closed]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

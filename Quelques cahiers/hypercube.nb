@@ -1,0 +1,1169 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     35104,       1159]
+NotebookOptionsPosition[     30927,       1030]
+NotebookOutlinePosition[     31347,       1046]
+CellTagsIndexPosition[     31304,       1043]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Rotations d'un hypercube", "Title"],
+
+Cell[TextData[StyleBox["Marc Lorenzi        \nmardi 5 avril 2005",
+ FontColor->RGBColor[0, 0, 1]]], "Author",
+ CellFrame->True,
+ Background->GrayLevel[0.833326]],
+
+Cell[TextData[{
+ "Faire tourner un hypercube  ... c'est s\[UHat]rement marrant, mais pour \
+cela, il va peut-\[EHat]tre falloir ",
+ StyleBox["travailler",
+  FontWeight->"Bold"],
+ " ? Eh bien ... oui."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"Quit", "[", "]"}]], "Input"],
+
+Cell[TextData[{
+ StyleBox["Euh",
+  FontSlant->"Italic"],
+ " .. Je commence tous mes notebooks par ",
+ StyleBox["Quit[]", "Input"],
+ ". C'est une manie chez moi.\nAh oui, j'ai une autre manie : je teste ",
+ StyleBox["toutes",
+  FontWeight->"Bold"],
+ " les fonctions que j'\[EAcute]cris (quelle dr\[OHat]le d'id\[EAcute]e, \
+n'est-ce pas ?)\n",
+ StyleBox["Derni\[EGrave]re chose",
+  FontWeight->"Bold"],
+ " : si les d\[EAcute]tails d'une fonction paraissent obscurs au lecteur, \
+celui-ci doit faire ",
+ StyleBox["trois",
+  FontWeight->"Bold"],
+ " choses : tout d'abord, ",
+ StyleBox["r\[EAcute]fl\[EAcute]chir",
+  FontSlant->"Italic"],
+ " afin d'essayer de comprendre comment fonctionne la fonction. En cas d'\
+\[EAcute]chec, la deuxi\[EGrave]me chose \[AGrave] faire est de ",
+ StyleBox["r\[EAcute]fl\[EAcute]chir",
+  FontSlant->"Italic"],
+ " plus fort (si, si, on peut toujours, au pire on aura un peu mal au cr\
+\[AHat]ne : c'est une question d'entra\[IHat]nement). Si \[CCedilla]a rate, \
+appuyer sur ",
+ StyleBox["Shift+Entr\[EAcute]e",
+  FontWeight->"Bold"],
+ " (sans ",
+ StyleBox["r\[EAcute]fl\[EAcute]chir",
+  FontSlant->"Italic"],
+ ") et passer \[AGrave] la suite (on aura tout de m\[EHat]me acquis un \
+savoir-faire : celui d'appuyer sur ",
+ StyleBox["deux",
+  FontSlant->"Italic"],
+ " boutons \[AGrave] la fois). Si l'on n'arrive pas \[AGrave] franchir cette \
+derni\[EGrave]re \[EAcute]tape avec succ\[EGrave]s, peut-\[EHat]tre \
+devra-t-on consacrer son temps libre \[AGrave] autre chose qu'\[AGrave] ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ "."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " D\[EAcute]finir les sommets de l'hypercube"
+}], "Section"],
+
+Cell[TextData[{
+ StyleBox["Premi\[EGrave]re \[EAcute]tape",
+  FontWeight->"Bold"],
+ " : d\[EAcute]finir les sommets de l'hypercube \"au repos\". Apr\[EGrave]s \
+tout, il n'y a que 16 sommets. Mais c'est fatigant de les taper un apr\
+\[EGrave]s l'autre. N'y aurait-il pas un ",
+ StyleBox["ALGORITHME",
+  FontWeight->"Bold"],
+ " permettant de les cr\[EAcute]er sans peine ? ",
+ StyleBox["ACDC",
+  FontSlant->"Italic"],
+ ", me dis-je (Ah ! C'est Du Cours ! quelle douce musique ...). On prend un \
+segment, on le d\[EAcute]double, c'est un carr\[EAcute]. On d\[EAcute]double \
+le carr\[EAcute], c'est un cube. On d\[EAcute]double le cube .. c'est ce \
+qu'on voulait fabriquer."
+}], "Text"],
+
+Cell[TextData[{
+ "Voici la magique fonction. Elle prend une liste de ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " uplets en param\[EGrave]tre. Elle d\[EAcute]double cette liste pour cr\
+\[EAcute]er des ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"n", "+", "1"}], TraditionalForm]]],
+ "-uplets, la moiti\[EAcute] d'entre eux comen\[CCedilla]ant par ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"-", "1"}], TraditionalForm]]],
+ " et l'autre moiti\[EAcute] commen\[CCedilla]ant par 1."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"dedoubler", "[", "s_", "]"}], ":=", 
+  RowBox[{"Join", "[", 
+   RowBox[{
+    RowBox[{"Map", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Prepend", "[", 
+        RowBox[{"#1", ",", 
+         RowBox[{"-", "1"}]}], "]"}], "&"}], ",", "s"}], "]"}], ",", 
+    RowBox[{"Map", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Prepend", "[", 
+        RowBox[{"#1", ",", "1"}], "]"}], "&"}], ",", "s"}], "]"}]}], 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"dedoubler", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"1", ",", "2"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"3", ",", "4"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"5", ",", "6"}], "}"}]}], "}"}], "]"}]], "Input"],
+
+Cell[TextData[{
+ "Avez-vous suivi mes conseils ? Bien s\[UHat]r que non, vous \[EHat]tes pass\
+\[EAcute]s directement \[AGrave] l'\[EAcute]tape num\[EAcute]ro 3, ne dites \
+pas le contraire. C'est vraiment ",
+ StyleBox["honteux !",
+  FontWeight->"Bold"]
+}], "Text"],
+
+Cell["\<\
+Pour avoir tous les sommets de l'hypercube, on part d'une liste d'un 0-uplet \
+(c'est le cube de dimension 0), et on applique 4 fois la magique fonction.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"sommets", "=", 
+   RowBox[{"Nest", "[", 
+    RowBox[{"dedoubler", ",", 
+     RowBox[{"{", 
+      RowBox[{"{", "}"}], "}"}], ",", "4"}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"sommets", "//", "MatrixForm"}]], "Input"],
+
+Cell["\<\
+Bon, c'est un d\[EAcute]but. Maintenant, le gros du boulot : il faut \
+s'attaquer aux ar\[EHat]tes.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " D\[EAcute]finir les ar\[EHat]tes"
+}], "Section"],
+
+Cell[TextData[{
+ "D\[EAcute]cidons de repr\[EAcute]senter les ar\[EHat]tes de l'hypercube par \
+des listes de 2 entiers : ainsi , la liste ",
+ StyleBox["{i,j}", "Input"],
+ " repr\[EAcute]sente l'ar\[EHat]te qui va du sommet ",
+ Cell[BoxData[
+  FormBox["i", TraditionalForm]]],
+ " au sommet ",
+ Cell[BoxData[
+  FormBox["j", TraditionalForm]]],
+ ". Apr\[EGrave]s une longue r\[EAcute]flexion, je me dis qu'il serait bien \
+d'avoir un ",
+ StyleBox["ALGORITHME",
+  FontWeight->"Bold"],
+ " pour calculer les ar\[EHat]tes. Parce que, bon, il y a 30 ar\[EHat]tes (et \
+puis en plus, qui sait si un de ces 4, je n'aurai pas envie de faire tourner \
+un hyper-hypercube ?)."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Une fonction utile"
+}], "Subsection"],
+
+Cell[TextData[{
+ "L\[AGrave], j'ai besoin d'une ",
+ StyleBox["super-magique",
+  FontWeight->"Bold"],
+ " fonction : elle applique une fonction de deux variables \[AGrave] deux \
+listes, tout en sachant que la fonction de deux variables renvoie elle-m\
+\[EHat]me une liste. C'est une sorte d'extension trafiqu\[EAcute]e de ",
+ StyleBox["Map", "Input"],
+ " aux fonctions de deux variables (en cas de douleurs cr\[AHat]niennes \
+aigues, passez vite \[AGrave] l'\[EAcute]tape Shift+Entr\[EAcute]e et essayez \
+l'exemple)"
+}], "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Map2", "[", 
+    RowBox[{"f_", ",", 
+     RowBox[{"{", "}"}], ",", 
+     RowBox[{"{", "}"}]}], "]"}], ":=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Map2", "[", 
+   RowBox[{"f_", ",", 
+    RowBox[{"{", 
+     RowBox[{"x_", ",", "r1___"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"y_", ",", "r2___"}], "}"}]}], "]"}], ":=", 
+  RowBox[{"Join", "[", 
+   RowBox[{
+    RowBox[{"Map2", "[", 
+     RowBox[{"f", ",", 
+      RowBox[{"{", "r1", "}"}], ",", 
+      RowBox[{"{", "r2", "}"}]}], "]"}], ",", 
+    RowBox[{"f", "[", 
+     RowBox[{"x", ",", "y"}], "]"}]}], "]"}]}]}], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Map2", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{"\"\<hello\>\"", ",", "#1", ",", "#2"}], "}"}], "}"}], "&"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "3"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", "5", ",", "6"}], "}"}]}], "]"}]], "Input"],
+
+Cell[TextData[{
+ "Maintenant, il me faut trouver ",
+ StyleBox["l'algorithme",
+  FontSlant->"Italic"],
+ " : si j'ai les ar\[EHat]tes du cube ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ "-dimensionnel, je les d\[EAcute]double, en renum\[EAcute]rotant de fa\
+\[CCedilla]on judicieuse la seconde moiti\[EAcute], puis j'invente de \
+nouvelles ar\[EHat]tes reliant les sommets qui sont les extr\[EAcute]mit\
+\[EAcute]s des deux moiti\[EAcute]s des ar\[EHat]tes d\[EAcute]j\[AGrave] cr\
+\[EAcute]\[EAcute]es. Ah oui, j'ai donc besoin d'une fonction qui \"croise\" \
+les ar\[EHat]tes, un peu comme dans un croisement de chromosomes (bigre, voil\
+\[AGrave] que la biologie donne des id\[EAcute]es aux informaticiens). \
+Croisons donc ..."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Croisements"
+}], "Subsection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"croiser", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"x_", ",", "y_"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"z_", ",", "t_"}], "}"}]}], "]"}], ":=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"x", ",", "z"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"y", ",", "t"}], "}"}]}], "}"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"croiser", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "4"}], "}"}]}], "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Clonage et recollage"
+}], "Subsection"],
+
+Cell["\<\
+La fonction de clonage est tr\[EGrave]s simple. Elle ajoute une constante fix\
+\[EAcute]e aux num\[EAcute]ros des ar\[EHat]tes de d\[EAcute]part.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"cloner", "[", 
+   RowBox[{"s_", ",", "n_"}], "]"}], ":=", 
+  RowBox[{"s", "+", "n"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"cloner", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "4"}], "}"}]}], "}"}], ",", "4"}], "]"}]], "Input"],
+
+Cell[TextData[{
+ "La fonction de recollement applique simplement la fonction ",
+ StyleBox["croiser", "Input"],
+ " \[AGrave] deux listes d'ar\[EHat]tes."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"recoller", "[", 
+   RowBox[{"s1_", ",", "s2_"}], "]"}], ":=", 
+  RowBox[{"Map2", "[", 
+   RowBox[{"croiser", ",", "s1", ",", "s2"}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"recoller", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "4"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"5", ",", "6"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"7", ",", "8"}], "}"}]}], "}"}]}], "]"}]], "Input"],
+
+Cell[TextData[{
+ "Enfin, la fonction clonerRecoller combine les deux actions pr\[EAcute]c\
+\[EAcute]dentes. Remarquer l'utilisation de ",
+ StyleBox["Union", "Input"],
+ " \[AGrave] la place de ",
+ StyleBox["Join", "Input"],
+ " : certaines ar\[EHat]tes sont cr\[EAcute]\[EAcute]es plusieurs fois, et il \
+faut se d\[EAcute]barrasser des doublons."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"clonerRecoller", "[", 
+   RowBox[{"s_", ",", "n_"}], "]"}], ":=", 
+  RowBox[{"Union", "[", 
+   RowBox[{"s", ",", 
+    RowBox[{"s", "+", "n"}], ",", 
+    RowBox[{"recoller", "[", 
+     RowBox[{"s", ",", 
+      RowBox[{"s", "+", "n"}]}], "]"}]}], "]"}]}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Construction des ar\[EHat]tes de l'hypercube"
+}], "Subsection"],
+
+Cell["\<\
+On part des ar\[EHat]tes du cube en dimension 1, puis on clone-recolle trois \
+fois d'affil\[EAcute]e. Les nombres magiques 2, 4 et 8 sont \
+\[EAcute]videmment le nombre de sommets des cubes concern\[EAcute]s.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"aretesD1", ":=", 
+  RowBox[{"{", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2"}], "}"}], "}"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"aretesD2", "=", 
+  RowBox[{"clonerRecoller", "[", 
+   RowBox[{"aretesD1", ",", "2"}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"aretesD3", "=", 
+  RowBox[{"clonerRecoller", "[", 
+   RowBox[{"aretesD2", ",", "4"}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"aretesHypercube", "=", 
+  RowBox[{"clonerRecoller", "[", 
+   RowBox[{"aretesD3", ",", "8"}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Length", "[", "aretesHypercube", "]"}]], "Input"],
+
+Cell[TextData[{
+ "Et voil\[AGrave]. L'hypercube a effectivement 32 ar\[EHat]tes. Mais il \
+faudrait s'assurer que tout cela est correct, et le mieux serait de ",
+ StyleBox["VOIR",
+  FontSlant->"Italic"],
+ " cet hypercube."
+}], "Text"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Visualiser"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Visualiser les sommets"
+}], "Subsection"],
+
+Cell[TextData[{
+ "On retrousse ses manches. Chaque sommet de l'hypercube va tout d'abord \
+\[EHat]tre projet\[EAcute] brutalement sur l'hyperplan d'\[EAcute]quation \"",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"t", "=", "0"}], TraditionalForm]]],
+ "\". On gagne  du temps en fabriquant en m\[EHat]me temps un objet graphique \
+appel\[EAcute] ",
+ StyleBox["cubo\[IDoubleDot]de",
+  FontWeight->"Bold"],
+ " (\[AGrave] ma connaissance, \[CCedilla]a ne se mange pas : un cubo\
+\[IDoubleDot]de, c'est un petit cube). Voir la documentation de ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " \[AGrave] ce sujet : il n'y a qu'\[AGrave] placer le curseur \[AGrave] c\
+\[OHat]t\[EAcute] du mot, et appuyer sur F1 (pas trop crevant, donc)."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"imageSommet", "[", 
+   RowBox[{"{", 
+    RowBox[{"x_", ",", "y_", ",", "z_", ",", "_"}], "}"}], "]"}], ":=", 
+  RowBox[{"Cuboid", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"x", ",", "y", ",", "z"}], "}"}], "-", "0.1"}], ",", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"x", ",", "y", ",", "z"}], "}"}], "+", "0.1"}]}], 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"imageSommet", "[", 
+  RowBox[{"{", 
+   RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}], "]"}]], "Input"],
+
+Cell["\<\
+Tant qu'on y est, on fabrique une fonction de projection qui renvoie un \
+triplet tout-b\[EHat]te (\[CCedilla]a, c'est du apr\[EGrave]s-coup. Je me \
+suis aper\[CCedilla]u que j'en aurais besoin quand je me suis mis \[AGrave] \
+tracer les ar\[EHat]tes).\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"imagePointSommet", "[", 
+   RowBox[{"{", 
+    RowBox[{"x_", ",", "y_", ",", "z_", ",", "_"}], "}"}], "]"}], ":=", 
+  RowBox[{"{", 
+   RowBox[{"x", ",", "y", ",", "z"}], "}"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"imagePointSommet", "[", 
+  RowBox[{"{", 
+   RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}], "]"}]], "Input"],
+
+Cell["Alons-y : affichons les sommets de l'hypercube.", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"listeSommets", "[", "s_", "]"}], ":=", 
+  RowBox[{"Map", "[", 
+   RowBox[{"imageSommet", ",", "s"}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Graphics3D", "[", 
+  RowBox[{
+   RowBox[{"listeSommets", "[", "sommets", "]"}], ",", 
+   RowBox[{"Boxed", "\[Rule]", "False"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.410173846625*^9, 3.410173851609375*^9}}],
+
+Cell["\<\
+Mais de qui se moque-t-on ? C'est un cube, \[CCedilla]a ! Et le \"hyper\" ?  \
+Ben voui, vu qu'on a projet\[EAcute] sans r\[EAcute]fl\[EAcute]chir, on a un \
+navrant effet de perspective : plusieurs sommets se projettent au m\[EHat]me \
+endroit. Il va falloir faire tourner l'hypercube pour \"voir\". Mais chaque \
+chose en son temps. D'abord, on va afficher les ar\[EHat]tes.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Visualiser les ar\[EHat]tes"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Voici de quoi afficher nos ar\[EHat]tes. ",
+ StyleBox["Line", "Input"],
+ ", c'est un mot ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ ", un peu comme ",
+ StyleBox["Cuboid", "Input"],
+ ", sauf que ce n'est pas un cubo\[IDoubleDot]de."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"imageArete", "[", 
+   RowBox[{"s_", ",", 
+    RowBox[{"{", 
+     RowBox[{"i_", ",", "j_"}], "}"}]}], "]"}], ":=", 
+  RowBox[{"Line", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"imagePointSommet", "[", 
+      RowBox[{"s", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+     RowBox[{"imagePointSommet", "[", 
+      RowBox[{"s", "[", 
+       RowBox[{"[", "j", "]"}], "]"}], "]"}]}], "}"}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"listeAretes", "[", "s_", "]"}], ":=", 
+  RowBox[{"Map", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"imageArete", "[", 
+      RowBox[{"s", ",", "#1"}], "]"}], "&"}], ",", "aretesHypercube"}], 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"listeAretes", "[", "sommets", "]"}], "//", "TableForm"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Graphics3D", "[", 
+  RowBox[{
+   RowBox[{"listeAretes", "[", "sommets", "]"}], ",", 
+   RowBox[{"Boxed", "\[Rule]", "False"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.41017386740625*^9, 3.41017386953125*^9}}],
+
+Cell["\<\
+Ben oui, c'est toujours un cube (et m\[EHat]me qu'on peut le faire bouger \
+avec la souris !). Mais si vous avez lu ce qui pr\[EAcute]c\[EGrave]de, vous \
+savez pourquoi (pourquoi c'est un cube, ET pourquoi on peut le faire bouger \
+avec la souris). Maintenant, on va afficher ensemble les sommets et les ar\
+\[EHat]tes.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"Graphics3D", "[", 
+  RowBox[{
+   RowBox[{"Join", "[", 
+    RowBox[{
+     RowBox[{"listeSommets", "[", "sommets", "]"}], ",", 
+     RowBox[{"listeAretes", "[", "sommets", "]"}]}], "]"}], ",", 
+   RowBox[{"Boxed", "\[Rule]", "False"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.410173877578125*^9, 3.4101738801875*^9}}],
+
+Cell[TextData[{
+ "C'est beau, on en pleurerait. Tant qu'\[AGrave] faire, appelons ",
+ StyleBox["voir4D", "Input"],
+ " la fonction qui affichera tout ces trucs  toute seule."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"voir4D", "[", "s_", "]"}], ":=", 
+  RowBox[{"Graphics3D", "[", 
+   RowBox[{
+    RowBox[{"Join", "[", 
+     RowBox[{
+      RowBox[{"listeSommets", "[", "s", "]"}], ",", 
+      RowBox[{"listeAretes", "[", "s", "]"}]}], "]"}], ",", 
+    RowBox[{"Boxed", "\[Rule]", "False"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "2"}], ",", "2"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "2"}], ",", "2"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "2"}], ",", "2"}], "}"}]}], "}"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.41017389390625*^9, 3.410173897859375*^9}}],
+
+Cell[BoxData[
+ RowBox[{"voir4D", "[", "sommets", "]"}]], "Input"],
+
+Cell["\<\
+On est contents, mais tant qu'on ne fera pas tourner cet hypercube (dans la \
+quatri\[EGrave]me dimension, j'entends), on n'y verra rien.\
+\>", "Text"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Effectuer des rotations"
+}], "Section"],
+
+Cell["\<\
+Pour \[EHat]tre honn\[EHat]te, je n'ai pas envie de faire un cours sur les \
+rotations en dimension 4. Disons pour faire simple qu'en dimension 4 on \
+tourne autour d'un plan (alors qu'en dimension 2, on tourne autour d'un \
+point, et en dimension 3 c'est autour d'une droite). Histoire de faire \
+rapide, d\[EAcute]finissons les rotations autours des plans de coordonn\
+\[EAcute]es de l'hyper-espace (j'aime bien \"hyper-espace\" avec un tiret : \
+\[CCedilla]a fait tr\[EGrave]s SF).\
+\>", "Text"],
+
+Cell[TextData[{
+ "Un appel \[AGrave] ",
+ StyleBox["rotation[m,theta,i,j]", "Input"],
+ " fait \"tourner\" les coordonn\[EAcute]es ",
+ Cell[BoxData[
+  FormBox["i", TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox["j", TraditionalForm]]],
+ " du point ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]]],
+ " d'un angle ",
+ Cell[BoxData[
+  FormBox["\[Theta]", TraditionalForm]]],
+ ", et laisse les deux autres coordonn\[EAcute]es invariantes."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"rotation", "[", 
+   RowBox[{"m_", ",", "theta_", ",", "i_", ",", "j_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"tmp", ",", 
+      RowBox[{"s", "=", "m"}]}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"tmp", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"s", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "*", 
+        RowBox[{"Cos", "[", "theta", "]"}]}], "-", 
+       RowBox[{
+        RowBox[{"s", "[", 
+         RowBox[{"[", "j", "]"}], "]"}], "*", 
+        RowBox[{"Sin", "[", "theta", "]"}]}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"s", "[", 
+       RowBox[{"[", "j", "]"}], "]"}], "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"s", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "*", 
+        RowBox[{"Sin", "[", "theta", "]"}]}], "+", 
+       RowBox[{
+        RowBox[{"s", "[", 
+         RowBox[{"[", "j", "]"}], "]"}], "*", 
+        RowBox[{"Cos", "[", "theta", "]"}]}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"s", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], "=", "tmp"}], ";", 
+     "\[IndentingNewLine]", "s"}]}], "\[IndentingNewLine]", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"rotation", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "}"}], ",", 
+   RowBox[{"Pi", "/", "4."}], ",", "2", ",", "4"}], "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Voir l'hypercube"
+}], "Section"],
+
+Cell["\<\
+On y est. On prend l'hypercube d'origine, on lui fait subir trois ou quatre \
+rotations suivant diff\[EAcute]rents plans, et on affiche le tout.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"hyp", "=", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"rotation", "[", 
+       RowBox[{"#1", ",", 
+        RowBox[{"Pi", "/", "5."}], ",", "3", ",", "4"}], "]"}], "&"}], ",", 
+     "sommets"}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"hyp", "=", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"rotation", "[", 
+       RowBox[{"#1", ",", 
+        RowBox[{"Pi", "/", "5."}], ",", "3", ",", "2"}], "]"}], "&"}], ",", 
+     "hyp"}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"hyp", "=", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"rotation", "[", 
+       RowBox[{"#1", ",", 
+        RowBox[{"Pi", "/", "5."}], ",", "1", ",", "2"}], "]"}], "&"}], ",", 
+     "hyp"}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"hyp", "=", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"rotation", "[", 
+       RowBox[{"#1", ",", 
+        RowBox[{"Pi", "/", "5."}], ",", "4", ",", "1"}], "]"}], "&"}], ",", 
+     "hyp"}], "]"}]}], ";"}]], "Input"],
+
+Cell[TextData[StyleBox["And now, Ladies and Gentlemen... the hypercube !!",
+ FontSlant->"Italic"]], "Text"],
+
+Cell[BoxData[
+ RowBox[{"voir4D", "[", "hyp", "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Rotations en 4 dimensions"
+}], "Section",
+ CellChangeTimes->{{3.4101744769375*^9, 3.410174485453125*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"tourner", "[", 
+   RowBox[{
+   "xy_", ",", "xz_", ",", "xt_", ",", "yz_", ",", "yt_", ",", "zt_"}], "]"}],
+   ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"s", ",", "angle"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"s", "=", "sommets"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"s", "=", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"rotation", "[", 
+          RowBox[{"#1", ",", "xy", ",", "1", ",", "2"}], "]"}], "&"}], ",", 
+        "s"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"s", "=", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"rotation", "[", 
+          RowBox[{"#1", ",", "xz", ",", "1", ",", "3"}], "]"}], "&"}], ",", 
+        "s"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"s", "=", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"rotation", "[", 
+          RowBox[{"#1", ",", "xt", ",", "1", ",", "4"}], "]"}], "&"}], ",", 
+        "s"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"s", "=", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"rotation", "[", 
+          RowBox[{"#1", ",", "yz", ",", "2", ",", "3"}], "]"}], "&"}], ",", 
+        "s"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"s", "=", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"rotation", "[", 
+          RowBox[{"#1", ",", "yt", ",", "2", ",", "4"}], "]"}], "&"}], ",", 
+        "s"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"s", "=", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"rotation", "[", 
+          RowBox[{"#1", ",", "zt", ",", "3", ",", "4"}], "]"}], "&"}], ",", 
+        "s"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"voir4D", "[", "s", "]"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.410174492234375*^9, 3.41017461928125*^9}, {
+  3.41017468596875*^9, 3.4101746895*^9}, {3.410174724046875*^9, 
+  3.41017476065625*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"tourner", "[", 
+    RowBox[{"xy", ",", "xz", ",", "xt", ",", "yz", ",", "yt", ",", "zt"}], 
+    "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"xy", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"xz", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"xt", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"yz", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"yt", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"zt", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.41017462325*^9, 3.410174671125*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"animer", "[", "n_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"s", ",", "angle"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"s", "=", "sommets"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"angle", "=", 
+      RowBox[{"4.", "*", 
+       RowBox[{"Pi", "/", "n"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"s", "=", 
+         RowBox[{"Map", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"rotation", "[", 
+             RowBox[{"#1", ",", "angle", ",", "1", ",", "2"}], "]"}], "&"}], 
+           ",", "s"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"s", "=", 
+         RowBox[{"Map", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"rotation", "[", 
+             RowBox[{"#1", ",", "angle", ",", "2", ",", "3"}], "]"}], "&"}], 
+           ",", "s"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"s", "=", 
+         RowBox[{"Map", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"rotation", "[", 
+             RowBox[{"#1", ",", "angle", ",", "3", ",", "4"}], "]"}], "&"}], 
+           ",", "s"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"s", "=", 
+         RowBox[{"Map", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"rotation", "[", 
+             RowBox[{"#1", ",", "angle", ",", "1", ",", "4"}], "]"}], "&"}], 
+           ",", "s"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"s", "=", 
+         RowBox[{"Map", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"rotation", "[", 
+             RowBox[{"#1", ",", "angle", ",", "1", ",", "3"}], "]"}], "&"}], 
+           ",", "s"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"s", "=", 
+         RowBox[{"Map", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"rotation", "[", 
+             RowBox[{"#1", ",", "angle", ",", "2", ",", "3"}], "]"}], "&"}], 
+           ",", "s"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"voir4D", "[", "s", "]"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", "n", "}"}]}], "]"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.41017397821875*^9, 3.4101739795625*^9}, {
+  3.410174012640625*^9, 3.410174012953125*^9}}],
+
+Cell[TextData[{
+ StyleBox["Quelques petits conseils pour l'animation",
+  FontWeight->"Bold"],
+ " : l'instruction ci-dessous cr\[EAcute]e 200 images successives de \
+l'hypercube. Une fois la cr\[EAcute]ation finie (entre 15 et 30 secondes sur \
+une machine \"normale\"), faire clic-clic sur le crochet de droite enserrant \
+toutes les images, ceci afin de \"fusionner\" les cellules contenant les \
+images sus-dites. Puis, faire clic-clic sur l'unique image restant visible, \
+afin de lancer l'animation.\nOn peut r\[EAcute]gler la vitesse d'animation gr\
+\[AHat]ce aux petites icones en bas \[AGrave] gauche du notebook.\n",
+ StyleBox["Dernier conseil",
+  FontWeight->"Bold"],
+ " : au bout de 200 images, on ne revient pas \[AGrave] la position de d\
+\[EAcute]part (les rotations ne commutent pas entre-elles) : une des \
+ic\[OHat]nes de r\[EAcute]glage de l'animation (celle qui repr\[EAcute]sente \
+un cercle avec des fl\[EGrave]ches) permet d'inverser le sens d'animation une \
+fois arriv\[EAcute](e)(s) \[AGrave] la derni\[EGrave]re image. C'est plus \
+joli comme \[CCedilla]a, parce qu'on \[EAcute]vite un saut brutal de l'image."
+}], "Text"],
+
+Cell[TextData[StyleBox["Lors de l'animation, fixer un des \
+cubo\[IDoubleDot]des, ne plus le quitter des yeux, et essayer de comprendre \
+quelle est sa trajectoire.\nN'oubliez pas que ce que vous voyez n'est que la \
+projection d'une trajectoire qui se situe dans un espace de dimension 4 : en \
+particulier, vous voyez les ar\[EHat]tes se croiser et les angles entre les \
+ar\[EHat]tes se modifier. Que  nenni ! dans l'hyper-espace, tous les angles \
+sont droits, et les ar\[EHat]tes ne se coupent jamais.",
+ CellFrame->True,
+ Background->GrayLevel[0.833326]]], "Text",
+ CellFrame->True,
+ Background->GrayLevel[0.833326]],
+
+Cell[BoxData[
+ RowBox[{"animer", "[", "200", "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Conclusion"
+}], "Section"],
+
+Cell[TextData[{
+ "\"You know what ? I'm happy.\"\n",
+ StyleBox["Tex Avery",
+  FontSlant->"Italic"]
+}], "Text",
+ TextAlignment->Right]
+}, Closed]]
+}, Open  ]]
+},
+WindowSize->{666, 579},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 41, 0, 65, "Title"],
+Cell[623, 24, 161, 3, 55, "Author"],
+Cell[787, 29, 212, 6, 47, "Text"],
+Cell[1002, 37, 52, 1, 41, "Input"],
+Cell[1057, 40, 1581, 41, 192, "Text"],
+Cell[CellGroupData[{
+Cell[2663, 85, 103, 4, 75, "Section"],
+Cell[2769, 91, 686, 15, 101, "Text"],
+Cell[3458, 108, 496, 14, 65, "Text"],
+Cell[3957, 124, 469, 16, 41, "Input"],
+Cell[4429, 142, 272, 9, 41, "Input"],
+Cell[4704, 153, 265, 6, 47, "Text"],
+Cell[4972, 161, 177, 3, 47, "Text"],
+Cell[5152, 166, 196, 6, 41, "Input"],
+Cell[5351, 174, 65, 1, 41, "Input"],
+Cell[5419, 177, 123, 3, 29, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5579, 185, 93, 4, 75, "Section"],
+Cell[5675, 191, 676, 17, 84, "Text"],
+Cell[CellGroupData[{
+Cell[6376, 212, 117, 7, 36, "Subsection"],
+Cell[6496, 221, 528, 11, 84, "Text"],
+Cell[7027, 234, 664, 22, 62, "Input"],
+Cell[7694, 258, 333, 11, 41, "Input"],
+Cell[8030, 271, 751, 15, 101, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8818, 291, 110, 7, 36, "Subsection"],
+Cell[8931, 300, 363, 13, 41, "Input"],
+Cell[9297, 315, 181, 6, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9515, 326, 119, 7, 36, "Subsection"],
+Cell[9637, 335, 169, 3, 47, "Text"],
+Cell[9809, 340, 132, 4, 41, "Input"],
+Cell[9944, 346, 237, 8, 41, "Input"],
+Cell[10184, 356, 164, 4, 30, "Text"],
+Cell[10351, 362, 186, 5, 41, "Input"],
+Cell[10540, 369, 394, 14, 41, "Input"],
+Cell[10937, 385, 357, 8, 66, "Text"],
+Cell[11297, 395, 298, 9, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11632, 409, 143, 7, 36, "Subsection"],
+Cell[11778, 418, 233, 4, 47, "Text"],
+Cell[12014, 424, 129, 4, 41, "Input"],
+Cell[12146, 430, 128, 3, 41, "Input"],
+Cell[12277, 435, 128, 3, 41, "Input"],
+Cell[12408, 440, 135, 3, 41, "Input"],
+Cell[12546, 445, 73, 1, 41, "Input"],
+Cell[12622, 448, 234, 6, 47, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12905, 460, 71, 4, 75, "Section"],
+Cell[CellGroupData[{
+Cell[13001, 468, 121, 7, 36, "Subsection"],
+Cell[13125, 477, 744, 16, 101, "Text"],
+Cell[13872, 495, 401, 13, 41, "Input"],
+Cell[14276, 510, 131, 3, 41, "Input"],
+Cell[14410, 515, 277, 5, 47, "Text"],
+Cell[14690, 522, 222, 6, 41, "Input"],
+Cell[14915, 530, 136, 3, 41, "Input"],
+Cell[15054, 535, 63, 0, 29, "Text"],
+Cell[15120, 537, 154, 4, 41, "Input"],
+Cell[15277, 543, 233, 5, 41, "Input"],
+Cell[15513, 550, 400, 6, 83, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15950, 561, 126, 7, 36, "Subsection"],
+Cell[16079, 570, 271, 9, 48, "Text"],
+Cell[16353, 581, 457, 14, 62, "Input"],
+Cell[16813, 597, 249, 8, 41, "Input"],
+Cell[17065, 607, 102, 2, 41, "Input"],
+Cell[17170, 611, 233, 5, 41, "Input"],
+Cell[17406, 618, 344, 6, 65, "Text"],
+Cell[17753, 626, 340, 8, 62, "Input"],
+Cell[18096, 636, 185, 4, 48, "Text"],
+Cell[18284, 642, 751, 22, 62, "Input"],
+Cell[19038, 666, 65, 1, 41, "Input"],
+Cell[19106, 669, 161, 3, 47, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19316, 678, 84, 4, 75, "Section"],
+Cell[19403, 684, 508, 8, 101, "Text"],
+Cell[19914, 694, 455, 16, 48, "Text"],
+Cell[20372, 712, 1224, 35, 142, "Input"],
+Cell[21599, 749, 199, 5, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21835, 759, 77, 4, 75, "Section"],
+Cell[21915, 765, 168, 3, 47, "Text"],
+Cell[22086, 770, 277, 9, 41, "Input"],
+Cell[22366, 781, 273, 9, 41, "Input"],
+Cell[22642, 792, 273, 9, 41, "Input"],
+Cell[22918, 803, 273, 9, 41, "Input"],
+Cell[23194, 814, 107, 1, 29, "Text"],
+Cell[23304, 817, 61, 1, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23402, 823, 150, 5, 75, "Section"],
+Cell[23555, 830, 2068, 57, 202, "Input"],
+Cell[25626, 889, 828, 24, 62, "Input"],
+Cell[26457, 915, 2359, 60, 262, "Input"],
+Cell[28819, 977, 1147, 18, 191, "Text"],
+Cell[29969, 997, 622, 10, 135, "Text"],
+Cell[30594, 1009, 61, 1, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[30692, 1015, 71, 4, 75, "Section"],
+Cell[30766, 1021, 133, 5, 70, "Text"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

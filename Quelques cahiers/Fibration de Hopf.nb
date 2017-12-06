@@ -1,0 +1,2197 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     76125,       2187]
+NotebookOptionsPosition[     71652,       2054]
+NotebookOutlinePosition[     72234,       2074]
+CellTagsIndexPosition[     72191,       2071]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Fibration de Hopf", "Title",
+ CellChangeTimes->{{3.45032742228125*^9, 3.450327425578125*^9}}],
+
+Cell["\<\
+Marc Lorenzi
+4 mai 2009\
+\>", "Text",
+ CellChangeTimes->{{3.450355226625*^9, 3.450355235171875*^9}, {
+  3.450450197954911*^9, 3.450450200092111*^9}}],
+
+Cell[TextData[{
+ "Cette feuille fait suite \[AGrave] la projection en classe de la \
+s\[EAcute]rie de films \"Dimensions\" (ces films peuvent \[EHat]tre \
+t\[EAcute]l\[EAcute]charg\[EAcute]s ou regard\[EAcute]s en ligne \[AGrave] \
+l'adresse ",
+ ButtonBox["http://www.dimensions-math.org).",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://www.dimensions-math.org/"], None},
+  ButtonNote->"http://www.dimensions-math.org/"]
+}], "Text",
+ CellChangeTimes->{{3.450449591080311*^9, 3.450449625883911*^9}, {
+  3.4504496836975107`*^9, 3.450449698533111*^9}, {3.4504497341645107`*^9, 
+  3.450449781199511*^9}, {3.450449821977311*^9, 3.4504498812885113`*^9}, {
+  3.4504500705009108`*^9, 3.4504500987691107`*^9}}],
+
+Cell[TextData[{
+ "Apr\[EGrave]s une introduction \[AGrave] la projection \
+st\[EAcute]r\[EAcute]ographique en dimensions 3 et 4, on tente d'expliquer ce \
+qu'est la ",
+ StyleBox["fibration de Hopf",
+  FontSlant->"Italic"],
+ " : une partition en cercles de la sph\[EGrave]re unit\[EAcute] ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "3"], TraditionalForm]]],
+ " de l'espace de dimension 4. Puis on donne quelques repr\[EAcute]sentations \
+graphiques li\[EAcute]es \[AGrave] cette fibration."
+}], "Text",
+ CellChangeTimes->{{3.450449904470111*^9, 3.450450009052511*^9}, {
+  3.4504501495013113`*^9, 3.450450189203311*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Projection st\[EAcute]r\[EAcute]ographique"
+}], "Section",
+ CellChangeTimes->{{3.450352751078125*^9, 3.45035275859375*^9}, {
+  3.450406325095735*^9, 3.450406327262735*^9}, {3.450440045453125*^9, 
+  3.45044004559375*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Projection de la sph\[EGrave]re ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "2"], TraditionalForm]], "None"],
+ " sur le plan ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[DoubleStruckCapitalR]", "2"], TraditionalForm]], "None"]
+}], "Subsection",
+ CellChangeTimes->{{3.450402398049735*^9, 3.450402413254735*^9}, {
+  3.450402722079735*^9, 3.450402754520735*^9}, {3.4504059550077353`*^9, 
+  3.4504059571847353`*^9}, {3.450406516834735*^9, 3.4504065321857347`*^9}}],
+
+Cell[TextData[{
+ "Soit ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"M", "=", 
+    RowBox[{"(", 
+     RowBox[{"x", ",", "y", ",", "z"}], ")"}]}], TraditionalForm]]],
+ "  un point de la sph\[EGrave]re unit\[EAcute] ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "2"], TraditionalForm]]],
+ ". Soit ",
+ Cell[BoxData[
+  FormBox[Cell[TextData[Cell[BoxData[
+    FormBox[
+     RowBox[{"N", " ", "=", " ", 
+      RowBox[{"(", 
+       RowBox[{"0", ",", " ", "0", ",", " ", "1"}], ")"}]}], 
+     TraditionalForm]]]]], TraditionalForm]]],
+ " le p\[OHat]le Nord de cette m\[EHat]me sph\[EGrave]re. Lorsque ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"M", "\[NotEqual]", "N"}], TraditionalForm]]],
+ ", la droite ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{"N", " ", "M"}], ")"}], TraditionalForm]]],
+ " a pour \[EAcute]quations param\[EAcute]triques ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"X", "=", 
+     RowBox[{"\[Lambda]", " ", "x"}]}], ",", " ", 
+    RowBox[{"Y", "=", 
+     RowBox[{"\[Lambda]", " ", "y"}]}], ",", 
+    RowBox[{"Z", "=", 
+     RowBox[{"1", "+", 
+      RowBox[{"\[Lambda]", "(", 
+       RowBox[{"z", "-", "1"}], ")"}]}]}]}], TraditionalForm]]],
+ ". Elle intersecte le plan ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"x", " ", "O", " ", "y"}], TraditionalForm]]],
+ " lorsque ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"Z", "=", "0"}], TraditionalForm]]],
+ ", c'est \[AGrave] dire lorsque ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Lambda]", "=", 
+    FractionBox["1", 
+     RowBox[{"1", "-", "z"}]]}], TraditionalForm]]],
+ ". Le point ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"P", "=", 
+    RowBox[{"(", 
+     RowBox[{
+      FractionBox["x", 
+       RowBox[{"1", "-", "z"}]], ",", 
+      FractionBox["y", 
+       RowBox[{"1", "-", "z"}]]}], ")"}]}], TraditionalForm]]],
+ " est la ",
+ StyleBox["projection st\[EAcute]r\[EAcute]ographique",
+  FontSlant->"Italic"],
+ " du point ",
+ Cell[BoxData[
+  FormBox["M", TraditionalForm]]],
+ " sur le plan ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"x", " ", "O", " ", "y"}], TraditionalForm]]],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.450402419139735*^9, 3.450402699643735*^9}, {
+  3.450405962792735*^9, 3.4504059644677353`*^9}, {3.45058546384375*^9, 
+  3.450585484859375*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"stereo2", "[", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "y", ",", "z"}], "}"}], "]"}], ":=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"x", "/", 
+     RowBox[{"(", 
+      RowBox[{"1", "-", "z"}], ")"}]}], ",", 
+    RowBox[{"y", "/", 
+     RowBox[{"(", 
+      RowBox[{"1", "-", "z"}], ")"}]}]}], "}"}]}]], "Input",
+ CellChangeTimes->{{3.450407170346735*^9, 3.450407178337735*^9}, {
+  3.450583228234375*^9, 3.4505832306875*^9}}],
+
+Cell["\<\
+Parmi les propri\[EAcute]t\[EAcute]s importantes de la projection \
+st\[EAcute]r\[EAcute]ographique, citons les deux suivantes :\
+\>", "Text",
+ CellChangeTimes->{{3.450440370953125*^9, 3.450440393484375*^9}}],
+
+Cell[TextData[{
+ "1- La conservation des cercles. Pr\[EAcute]cis\[EAcute]ment, la projection \
+st\[EAcute]r\[EAcute]ographique d'un cercle de ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "2"], TraditionalForm]]],
+ " ne passant pas par le p\[OHat]le Nord est un cercle du plan, et la \
+projection st\[EAcute]r\[EAcute]ographique d'un cercle passant par le \
+p\[OHat]le Nord est une droite du plan."
+}], "Text",
+ CellChangeTimes->{{3.45044039725*^9, 3.450440468984375*^9}}],
+
+Cell[TextData[{
+ "2- La conservation des angles : si deux courbes trac\[EAcute]es sur la sph\
+\[EGrave]re se coupent ailleurs qu'au p\[OHat]le Nord en faisant un angle ",
+ Cell[BoxData[
+  FormBox["\[Alpha]", TraditionalForm]]],
+ " (l'angle form\[EAcute] par deux courbes est celui form\[EAcute] par leurs \
+tangentes), alors les projections de ces deux courbes sont deux courbes du \
+plan qui se couperont \[EAcute]galement avec l'angle ",
+ Cell[BoxData[
+  FormBox["\[Alpha]", TraditionalForm]]],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.45044047171875*^9, 3.450440621828125*^9}}],
+
+Cell[TextData[{
+ "On v\[EAcute]rifie ais\[EAcute]ment que la projection \
+st\[EAcute]r\[EAcute]ographique est une bijection de ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SuperscriptBox["S", "2"], "\\", 
+    RowBox[{"{", "N", "}"}]}], TraditionalForm]]],
+ " sur ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[DoubleStruckCapitalR]", "2"], TraditionalForm]]],
+ ". Sa r\[EAcute]ciproque est la fonction qui au couple ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{"\[Alpha]", ",", "\[Beta]"}], ")"}], TraditionalForm]]],
+ " associe le point ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"2", 
+      RowBox[{"\[Alpha]", "/", "T"}]}], ",", 
+     RowBox[{"2", 
+      RowBox[{"\[Beta]", "/", "T"}]}], ",", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        SuperscriptBox["\[Alpha]", "2"], "+", 
+        SuperscriptBox["\[Beta]", "2"], "-", "1"}], ")"}], "/", "T"}]}], 
+    ")"}], TraditionalForm]]],
+ " o\[UGrave] ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"T", "=", 
+    RowBox[{
+     SuperscriptBox["\[Alpha]", "2"], "+", 
+     SuperscriptBox["\[Beta]", "2"], "+", "1"}]}], TraditionalForm]]],
+ " (exercice !). Rajoutons un ",
+ StyleBox["point \[AGrave] l'infini",
+  FontSlant->"Italic"],
+ " ",
+ Cell[BoxData[
+  FormBox["\[Omega]", TraditionalForm]]],
+ " au plan et posons ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[ScriptCapitalP]", "=", 
+    RowBox[{
+     SuperscriptBox["\[DoubleStruckCapitalR]", "2"], "\[Union]", 
+     RowBox[{"{", "\[Omega]", "}"}]}]}], TraditionalForm]]],
+ ". En envoyant le p\[OHat]le Nord de la sph\[EGrave]re sur le point \
+\[AGrave] l'infini, on prolonge alors notre bijection en une bijection entre ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "2"], TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox["\[ScriptCapitalP]", TraditionalForm]]],
+ ". Gr\[AHat]ce \[AGrave] cette bijection, on peut confondre ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "2"], TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox["\[ScriptCapitalP]", TraditionalForm]]],
+ ", et donc identifier les points du plan avec les points de la \
+sph\[EGrave]re."
+}], "Text",
+ CellChangeTimes->{{3.450403144124735*^9, 3.450403280051735*^9}, {
+  3.450403343050735*^9, 3.450403404735735*^9}, {3.450403761381735*^9, 
+  3.4504038205007353`*^9}, {3.450405972399735*^9, 3.4504059935787354`*^9}, {
+  3.450407233016735*^9, 3.450407261407735*^9}, {3.450407354880735*^9, 
+  3.450407428520735*^9}, {3.450585540640625*^9, 3.45058560671875*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Illustrations"
+}], "Subsection",
+ CellChangeTimes->{{3.45043622046875*^9, 3.450436236296875*^9}, {
+  3.450586961421875*^9, 3.450586969859375*^9}}],
+
+Cell["\<\
+Voici la r\[EAcute]ciproque de la projection st\[EAcute]r\[EAcute]ographique. \
+Elle associe \[AGrave] chaque point du plan complexe un point de la sph\
+\[EGrave]re unit\[EAcute] priv\[EAcute]e de son p\[OHat]le Nord.\
+\>", "Text",
+ CellChangeTimes->{{3.45043627475*^9, 3.4504363081875*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"g1", "[", 
+   RowBox[{"\[Alpha]_", ",", "\[Beta]_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "T", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"T", "=", 
+      RowBox[{
+       RowBox[{"\[Alpha]", "^", "2"}], "+", 
+       RowBox[{"\[Beta]", "^", "2"}], "+", "1"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"2", "*", 
+        RowBox[{"\[Alpha]", "/", "T"}]}], ",", 
+       RowBox[{"2", "*", 
+        RowBox[{"\[Beta]", "/", "T"}]}], ",", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"\[Alpha]", "^", "2"}], "+", 
+          RowBox[{"\[Beta]", "^", "2"}], "-", "1"}], ")"}], "/", "T"}]}], 
+      "}"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.450407519188735*^9, 3.450407636631735*^9}, {
+  3.450407983022735*^9, 3.4504079879827347`*^9}}],
+
+Cell["\<\
+En guise d'illustration, voici une fonction qui prend en param\[EGrave]tre \
+une courbe param\[EAcute]tr\[EAcute]e du plan et affiche la courbe qui lui \
+correspond sur la sph\[EGrave]re.\
+\>", "Text",
+ CellChangeTimes->{{3.4505385398101997`*^9, 3.4505385808382*^9}, {
+  3.45058456853125*^9, 3.45058461846875*^9}, {3.4505856334375*^9, 
+  3.450585635578125*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"stereoPlot", "[", 
+   RowBox[{"f_", ",", "iter_"}], "]"}], ":=", 
+  RowBox[{"Show", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"ParametricPlot3D", "[", 
+     RowBox[{
+      RowBox[{"Apply", "[", 
+       RowBox[{"g1", ",", "f"}], "]"}], ",", "iter", ",", 
+      RowBox[{"PlotStyle", "\[Rule]", "Thick"}]}], "]"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Graphics3D", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Opacity", "[", "0.5", "]"}], ",", 
+       RowBox[{"Sphere", "[", "]"}]}], "}"}], "]"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"ParametricPlot3D", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"f", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", 
+        RowBox[{"f", "[", 
+         RowBox[{"[", "2", "]"}], "]"}], ",", "0"}], "}"}], ",", "iter"}], 
+     "]"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"Plot3D", "[", 
+     RowBox[{"0", ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", 
+        RowBox[{"-", "3"}], ",", "3"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"y", ",", 
+        RowBox[{"-", "3"}], ",", "3"}], "}"}], ",", 
+      RowBox[{"PlotStyle", "\[Rule]", 
+       RowBox[{"Opacity", "[", "0.5", "]"}]}], ",", 
+      RowBox[{"Mesh", "\[Rule]", "False"}]}], "]"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"PlotRange", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "3"}], ",", "3"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "3"}], ",", "3"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "}"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.4505846319375*^9, 3.450584689328125*^9}, {
+  3.450584890046875*^9, 3.45058489371875*^9}, {3.450585051953125*^9, 
+  3.45058506159375*^9}, {3.45058512759375*^9, 3.450585147484375*^9}, {
+  3.4505851891875*^9, 3.450585191953125*^9}, {3.45058565075*^9, 
+  3.450585726359375*^9}, {3.4505857585625*^9, 3.4505857615625*^9}, {
+  3.45058580928125*^9, 3.45058592159375*^9}, {3.450585972*^9, 
+  3.450585973328125*^9}, {3.45058602190625*^9, 3.450586069328125*^9}, {
+  3.450586111390625*^9, 3.45058611721875*^9}, {3.4505861573125*^9, 
+  3.4505861583125*^9}, {3.450586191703125*^9, 3.4505861924375*^9}, {
+  3.45058674375*^9, 3.450586745125*^9}}],
+
+Cell["Essayons avec la courbe suivante :", "Text",
+ CellChangeTimes->{{3.450584707859375*^9, 3.45058471790625*^9}, {
+  3.450587058609375*^9, 3.4505870595625*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "t_", "]"}], "=", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", 
+     RowBox[{"Tan", "[", "t", "]"}]}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.450586700890625*^9, 3.45058672865625*^9}, {
+  3.4505867745625*^9, 3.450586801046875*^9}, {3.45058684434375*^9, 
+  3.450586844796875*^9}}],
+
+Cell[BoxData[
+ RowBox[{"stereoPlot", "[", 
+  RowBox[{
+   RowBox[{"f", "[", "t", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", 
+     RowBox[{"-", "20"}], ",", "20"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.4505386991798*^9, 3.4505387756354*^9}, {
+  3.4505388079742002`*^9, 3.4505389007474003`*^9}, {3.450584732359375*^9, 
+  3.450584741359375*^9}, {3.450584805390625*^9, 3.450584822109375*^9}, {
+  3.4505848599375*^9, 3.450584862234375*^9}, {3.4505857793125*^9, 
+  3.450585782390625*^9}, {3.45058681221875*^9, 3.450586814515625*^9}}],
+
+Cell[TextData[{
+ "Dans la manipulation ci-dessous, les variables \[Alpha] et \[Beta] repr\
+\[EAcute]sentent les coordonn\[EAcute]es d'un point du plan. Le graphique \
+montre le point correspondant sur la sph\[EGrave]re ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "2"], TraditionalForm]]],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.45043632290625*^9, 3.4504364086875*^9}, {
+  3.4505870916875*^9, 3.4505871188125*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Show", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Plot3D", "[", 
+      RowBox[{"0", ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", 
+         RowBox[{"-", "3"}], ",", "3"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"y", ",", 
+         RowBox[{"-", "3"}], ",", "3"}], "}"}], ",", 
+       RowBox[{"PlotStyle", "\[Rule]", 
+        RowBox[{"Directive", "[", 
+         RowBox[{"Opacity", "[", "0.5", "]"}], "]"}]}], ",", 
+       RowBox[{"Mesh", "\[Rule]", "True"}]}], "]"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Graphics3D", "[", 
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"PointSize", "[", "Large", "]"}], ",", 
+          RowBox[{"Point", "[", 
+           RowBox[{"g1", "[", 
+            RowBox[{"\[Alpha]", ",", "\[Beta]"}], "]"}], "]"}]}], "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"PointSize", "[", "Large", "]"}], ",", 
+          RowBox[{"Point", "[", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "0", ",", "1"}], "}"}], "]"}]}], "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"PointSize", "[", "Large", "]"}], ",", 
+          RowBox[{"Point", "[", 
+           RowBox[{"{", 
+            RowBox[{"\[Alpha]", ",", "\[Beta]", ",", "0"}], "}"}], "]"}]}], 
+         "}"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"Line", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0", ",", "1"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"\[Alpha]", ",", "\[Beta]", ",", "0"}], "}"}]}], "}"}], 
+          "]"}], "}"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"Line", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0", ",", "1"}], "}"}], ",", 
+            RowBox[{"g1", "[", 
+             RowBox[{"\[Alpha]", ",", "\[Beta]"}], "]"}]}], "}"}], "]"}], 
+         "}"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Opacity", "[", "0.5", "]"}], ",", 
+          RowBox[{"Sphere", "[", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "0", ",", "0"}], "}"}], "]"}]}], "}"}]}], "}"}],
+       "]"}], ",", 
+     RowBox[{"AspectRatio", "\[Rule]", "Automatic"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\[Alpha]", ",", 
+     RowBox[{"-", "3"}], ",", "3"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\[Beta]", ",", 
+     RowBox[{"-", "3"}], ",", "3"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.450407639377735*^9, 3.450407707980735*^9}, {
+   3.450407749188735*^9, 3.450407787643735*^9}, {3.450407826818735*^9, 
+   3.450407838226735*^9}, {3.450407874881735*^9, 3.450407892193735*^9}, {
+   3.4504079296007347`*^9, 3.4504079413287354`*^9}, {3.450407999782735*^9, 
+   3.450408033141735*^9}, {3.450408077004735*^9, 3.450408077972735*^9}, {
+   3.450435202296875*^9, 3.45043523221875*^9}, {3.450435282515625*^9, 
+   3.450435287796875*^9}, {3.4504353426875*^9, 3.45043537875*^9}, {
+   3.450435445921875*^9, 3.450435604796875*^9}, 3.4504356464375*^9, {
+   3.450435696*^9, 3.450435746515625*^9}, {3.4504357875625*^9, 
+   3.4504360390625*^9}, {3.4504360715625*^9, 3.450436109078125*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " ",
+ "Projection de la sph\[EGrave]re ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "3"], TraditionalForm]], "None"],
+ " sur l'espace ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[DoubleStruckCapitalR]", "3"], TraditionalForm]], "None"]
+}], "Subsection",
+ CellChangeTimes->{{3.450402770870735*^9, 3.4504027963437347`*^9}, {
+   3.450405998638735*^9, 3.450406001319735*^9}, 3.450406537297735*^9}],
+
+Cell[TextData[{
+ "De la m\[EHat]me mani\[EGrave]re, on projette \
+st\[EAcute]r\[EAcute]ographiquement les points de la sph\[EGrave]re ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "3"], TraditionalForm]]],
+ " diff\[EAcute]rents de son p\[OHat]le Nord ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "1"}], ")"}], TraditionalForm]]],
+ " sur l'espace de dimension 3. Les formules obtenues sont analogues \
+\[AGrave] celles trouv\[EAcute]e ci-dessus :"
+}], "Text",
+ CellChangeTimes->{{3.45035366984375*^9, 3.450353760609375*^9}, {
+   3.450355091703125*^9, 3.450355092109375*^9}, {3.450402427464735*^9, 
+   3.4504024450597353`*^9}, {3.450402801446735*^9, 3.450402862636735*^9}, 
+   3.4504032886267347`*^9, {3.4504060077107353`*^9, 3.450406012272735*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"stereo3", "[", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "y", ",", "z", ",", "t"}], "}"}], "]"}], ":=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"x", "/", 
+     RowBox[{"(", 
+      RowBox[{"1", "-", "t"}], ")"}]}], ",", 
+    RowBox[{"y", "/", 
+     RowBox[{"(", 
+      RowBox[{"1", "-", "t"}], ")"}]}], ",", 
+    RowBox[{"z", "/", 
+     RowBox[{"(", 
+      RowBox[{"1", "-", "t"}], ")"}]}]}], "}"}]}]], "Input",
+ CellChangeTimes->{{3.450353733265625*^9, 3.450353735359375*^9}, {
+   3.45035376684375*^9, 3.45035380965625*^9}, 3.450402876461735*^9, 
+   3.450407157330735*^9}],
+
+Cell[TextData[{
+ "Comme dans le paragraphe pr\[EAcute]c\[EAcute]dent, on obtient une \
+bijection entre ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "3"], TraditionalForm]]],
+ " et l'espace ",
+ Cell[BoxData[
+  FormBox["\[ScriptCapitalE]", TraditionalForm]]],
+ " auquel on a rajout\[EAcute] un point \[AGrave] l'infini (",
+ StyleBox["exercice",
+  FontWeight->"Bold"],
+ " : d\[EAcute]terminer la r\[EAcute]ciproque de cette bijection)."
+}], "Text",
+ CellChangeTimes->{{3.450403302032735*^9, 3.4504033183687353`*^9}, {
+  3.4504034169027348`*^9, 3.450403447733735*^9}, {3.450406019822735*^9, 
+  3.4504060213317347`*^9}, {3.4504074776737347`*^9, 3.450407488681735*^9}, {
+  3.4504364394375*^9, 3.450436443734375*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Fibration de Hopf"
+}], "Section",
+ CellChangeTimes->{{3.45035514140625*^9, 3.45035515840625*^9}, 
+   3.450406333854735*^9}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " ",
+ "Introduction"
+}], "Subsection",
+ CellChangeTimes->{{3.450402923762735*^9, 3.4504029263947353`*^9}, 
+   3.450406541480735*^9}],
+
+Cell[TextData[{
+ "Nous allons fabriquer une ",
+ StyleBox["partition",
+  FontSlant->"Italic"],
+ " de la sph\[EGrave]re ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "3"], TraditionalForm]]],
+ " param\[EAcute]tr\[EAcute]e par la sph\[EGrave]re ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "2"], TraditionalForm]]],
+ " (ou le plan \[EAcute]tendu ",
+ Cell[BoxData[
+  FormBox["\[ScriptCapitalP]", TraditionalForm]]],
+ ", qui est en bijection avec ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "2"], TraditionalForm]]],
+ "). Consid\[EAcute]rons ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "3"], TraditionalForm]]],
+ " comme une partie de ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[DoubleStruckCapitalC]", "2"], TraditionalForm]]],
+ " : une \[EAcute]quation cart\[EAcute]sienne de ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "3"], TraditionalForm]]],
+ " est alors ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"|", 
+    SubscriptBox["z", "1"], 
+    SuperscriptBox["|", "2"], 
+    RowBox[{"+", 
+     RowBox[{"|", 
+      SubscriptBox["z", "2"], 
+      SuperscriptBox["|", "2"], 
+      RowBox[{"=", "1"}]}]}]}], TraditionalForm]]],
+ ". Soit ",
+ Cell[BoxData[
+  FormBox["H", TraditionalForm]]],
+ " l'application de ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "3"], TraditionalForm]]],
+ " vers ",
+ Cell[BoxData[
+  FormBox["\[ScriptCapitalP]", TraditionalForm]]],
+ " d\[EAcute]finie par ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"H", "(", 
+     RowBox[{
+      SubscriptBox["z", "1"], ",", 
+      SubscriptBox["z", "2"]}], ")"}], " ", "=", 
+    RowBox[{
+     SubscriptBox["z", "2"], "/", 
+     SubscriptBox["z", "1"]}]}], TraditionalForm]]],
+ " si ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["z", "1"], "\[NotEqual]", "0"}], TraditionalForm]]],
+ ", et ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"H", "(", 
+     RowBox[{
+      SubscriptBox["z", "1"], ",", 
+      SubscriptBox["z", "2"]}], ")"}], "=", "\[Omega]"}], TraditionalForm]]],
+ " sinon. On peut alors v\[EAcute]rifier les propri\[EAcute]t\[EAcute]s \
+suivantes :"
+}], "Text",
+ CellChangeTimes->{{3.450402946745735*^9, 3.4504030917507353`*^9}, {
+  3.450403465325735*^9, 3.450403564731735*^9}, {3.4504036041267347`*^9, 
+  3.450403730470735*^9}, {3.4504060373507347`*^9, 3.4504060816337347`*^9}, {
+  3.4504061381587353`*^9, 3.450406142046735*^9}, {3.450587159703125*^9, 
+  3.4505871845*^9}}],
+
+Cell[TextData[{
+ "1- ",
+ Cell[BoxData[
+  FormBox["H", TraditionalForm]]],
+ " est une surjection.\n2- Pour tout point ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"a", "\[Element]", 
+    SuperscriptBox["S", "2"]}], TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["\[ScriptCapitalC]", "a"], "=", 
+    RowBox[{
+     SuperscriptBox["H", 
+      RowBox[{"-", "1"}]], "(", "a", ")"}]}], TraditionalForm]]],
+ " est un cercle inclus dans ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "3"], TraditionalForm]]],
+ ".\n3- Les ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[ScriptCapitalC]", "a"], TraditionalForm]]],
+ " sont disjoints deux \[AGrave] deux.\n4- La r\[EAcute]union des ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[ScriptCapitalC]", "a"], TraditionalForm]]],
+ " lorsque ",
+ Cell[BoxData[
+  FormBox["a", TraditionalForm]]],
+ " parcourt ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "2"], TraditionalForm]]],
+ " est pr\[EAcute]cis\[EAcute]ment ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "3"], TraditionalForm]]],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.4504037347107353`*^9, 3.450403742365735*^9}, {
+  3.450403831907735*^9, 3.450403955073735*^9}, {3.4504041032987347`*^9, 
+  3.450404116098735*^9}, {3.450437473359375*^9, 3.45043747821875*^9}, {
+  3.4504377993125*^9, 3.450437836078125*^9}}],
+
+Cell[TextData[{
+ "La propri\[EAcute]t\[EAcute] 1 est \[EAcute]vidente : si ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"a", "\[Element]", "\[DoubleStruckCapitalC]"}], TraditionalForm]]],
+ ", posons ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["z", "1"], "=", 
+    FractionBox["1", 
+     SqrtBox[
+      RowBox[{
+       RowBox[{"1", "+"}], "|", "a", 
+       SuperscriptBox["|", "2"]}]]]}], TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["z", "2"], "=", 
+    RowBox[{"a", " ", 
+     SubscriptBox["z", "1"]}]}], TraditionalForm]]],
+ ". On v\[EAcute]rifie sans peine que ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{
+     SubscriptBox["z", "1"], ",", 
+     SubscriptBox["z", "2"]}], ")"}], TraditionalForm]]],
+ " est un ant\[EAcute]c\[EAcute]dent de ",
+ Cell[BoxData[
+  FormBox["a", TraditionalForm]]],
+ " par ",
+ Cell[BoxData[
+  FormBox["H", TraditionalForm]]],
+ ". Si, cas particulier, ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"a", "=", "\[Omega]"}], TraditionalForm]]],
+ ", alors ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"H", "(", 
+     RowBox[{"1", ",", "0"}], ")"}], "=", "a"}], TraditionalForm]]],
+ ". Les propri\[EAcute]t\[EAcute]s 3 et 4 sont des cons\[EAcute]quences \
+faciles de la surjectivit\[EAcute] de ",
+ Cell[BoxData[
+  FormBox["H", TraditionalForm]]],
+ ". La propri\[EAcute]t\[EAcute] 2 est une cons\[EAcute]quence directe du \
+fait que l'intersection d'une sph\[EGrave]re (en dimension quelconque) et \
+d'un plan est un cercle : prenez votre cours de g\[EAcute]om\[EAcute]trie : \
+c'est fait en dimension 3, mais on n'utilise jamais cette hypoth\[EGrave]se \
+de dimension."
+}], "Text",
+ CellChangeTimes->{{3.450437482859375*^9, 3.450437491703125*^9}, {
+   3.450437616875*^9, 3.450437785203125*^9}, {3.450437839265625*^9, 
+   3.450437861515625*^9}, 3.450437907265625*^9, {3.450437971796875*^9, 
+   3.450438058453125*^9}, {3.450587226046875*^9, 3.450587227875*^9}}],
+
+Cell[TextData[{
+ "On voit donc que l' application ",
+ Cell[BoxData[
+  FormBox["H", TraditionalForm]]],
+ " permet de d\[EAcute]composer ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "3"], TraditionalForm]]],
+ " en une r\[EAcute]union infinie de cercles disjoints index\[EAcute]e par ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "2"], TraditionalForm]]],
+ ". C'est ce que l'on appelle la ",
+ StyleBox["fibration de Hopf",
+  FontSlant->"Italic"],
+ ". Pour chaque ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"a", "\[Element]", 
+    SuperscriptBox["S", "2"]}], TraditionalForm]]],
+ ", le cercle ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[ScriptCapitalC]", "a"], TraditionalForm]]],
+ " est la ",
+ StyleBox["fibre",
+  FontSlant->"Italic"],
+ " au-dessus du point ",
+ Cell[BoxData[
+  FormBox["a", TraditionalForm]]],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.450403970463735*^9, 3.450404081150735*^9}, {
+  3.450404121576735*^9, 3.450404129056735*^9}, {3.450436551875*^9, 
+  3.450436568109375*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " ",
+ "Calcul et repr\[EAcute]sentation des fibres"
+}], "Subsection",
+ CellChangeTimes->{{3.450404141596735*^9, 3.450404149387735*^9}, 
+   3.450406544704735*^9}],
+
+Cell[TextData[{
+ "Soit ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"a", "\[Element]", "\[DoubleStruckCapitalC]"}], TraditionalForm]]],
+ ". Pour trouver la fibre au-dessus de ",
+ Cell[BoxData[
+  FormBox["a", TraditionalForm]]],
+ ", il suffit de r\[EAcute]soudre les deux \[EAcute]quations d'inconnues \
+complexes ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["z", "1"], TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["z", "2"], TraditionalForm]]],
+ " : ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"|", 
+    SubscriptBox["z", "1"], 
+    SuperscriptBox["|", "2"], 
+    RowBox[{"+", 
+     RowBox[{"|", 
+      SubscriptBox["z", "2"], 
+      SuperscriptBox["|", "2"], 
+      RowBox[{"=", "1"}]}]}]}], TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SubscriptBox["z", "2"], "/", 
+     SubscriptBox["z", "1"]}], "=", "a"}], TraditionalForm]]],
+ ". G\[EAcute]om\[EAcute]triquement, on intersecte la sph\[EGrave]re ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "3"], TraditionalForm]]],
+ " avec le plan de ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[DoubleStruckCapitalR]", "4"], TraditionalForm]]],
+ "(ou ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[DoubleStruckCapitalC]", "2"], TraditionalForm]]],
+ " si on pr\[EAcute]f\[EGrave]re) d'\[EAcute]quation ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["z", "2"], "=", 
+    RowBox[{"a", " ", 
+     SubscriptBox["z", "1"]}]}], TraditionalForm]]],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.4504041555157347`*^9, 3.450404326377735*^9}, {
+  3.450406160874735*^9, 3.450406164090735*^9}, {3.4504401878125*^9, 
+  3.45044023421875*^9}}],
+
+Cell[TextData[{
+ StyleBox["Exercice",
+  FontWeight->"Bold"],
+ " : avec tous ces m\[EAcute]langes entre complexes et r\[EAcute]els, vous \
+\[EHat]tes peut-\[EHat]tre un peu perdus. R\[EAcute]interpr\[EAcute]tez le \
+plan ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["z", "2"], "=", 
+    RowBox[{"a", " ", 
+     SubscriptBox["z", "1"]}]}], TraditionalForm]]],
+ " en termes de nombres r\[EAcute]els et d\[EAcute]terminez une base de ce \
+plan."
+}], "Text",
+ CellChangeTimes->{{3.450437553375*^9, 3.450437568046875*^9}, {
+  3.45044006409375*^9, 3.450440158671875*^9}}],
+
+Cell[TextData[{
+ "Le syst\[EGrave]me ci-dessus est tr\[EGrave]s simple \[AGrave] \
+r\[EAcute]soudre. L'ensemble des solutions est un cercle inclus dans le plan ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["z", "2"], "=", 
+    RowBox[{"a", " ", 
+     SubscriptBox["z", "1"]}]}], TraditionalForm]]],
+ ", cercle que l'on peut param\[EAcute]trer par un angle ",
+ Cell[BoxData[
+  FormBox["\[Phi]", TraditionalForm]]],
+ " compris entre 0 et ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"2", "\[Pi]"}], TraditionalForm]]],
+ ". Chaque valeur de l'angle ",
+ Cell[BoxData[
+  FormBox["\[Phi]", TraditionalForm]]],
+ " nous donne un point de la fibre ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[ScriptCapitalC]", "a"], TraditionalForm]]],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.4504043465347347`*^9, 3.450404426261735*^9}, {
+  3.450404570745735*^9, 3.450404586721735*^9}, {3.450406189801735*^9, 
+  3.4504061954677353`*^9}, {3.450440257890625*^9, 3.450440283953125*^9}}],
+
+Cell[TextData[{
+ "La fonction ci-dessous prend en param\[EGrave]tres :\n- deux r\[EAcute]els ",
+ Cell[BoxData[
+  FormBox["\[Alpha]", TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox["\[Beta]", TraditionalForm]]],
+ ", qui sont la partie r\[EAcute]elle et la partie imaginaire du nombre \
+complexe ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"a", "=", 
+    RowBox[{"\[Alpha]", "+", 
+     RowBox[{"i", " ", "\[Beta]"}]}]}], TraditionalForm]]],
+ ".\n- un r\[EAcute]el ",
+ Cell[BoxData[
+  FormBox["\[Phi]", TraditionalForm]]],
+ ", repr\[EAcute]sentant l'angle dont on vient de parler.\nCette fonction \
+revoie le point de param\[EGrave]tre \[Phi] de la fibre au-dessus de ",
+ Cell[BoxData[
+  FormBox["a", TraditionalForm]]],
+ ". Plus pr\[EAcute]cis\[EAcute]ment, ce point est un point de ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "3"], TraditionalForm]]],
+ ", et la fonction renvoie sa projection st\[EAcute]r\[EAcute]ographique dans \
+l'espace ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[DoubleStruckCapitalR]", "3"], TraditionalForm]]],
+ ". Lorsque le param\[EGrave]tre \[Phi] d\[EAcute]crit l'intervalle ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"[", 
+    RowBox[{"0", ",", 
+     RowBox[{"2", "\[Pi]"}]}], "]"}], TraditionalForm]]],
+ ", cette projection d\[EAcute]crit un cercle de ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SuperscriptBox["\[DoubleStruckCapitalR]", "3"], Cell[""]}], 
+   TraditionalForm]]],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.450353932125*^9, 3.450354027703125*^9}, {
+  3.45035406425*^9, 3.45035415765625*^9}, {3.450404397518735*^9, 
+  3.450404551954735*^9}, {3.450404605576735*^9, 3.450404645065735*^9}, {
+  3.45043665178125*^9, 3.450436706484375*^9}, {3.450436789671875*^9, 
+  3.450436797890625*^9}, {3.45058727740625*^9, 3.450587317875*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"fibre", "[", 
+   RowBox[{"\[Alpha]_", ",", "\[Beta]_", ",", "\[Phi]_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"r", ",", "x", ",", "y", ",", "z", ",", "t"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"r", "=", 
+      RowBox[{"1", "/", 
+       RowBox[{"Sqrt", "[", 
+        RowBox[{"1", "+", 
+         RowBox[{"\[Alpha]", "^", "2"}], "+", 
+         RowBox[{"\[Beta]", "^", "2"}]}], "]"}]}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"x", "=", 
+      RowBox[{"r", "*", 
+       RowBox[{"Cos", "[", "\[Phi]", "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"y", "=", 
+      RowBox[{"r", "*", 
+       RowBox[{"Sin", "[", "\[Phi]", "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"z", "=", 
+      RowBox[{
+       RowBox[{"\[Alpha]", "*", "x"}], "-", 
+       RowBox[{"\[Beta]", "*", "y"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"t", "=", 
+      RowBox[{
+       RowBox[{"\[Alpha]", "*", "y"}], "+", 
+       RowBox[{"\[Beta]", "*", "x"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"x", "/", 
+        RowBox[{"(", 
+         RowBox[{"1", "-", "t"}], ")"}]}], ",", 
+       RowBox[{"y", "/", 
+        RowBox[{"(", 
+         RowBox[{"1", "-", "t"}], ")"}]}], ",", 
+       RowBox[{"z", "/", 
+        RowBox[{"(", 
+         RowBox[{"1", "-", "t"}], ")"}]}]}], "}"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.450325345234375*^9, 3.450325514671875*^9}, {
+  3.450327304671875*^9, 3.450327319734375*^9}, {3.4504045431337347`*^9, 
+  3.4504045455487347`*^9}, {3.450404656866735*^9, 3.450404672266735*^9}}],
+
+Cell[TextData[{
+ "Voici \[AGrave] titre d'exemple le cercle obtenu en prenant ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"a", "=", 
+    RowBox[{"1", "+", 
+     RowBox[{"2", "i"}]}]}], TraditionalForm]]],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.450354173125*^9, 3.45035419265625*^9}, 
+   3.450406222464735*^9}],
+
+Cell[BoxData[
+ RowBox[{"ParametricPlot3D", "[", 
+  RowBox[{
+   RowBox[{"fibre", "[", 
+    RowBox[{
+     RowBox[{"1", "/", "2"}], ",", 
+     RowBox[{"3", "/", "4"}], ",", "t"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.45032555625*^9, 3.45032557628125*^9}, {
+  3.45032732978125*^9, 3.45032733009375*^9}, {3.450404680735735*^9, 
+  3.4504046836077347`*^9}, {3.450583389609375*^9, 3.450583396390625*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Repr\[EAcute]sentation graphique des fibres"
+}], "Section",
+ CellChangeTimes->{{3.450404720109735*^9, 3.450404734175735*^9}, 
+   3.450406338638735*^9, {3.45044003184375*^9, 3.450440039515625*^9}}],
+
+Cell[TextData[{
+ "Pour avoir une premi\[EGrave]re vision de la sph\[EGrave]re ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "3"], TraditionalForm]]],
+ ", on peut tracer des fibres au hasard :  on choisit des points \
+al\[EAcute]atoirement sur la sph\[EGrave]re ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "2"], TraditionalForm]]],
+ " (en utilisant des coordonn\[EAcute]es sph\[EAcute]riques tir\[EAcute]es au \
+hasard), et on les projette st\[EAcute]r\[EAcute]ographiquement sur le plan \
+complexe. On trace les projections st\[EAcute]r\[EAcute]ographiques de toutes \
+les fibres obtenues."
+}], "Text",
+ CellChangeTimes->{{3.450354212484375*^9, 3.45035427340625*^9}, {
+   3.450404741805735*^9, 3.4504048271327353`*^9}, 3.450406254624735*^9, {
+   3.450436839453125*^9, 3.450436884234375*^9}, {3.4505873480625*^9, 
+   3.450587359*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"randomHopf", "[", 
+   RowBox[{"n_", ",", "t_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"s", ",", "u", ",", "v", ",", "x", ",", "y", ",", "z"}], "}"}], 
+    ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"s", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"u", "=", 
+         RowBox[{"RandomReal", "[", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", "Pi"}], "}"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"v", "=", 
+         RowBox[{"RandomReal", "[", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", 
+            RowBox[{"2", "*", "Pi"}]}], "}"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"x", "=", 
+         RowBox[{
+          RowBox[{"Sin", "[", "u", "]"}], "*", 
+          RowBox[{"Cos", "[", "v", "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"y", "=", 
+         RowBox[{
+          RowBox[{"Sin", "[", "u", "]"}], "*", 
+          RowBox[{"Sin", "[", "v", "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"z", "=", 
+         RowBox[{"Cos", "[", "u", "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"s", ",", 
+          RowBox[{"fibre", "[", 
+           RowBox[{
+            RowBox[{"x", "/", 
+             RowBox[{"(", 
+              RowBox[{"1", "-", "z"}], ")"}]}], ",", 
+            RowBox[{"y", "/", 
+             RowBox[{"(", 
+              RowBox[{"1", "-", "z"}], ")"}]}], ",", "t"}], "]"}]}], "]"}]}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"{", "n", "}"}]}], "]"}], ";", "\[IndentingNewLine]", "s"}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.45032637046875*^9, 3.450326538296875*^9}, {
+  3.450326821296875*^9, 3.450326825578125*^9}, {3.4503273375625*^9, 
+  3.45032733778125*^9}, {3.450404852494735*^9, 3.450404873445735*^9}, {
+  3.450583422140625*^9, 3.450583422609375*^9}}],
+
+Cell["\<\
+Voici ce que l'on obtient. Un ordinateur assez puissant peut afficher sans \
+probl\[EGrave]me quelques centaines de fibres. Si votre machine ne le \
+supporte pas, diminuez la valeur ci-dessous. On peut faire des rotations du \
+graphique \[AGrave] l'aide de la souris. On peut \[EAcute]galement, en \
+maintenant la touche \[ControlKey] enfonc\[EAcute]e, zoomer avec la souris.\
+\>", "Text",
+ CellChangeTimes->{{3.4504048920337353`*^9, 3.450404957631735*^9}, {
+  3.4504062905597353`*^9, 3.450406294870735*^9}, {3.450436973546875*^9, 
+  3.4504370489375*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"s", "=", 
+   RowBox[{"randomHopf", "[", 
+    RowBox[{"200", ",", "t"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.450325596*^9, 3.450325631953125*^9}, {
+   3.450325756234375*^9, 3.4503257600625*^9}, {3.450325944921875*^9, 
+   3.450325989671875*^9}, {3.45032604925*^9, 3.450326052921875*^9}, {
+   3.450326343765625*^9, 3.450326364546875*^9}, {3.450326545171875*^9, 
+   3.450326596890625*^9}, {3.450327463515625*^9, 3.450327464078125*^9}, {
+   3.4503542994375*^9, 3.45035429971875*^9}, {3.4503632933476*^9, 
+   3.4503632938311996`*^9}, {3.450363792376*^9, 3.4503637944976*^9}, {
+   3.4503640112908*^9, 3.4503640127104*^9}, 3.4504369050625*^9, {
+   3.45058350946875*^9, 3.45058350965625*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ParametricPlot3D", "[", 
+  RowBox[{"s", ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+   RowBox[{"PerformanceGoal", "\[Rule]", "\"\<Speed\>\""}], ",", 
+   RowBox[{"NormalsFunction", "\[Rule]", "False"}], ",", 
+   RowBox[{"SphericalRegion", "\[Rule]", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.45032564228125*^9, 3.450325653078125*^9}, {
+   3.450325684109375*^9, 3.450325727828125*^9}, {3.4503258215*^9, 
+   3.450325821734375*^9}, {3.450325869609375*^9, 3.45032586978125*^9}, {
+   3.45032600115625*^9, 3.45032600178125*^9}, {3.4503263311875*^9, 
+   3.45032633996875*^9}, {3.450326645046875*^9, 3.4503266510625*^9}, {
+   3.450326723796875*^9, 3.450326728421875*^9}, {3.4503635467384*^9, 
+   3.450363572884*^9}, 3.4503639922276*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Cercles de Villarceau"
+}], "Section",
+ CellChangeTimes->{{3.450355172296875*^9, 3.450355177046875*^9}, 
+   3.450406343933735*^9}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Le tore"
+}], "Subsection",
+ CellChangeTimes->{{3.4504389616875*^9, 3.450438980671875*^9}}],
+
+Cell["Voici un tore :", "Text",
+ CellChangeTimes->{{3.45043825321875*^9, 3.450438266734375*^9}, {
+  3.4504384770625*^9, 3.450438484296875*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ParametricPlot3D", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"2", "+", 
+        RowBox[{"Cos", "[", "\[Theta]", "]"}]}], ")"}], "*", 
+      RowBox[{"Cos", "[", "\[Phi]", "]"}]}], ",", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"2", "+", 
+        RowBox[{"Cos", "[", "\[Theta]", "]"}]}], ")"}], "*", 
+      RowBox[{"Sin", "[", "\[Phi]", "]"}]}], ",", 
+     RowBox[{"Sin", "[", "\[Theta]", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\[Theta]", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\[Phi]", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.45043826890625*^9, 3.450438326765625*^9}, {
+  3.45043845475*^9, 3.450438459203125*^9}}],
+
+Cell[TextData[{
+ "On remarque que ce tore est engendr\[EAcute] par deux familles de cercles, \
+\"horizontaux\" et verticaux\". Il existe deux autres familles de cercles qui \
+engendrent le tore : ce sont ses ",
+ StyleBox["cercles de Villarceau",
+  FontSlant->"Italic"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.450438489875*^9, 3.450438561015625*^9}, {
+  3.45043889528125*^9, 3.45043891771875*^9}, {3.45058741071875*^9, 
+  3.450587421296875*^9}}],
+
+Cell["\<\
+Ne cherchez pas \[AGrave] comprendre pour l'instant la fonction ci-dessous. \
+Evaluez les trois cellules ci-deessous et vous verrez une famille de cercles \
+de Villarceau.\
+\>", "Text",
+ CellChangeTimes->{{3.45043900525*^9, 3.45043904703125*^9}, {
+  3.4505874303125*^9, 3.45058743684375*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"toresHopf", "[", 
+   RowBox[{"rmin_", ",", "rmax_", ",", "dr_", ",", "nb_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"s", ",", "\[Alpha]", ",", "\[Beta]", ",", "i", ",", "r"}], 
+     "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"s", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"\[Alpha]", "=", 
+         RowBox[{"r", "*", 
+          RowBox[{"Cos", "[", 
+           RowBox[{"2", "*", "i", "*", 
+            RowBox[{"Pi", "/", "nb"}]}], "]"}]}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"\[Beta]", "=", 
+         RowBox[{"r", "*", 
+          RowBox[{"Sin", "[", 
+           RowBox[{"2", "*", "i", "*", 
+            RowBox[{"Pi", "/", "nb"}]}], "]"}]}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"s", ",", 
+          RowBox[{"fibre", "[", 
+           RowBox[{"\[Alpha]", ",", "\[Beta]", ",", "t"}], "]"}]}], "]"}]}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", "nb"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"r", ",", "rmin", ",", "rmax", ",", "dr"}], "}"}]}], "]"}], 
+     ";", "\[IndentingNewLine]", "s"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.45032680046875*^9, 3.450326989421875*^9}, {
+  3.45032734784375*^9, 3.4503273568125*^9}, {3.450327445828125*^9, 
+  3.450327447125*^9}, {3.450405064513735*^9, 3.450405072712735*^9}, {
+  3.45058359315625*^9, 3.45058360021875*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"s", "=", 
+   RowBox[{"toresHopf", "[", 
+    RowBox[{"0.6", ",", "0.6", ",", "1", ",", "40"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.450438588203125*^9, 3.45043864453125*^9}, {
+  3.450438698390625*^9, 3.450438698875*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ParametricPlot3D", "[", 
+  RowBox[{"s", ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.45043868303125*^9, 3.450438683421875*^9}, {
+  3.45043872875*^9, 3.450438733203125*^9}, {3.450450317887711*^9, 
+  3.4504503193229113`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Fibre au-dessus d'un parall\[EGrave]le de ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "2"], TraditionalForm]], "None"]
+}], "Subsection",
+ CellChangeTimes->{{3.450439058734375*^9, 3.450439075453125*^9}}],
+
+Cell[TextData[{
+ "Revenons \[AGrave] notre probl\[EGrave]me : voir ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "3"], TraditionalForm]]],
+ ". Faisons d\[EAcute]crire au point ",
+ Cell[BoxData[
+  FormBox["a", TraditionalForm]]],
+ " du plan un cercle de centre ",
+ Cell[BoxData[
+  FormBox["O", TraditionalForm]]],
+ ". Le point correspondant sur la sph\[EGrave]re ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "2"], TraditionalForm]]],
+ " d\[EAcute]crit un parall\[EGrave]le de ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "2"], TraditionalForm]]],
+ ". Les projections st\[EAcute]r\[EAcute]ographiques des fibres forment alors \
+un tore et, de plus, ces projections sont des ",
+ StyleBox["cercles de Villarceau",
+  FontSlant->"Italic"],
+ " du tore en question."
+}], "Text",
+ CellChangeTimes->{{3.45035433640625*^9, 3.4503544061875*^9}, {
+  3.450354496859375*^9, 3.450354504078125*^9}, {3.45035497196875*^9, 
+  3.450354975515625*^9}, {3.450405013215735*^9, 3.450405054598735*^9}, {
+  3.450405094397735*^9, 3.450405169965735*^9}, {3.4504381791875*^9, 
+  3.450438180125*^9}, {3.45043880665625*^9, 3.45043887928125*^9}, {
+  3.45058745240625*^9, 3.4505875014375*^9}}],
+
+Cell[TextData[{
+ "La fonction ",
+ StyleBox["toreHopf", "Input"],
+ " d\[EAcute]finie au paragraphe pr\[EAcute]c\[EAcute]dent affiche les \
+projections st\[EAcute]r\[EAcute]ographiques des fibres au - dessus de ",
+ Cell[BoxData[
+  FormBox["a", TraditionalForm]]],
+ " pour ",
+ Cell[BoxData[
+  FormBox["a", TraditionalForm]]],
+ " d\[EAcute]crivant des cercles de rayons ",
+ Cell[BoxData[
+  FormBox[Cell[TextData[Cell[BoxData[
+    FormBox[
+     RowBox[{"rmin", ",", " ", 
+      RowBox[{"rmin", " ", "+", " ", "dr"}], ",", "  ", "...", " ", ",", " ", 
+      "rmax"}], TraditionalForm]]]]], TraditionalForm]]],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.450439089015625*^9, 3.450439182609375*^9}, {
+  3.45058753559375*^9, 3.45058758715625*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"s", "=", 
+   RowBox[{"toresHopf", "[", 
+    RowBox[{"0", ",", "2", ",", "0.5", ",", "40"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.450326994296875*^9, 3.450327031109375*^9}, {
+  3.450327068859375*^9, 3.4503270706875*^9}, {3.45032715871875*^9, 
+  3.4503272043125*^9}, {3.450327281234375*^9, 3.45032728184375*^9}, {
+  3.450450341350111*^9, 3.450450361427311*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ParametricPlot3D", "[", 
+  RowBox[{"s", ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+   RowBox[{"PerformanceGoal", "\[Rule]", "\"\<Speed\>\""}], ",", 
+   RowBox[{"NormalsFunction", "\[Rule]", "False"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.450327175484375*^9, 3.45032718759375*^9}, {
+  3.450327230171875*^9, 3.450327234734375*^9}, {3.4503639301084003`*^9, 
+  3.4503639738508*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Fibre au-dessus d'une courbe quelconque de ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "2"], TraditionalForm]], "None"]
+}], "Subsection",
+ CellChangeTimes->{{3.450527012875*^9, 3.450527063046875*^9}, {
+  3.4505371168406*^9, 3.4505371188842*^9}}],
+
+Cell[TextData[{
+ "On fait ici d\[EAcute]crire au point ",
+ Cell[BoxData[
+  FormBox["a", TraditionalForm]]],
+ " une courbe quelconque du plan. Les cercles composant les fibres au-dessus \
+de a (ou plut\[OHat]t du point correspondant sur ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "2"], TraditionalForm]]],
+ ") engendrent une surface que l'on se propose de tracer sur quelques \
+exemples. Rien ne vous emp\[EHat]che \[EAcute]videmment d'en essayer d'autres \
+..."
+}], "Text",
+ CellChangeTimes->{{3.450527073359375*^9, 3.450527099484375*^9}, {
+  3.450528440953125*^9, 3.45052850215625*^9}, {3.4505378370614*^9, 
+  3.4505378668886003`*^9}, {3.450538481201*^9, 3.4505384841806*^9}}],
+
+Cell[TextData[{
+ "Si l'on prend pour la courbe un cercle de centre ",
+ Cell[BoxData[
+  FormBox["O", TraditionalForm]]],
+ ", on retombe sur le paragraphe pr\[EAcute]c\[EAcute]dent, et on obtient \
+\[EAcute]videmment un tore."
+}], "Text",
+ CellChangeTimes->{{3.4505377331809998`*^9, 3.4505377537886*^9}, {
+  3.4505383316126003`*^9, 3.4505383413314*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "t_", "]"}], "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"1", "/", "2"}], "*", 
+      RowBox[{"Cos", "[", "t", "]"}]}], ",", 
+     RowBox[{
+      RowBox[{"1", "/", "2"}], "*", 
+      RowBox[{"Sin", "[", "t", "]"}]}]}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.4505359995625*^9, 3.450536013796875*^9}, {
+  3.45053612253125*^9, 3.450536131640625*^9}, {3.4505363120053997`*^9, 
+  3.4505363345318003`*^9}, {3.4505364773498*^9, 3.4505364873182*^9}, {
+  3.4505365195165997`*^9, 3.4505365461458*^9}, {3.450536584631*^9, 
+  3.450536603663*^9}, {3.450537774131*^9, 3.4505377784522*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"g", "[", 
+   RowBox[{"t_", ",", "u_"}], "]"}], "=", 
+  RowBox[{"Simplify", "[", 
+   RowBox[{"fibre", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"f", "[", "u", "]"}], "[", 
+      RowBox[{"[", "1", "]"}], "]"}], ",", 
+     RowBox[{
+      RowBox[{"f", "[", "u", "]"}], "[", 
+      RowBox[{"[", "2", "]"}], "]"}], ",", "t"}], "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.45052735578125*^9, 3.45052740628125*^9}, {
+  3.450527438890625*^9, 3.450527481671875*^9}, {3.45052755578125*^9, 
+  3.450527588109375*^9}, {3.450527643234375*^9, 3.45052766946875*^9}, {
+  3.450528000671875*^9, 3.450528042234375*^9}, {3.450528166015625*^9, 
+  3.450528247765625*^9}, {3.450528284953125*^9, 3.450528288875*^9}, {
+  3.450528376890625*^9, 3.450528395765625*^9}, {3.4505285350625*^9, 
+  3.450528540875*^9}, {3.450528649203125*^9, 3.450528652796875*^9}, {
+  3.450536036265625*^9, 3.450536047203125*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ParametricPlot3D", "[", 
+  RowBox[{
+   RowBox[{"g", "[", 
+    RowBox[{"t", ",", "u"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"u", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+   RowBox[{"PlotPoints", " ", "\[Rule]", " ", "40"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.450527513046875*^9, 3.450527526609375*^9}, {
+  3.45052782740625*^9, 3.450527837140625*^9}, {3.450527982234375*^9, 
+  3.450527984328125*^9}, {3.450528253265625*^9, 3.45052826184375*^9}, {
+  3.45052831209375*^9, 3.450528345609375*^9}, {3.450528600046875*^9, 
+  3.450528622265625*^9}, {3.450528687640625*^9, 3.45052871821875*^9}, {
+  3.450528769625*^9, 3.450528774078125*^9}, {3.45053614203125*^9, 
+  3.450536142984375*^9}, {3.4505363648738003`*^9, 3.450536408429*^9}}],
+
+Cell[TextData[{
+ "Prenons maintenant une droite, la droite d'\[EAcute]quation  ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"y", "=", "0"}], TraditionalForm]]],
+ " par exemple."
+}], "Text",
+ CellChangeTimes->{{3.450537891365*^9, 3.4505379328922*^9}, {
+  3.4505380072262*^9, 3.4505380087862*^9}, {3.4505384534798*^9, 
+  3.4505384655854*^9}, {3.450583766234375*^9, 3.45058376696875*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "t_", "]"}], "=", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0"}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.4505359995625*^9, 3.450536013796875*^9}, {
+  3.45053612253125*^9, 3.450536131640625*^9}, {3.4505363120053997`*^9, 
+  3.4505363345318003`*^9}, {3.4505364773498*^9, 3.4505364873182*^9}, {
+  3.4505365195165997`*^9, 3.4505365461458*^9}, {3.450536584631*^9, 
+  3.450536603663*^9}, {3.4505379097574*^9, 3.4505379134546003`*^9}, {
+  3.4505379796766*^9, 3.4505379801602*^9}, {3.4505380158842*^9, 
+  3.4505380169138002`*^9}, {3.4505383743566*^9, 3.4505384418733997`*^9}, {
+  3.45058377021875*^9, 3.450583770625*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"g", "[", 
+   RowBox[{"t_", ",", "u_"}], "]"}], "=", 
+  RowBox[{"Simplify", "[", 
+   RowBox[{"fibre", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"f", "[", "u", "]"}], "[", 
+      RowBox[{"[", "1", "]"}], "]"}], ",", 
+     RowBox[{
+      RowBox[{"f", "[", "u", "]"}], "[", 
+      RowBox[{"[", "2", "]"}], "]"}], ",", "t"}], "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.45052735578125*^9, 3.45052740628125*^9}, {
+  3.450527438890625*^9, 3.450527481671875*^9}, {3.45052755578125*^9, 
+  3.450527588109375*^9}, {3.450527643234375*^9, 3.45052766946875*^9}, {
+  3.450528000671875*^9, 3.450528042234375*^9}, {3.450528166015625*^9, 
+  3.450528247765625*^9}, {3.450528284953125*^9, 3.450528288875*^9}, {
+  3.450528376890625*^9, 3.450528395765625*^9}, {3.4505285350625*^9, 
+  3.450528540875*^9}, {3.450528649203125*^9, 3.450528652796875*^9}, {
+  3.450536036265625*^9, 3.450536047203125*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ParametricPlot3D", "[", 
+  RowBox[{
+   RowBox[{"g", "[", 
+    RowBox[{"t", ",", "u"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"u", ",", 
+     RowBox[{"-", "10"}], ",", "10"}], "}"}], ",", 
+   RowBox[{"PlotPoints", " ", "\[Rule]", " ", "40"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", "5"}], ",", "5"}], "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.450527513046875*^9, 3.450527526609375*^9}, {
+  3.45052782740625*^9, 3.450527837140625*^9}, {3.450527982234375*^9, 
+  3.450527984328125*^9}, {3.450528253265625*^9, 3.45052826184375*^9}, {
+  3.45052831209375*^9, 3.450528345609375*^9}, {3.450528600046875*^9, 
+  3.450528622265625*^9}, {3.450528687640625*^9, 3.45052871821875*^9}, {
+  3.450528769625*^9, 3.450528774078125*^9}, {3.45053614203125*^9, 
+  3.450536142984375*^9}, {3.4505363648738003`*^9, 3.450536408429*^9}, {
+  3.4505379509882*^9, 3.4505379645446*^9}, {3.4505380302518*^9, 
+  3.4505380675514*^9}, {3.4505381496386003`*^9, 3.4505381525402*^9}}],
+
+Cell[TextData[{
+ "La surface obtenue poss\[EGrave]de apparemment deux \
+\"\[EAcute]chancrures\". En r\[EAcute]alit\[EAcute] il n'en est rien (prenez \
+par exemple ci dessus ",
+ Cell[BoxData[
+  FormBox["u", TraditionalForm]]],
+ " entre -100 et 100 et observez ce qui se passe). Nous reverrons \
+bient\[OHat]t cette surface."
+}], "Text",
+ CellChangeTimes->{{3.4505380880966*^9, 3.4505381370962*^9}, {
+  3.4505381674226*^9, 3.4505381761118*^9}}],
+
+Cell["\<\
+Prenons maintenant une courbe un peu plus compliqu\[EAcute]e :\
+\>", "Text",
+ CellChangeTimes->{{3.4505366431466*^9, 3.4505366548934*^9}, {
+  3.4505378743297997`*^9, 3.4505378790098*^9}, {3.450583859015625*^9, 
+  3.45058386903125*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "t_", "]"}], "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"1", "/", "2"}], "*", 
+       RowBox[{"Cos", "[", "t", "]"}]}], "+", 
+      RowBox[{
+       RowBox[{"1", "/", "10"}], "*", 
+       RowBox[{"Cos", "[", 
+        RowBox[{"7", "*", "t"}], "]"}]}]}], ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"1", "/", "2"}], "*", 
+       RowBox[{"Sin", "[", "t", "]"}]}], "+", 
+      RowBox[{
+       RowBox[{"1", "/", "10"}], "*", 
+       RowBox[{"Sin", "[", 
+        RowBox[{"7", "*", "t"}], "]"}]}]}]}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.4505359995625*^9, 3.450536013796875*^9}, {
+  3.45053612253125*^9, 3.450536131640625*^9}, {3.4505363120053997`*^9, 
+  3.4505363345318003`*^9}, {3.4505364773498*^9, 3.4505364873182*^9}, {
+  3.4505365195165997`*^9, 3.4505365461458*^9}, {3.450536584631*^9, 
+  3.450536603663*^9}, {3.450583831453125*^9, 3.45058385121875*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ParametricPlot", "[", 
+  RowBox[{
+   RowBox[{"f", "[", "t", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.450535947390625*^9, 3.450536010203125*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"g", "[", 
+    RowBox[{"t_", ",", "u_"}], "]"}], "=", 
+   RowBox[{"Simplify", "[", 
+    RowBox[{"fibre", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"f", "[", "u", "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], ",", 
+      RowBox[{
+       RowBox[{"f", "[", "u", "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}], ",", "t"}], "]"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.45052735578125*^9, 3.45052740628125*^9}, {
+   3.450527438890625*^9, 3.450527481671875*^9}, {3.45052755578125*^9, 
+   3.450527588109375*^9}, {3.450527643234375*^9, 3.45052766946875*^9}, {
+   3.450528000671875*^9, 3.450528042234375*^9}, {3.450528166015625*^9, 
+   3.450528247765625*^9}, {3.450528284953125*^9, 3.450528288875*^9}, {
+   3.450528376890625*^9, 3.450528395765625*^9}, {3.4505285350625*^9, 
+   3.450528540875*^9}, {3.450528649203125*^9, 3.450528652796875*^9}, {
+   3.450536036265625*^9, 3.450536047203125*^9}, 3.4505381990594*^9}],
+
+Cell[BoxData[
+ RowBox[{"ParametricPlot3D", "[", 
+  RowBox[{
+   RowBox[{"g", "[", 
+    RowBox[{"t", ",", "u"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"u", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+   RowBox[{"PlotPoints", " ", "\[Rule]", " ", "40"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.450527513046875*^9, 3.450527526609375*^9}, {
+  3.45052782740625*^9, 3.450527837140625*^9}, {3.450527982234375*^9, 
+  3.450527984328125*^9}, {3.450528253265625*^9, 3.45052826184375*^9}, {
+  3.45052831209375*^9, 3.450528345609375*^9}, {3.450528600046875*^9, 
+  3.450528622265625*^9}, {3.450528687640625*^9, 3.45052871821875*^9}, {
+  3.450528769625*^9, 3.450528774078125*^9}, {3.45053614203125*^9, 
+  3.450536142984375*^9}, {3.4505363648738003`*^9, 3.450536408429*^9}}],
+
+Cell["Et une spirale logarithmique pour terminer :", "Text",
+ CellChangeTimes->{{3.450537168461*^9, 3.4505371766666*^9}, {
+   3.4505382116174*^9, 3.4505382144566*^9}, 3.4505382620522003`*^9, {
+   3.450583978125*^9, 3.45058398025*^9}, {3.4505853869375*^9, 
+   3.450585403921875*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "t_", "]"}], "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Exp", "[", 
+       RowBox[{"t", "/", "7"}], "]"}], "*", 
+      RowBox[{"Cos", "[", "t", "]"}]}], ",", 
+     RowBox[{
+      RowBox[{"Exp", "[", 
+       RowBox[{"t", "/", "7"}], "]"}], "*", 
+      RowBox[{"Sin", "[", "t", "]"}]}]}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.4505359995625*^9, 3.450536013796875*^9}, {
+  3.45053612253125*^9, 3.450536131640625*^9}, {3.4505363120053997`*^9, 
+  3.4505363345318003`*^9}, {3.4505364773498*^9, 3.4505364873182*^9}, {
+  3.4505365195165997`*^9, 3.4505365461458*^9}, {3.450536584631*^9, 
+  3.450536603663*^9}, {3.450536682365*^9, 3.4505367084326*^9}, {
+  3.450536749523*^9, 3.450536754359*^9}, {3.4505367973993998`*^9, 
+  3.4505368067125998`*^9}, {3.450537160115*^9, 3.4505371968218*^9}, {
+  3.4505382194018*^9, 3.4505382426614*^9}, {3.450583955953125*^9, 
+  3.45058396153125*^9}, {3.4505841005*^9, 3.4505841695625*^9}, {
+  3.45058426365625*^9, 3.450584284546875*^9}, {3.45058528478125*^9, 
+  3.450585288203125*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ParametricPlot", "[", 
+  RowBox[{
+   RowBox[{"f", "[", "t", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", 
+     RowBox[{"-", "10"}], ",", "10"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.450535947390625*^9, 3.450536010203125*^9}, {
+  3.45058396775*^9, 3.450583967921875*^9}, {3.45058410921875*^9, 
+  3.4505841401875*^9}, {3.450584289875*^9, 3.450584304265625*^9}, {
+  3.450585293109375*^9, 3.45058529521875*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"g", "[", 
+    RowBox[{"t_", ",", "u_"}], "]"}], "=", 
+   RowBox[{"Simplify", "[", 
+    RowBox[{"fibre", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"f", "[", "u", "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], ",", 
+      RowBox[{
+       RowBox[{"f", "[", "u", "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}], ",", "t"}], "]"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.45052735578125*^9, 3.45052740628125*^9}, {
+   3.450527438890625*^9, 3.450527481671875*^9}, {3.45052755578125*^9, 
+   3.450527588109375*^9}, {3.450527643234375*^9, 3.45052766946875*^9}, {
+   3.450528000671875*^9, 3.450528042234375*^9}, {3.450528166015625*^9, 
+   3.450528247765625*^9}, {3.450528284953125*^9, 3.450528288875*^9}, {
+   3.450528376890625*^9, 3.450528395765625*^9}, {3.4505285350625*^9, 
+   3.450528540875*^9}, {3.450528649203125*^9, 3.450528652796875*^9}, {
+   3.450536036265625*^9, 3.450536047203125*^9}, 3.4505372042005997`*^9}],
+
+Cell[BoxData[
+ RowBox[{"ParametricPlot3D", "[", 
+  RowBox[{
+   RowBox[{"g", "[", 
+    RowBox[{"t", ",", "u"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"u", ",", 
+     RowBox[{"-", "10"}], ",", "2"}], "}"}], ",", 
+   RowBox[{"PlotPoints", " ", "\[Rule]", " ", "30"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.450527513046875*^9, 3.450527526609375*^9}, {
+  3.45052782740625*^9, 3.450527837140625*^9}, {3.450527982234375*^9, 
+  3.450527984328125*^9}, {3.450528253265625*^9, 3.45052826184375*^9}, {
+  3.45052831209375*^9, 3.450528345609375*^9}, {3.450528600046875*^9, 
+  3.450528622265625*^9}, {3.450528687640625*^9, 3.45052871821875*^9}, {
+  3.450528769625*^9, 3.450528774078125*^9}, {3.45053614203125*^9, 
+  3.450536142984375*^9}, {3.4505363648738003`*^9, 3.450536408429*^9}, {
+  3.450583988984375*^9, 3.450584009671875*^9}, {3.450584188859375*^9, 
+  3.45058421359375*^9}, {3.450584317296875*^9, 3.45058436821875*^9}, {
+  3.450584404859375*^9, 3.450584408109375*^9}, {3.450585331015625*^9, 
+  3.450585337359375*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Clear", "[", 
+  RowBox[{"f", ",", "g"}], "]"}]], "Input",
+ CellChangeTimes->{{3.45058541375*^9, 3.4505854170625*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Cyclides de Dupin"
+}], "Section",
+ CellChangeTimes->{{3.450355185296875*^9, 3.450355188828125*^9}, 
+   3.4504063774537354`*^9}],
+
+Cell[TextData[{
+ "On choisit un parall\[EGrave]le de la  sph\[EGrave]re ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["S", "2"], TraditionalForm]]],
+ ", et on fait d\[EAcute]crire au point ",
+ Cell[BoxData[
+  FormBox["a", TraditionalForm]]],
+ " ce parall\[EGrave]le. Les fibres au-dessus du point ",
+ Cell[BoxData[
+  FormBox["a", TraditionalForm]]],
+ " engendrent une surface ",
+ Cell[BoxData[
+  FormBox["\[ScriptCapitalS]", TraditionalForm]]],
+ " de l'espace ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[DoubleStruckCapitalR]", "4"], TraditionalForm]]],
+ " et nous savons que si l'on projette st\[EAcute]r\[EAcute]ographiquement \
+cette surface sur ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[DoubleStruckCapitalR]", "3"], TraditionalForm]]],
+ ", on obtient un tore. En revanche, si l'on effectue d'abord une rotation de \
+cette surface dans l'espace de dimension 4, ",
+ StyleBox["puis",
+  FontSlant->"Italic"],
+ " qu'on la projette st\[EAcute]r\[EAcute]ographiquement, on obtient une \
+famille de surfaces, plus ou moins \[EAcute]loign\[EAcute]es par leur aspect \
+du tore de d\[EAcute]part : les ",
+ StyleBox["cyclides de Dupin",
+  FontSlant->"Italic"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.450354482796875*^9, 3.450354487234375*^9}, {
+  3.45035456603125*^9, 3.45035468178125*^9}, {3.450354983421875*^9, 
+  3.450354989734375*^9}, {3.450405245194735*^9, 3.450405436716735*^9}, {
+  3.45043713703125*^9, 3.450437142265625*^9}}],
+
+Cell[TextData[{
+ "La fonction ci-dessous prend trois param\[EGrave]tres ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"A", ",", "\[Theta]", ",", "\[Phi]"}], TraditionalForm]]],
+ ". Elle calcule le nombre complexe ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"a", "=", 
+    RowBox[{"exp", "(", 
+     RowBox[{"i", " ", "\[Phi]"}], ")"}]}], TraditionalForm]]],
+ ", ou plut\[OHat]t ses parties r\[EAcute]elle et imaginaire ",
+ Cell[BoxData[
+  FormBox["\[Alpha]", TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox["\[Beta]", TraditionalForm]]],
+ ". Puis elle calcule le point de la fibre au-dessus de ",
+ Cell[BoxData[
+  FormBox["a", TraditionalForm]]],
+ " param\[EAcute]tr\[EAcute] par l'angle \[Theta] (voir plus haut : chaque \
+fibre est un cercle que l'on peut param\[EAcute]trer par un angle entre 0 et ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"2", "\[Pi]"}], TraditionalForm]]],
+ "). Puis la fonction calcule l'image de ce point par la rotation de l'espace \
+",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[DoubleStruckCapitalR]", "4"], TraditionalForm]]],
+ " autour du plan ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"x", " ", "O", " ", "z"}], TraditionalForm]]],
+ ", d'angle ",
+ Cell[BoxData[
+  FormBox["A", TraditionalForm]]],
+ ". Enfin, elle projette st\[EAcute]r\[EAcute]ographiquement le point obtenu \
+sur l'espace usuel de dimension 3. "
+}], "Text",
+ CellChangeTimes->{{3.450405483410735*^9, 3.4504058388687353`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"g", "[", 
+   RowBox[{"A_", ",", "\[Theta]_", ",", "\[Phi]_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "\[Alpha]", ",", "\[Beta]", ",", "r", ",", "x", ",", "y", ",", "z", ",", 
+      "t", ",", "y1", ",", "t1", ",", "\[Lambda]"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"\[Alpha]", "=", 
+      RowBox[{"Cos", "[", "\[Phi]", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"\[Beta]", "=", 
+      RowBox[{"Sin", "[", "\[Phi]", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"r", "=", 
+      RowBox[{"1", "/", 
+       RowBox[{"Sqrt", "[", 
+        RowBox[{"1", "+", 
+         RowBox[{"\[Alpha]", "^", "2"}], "+", 
+         RowBox[{"\[Beta]", "^", "2"}]}], "]"}]}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"x", "=", 
+      RowBox[{"r", "*", 
+       RowBox[{"Cos", "[", "\[Theta]", "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"y", "=", 
+      RowBox[{"r", "*", 
+       RowBox[{"Sin", "[", "\[Theta]", "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"z", "=", 
+      RowBox[{
+       RowBox[{"\[Alpha]", "*", "x"}], "-", 
+       RowBox[{"\[Beta]", "*", "y"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"t", "=", 
+      RowBox[{
+       RowBox[{"\[Alpha]", "*", "y"}], "+", 
+       RowBox[{"\[Beta]", "*", "x"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"y1", "=", 
+      RowBox[{
+       RowBox[{"y", "*", 
+        RowBox[{"Cos", "[", "A", "]"}]}], "-", 
+       RowBox[{"t", "*", 
+        RowBox[{"Sin", "[", "A", "]"}]}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"t1", "=", 
+      RowBox[{
+       RowBox[{"y", "*", 
+        RowBox[{"Sin", "[", "A", "]"}]}], "+", 
+       RowBox[{"t", "*", 
+        RowBox[{"Cos", "[", "A", "]"}]}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"\[Lambda]", "=", 
+      RowBox[{"1", "/", 
+       RowBox[{"(", 
+        RowBox[{"1", "-", "t1"}], ")"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\[Lambda]", "*", "x"}], ",", 
+       RowBox[{"\[Lambda]", "*", "y1"}], ",", 
+       RowBox[{"\[Lambda]", "*", "z"}]}], "}"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.450351254234375*^9, 3.450351263921875*^9}, {
+  3.450351323546875*^9, 3.4503515658125*^9}, {3.45035299725*^9, 
+  3.45035300515625*^9}, {3.450353036515625*^9, 3.450353053609375*^9}, {
+  3.450405538926735*^9, 3.450405562653735*^9}, {3.450405727689735*^9, 
+  3.450405730064735*^9}}],
+
+Cell["\<\
+Voici une animation des surfaces obtenues en faisant varier l'angle de \
+rotation. L'animation compl\[EGrave]te effectue un \"retournement du tore\" : \
+l'int\[EAcute]rieur devient l'ext\[EAcute]rieur et vice-versa. Si votre \
+machine est lente, soyez patient ...\
+\>", "Text",
+ CellChangeTimes->{{3.450405862105735*^9, 3.450405894872735*^9}, {
+  3.450406433147735*^9, 3.450406449010735*^9}, {3.450437284609375*^9, 
+  3.450437299390625*^9}, {3.450439378609375*^9, 3.450439420625*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Animate", "[", 
+  RowBox[{
+   RowBox[{"ParametricPlot3D", "[", 
+    RowBox[{
+     RowBox[{"g", "[", 
+      RowBox[{"a", ",", "\[Theta]", ",", "\[Phi]"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Theta]", ",", "0", ",", 
+       RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Phi]", ",", "0", ",", 
+       RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "3"}], ",", "3"}], "}"}]}], ",", 
+     RowBox[{"PlotPoints", "\[Rule]", "60"}], ",", 
+     RowBox[{"SphericalRegion", "\[Rule]", "True"}], ",", 
+     RowBox[{"PerformanceGoal", "\[Rule]", "\"\<Speed\>\""}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", "0", ",", "Pi", ",", "0.05"}], "}"}], ",", 
+   RowBox[{"DisplayAllSteps", "\[Rule]", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.4503515739375*^9, 3.450351648734375*^9}, {
+  3.450351928546875*^9, 3.450351932234375*^9}, {3.45035200621875*^9, 
+  3.450352011015625*^9}, {3.450352065078125*^9, 3.450352073203125*^9}, {
+  3.450352164359375*^9, 3.45035216946875*^9}, {3.450352672984375*^9, 
+  3.45035267840625*^9}, {3.4503529226875*^9, 3.450352923890625*^9}, {
+  3.450353094953125*^9, 3.450353095234375*^9}, {3.450353301328125*^9, 
+  3.450353308328125*^9}, {3.450353420671875*^9, 3.450353427359375*^9}, {
+  3.45035349721875*^9, 3.45035349784375*^9}, {3.450363400192*^9, 
+  3.450363456508*^9}, {3.4503641372608*^9, 3.4503641724544*^9}, {
+  3.4503642703288*^9, 3.4503642786280003`*^9}, {3.4503643275184*^9, 
+  3.4503643331968*^9}, {3.450364382758*^9, 3.4503644150811996`*^9}, {
+  3.4504064685487347`*^9, 3.450406470428735*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{666, 579},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic},
+Magnification:>FEPrivate`If[
+  FEPrivate`Equal[FEPrivate`$VersionNumber, 6.], 1.25, 1.25 Inherited],
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "PastelColor.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 99, 1, 82, "Title"],
+Cell[681, 25, 159, 5, 55, "Text"],
+Cell[843, 32, 714, 14, 76, "Text"],
+Cell[1560, 48, 627, 14, 99, "Text"],
+Cell[CellGroupData[{
+Cell[2212, 66, 265, 7, 94, "Section"],
+Cell[CellGroupData[{
+Cell[2502, 77, 553, 17, 46, "Subsection"],
+Cell[3058, 96, 2234, 78, 132, "Text"],
+Cell[5295, 176, 459, 14, 48, "Input"],
+Cell[5757, 192, 218, 4, 55, "Text"],
+Cell[5978, 198, 478, 10, 99, "Text"],
+Cell[6459, 210, 578, 12, 97, "Text"],
+Cell[7040, 224, 2489, 74, 171, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9566, 303, 226, 9, 46, "Subsection"],
+Cell[9795, 314, 301, 5, 55, "Text"],
+Cell[10099, 321, 895, 26, 93, "Input"],
+Cell[10997, 349, 371, 7, 55, "Text"],
+Cell[11371, 358, 2356, 60, 203, "Input"],
+Cell[13730, 420, 162, 2, 34, "Text"],
+Cell[13895, 424, 339, 9, 48, "Input"],
+Cell[14237, 435, 546, 11, 48, "Input"],
+Cell[14786, 448, 421, 10, 78, "Text"],
+Cell[15210, 460, 3465, 84, 291, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18712, 549, 483, 17, 46, "Subsection"],
+Cell[19198, 568, 796, 17, 78, "Text"],
+Cell[19997, 587, 606, 18, 48, "Input"],
+Cell[20606, 607, 717, 17, 79, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21372, 630, 168, 6, 94, "Section"],
+Cell[CellGroupData[{
+Cell[21565, 640, 210, 10, 46, "Subsection"],
+Cell[21778, 652, 2410, 83, 130, "Text"],
+Cell[24191, 737, 1341, 45, 101, "Text"],
+Cell[25535, 784, 1946, 58, 177, "Text"],
+Cell[27484, 844, 999, 34, 82, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28520, 883, 239, 10, 46, "Subsection"],
+Cell[28762, 895, 1641, 58, 106, "Text"],
+Cell[30406, 955, 577, 16, 77, "Text"],
+Cell[30986, 973, 968, 27, 97, "Text"],
+Cell[31957, 1002, 1781, 48, 186, "Text"],
+Cell[33741, 1052, 1658, 44, 181, "Input"],
+Cell[35402, 1098, 305, 10, 34, "Text"],
+Cell[35710, 1110, 503, 12, 48, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[36262, 1128, 241, 6, 94, "Section"],
+Cell[36506, 1136, 847, 18, 121, "Text"],
+Cell[37356, 1156, 2019, 52, 269, "Input"],
+Cell[39378, 1210, 565, 9, 117, "Text"],
+Cell[39946, 1221, 730, 13, 48, "Input"],
+Cell[40679, 1236, 818, 15, 93, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[41534, 1256, 174, 6, 94, "Section"],
+Cell[CellGroupData[{
+Cell[41733, 1266, 170, 8, 46, "Subsection"],
+Cell[41906, 1276, 143, 2, 34, "Text"],
+Cell[42052, 1280, 821, 23, 93, "Input"],
+Cell[42876, 1305, 444, 10, 76, "Text"],
+Cell[43323, 1317, 302, 6, 55, "Text"],
+Cell[43628, 1325, 1611, 40, 225, "Input"],
+Cell[45242, 1367, 265, 6, 48, "Input"],
+Cell[45510, 1375, 389, 9, 48, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[45936, 1389, 290, 11, 46, "Subsection"],
+Cell[46229, 1402, 1179, 30, 103, "Text"],
+Cell[47411, 1434, 733, 20, 78, "Text"],
+Cell[48147, 1456, 405, 8, 48, "Input"],
+Cell[48555, 1466, 515, 11, 93, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[49107, 1482, 271, 7, 46, "Subsection"],
+Cell[49381, 1491, 686, 15, 99, "Text"],
+Cell[50070, 1508, 351, 8, 55, "Text"],
+Cell[50424, 1518, 660, 16, 48, "Input"],
+Cell[51087, 1536, 921, 20, 48, "Input"],
+Cell[52011, 1558, 877, 18, 71, "Input"],
+Cell[52891, 1578, 380, 9, 34, "Text"],
+Cell[53274, 1589, 676, 13, 48, "Input"],
+Cell[53953, 1604, 921, 20, 48, "Input"],
+Cell[54877, 1626, 1130, 24, 71, "Input"],
+Cell[56010, 1652, 442, 10, 76, "Text"],
+Cell[56455, 1664, 245, 5, 34, "Text"],
+Cell[56703, 1671, 962, 26, 71, "Input"],
+Cell[57668, 1699, 271, 7, 48, "Input"],
+Cell[57942, 1708, 980, 22, 48, "Input"],
+Cell[58925, 1732, 877, 18, 71, "Input"],
+Cell[59805, 1752, 282, 4, 34, "Text"],
+Cell[60090, 1758, 1095, 24, 48, "Input"],
+Cell[61188, 1784, 449, 10, 48, "Input"],
+Cell[61640, 1796, 984, 22, 48, "Input"],
+Cell[62627, 1820, 1112, 22, 71, "Input"],
+Cell[63742, 1844, 141, 3, 48, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[63932, 1853, 172, 6, 94, "Section"],
+Cell[64107, 1861, 1441, 37, 165, "Text"],
+Cell[65551, 1900, 1417, 40, 161, "Text"],
+Cell[66971, 1942, 2464, 62, 291, "Input"],
+Cell[69438, 2006, 494, 8, 76, "Text"],
+Cell[69935, 2016, 1689, 34, 115, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

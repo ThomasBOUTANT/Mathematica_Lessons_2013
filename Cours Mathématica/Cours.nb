@@ -1,0 +1,315 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      6494,        237]*)
+(*NotebookOutlinePosition[      7233,        262]*)
+(*  CellTagsIndexPosition[      7189,        258]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[TextData[{
+  StyleBox["Initiation \[AGrave] ", "Chapter"],
+  StyleBox["Mathematica", "Chapter",
+    FontSlant->"Italic"],
+  StyleBox[" ", "Chapter"]
+}], "Title"],
+
+Cell["Marc Lorenzi - Juillet 2004", "Author"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  StyleBox[" ",
+    FontSlant->"Italic"],
+  ButtonBox["Utiliser Mathematica comme calculatrice",
+    ButtonData:>{"Calculatrice.nb", None},
+    ButtonStyle->"Hyperlink"]
+}], "Section"],
+
+Cell[TextData[{
+  "Il est possible d'utiliser ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " comme une simple calculatrice, pour effectuer des op\[EAcute]rations sur \
+les nombres entiers (aussi grands qu'on le d\[EAcute]sire), les nombres \
+rationnels et r\[EAcute]els, et les nombres complexes."
+}], "Text",
+  TextJustification->1]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " ",
+  ButtonBox["Factoriser, d\[EAcute]velopper, simplifier",
+    ButtonData:>{"FactoriserDevelopper.nb", None},
+    ButtonStyle->"Hyperlink"]
+}], "Section"],
+
+Cell[TextData[{
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " n'est pas qu'une calculatrice. C'est aussi un logiciel de calcul formel \
+qui permet de manipuler des expressions alg\[EAcute]briques. Nous allons voir \
+comment les op\[EAcute]rations \[EAcute]l\[EAcute]mentaires de \
+l'alg\[EGrave]bre (factoriser, d\[EAcute]velopper, simplifier) peuvent \
+\[EHat]tre mises en oeuvre avec ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  "."
+}], "Text",
+  TextJustification->1]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " ",
+  ButtonBox["\[CapitalEAcute]quations, sommes et produits",
+    ButtonData:>{"EquationsSommesProduits.nb", None},
+    ButtonStyle->"Hyperlink"]
+}], "Section"],
+
+Cell[TextData[{
+  "On pr\[EAcute]sente ici quelques unes des possibilit\[EAcute]s de ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " en calcul alg\[EAcute]brique, au travers de la r\[EAcute]solution d'\
+\[EAcute]quations, et du calcul de sommes et de produits."
+}], "Text",
+  TextJustification->1]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " ",
+  ButtonBox["Limites, d\[EAcute]riv\[EAcute]es, int\[EAcute]grales, \
+\[CapitalEAcute]quations diff\[EAcute]rentielles",
+    ButtonData:>{"Analyse.nb", None},
+    ButtonStyle->"Hyperlink"]
+}], "Section"],
+
+Cell[TextData[{
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " permet bien entendu de faire des calculs en Analyse. On passe ici en \
+revue les calculs de limites, de d\[EAcute]riv\[EAcute]es et \
+d'int\[EAcute]grales, ainsi que la r\[EAcute]solution des \[EAcute]quations \
+diff\[EAcute]rentielles."
+}], "Text",
+  TextJustification->1]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " ",
+  ButtonBox["Graphisme",
+    ButtonData:>{"CourbesSurfaces.nb", None},
+    ButtonStyle->"Hyperlink"]
+}], "Section"],
+
+Cell["\<\
+Outre les simples trac\[EAcute]s de courbes et de surfaces, les graphiques \
+sont un moyen direct de pr\[EAcute]sentation et de synth\[EGrave]se de r\
+\[EAcute]sultats math\[EAcute]matiques.\
+\>", "Text",
+  TextJustification->1]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " ",
+  ButtonBox["Les Listes",
+    ButtonData:>{"Listes.nb", None},
+    ButtonStyle->"Hyperlink"]
+}], "Section"],
+
+Cell[TextData[{
+  "La liste est une structure de donn\[EAcute]es d'une grande importance pour \
+tout utilisateur de ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  ". On d\[EAcute]crit ci-dessous quelques op\[EAcute]rations sur les \
+listes."
+}], "Text",
+  TextJustification->1]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " ",
+  ButtonBox["Programmation",
+    ButtonData:>{"Programmation.nb", None},
+    ButtonStyle->"Hyperlink"]
+}], "Section"],
+
+Cell[TextData[{
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " est aussi un langage de programmation.On peut \[EHat]tre amen\[EAcute], \
+pour un probl\[EGrave]me sp\[EAcute]cifique, \[AGrave] \[EAcute]crire soi-m\
+\[EHat]me les fonctions permettant la r\[EAcute]solution du \
+probl\[EGrave]me."
+}], "Text",
+  TextJustification->1]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " ",
+  ButtonBox["Notions avanc\[EAcute]es sur les expressions",
+    ButtonData:>{"Expressions.nb", None},
+    ButtonStyle->"Hyperlink"]
+}], "Section"],
+
+Cell[TextData[{
+  "Tous les objets manipul\[EAcute]s par ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " sont b\[AHat]tis selon une m\[EHat]me structure. On d\[EAcute]crit dans \
+ce qui suit la structure en question."
+}], "Text",
+  TextJustification->1]
+}, Open  ]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1024}, {0, 687}},
+ScreenStyleEnvironment->"Brackets",
+WindowSize->{560, 651},
+WindowMargins->{{-8, Automatic}, {Automatic, 0}},
+CellLabelAutoDelete->True,
+StyleDefinitions -> "Style.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 166, 5, 68, "Title"],
+Cell[1923, 58, 45, 0, 37, "Author"],
+
+Cell[CellGroupData[{
+Cell[1993, 62, 228, 8, 67, "Section"],
+Cell[2224, 72, 345, 8, 67, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2606, 85, 204, 7, 67, "Section"],
+Cell[2813, 94, 492, 12, 86, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3342, 111, 209, 7, 67, "Section"],
+Cell[3554, 120, 308, 7, 48, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3899, 132, 254, 8, 67, "Section"],
+Cell[4156, 142, 345, 8, 67, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4538, 155, 166, 7, 67, "Section"],
+Cell[4707, 164, 238, 5, 48, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4982, 174, 158, 7, 67, "Section"],
+Cell[5143, 183, 287, 8, 48, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5467, 196, 168, 7, 67, "Section"],
+Cell[5638, 205, 339, 8, 48, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[6014, 218, 197, 7, 67, "Section"],
+Cell[6214, 227, 264, 7, 48, "Text"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

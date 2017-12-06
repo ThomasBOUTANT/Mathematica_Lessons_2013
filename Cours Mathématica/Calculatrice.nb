@@ -1,0 +1,521 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      8584,        392]*)
+(*NotebookOutlinePosition[      9294,        416]*)
+(*  CellTagsIndexPosition[      9250,        412]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[TextData[{
+  StyleBox["Mathematica,",
+    FontSlant->"Italic"],
+  " une calculatrice."
+}], "Title"],
+
+Cell[TextData[{
+  "Il est possible d'utiliser ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " comme une simple calculatrice, pour effectuer des op\[EAcute]rations sur \
+les nombres entiers (aussi grands qu'on le d\[EAcute]sire), les nombres \
+rationnels et r\[EAcute]els, et les nombres complexes."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " Nombres entiers, Nombres rationnels"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " Op\[EAcute]rations arithm\[EAcute]tiques"
+}], "Subsection"],
+
+Cell[BoxData[
+    \(3 + 5\)], "Input"],
+
+Cell[TextData[{
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " renvoie toujours un r\[EAcute]sultat exact."
+}], "Text"],
+
+Cell[BoxData[
+    \(\((2 + 3)\)*\((5 + 8)\)/\((67 - 3)\)\)], "Input"],
+
+Cell["Il n'y a pas de limite \[AGrave] la taille des nombres manipulables.", \
+"Text"],
+
+Cell[BoxData[
+    \(2^100\)], "Input"],
+
+Cell[BoxData[
+    \(\(66!\)\)], "Input"],
+
+Cell["\<\
+Le symbole de la multiplication peut \[EAcute]ventuellement \[EHat]tre omis, \
+mais attention : des ambigu\[IDoubleDot]t\[EAcute]s peuvent parfois appara\
+\[IHat]tre.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(3\ \((57 - 9\ 6)\)\)], "Input"],
+
+Cell[BoxData[
+    \(2\ 3\  + \ 4\ 5\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " Pgcd, Ppcm"
+}], "Subsection"],
+
+Cell[TextData[{
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " poss\[EGrave]de des milliers de fonctions permettant de faire toutes \
+sortes de calculs. Voici un exemple de calcul du plus grand diviseur commun \
+et du plus petit multiple commun de deux nombres."
+}], "Text"],
+
+Cell[TextData[{
+  StyleBox["Attention",
+    FontWeight->"Bold"],
+  " : les param\[EGrave]tres d'une fonction DOIVENT \[EHat]tre mis entre \
+crochets, et PAS entre parenth\[EGrave]ses."
+}], "Text"],
+
+Cell[BoxData[
+    \(GCD[2548, 2584]\)], "Input"],
+
+Cell[BoxData[
+    \(LCM[2548, 2584]\)], "Input"],
+
+Cell[BoxData[
+    \(ExtendedGCD[16, 99]\)], "Input"],
+
+Cell[BoxData[
+    \(31*16\  - 5*99\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " Primalit\[EAcute], Factorisation"
+}], "Subsection"],
+
+Cell[TextData[{
+  "On appelle ",
+  Cell[BoxData[
+      \(TraditionalForm\`n\)]],
+  "i\[EGrave]me nombre de Fermat le nombre ",
+  Cell[BoxData[
+      \(TraditionalForm\`F\_n = 2\^\(2\^n\) + 1\)]],
+  ". Voici le 7\[EGrave]me nombre de Fermat."
+}], "Text"],
+
+Cell[BoxData[
+    \(x = 2^\((2^7)\) + 1\)], "Input"],
+
+Cell[TextData[{
+  "Fermat pensait que tous ces nombres \[EAcute]taient des nombres premiers. \
+S'il avait eu ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  ", il aurait vu que ",
+  Cell[BoxData[
+      \(TraditionalForm\`F\_7\)]],
+  " est un nombre compos\[EAcute]."
+}], "Text"],
+
+Cell[BoxData[
+    \(PrimeQ[x]\)], "Input"],
+
+Cell["\<\
+Il est bon de savoir qu'un nombre est compos\[EAcute]. Il est encore mieux de \
+le factoriser.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(FactorInteger[x]\)], "Input"],
+
+Cell[TextData[{
+  "N'oublions pas d'effacer ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\)]],
+  " ..."
+}], "Text"],
+
+Cell[BoxData[
+    \(Clear[x]\)], "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " Nombres r\[EAcute]els"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " Calculs d'approximations"
+}], "Subsection"],
+
+Cell["\<\
+Tous les calculs effectu\[EAcute]s par Math\[EAcute]matica sont faits de fa\
+\[CCedilla]on exacte ...\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Sqrt[24]\)], "Input"],
+
+Cell["Sauf si on demande express\[EAcute]ment une approximation.", "Text"],
+
+Cell[BoxData[
+    \(N[%, 30]\)], "Input"],
+
+Cell["Quelques nombres c\[EAcute]l\[EGrave]bres ...", "Text"],
+
+Cell[BoxData[
+    \(N[E, 100]\)], "Input"],
+
+Cell[BoxData[
+    \(N[Pi, 100]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " Fonctions usuelles"
+}], "Subsection"],
+
+Cell["\<\
+Toutes les fonctions usuelles, et bien d'autres, sont \[EAcute]videmment \
+disponibles imm\[EAcute]diatement.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Sin[Pi/12]\)], "Input"],
+
+Cell[BoxData[
+    \(Log[6] + Log[11]\)], "Input"],
+
+Cell[BoxData[
+    \(Simplify[%]\)], "Input"],
+
+Cell[BoxData[
+    \(N[%]\)], "Input"],
+
+Cell[BoxData[
+    \(Exp[6] Exp[9]\)], "Input"],
+
+Cell[BoxData[
+    \(FunctionExpand[Sin[Pi/17]]\)], "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " Nombres complexes"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " Calculs \[EAcute]l\[EAcute]mentaires"
+}], "Subsection"],
+
+Cell[TextData[{
+  "Le nombre complexe \[ImaginaryI] est not\[EAcute] I dans ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  ". On calcule avec les complexes comme avec les r\[EAcute]els."
+}], "Text"],
+
+Cell[BoxData[
+    \(I^2\)], "Input"],
+
+Cell[BoxData[
+    \(\((3 + 2  I)\)/\((5 + 8  I)\)\)], "Input"],
+
+Cell[BoxData[
+    \(\((4 - 3  I)\)^7\)], "Input"],
+
+Cell[BoxData[
+    \(E^\((I*Pi)\)\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " Fonctions de base"
+}], "Subsection"],
+
+Cell[BoxData[
+    \(Abs[1 + I]\)], "Input"],
+
+Cell[BoxData[
+    \(Re[3 + 5  I]\)], "Input"],
+
+Cell[BoxData[
+    \(Arg[1 + I]\)], "Input"],
+
+Cell[BoxData[
+    \(Conjugate[1 + I]\)], "Input"],
+
+Cell[BoxData[
+    \(z = \((a + I\ b)\)^3\)], "Input"],
+
+Cell[BoxData[
+    \(Expand[z]\)], "Input"],
+
+Cell[BoxData[
+    \(Re[z]\)], "Input"],
+
+Cell[TextData[{
+  "Le r\[EAcute]sultat pr\[EAcute]c\[EAcute]dent peut surprendre. ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " ne sait-il pas calculer la partie r\[EAcute]elle d'un nombre aussi simple \
+? Bien s\[UHat]r que oui, mais qui lui a dit que ",
+  Cell[BoxData[
+      \(TraditionalForm\`a\)]],
+  " et ",
+  Cell[BoxData[
+      \(TraditionalForm\`b\)]],
+  " \[EAcute]tait des nombres r\[EAcute]els ? Par d\[EAcute]faut, ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " consid\[EGrave]re que tous les nombres sont complexes.\nLa fonction \
+ComplexExpand consid\[EGrave]re que les variables intervenant dans les \
+expressions sont r\[EAcute]elles. Elle met un nombre sous la forme \"x+I \
+y\"."
+}], "Text"],
+
+Cell[BoxData[
+    \(ComplexExpand[z]\)], "Input"],
+
+Cell[BoxData[
+    \(Clear[z]\)], "Input"]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1024}, {0, 687}},
+ScreenStyleEnvironment->"Working",
+WindowSize->{543, 653},
+WindowMargins->{{Automatic, 4}, {1, Automatic}},
+StyleDefinitions -> "Style.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 104, 4, 68, "Title"],
+Cell[1861, 57, 321, 7, 67, "Text"],
+
+Cell[CellGroupData[{
+Cell[2207, 68, 99, 4, 67, "Section"],
+
+Cell[CellGroupData[{
+Cell[2331, 76, 145, 7, 52, "Subsection"],
+Cell[2479, 85, 38, 1, 50, "Input"],
+Cell[2520, 88, 128, 4, 29, "Text"],
+Cell[2651, 94, 69, 1, 50, "Input"],
+Cell[2723, 97, 86, 1, 29, "Text"],
+Cell[2812, 100, 38, 1, 50, "Input"],
+Cell[2853, 103, 40, 1, 50, "Input"],
+Cell[2896, 106, 190, 4, 48, "Text"],
+Cell[3089, 112, 51, 1, 50, "Input"],
+Cell[3143, 115, 48, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[3228, 121, 115, 7, 36, "Subsection"],
+Cell[3346, 130, 283, 6, 67, "Text"],
+Cell[3632, 138, 196, 5, 48, "Text"],
+Cell[3831, 145, 48, 1, 50, "Input"],
+Cell[3882, 148, 48, 1, 50, "Input"],
+Cell[3933, 151, 52, 1, 50, "Input"],
+Cell[3988, 154, 47, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[4072, 160, 137, 7, 36, "Subsection"],
+Cell[4212, 169, 253, 8, 49, "Text"],
+Cell[4468, 179, 52, 1, 50, "Input"],
+Cell[4523, 182, 287, 9, 48, "Text"],
+Cell[4813, 193, 42, 1, 50, "Input"],
+Cell[4858, 196, 118, 3, 29, "Text"],
+Cell[4979, 201, 49, 1, 50, "Input"],
+Cell[5031, 204, 115, 5, 29, "Text"],
+Cell[5149, 211, 41, 1, 50, "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5239, 218, 85, 4, 67, "Section"],
+
+Cell[CellGroupData[{
+Cell[5349, 226, 129, 7, 52, "Subsection"],
+Cell[5481, 235, 125, 3, 29, "Text"],
+Cell[5609, 240, 41, 1, 50, "Input"],
+Cell[5653, 243, 74, 0, 29, "Text"],
+Cell[5730, 245, 41, 1, 50, "Input"],
+Cell[5774, 248, 61, 0, 29, "Text"],
+Cell[5838, 250, 42, 1, 50, "Input"],
+Cell[5883, 253, 43, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[5963, 259, 123, 7, 36, "Subsection"],
+Cell[6089, 268, 133, 3, 48, "Text"],
+Cell[6225, 273, 43, 1, 50, "Input"],
+Cell[6271, 276, 49, 1, 50, "Input"],
+Cell[6323, 279, 44, 1, 50, "Input"],
+Cell[6370, 282, 37, 1, 50, "Input"],
+Cell[6410, 285, 46, 1, 50, "Input"],
+Cell[6459, 288, 59, 1, 50, "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[6567, 295, 81, 4, 67, "Section"],
+
+Cell[CellGroupData[{
+Cell[6673, 303, 141, 7, 52, "Subsection"],
+Cell[6817, 312, 208, 5, 48, "Text"],
+Cell[7028, 319, 36, 1, 50, "Input"],
+Cell[7067, 322, 62, 1, 50, "Input"],
+Cell[7132, 325, 49, 1, 50, "Input"],
+Cell[7184, 328, 45, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[7266, 334, 122, 7, 36, "Subsection"],
+Cell[7391, 343, 43, 1, 50, "Input"],
+Cell[7437, 346, 45, 1, 50, "Input"],
+Cell[7485, 349, 43, 1, 50, "Input"],
+Cell[7531, 352, 49, 1, 50, "Input"],
+Cell[7583, 355, 53, 1, 50, "Input"],
+Cell[7639, 358, 42, 1, 50, "Input"],
+Cell[7684, 361, 38, 1, 50, "Input"],
+Cell[7725, 364, 735, 18, 136, "Text"],
+Cell[8463, 384, 49, 1, 50, "Input"],
+Cell[8515, 387, 41, 1, 50, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

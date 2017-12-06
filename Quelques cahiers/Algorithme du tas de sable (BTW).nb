@@ -1,0 +1,954 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     29158,        944]
+NotebookOptionsPosition[     26126,        847]
+NotebookOutlinePosition[     26836,        870]
+CellTagsIndexPosition[     26793,        867]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+Algorithme du tas de sable
+(B.T.W.)\
+\>", "Title"],
+
+Cell["\<\
+Marc Lorenzi  - Matthias Henri
+11 mai 2007\
+\>", "Text",
+ CellChangeTimes->{{3.392032882390625*^9, 3.39203290234375*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Quit", "[", "]"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell["Algorithme BTW", "Section"],
+
+Cell[CellGroupData[{
+
+Cell["Description", "Subsection"],
+
+Cell[TextData[{
+ "On part d'un tableau ",
+ Cell[BoxData[
+  FormBox["t", TraditionalForm]]],
+ " de taille ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"n", "\[Cross]", "n"}], TraditionalForm]]],
+ ". Ce tableau mod\[EAcute]lise un tas de sable : la valeur de ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"t", "(", 
+    RowBox[{"i", ",", "j"}], ")"}], TraditionalForm]]],
+ " est la hauteur du tas au point de coordonn\[EAcute]es ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{"i", ",", "j"}], ")"}], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[TextData[{
+ "On d\[EAcute]finit une hauteur critique ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["z", "c"], "\[GreaterEqual]", "5"}], TraditionalForm]]],
+ " (en dessous de cette valeur, l'algorithme risque de produire des \
+r\[EAcute]sultats non conformes avec l'intuition d'un tas de sable)."
+}], "Text",
+ CellChangeTimes->{{3.39203292575*^9, 3.3920329261875*^9}, {
+  3.392033204453125*^9, 3.39203320690625*^9}}],
+
+Cell[TextData[{
+ "Une \[EAcute]tape \"\[EAcute]l\[EAcute]mentaire\" de l'algorithme : pour \
+chaque valeur de ",
+ Cell[BoxData[
+  FormBox["i", TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox["j", TraditionalForm]]],
+ " et pour chacune des cases ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{"a", ",", "b"}], ")"}], TraditionalForm]]],
+ " voisines de ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{"i", ",", "j"}], ")"}], TraditionalForm]]],
+ " :\nSi ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     RowBox[{"t", "(", 
+      RowBox[{"i", ",", "j"}], ")"}], "-", 
+     RowBox[{"t", "(", 
+      RowBox[{"a", ",", "b"}], ")"}]}], "\[GreaterEqual]", 
+    SubscriptBox["z", "c"]}], TraditionalForm]]],
+ ", alors ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"z", "(", 
+     RowBox[{"i", ",", "j"}], ")"}], " ", "\[LeftArrow]", " ", 
+    RowBox[{
+     RowBox[{"z", "(", 
+      RowBox[{"i", ",", "j"}], ")"}], "-", "1"}]}], TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"t", "(", 
+     RowBox[{"a", ",", "b"}], ")"}], "\[LeftArrow]", 
+    RowBox[{
+     RowBox[{"t", "(", 
+      RowBox[{"a", ",", "b"}], ")"}], "+", "1"}]}], TraditionalForm]]],
+ ". On appelle voisins de ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{"i", ",", "j"}], ")"}], TraditionalForm]]],
+ " les couples ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"i", "\[PlusMinus]", "1"}], ",", 
+     RowBox[{"j", "\[PlusMinus]", "1"}]}], ")"}], TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"i", "\[PlusMinus]", "1"}], ",", 
+     RowBox[{"j", "\[PlusMinus]", "1"}]}], ")"}], TraditionalForm]]],
+ " dont les deux coordonn\[EAcute]es sont comprises entre 1 et ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[TextData[{
+ "On it\[EGrave]re cette \[EAcute]tape \[EAcute]l\[EAcute]mentaire autant de \
+fois que l'on d\[EAcute]sire. Dans les programmes ci-dessous, on ajoute \
+\[AGrave] chaque \[EAcute]tape un grain de sable au milieu du tas : ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"t", "(", 
+     RowBox[{
+      RowBox[{"n", "/", "2"}], ",", 
+      RowBox[{"n", "/", "2"}]}], ")"}], "\[LeftArrow]", 
+    RowBox[{
+     RowBox[{"t", "(", 
+      RowBox[{
+       RowBox[{"n", "/", "2"}], ",", 
+       RowBox[{"n", "/", "2"}]}], ")"}], "+", "1"}]}], TraditionalForm]]],
+ ". On peut \[EAcute]videmment proc\[EAcute]der de bien d'autres \
+fa\[CCedilla]ons."
+}], "Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Une \[EAcute]tape de l'algorithme", "Subsection"],
+
+Cell["\<\
+La hauteur critique au-del\[AGrave] de laquelle se produit un \
+\[EAcute]coulement :\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"zc", "=", "5"}], ";"}]], "Input",
+ CellChangeTimes->{{3.39203320209375*^9, 3.39203320946875*^9}}],
+
+Cell[TextData[{
+ "Une fonction permettant de tester si un couple ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{"i", ",", "j"}], ")"}], TraditionalForm]]],
+ " est un couple de coordonn\[EAcute]es admissible :"
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"admissible", "[", 
+    RowBox[{"i_", ",", "j_", ",", "n_"}], "]"}], "=", 
+   RowBox[{
+    RowBox[{"1", "\[LessEqual]", "i"}], "&&", 
+    RowBox[{"i", "\[LessEqual]", "n"}], "&&", 
+    RowBox[{"1", "\[LessEqual]", "j"}], "&&", 
+    RowBox[{"j", "\[LessEqual]", "n"}]}]}], ";"}]], "Input"],
+
+Cell[TextData[{
+ "Voici la fonction calculant les modifications du tas de sable en une \
+\[EAcute]tape \[EAcute]l\[EAcute]mentaire. La fonction prend le tas ",
+ Cell[BoxData[
+  FormBox["t", TraditionalForm]]],
+ " en param\[EGrave]tre, cr\[EAcute]e un tas interm\[EAcute]diaire ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["t", "1"], TraditionalForm]]],
+ " qu'elle modifie comme d\[EAcute]crit au d\[EAcute]but du document, puis \
+renvoie ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["t", "1"], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"etape", "[", "t_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"t1", "=", "t"}], ",", 
+      RowBox[{"taille", "=", 
+       RowBox[{"Length", "[", "t", "]"}]}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"admissible", "[", 
+            RowBox[{
+             RowBox[{"i", "-", "1"}], ",", 
+             RowBox[{"j", "-", "1"}], ",", "taille"}], "]"}], " ", "&&", " ", 
+           
+           RowBox[{
+            RowBox[{"t", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "j"}], "]"}], "]"}], "\[GreaterEqual]", " ", 
+            RowBox[{
+             RowBox[{"t", "[", 
+              RowBox[{"[", 
+               RowBox[{
+                RowBox[{"i", "-", "1"}], ",", 
+                RowBox[{"j", "-", "1"}]}], "]"}], "]"}], "+", "zc"}]}]}], ",",
+           "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"t1", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "j"}], "]"}], "]"}], "--"}], ";", 
+           RowBox[{
+            RowBox[{"t1", "[", 
+             RowBox[{"[", 
+              RowBox[{
+               RowBox[{"i", "-", "1"}], ",", 
+               RowBox[{"j", "-", "1"}]}], "]"}], "]"}], "++"}]}]}], "]"}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"admissible", "[", 
+            RowBox[{
+             RowBox[{"i", "+", "1"}], ",", 
+             RowBox[{"j", "+", "1"}], ",", "taille"}], "]"}], " ", "&&", " ", 
+           
+           RowBox[{
+            RowBox[{"t", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "j"}], "]"}], "]"}], "\[GreaterEqual]", " ", 
+            RowBox[{
+             RowBox[{"t", "[", 
+              RowBox[{"[", 
+               RowBox[{
+                RowBox[{"i", "+", "1"}], ",", 
+                RowBox[{"j", "+", "1"}]}], "]"}], "]"}], "+", "zc"}]}]}], ",",
+           "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"t1", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "j"}], "]"}], "]"}], "--"}], ";", 
+           RowBox[{
+            RowBox[{"t1", "[", 
+             RowBox[{"[", 
+              RowBox[{
+               RowBox[{"i", "+", "1"}], ",", 
+               RowBox[{"j", "+", "1"}]}], "]"}], "]"}], "++"}]}]}], "]"}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"admissible", "[", 
+            RowBox[{
+             RowBox[{"i", "+", "1"}], ",", 
+             RowBox[{"j", "-", "1"}], ",", "taille"}], "]"}], " ", "&&", " ", 
+           
+           RowBox[{
+            RowBox[{"t", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "j"}], "]"}], "]"}], "\[GreaterEqual]", " ", 
+            RowBox[{
+             RowBox[{"t", "[", 
+              RowBox[{"[", 
+               RowBox[{
+                RowBox[{"i", "+", "1"}], ",", 
+                RowBox[{"j", "-", "1"}]}], "]"}], "]"}], "+", "zc"}]}]}], ",",
+           "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"t1", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "j"}], "]"}], "]"}], "--"}], ";", 
+           RowBox[{
+            RowBox[{"t1", "[", 
+             RowBox[{"[", 
+              RowBox[{
+               RowBox[{"i", "+", "1"}], ",", 
+               RowBox[{"j", "-", "1"}]}], "]"}], "]"}], "++"}]}]}], "]"}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"admissible", "[", 
+            RowBox[{
+             RowBox[{"i", "-", "1"}], ",", 
+             RowBox[{"j", "+", "1"}], ",", "taille"}], "]"}], " ", "&&", " ", 
+           
+           RowBox[{
+            RowBox[{"t", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "j"}], "]"}], "]"}], "\[GreaterEqual]", " ", 
+            RowBox[{
+             RowBox[{"t", "[", 
+              RowBox[{"[", 
+               RowBox[{
+                RowBox[{"i", "-", "1"}], ",", 
+                RowBox[{"j", "+", "1"}]}], "]"}], "]"}], "+", "zc"}]}]}], ",",
+           "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"t1", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "j"}], "]"}], "]"}], "--"}], ";", 
+           RowBox[{
+            RowBox[{"t1", "[", 
+             RowBox[{"[", 
+              RowBox[{
+               RowBox[{"i", "-", "1"}], ",", 
+               RowBox[{"j", "+", "1"}]}], "]"}], "]"}], "++"}]}]}], "]"}], 
+        ";"}], "*)"}], "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"admissible", "[", 
+            RowBox[{
+             RowBox[{"i", "-", "1"}], ",", "j", ",", "taille"}], "]"}], " ", "&&",
+            " ", 
+           RowBox[{
+            RowBox[{"t", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "j"}], "]"}], "]"}], "\[GreaterEqual]", " ", 
+            RowBox[{
+             RowBox[{"t", "[", 
+              RowBox[{"[", 
+               RowBox[{
+                RowBox[{"i", "-", "1"}], ",", "j"}], "]"}], "]"}], "+", 
+             "zc"}]}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"t1", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "j"}], "]"}], "]"}], "--"}], ";", 
+           RowBox[{
+            RowBox[{"t1", "[", 
+             RowBox[{"[", 
+              RowBox[{
+               RowBox[{"i", "-", "1"}], ",", "j"}], "]"}], "]"}], "++"}]}]}], 
+         "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"admissible", "[", 
+            RowBox[{
+             RowBox[{"i", "+", "1"}], ",", "j", ",", "taille"}], "]"}], " ", "&&",
+            " ", 
+           RowBox[{
+            RowBox[{"t", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "j"}], "]"}], "]"}], "\[GreaterEqual]", " ", 
+            RowBox[{
+             RowBox[{"t", "[", 
+              RowBox[{"[", 
+               RowBox[{
+                RowBox[{"i", "+", "1"}], ",", "j"}], "]"}], "]"}], "+", 
+             "zc"}]}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"t1", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "j"}], "]"}], "]"}], "--"}], ";", 
+           RowBox[{
+            RowBox[{"t1", "[", 
+             RowBox[{"[", 
+              RowBox[{
+               RowBox[{"i", "+", "1"}], ",", "j"}], "]"}], "]"}], "++"}]}]}], 
+         "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"admissible", "[", 
+            RowBox[{"i", ",", 
+             RowBox[{"j", "-", "1"}], ",", "taille"}], "]"}], " ", "&&", " ", 
+           
+           RowBox[{
+            RowBox[{"t", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "j"}], "]"}], "]"}], "\[GreaterEqual]", " ", 
+            RowBox[{
+             RowBox[{"t", "[", 
+              RowBox[{"[", 
+               RowBox[{"i", ",", 
+                RowBox[{"j", "-", "1"}]}], "]"}], "]"}], "+", "zc"}]}]}], ",",
+           "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"t1", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "j"}], "]"}], "]"}], "--"}], ";", 
+           RowBox[{
+            RowBox[{"t1", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", 
+               RowBox[{"j", "-", "1"}]}], "]"}], "]"}], "++"}]}]}], "]"}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"admissible", "[", 
+            RowBox[{"i", ",", 
+             RowBox[{"j", "+", "1"}], ",", "taille"}], "]"}], " ", "&&", " ", 
+           
+           RowBox[{
+            RowBox[{"t", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "j"}], "]"}], "]"}], "\[GreaterEqual]", " ", 
+            RowBox[{
+             RowBox[{"t", "[", 
+              RowBox[{"[", 
+               RowBox[{"i", ",", 
+                RowBox[{"j", "+", "1"}]}], "]"}], "]"}], "+", "zc"}]}]}], ",",
+           "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"t1", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "j"}], "]"}], "]"}], "--"}], ";", 
+           RowBox[{
+            RowBox[{"t1", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", 
+               RowBox[{"j", "+", "1"}]}], "]"}], "]"}], "++"}]}]}], "]"}]}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", "taille"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"j", ",", "1", ",", "taille"}], "}"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", "t1"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.392032938640625*^9, 3.39203295628125*^9}, {
+  3.39203318653125*^9, 3.392033194640625*^9}}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Simulation de plusieurs \[EAcute]tapes de l'algorithme\
+\>", "Subsection"],
+
+Cell["\<\
+\[CapitalAGrave] chaque \[EAcute]tape, on rajoute un grain de sable au centre \
+du tas.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"simuler", "[", 
+   RowBox[{"t_", ",", "nbEtapes_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"t1", "=", "t"}], ",", 
+      RowBox[{"n", "=", 
+       RowBox[{"Length", "[", "t", "]"}]}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"t1", "[", 
+          RowBox[{"[", 
+           RowBox[{
+            RowBox[{"Quotient", "[", 
+             RowBox[{"n", ",", "2"}], "]"}], ",", 
+            RowBox[{"Quotient", "[", 
+             RowBox[{"n", ",", "2"}], "]"}]}], "]"}], "]"}], "++"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"t1", "=", 
+         RowBox[{"etape", "[", "t1", "]"}]}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", "nbEtapes", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+     "t1"}]}], "]"}]}]], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Initialisation du tas de sable", "Subsection"],
+
+Cell["\<\
+On initialise le tas de sable \[AGrave] un tas vide. Si l'on veut un tas al\
+\[EAcute]atoire, modifier la fonction ci-dessous ...\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"initTas", "[", "n_", "]"}], ":=", 
+   RowBox[{"Table", "[", 
+    RowBox[{"0", ",", 
+     RowBox[{"{", "n", "}"}], ",", 
+     RowBox[{"{", "n", "}"}]}], "]"}]}], ";"}]], "Input"],
+
+Cell["\<\
+Voici une autre fonction d'initialisation. Celle-ci cr\[EAcute]e un tas plus \
+al\[EAcute]atoire que la pr\[EAcute]c\[EAcute]dente. En fait, la fonction \
+remplit un tableau vide de mani\[EGrave]re al\[EAcute]atoire avec une hauteur \
+maximale. Ensuite, elle lui applique les avalanches possibles jusqu'\[AGrave] \
+obtenir un tas de sable stable.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"InitA", "[", 
+   RowBox[{"n_", ",", "h_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"t", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{"0", ",", 
+        RowBox[{"{", "n", "}"}], ",", 
+        RowBox[{"{", "n", "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"t", "[", 
+         RowBox[{"[", 
+          RowBox[{"i", ",", "j"}], "]"}], "]"}], "=", 
+        RowBox[{"Random", "[", 
+         RowBox[{"Integer", ",", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", "h"}], "}"}]}], "]"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", "n"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"j", ",", "1", ",", "n"}], "}"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", "t"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"InitA", "[", 
+   RowBox[{"10", ",", "30"}], "]"}], "//", "TableForm"}]], "Input"],
+
+Cell["\<\
+On a donc r\[EAcute]ussi \[AGrave] cr\[EAcute]er un tas de sable \
+al\[EAcute]atoire. Le probl\[EGrave]me c'est qu'il y a des avalanches qui \
+peuvent se produire. Il faut donc les effectuer ! Pour cela il y a la \
+fonction suivante :\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"initTas2", "[", 
+    RowBox[{"n_", ",", "h_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"t", ",", "t1"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"t", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{"0", ",", 
+         RowBox[{"{", "n", "}"}], ",", 
+         RowBox[{"{", "n", "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Do", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"t", "[", 
+          RowBox[{"[", 
+           RowBox[{"i", ",", "j"}], "]"}], "]"}], "=", 
+         RowBox[{"Random", "[", 
+          RowBox[{"Integer", ",", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "h"}], "}"}]}], "]"}]}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", "n"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"j", ",", "1", ",", "n"}], "}"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"t1", "=", 
+       RowBox[{"etape", "[", "t", "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"While", "[", 
+       RowBox[{
+        RowBox[{"t1", " ", "\[NotEqual]", " ", "t"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"t", "=", "t1"}], ";", "\[IndentingNewLine]", 
+         RowBox[{"t1", "=", 
+          RowBox[{"etape", "[", "t1", "]"}]}]}]}], "]"}], ";", 
+      "\[IndentingNewLine]", "t"}]}], "\[IndentingNewLine]", "]"}]}], 
+  "\[IndentingNewLine]"}]], "Input"],
+
+Cell["\<\
+Testons alors la fonction pour v\[EAcute]rifier sa validit\[EAcute]...\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"initTas2", "[", 
+   RowBox[{"10", ",", "30"}], "]"}], "//", "TableForm"}]], "Input"],
+
+Cell["\<\
+Et voila !! Le probl\[EGrave]me est donc que cela ne marche pas !! Snif, \
+Snif...\
+\>", "Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Test", "Subsection"],
+
+Cell[TextData[{
+ "Un petit test pour s'assurer que tout fonctionne : on prend un tas de ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"10", "\[Cross]", "10"}], TraditionalForm]]],
+ " initialement vide, puis on it\[EGrave]re 800 fois."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"t", "=", 
+   RowBox[{"initTas2", "[", 
+    RowBox[{"10", ",", "30"}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"t1", "=", 
+   RowBox[{"simuler", "[", 
+    RowBox[{"t", ",", "800"}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"t1", "//", "TableForm"}]], "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Fonctions de dessin", "Section"],
+
+Cell[TextData[{
+ "Les r\[EAcute]sultats num\[EAcute]riques \[EAcute]tant assez peu \"parlants\
+\", il vaut mieux repr\[EAcute]senter graphiquement le tas. Voici deux \
+fonctions de dessin. L'une, en 3D, repr\[EAcute]sente le tas de sable sous \
+forme d'un histogramme. L'autre, en 2D, repr\[EAcute]sente les hauteurs par \
+des couleurs. On passe en param\[EGrave]tre le tas de sable et une hauteur \
+maximale ",
+ Cell[BoxData[
+  FormBox["h", TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Dessin 2D", "Subsection"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"dessinTas2D", "[", 
+    RowBox[{"t_", ",", "h_"}], "]"}], ":=", 
+   RowBox[{"ListDensityPlot", "[", 
+    RowBox[{"t", ",", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "h"}], "}"}]}], ",", 
+     RowBox[{"Mesh", "\[Rule]", "False"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"dessinTas2D", "[", "t_", "]"}], ":=", 
+   RowBox[{"dessinTas2D", "[", 
+    RowBox[{"t", ",", "20"}], "]"}]}], ";"}]}], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Dessin 3D", "Subsection"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"dessinTas3D", "[", 
+    RowBox[{"t_", ",", "h_"}], "]"}], ":=", 
+   RowBox[{"ListPlot3D", "[", 
+    RowBox[{"t", ",", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "h"}], "}"}]}], ",", 
+     RowBox[{"ColorFunction", "\[Rule]", "GrayLevel"}], ",", 
+     RowBox[{"Mesh", "\[Rule]", "False"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"dessinTas3D", "[", "t_", "]"}], ":=", 
+   RowBox[{"dessinTas3D", "[", 
+    RowBox[{"t", ",", "20"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.3920335343125*^9, 3.392033537796875*^9}, {
+  3.392033569375*^9, 3.39203357153125*^9}, {3.39203365184375*^9, 
+  3.392033654984375*^9}}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Test final", "Subsection"],
+
+Cell[TextData[{
+ "Avec un tas de taille ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"30", "\[Cross]", "30"}], TraditionalForm]]],
+ " sur lequel on effectue 200 it\[EAcute]rations."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"t", "=", 
+   RowBox[{"initTas2", "[", 
+    RowBox[{"30", ",", "100"}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"t", "=", 
+   RowBox[{"simuler", "[", 
+    RowBox[{"t", ",", "200"}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"dessinTas2D", "[", 
+  RowBox[{"t", ",", "100"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"dessinTas3D", "[", 
+  RowBox[{"t", ",", "100"}], "]"}]], "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Animations", "Section"],
+
+Cell["\<\
+On peut animer tout cela en affichant le tas de sable pour chacune des \
+\[EAcute]tapes. Pour un TIPE, ce n'est \[EAcute]videmment pas tr\[EGrave]s \
+int\[EAcute]ressant, puisque on n'a pas droit \[AGrave] un ordinateur le jour \
+de l'expos\[EAcute] ...\
+\>", "Text"],
+
+Cell[TextData[{
+ "La fonction animer prend en param\[EGrave]tres la taille ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " du tas de sable et le nombre ",
+ Cell[BoxData[
+  FormBox["nbEtapes", TraditionalForm]]],
+ " d'\[EAcute]tapes \[AGrave] simuler. Il vaut mieux en tout \[EAcute]tat de \
+cause rester raisonnable et ne pas d\[EAcute]passer quelques centaines de \
+dessins. Le param\[EGrave]tre ",
+ StyleBox["hinit", "Input"],
+ "  est la hauteur du tas al\[EAcute]atoire initial. Le param\[EGrave]tre ",
+ StyleBox["hmax", "Input"],
+ " est une estimation de la hauteur maximale du tas au cours de l'animation."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"Dynamic", "[", "g", "]"}]], "Input",
+ CellChangeTimes->{{3.392024894008814*^9, 3.392024899750888*^9}, {
+  3.392024979081433*^9, 3.392024979690778*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"animer", "[", 
+   RowBox[{"n_", ",", "nbEtapes_", ",", "hinit_", ",", "hmax_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "t", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"t", "=", 
+      RowBox[{"initTas2", "[", 
+       RowBox[{"n", ",", "hinit"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"t", "=", 
+         RowBox[{"simuler", "[", 
+          RowBox[{"t", ",", "zc"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"g", "=", 
+         RowBox[{"dessinTas3D", "[", 
+          RowBox[{"t", ",", "hmax"}], "]"}]}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", "nbEtapes"}], "}"}]}], "]"}]}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{
+  3.392024891571213*^9, {3.392024986112017*^9, 3.392024992214222*^9}}],
+
+Cell[BoxData[
+ RowBox[{"animer", "[", 
+  RowBox[{"20", ",", "500", ",", "10", ",", "100"}], "]"}]], "Input",
+ CellChangeTimes->{{3.392025098242058*^9, 3.392025099700964*^9}, {
+  3.392033264203125*^9, 3.3920332650625*^9}, {3.392033334890625*^9, 
+  3.392033335921875*^9}, {3.3920333815*^9, 3.392033389484375*^9}, {
+  3.392033631328125*^9, 3.392033631875*^9}}]
+}, Closed]]
+}, Open  ]]
+},
+WindowSize->{666, 579},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrintingPageRange->{Automatic, Automatic},
+PrintingOptions->{"Magnification"->1,
+"PaperOrientation"->"Portrait",
+"PaperSize"->{597.563, 842.375},
+"PostScriptOutputFile":>FrontEnd`FileName[{
+  "home", "marc", "Langages", "Mathematica"}, "btw.nb.ps", CharacterEncoding -> 
+  "WindowsANSI"]},
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 60, 3, 111, "Title"],
+Cell[642, 27, 131, 4, 47, "Text"],
+Cell[776, 33, 52, 1, 41, "Input"],
+Cell[CellGroupData[{
+Cell[853, 38, 33, 0, 75, "Section"],
+Cell[CellGroupData[{
+Cell[911, 42, 33, 0, 36, "Subsection"],
+Cell[947, 44, 534, 19, 70, "Text"],
+Cell[1484, 65, 432, 10, 70, "Text"],
+Cell[1919, 77, 1846, 69, 70, "Text"],
+Cell[3768, 148, 671, 18, 70, "Text"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[4476, 171, 55, 0, 28, "Subsection"],
+Cell[4534, 173, 108, 3, 70, "Text"],
+Cell[4645, 178, 132, 3, 70, "Input"],
+Cell[4780, 183, 232, 7, 70, "Text"],
+Cell[5015, 192, 334, 9, 70, "Input"],
+Cell[5352, 203, 530, 15, 70, "Text"],
+Cell[5885, 220, 9219, 259, 70, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[15141, 484, 84, 2, 28, "Subsection"],
+Cell[15228, 488, 111, 3, 70, "Text"],
+Cell[15342, 493, 953, 28, 70, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[16332, 526, 52, 0, 28, "Subsection"],
+Cell[16387, 528, 153, 3, 70, "Text"],
+Cell[16543, 533, 224, 7, 70, "Input"],
+Cell[16770, 542, 370, 6, 70, "Text"],
+Cell[17143, 550, 940, 27, 70, "Input"],
+Cell[18086, 579, 116, 3, 70, "Input"],
+Cell[18205, 584, 258, 5, 70, "Text"],
+Cell[18466, 591, 1535, 42, 70, "Input"],
+Cell[20004, 635, 94, 2, 70, "Text"],
+Cell[20101, 639, 119, 3, 70, "Input"],
+Cell[20223, 644, 106, 3, 70, "Text"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[20366, 652, 26, 0, 28, "Subsection"],
+Cell[20395, 654, 240, 6, 70, "Text"],
+Cell[20638, 662, 130, 4, 70, "Input"],
+Cell[20771, 668, 130, 4, 70, "Input"],
+Cell[20904, 674, 59, 1, 70, "Input"]
+}, Closed]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21012, 681, 38, 0, 75, "Section"],
+Cell[21053, 683, 478, 10, 83, "Text"],
+Cell[CellGroupData[{
+Cell[21556, 697, 31, 0, 36, "Subsection"],
+Cell[21590, 699, 525, 16, 70, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[22152, 720, 31, 0, 28, "Subsection"],
+Cell[22186, 722, 739, 20, 70, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[22962, 747, 32, 0, 28, "Subsection"],
+Cell[22997, 749, 188, 6, 70, "Text"],
+Cell[23188, 757, 131, 4, 70, "Input"],
+Cell[23322, 763, 129, 4, 70, "Input"],
+Cell[23454, 769, 89, 2, 70, "Input"],
+Cell[23546, 773, 89, 2, 70, "Input"]
+}, Closed]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23684, 781, 29, 0, 75, "Section"],
+Cell[23716, 783, 277, 5, 70, "Text"],
+Cell[23996, 790, 631, 14, 70, "Text"],
+Cell[24630, 806, 175, 3, 70, "Input"],
+Cell[24808, 811, 930, 24, 70, "Input"],
+Cell[25741, 837, 357, 6, 70, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

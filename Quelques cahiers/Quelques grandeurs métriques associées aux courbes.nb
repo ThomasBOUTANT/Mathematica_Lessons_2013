@@ -1,0 +1,884 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     21322,        874]
+NotebookOptionsPosition[     17454,        746]
+NotebookOutlinePosition[     17875,        762]
+CellTagsIndexPosition[     17832,        759]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+Quelques grandeurs m\[EAcute]triques
+associ\[EAcute]es aux courbes\
+\>", "Title"],
+
+Cell["\<\
+Marc Lorenzi
+juin 2005\
+\>", "Author"],
+
+Cell["\<\
+On d\[EAcute]finit dans ce cahier quelques grandeurs m\[EAcute]triques associ\
+\[EAcute]es aux courbes param\[EAcute]tr\[EAcute]es : longueur, courbure, \
+rayon de courbure. On applique au calcul de la d\[EAcute]velopp\[EAcute]e et \
+de la d\[EAcute]veloppante d'une courbe.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Vecteur tangent, vecteur normal"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " ",
+ "Rep\[EGrave]re de Fr\[EAcute]net"
+}], "Subsection"],
+
+Cell["\<\
+On d\[EAcute]finit des fonctions permettant de calculer le vecteur tangent et \
+le vecteur normal unitaires en un point d'une courbe \
+param\[EAcute]tr\[EAcute]e.\
+\>", "Text"],
+
+Cell[TextData[{
+ "La fonction ",
+ StyleBox["Norm", "Input"],
+ " ins\[EGrave]re des valeurs absolues (des modules), inutiles voire \
+nuisibles dans le cas qui nous int\[EAcute]resse : on travaille avec des \
+coordonn\[EAcute]es r\[EAcute]elles. On r\[EAcute]\[EAcute]crit donc la \
+fonction ",
+ StyleBox["norme", "Input"],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"norme", "[", 
+   RowBox[{"{", 
+    RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+  RowBox[{"Sqrt", "[", 
+   RowBox[{
+    RowBox[{"x", "^", "2"}], "+", 
+    RowBox[{"y", "^", "2"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"vecteurTangent", "[", 
+   RowBox[{"f_", ",", "t_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"D", "[", 
+    RowBox[{"f", ",", "t"}], "]"}], "/", 
+   RowBox[{"norme", "[", 
+    RowBox[{"D", "[", 
+     RowBox[{"f", ",", "t"}], "]"}], "]"}]}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"vecteurNormal", "[", 
+   RowBox[{"f_", ",", "t_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"u", "=", 
+      RowBox[{"vecteurTangent", "[", 
+       RowBox[{"f", ",", "t"}], "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", 
+       RowBox[{"u", "[", 
+        RowBox[{"[", "2", "]"}], "]"}]}], ",", 
+      RowBox[{"u", "[", 
+       RowBox[{"[", "1", "]"}], "]"}]}], "}"}]}], "]"}]}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Exemple du cercle."
+}], "Subsection"],
+
+Cell[BoxData[
+ RowBox[{"vecteurTangent", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"R", "*", 
+      RowBox[{"Cos", "[", "t", "]"}]}], ",", 
+     RowBox[{"R", "*", 
+      RowBox[{"Sin", "[", "t", "]"}]}]}], "}"}], ",", "t"}], "]"}]], "Input"],
+
+Cell[TextData[{
+ "Il arrivera fr\[EAcute]quemment que l'on obtienne des solutions for;elles \
+apparemment compliqu\[EAcute]es. Un appel \[AGrave] ",
+ StyleBox["Simplify", "Input"],
+ " s'imposerq le plus souvent."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"Simplify", "[", 
+  RowBox[{"%", ",", 
+   RowBox[{"R", ">", "0"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"vecteurNormal", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"R", "*", 
+      RowBox[{"Cos", "[", "t", "]"}]}], ",", 
+     RowBox[{"R", "*", 
+      RowBox[{"Sin", "[", "t", "]"}]}]}], "}"}], ",", "t"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Simplify", "[", 
+  RowBox[{"%", ",", 
+   RowBox[{"R", ">", "0"}]}], "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Longueur"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Calcul de la longueur"
+}], "Subsection"],
+
+Cell[TextData[{
+ "La fonction donnant la longueur de l'arc param\[EAcute]tr\[EAcute] ",
+ Cell[BoxData[
+  FormBox["f", TraditionalForm]]],
+ " entre les points de param\[EGrave]tres ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"t", "=", "a"}], TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"t", "=", "b"}], TraditionalForm]]],
+ " est imm\[EAcute]diate."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"longueur", "[", 
+   RowBox[{"f_", ",", 
+    RowBox[{"{", 
+     RowBox[{"t_", ",", "a_", ",", "b_"}], "}"}]}], "]"}], ":=", 
+  RowBox[{"Integrate", "[", 
+   RowBox[{
+    RowBox[{"norme", "[", 
+     RowBox[{"D", "[", 
+      RowBox[{"f", ",", "t"}], "]"}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"t", ",", "a", ",", "b"}], "}"}]}], "]"}]}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " La cardio\[IDoubleDot]de"
+}], "Subsection"],
+
+Cell["\<\
+Voici par exemple la longueur d'une cardio\[IDoubleDot]de.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"longueur", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"a", 
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        RowBox[{"Cos", "[", "t", "]"}]}], ")"}], "*", 
+      RowBox[{"Cos", "[", "t", "]"}]}], ",", 
+     RowBox[{"a", 
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        RowBox[{"Cos", "[", "t", "]"}]}], ")"}], "*", 
+      RowBox[{"Sin", "[", "t", "]"}]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", 
+     RowBox[{"2", " ", "Pi"}]}], "}"}]}], "]"}]], "Input"],
+
+Cell[TextData[{
+ "Ici (comme souvent), il faut dire \[AGrave] ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " que ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"a", ">", "0"}], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"Simplify", "[", 
+  RowBox[{"%", ",", 
+   RowBox[{"a", ">", "0"}]}], "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " L'ellipse"
+}], "Subsection"],
+
+Cell["\<\
+Voici la longueur d'une ellipse de demi-axes de longueur 3 et 2. Cette \
+longueur s'exprime \[AGrave] l'aide de \"fonctions elliptiques\".\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"longueur", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"3", "*", 
+      RowBox[{"Cos", "[", "t", "]"}]}], ",", 
+     RowBox[{"2", "*", 
+      RowBox[{"Sin", "[", "t", "]"}]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", 
+     RowBox[{"2", "*", "Pi"}]}], "}"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"N", "[", "%", "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Courbure, rayon de courbure"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Courbure"
+}], "Subsection"],
+
+Cell["On ne fait que traduire la formule bien connue.", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"courbure", "[", 
+   RowBox[{"f_", ",", "t_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"Det", "[", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"D", "[", 
+       RowBox[{"f", ",", "t"}], "]"}], ",", 
+      RowBox[{"D", "[", 
+       RowBox[{"f", ",", 
+        RowBox[{"{", 
+         RowBox[{"t", ",", "2"}], "}"}]}], "]"}]}], "}"}], "]"}], "/", 
+   RowBox[{
+    RowBox[{"norme", "[", 
+     RowBox[{"D", "[", 
+      RowBox[{"f", ",", "t"}], "]"}], "]"}], "^", "3"}]}]}]], "Input"],
+
+Cell["Voici l'exemple du cercle.", "Text"],
+
+Cell[BoxData[
+ RowBox[{"courbure", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"a", "*", 
+      RowBox[{"Cos", "[", "t", "]"}]}], ",", 
+     RowBox[{"a", "*", 
+      RowBox[{"Sin", "[", "t", "]"}]}]}], "}"}], ",", "t"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Simplify", "[", 
+  RowBox[{"%", ",", 
+   RowBox[{"a", ">", "0"}]}], "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Rayon de courbure"
+}], "Subsection"],
+
+Cell["C'est l'inverse de la courbure.", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"rayonCourbure", "[", 
+   RowBox[{"f_", ",", "t_"}], "]"}], ":=", 
+  RowBox[{"1", "/", 
+   RowBox[{"courbure", "[", 
+    RowBox[{"f", ",", "t"}], "]"}]}]}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " L'exemple de l'ellipse."
+}], "Subsection"],
+
+Cell[BoxData[
+ RowBox[{"re", "=", 
+  RowBox[{"rayonCourbure", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"a", "*", 
+       RowBox[{"Cos", "[", "t", "]"}]}], ",", 
+      RowBox[{"b", "*", 
+       RowBox[{"Sin", "[", "t", "]"}]}]}], "}"}], ",", "t"}], 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"re", "=", 
+  RowBox[{"Simplify", "[", 
+   RowBox[{"re", ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"a", ">", "0"}], ",", 
+      RowBox[{"b", ">", "0"}]}], "}"}]}], "]"}]}]], "Input"],
+
+Cell["\<\
+Cherchons les valeurs d'annulation de la d\[EAcute]riv\[EAcute]e de cette \
+expression.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"dre", "=", 
+  RowBox[{"Simplify", "[", 
+   RowBox[{"D", "[", 
+    RowBox[{"re", ",", "t"}], "]"}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"dre2", "=", 
+  RowBox[{"Simplify", "[", 
+   RowBox[{"D", "[", 
+    RowBox[{"dre", ",", "t"}], "]"}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"dre2", "/.", 
+  RowBox[{"t", "\[Rule]", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", 
+     RowBox[{"Pi", "/", "2"}]}], "}"}]}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Simplify", "[", 
+  RowBox[{"%", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"a", ">", "0"}], ",", 
+     RowBox[{"b", ">", "0"}]}], "}"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Factor", "[", "%", "]"}]], "Input"],
+
+Cell[TextData[{
+ "On constate que le rayon de courbure est extr\[EAcute]mal aux sommets de \
+l'ellipse. Plus pr\[EAcute]cis\[EAcute]ment, si ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"a", ">", "b"}], TraditionalForm]]],
+ ", le rayon est  minimal pour ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"t", "=", "0"}], TraditionalForm]]],
+ " et maximal pour ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"t", "=", 
+    RowBox[{"\[Pi]", "/", "2"}]}], TraditionalForm]]],
+ "."
+}], "Text"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " D\[EAcute]velopp\[EAcute]e"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Notion de d\[EAcute]velopp\[EAcute]e"
+}], "Subsection"],
+
+Cell["\<\
+La d\[EAcute]velopp\[EAcute]e est le lieu des centres de courbure. On utilise \
+les fonctions, d\[EAcute]finies plus haut, calculant le vecteur normal et le \
+rayon de courbure.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Calcul de la d\[EAcute]velopp\[EAcute]e"
+}], "Subsection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"developpee", "[", 
+   RowBox[{"f_", ",", "t_"}], "]"}], ":=", 
+  RowBox[{"f", "+", 
+   RowBox[{
+    RowBox[{"rayonCourbure", "[", 
+     RowBox[{"f", ",", "t"}], "]"}], "*", 
+    RowBox[{"vecteurNormal", "[", 
+     RowBox[{"f", ",", "t"}], "]"}]}]}]}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " L'exemple de la cardio\[IDoubleDot]de"
+}], "Subsection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", "[", "t_", "]"}], ":=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"1", "-", 
+       RowBox[{"Cos", "[", "t", "]"}]}], ")"}], "*", 
+     RowBox[{"Cos", "[", "t", "]"}]}], ",", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"1", "-", 
+       RowBox[{"Cos", "[", "t", "]"}]}], ")"}], "*", 
+     RowBox[{"Sin", "[", "t", "]"}]}]}], "}"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"g", "[", "t_", "]"}], "=", 
+  RowBox[{"FullSimplify", "[", 
+   RowBox[{"developpee", "[", 
+    RowBox[{
+     RowBox[{"f", "[", "t", "]"}], ",", "t"}], "]"}], "]"}]}]], "Input"],
+
+Cell["\<\
+Tra\[CCedilla]ons sur un m\[EHat]me dessin la cardio\[IDoubleDot]de et sa d\
+\[EAcute]velopp\[EAcute]e.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"ParametricPlot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"f", "[", "t", "]"}], ",", 
+     RowBox[{"g", "[", "t", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", 
+     RowBox[{"2", "Pi"}]}], "}"}], ",", 
+   RowBox[{"AspectRatio", "\[Rule]", "Automatic"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.410172967140625*^9, 3.410173031015625*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " L'exemple de l'astro\[IDoubleDot]de."
+}], "Subsection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", "[", "t_", "]"}], ":=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Cos", "[", "t", "]"}], "^", "3"}], ",", 
+    RowBox[{
+     RowBox[{"Sin", "[", "t", "]"}], "^", "3"}]}], "}"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"g", "[", "t_", "]"}], "=", 
+  RowBox[{"FullSimplify", "[", 
+   RowBox[{"developpee", "[", 
+    RowBox[{
+     RowBox[{"f", "[", "t", "]"}], ",", "t"}], "]"}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"TrigReduce", "[", 
+  RowBox[{"g", "[", "t", "]"}], "]"}]], "Input"],
+
+Cell["\<\
+Cette d\[EAcute]velopp\[EAcute]e est encore une astro\[IDoubleDot]de.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"ParametricPlot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"f", "[", "t", "]"}], ",", 
+     RowBox[{"g", "[", "t", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", 
+     RowBox[{"2", "Pi"}]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.41017304359375*^9, 3.410173058875*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " D\[EAcute]veloppante"
+}], "Section"],
+
+Cell[BoxData[
+ RowBox[{"Clear", "[", "dev", "]"}]], "Input",
+ CellChangeTimes->{{3.410173530375*^9, 3.410173532609375*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Position du probl\[EGrave]me"
+}], "Subsection"],
+
+Cell["\<\
+On pose un fil sur la courbe. Puis on d\[EAcute]colle progressivement le fil \
+en le \"tirant\" par son extr\[EAcute]mit\[EAcute]. La d\[EAcute]veloppante \
+de la courbe est la courbe d\[EAcute]crite par l'extr\[EAcute]mit\[EAcute] du \
+fil. On peut montrer que la d\[EAcute]velopp\[EAcute]e de la \
+d\[EAcute]veloppante est la courbe de d\[EAcute]part.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"developpante", "[", 
+   RowBox[{"f_", ",", 
+    RowBox[{"{", 
+     RowBox[{"t_", ",", "a_", ",", "t0_"}], "}"}]}], "]"}], ":=", 
+  RowBox[{"f", "+", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"a", "-", 
+      RowBox[{"longueur", "[", 
+       RowBox[{"f", ",", 
+        RowBox[{"{", 
+         RowBox[{"t", ",", "t0", ",", "t"}], "}"}]}], "]"}]}], ")"}], "*", 
+    RowBox[{"vecteurTangent", "[", 
+     RowBox[{"f", ",", "t"}], "]"}]}]}]}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " D\[EAcute]veloppantes d'une cyclo\[IDoubleDot]de."
+}], "Subsection"],
+
+Cell[BoxData[
+ RowBox[{"d", "=", 
+  RowBox[{"developpante", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"t", "-", 
+        RowBox[{"Sin", "[", "t", "]"}]}], ")"}], ",", 
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"t", ",", "a", ",", "0"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.4101732260625*^9, 3.41017322621875*^9}, {
+  3.41017354125*^9, 3.41017354140625*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"dev", "[", 
+   RowBox[{"t_", ",", "a_"}], "]"}], "=", 
+  RowBox[{"FullSimplify", "[", 
+   RowBox[{"d", ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"R", ">", "0"}], ",", 
+      RowBox[{"t", ">", "0"}], ",", 
+      RowBox[{"t", "<", "Pi"}]}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.41017323275*^9, 3.410173236296875*^9}, {
+  3.410173515109375*^9, 3.4101735175*^9}, {3.410173548359375*^9, 
+  3.410173548515625*^9}}],
+
+Cell["\<\
+Voici une animation de la famille des d\[EAcute]veloppantes de la cyclo\
+\[IDoubleDot]de. L'une d'entre-elles est une cyclo\[IDoubleDot]de.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"Animate", "[", 
+  RowBox[{
+   RowBox[{"ParametricPlot", "[", 
+    RowBox[{
+     RowBox[{"dev", "[", 
+      RowBox[{"t", ",", "a"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"t", ",", "0", ",", 
+       RowBox[{"2", "Pi"}]}], "}"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "15"}], ",", "15"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "15"}], ",", "15"}], "}"}]}], "}"}]}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", "0", ",", "10", ",", "0.2"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.4101730800625*^9, 3.410173162265625*^9}, {
+  3.410173248640625*^9, 3.410173248953125*^9}, {3.410173328765625*^9, 
+  3.410173365546875*^9}, {3.41017355528125*^9, 3.41017355628125*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{666, 579},
+WindowMargins->{{14, Automatic}, {Automatic, 7}},
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 91, 3, 111, "Title"],
+Cell[673, 27, 48, 3, 39, "Author"],
+Cell[724, 32, 298, 5, 65, "Text"],
+Cell[CellGroupData[{
+Cell[1047, 41, 92, 4, 75, "Section"],
+Cell[CellGroupData[{
+Cell[1164, 49, 136, 8, 36, "Subsection"],
+Cell[1303, 59, 186, 4, 47, "Text"],
+Cell[1492, 65, 338, 9, 49, "Text"],
+Cell[1833, 76, 238, 8, 41, "Input"],
+Cell[2074, 86, 283, 9, 41, "Input"],
+Cell[2360, 97, 492, 16, 62, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2889, 118, 117, 7, 36, "Subsection"],
+Cell[3009, 127, 259, 8, 41, "Input"],
+Cell[3271, 137, 224, 5, 48, "Text"],
+Cell[3498, 144, 108, 3, 41, "Input"],
+Cell[3609, 149, 258, 8, 41, "Input"],
+Cell[3870, 159, 108, 3, 41, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4027, 168, 69, 4, 75, "Section"],
+Cell[CellGroupData[{
+Cell[4121, 176, 120, 7, 36, "Subsection"],
+Cell[4244, 185, 378, 13, 47, "Text"],
+Cell[4625, 200, 387, 12, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5049, 217, 123, 7, 36, "Subsection"],
+Cell[5175, 226, 82, 2, 29, "Text"],
+Cell[5260, 230, 531, 17, 41, "Input"],
+Cell[5794, 249, 214, 9, 29, "Text"],
+Cell[6011, 260, 108, 3, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6156, 268, 108, 7, 36, "Subsection"],
+Cell[6267, 277, 162, 3, 47, "Text"],
+Cell[6432, 282, 339, 11, 41, "Input"],
+Cell[6774, 295, 54, 1, 41, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6877, 302, 88, 4, 75, "Section"],
+Cell[CellGroupData[{
+Cell[6990, 310, 107, 7, 36, "Subsection"],
+Cell[7100, 319, 63, 0, 29, "Text"],
+Cell[7166, 321, 516, 17, 41, "Input"],
+Cell[7685, 340, 42, 0, 29, "Text"],
+Cell[7730, 342, 253, 8, 41, "Input"],
+Cell[7986, 352, 108, 3, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8131, 360, 116, 7, 36, "Subsection"],
+Cell[8250, 369, 47, 0, 29, "Text"],
+Cell[8300, 371, 200, 6, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8537, 382, 122, 7, 36, "Subsection"],
+Cell[8662, 391, 293, 10, 41, "Input"],
+Cell[8958, 403, 215, 7, 41, "Input"],
+Cell[9176, 412, 111, 3, 29, "Text"],
+Cell[9290, 417, 141, 4, 41, "Input"],
+Cell[9434, 423, 143, 4, 41, "Input"],
+Cell[9580, 429, 158, 5, 41, "Input"],
+Cell[9741, 436, 185, 6, 41, "Input"],
+Cell[9929, 444, 59, 1, 41, "Input"],
+Cell[9991, 447, 467, 16, 47, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10507, 469, 87, 4, 75, "Section"],
+Cell[CellGroupData[{
+Cell[10619, 477, 135, 7, 36, "Subsection"],
+Cell[10757, 486, 201, 4, 47, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10995, 495, 138, 7, 36, "Subsection"],
+Cell[11136, 504, 296, 9, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11469, 518, 136, 7, 36, "Subsection"],
+Cell[11608, 527, 418, 14, 41, "Input"],
+Cell[12029, 543, 211, 6, 41, "Input"],
+Cell[12243, 551, 127, 3, 29, "Text"],
+Cell[12373, 556, 406, 11, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12816, 572, 135, 7, 36, "Subsection"],
+Cell[12954, 581, 242, 8, 41, "Input"],
+Cell[13199, 591, 211, 6, 41, "Input"],
+Cell[13413, 599, 91, 2, 41, "Input"],
+Cell[13507, 603, 93, 2, 29, "Text"],
+Cell[13603, 607, 344, 10, 41, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13996, 623, 81, 4, 75, "Section"],
+Cell[14080, 629, 123, 2, 41, "Input"],
+Cell[CellGroupData[{
+Cell[14228, 635, 127, 7, 36, "Subsection"],
+Cell[14358, 644, 377, 6, 65, "Text"],
+Cell[14738, 652, 483, 15, 62, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15258, 672, 148, 7, 36, "Subsection"],
+Cell[15409, 681, 513, 15, 41, "Input"],
+Cell[15925, 698, 466, 13, 41, "Input"],
+Cell[16394, 713, 163, 3, 47, "Text"],
+Cell[16560, 718, 854, 23, 62, "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

@@ -1,0 +1,432 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     12464,        422]
+NotebookOptionsPosition[     11085,        373]
+NotebookOutlinePosition[     11523,        390]
+CellTagsIndexPosition[     11480,        387]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["L'ensemble de Mandelbrodt", "Title"],
+
+Cell[TextData[{
+ "\[CapitalEAcute]tant donn\[EAcute] un nombre complexe ",
+ Cell[BoxData[
+  FormBox["c", TraditionalForm]]],
+ ", on consid\[EGrave]re la suite ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"u", "(", "c", ")"}], "=", 
+    RowBox[{"(", 
+     SubscriptBox["z", "n"], ")"}]}], TraditionalForm]]],
+ " d\[EAcute]finie par ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["z", "0"], "=", "c"}], TraditionalForm]]],
+ ", et, pour tout entier ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["z", 
+     RowBox[{"n", "+", "1"}]], "=", 
+    RowBox[{
+     SuperscriptBox[
+      SubscriptBox["z", "n"], "2"], "+", "c"}]}], TraditionalForm]]],
+ ". L'ensemble de Mandel brodt est l'ensemble des nombres complexes ",
+ Cell[BoxData[
+  FormBox["c", TraditionalForm]]],
+ " pour lesquels la suite ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"u", "(", "c", ")"}], TraditionalForm]]],
+ " est born\[EAcute]e."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"Quit", "[", "]"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Vitesse d'\[EAcute]chappement"
+}], "Section"],
+
+Cell[TextData[{
+ "La fonction ",
+ StyleBox["iterer", "Input"],
+ " ci-dessous d\[EAcute]termine le plus petit entier ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ " tel que ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"|", 
+    SubscriptBox["z", "k"], "|", 
+    RowBox[{">", "2"}]}], TraditionalForm]]],
+ ", o\[UGrave] la suite ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    SubscriptBox["z", "n"], ")"}], TraditionalForm]]],
+ " est d\[EAcute]finie par ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["z", "0"], "=", "z"}], TraditionalForm]]],
+ " (",
+ Cell[BoxData[
+  FormBox["z", TraditionalForm]]],
+ " : le premier param\[EGrave]tre de la fonction) et, pour tout ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["z", 
+     RowBox[{"n", "+", "1"}]], "=", 
+    RowBox[{
+     SuperscriptBox[
+      SubscriptBox["z", "n"], "2"], "+", "c"}]}], TraditionalForm]]],
+ " (",
+ Cell[BoxData[
+  FormBox["c", TraditionalForm]]],
+ " : le second param\[EGrave]tre). \[CapitalEAcute]videmment, tous les termes \
+de la suite pourraient \[EHat]tre inf\[EAcute]rieurs ou \[EAcute]gaux \
+\[AGrave] 2 en module. On it\[EGrave]re donc au maximum ",
+ StyleBox["maxIter", "Input"],
+ " fois.\nLa fonction est compil\[EAcute]e car elle sera appel\[EAcute]e un \
+grand nombre de fois (quelques centaines de milliers de fois, pour un dessin \
+de r\[EAcute]solution convenable)."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"iterer", "=", 
+  RowBox[{"Compile", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"z", ",", "_Complex"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"c", ",", "_Complex"}], "}"}]}], "}"}], ",", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"k", "=", "0"}], ",", 
+        RowBox[{"w", "=", "z"}], ",", 
+        RowBox[{"maxIter", "=", "256"}]}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"While", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"k", "<", "maxIter"}], " ", "&&", " ", 
+          RowBox[{
+           RowBox[{"Abs", "[", "w", "]"}], "\[LessEqual]", "2"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"k", "++"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"w", "=", 
+           RowBox[{
+            RowBox[{"w", "^", "2"}], "+", "c"}]}]}]}], "\[IndentingNewLine]", 
+        "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"k", "\[GreaterEqual]", "maxIter"}], ",", "0", ",", "k"}], 
+        "]"}]}]}], "\[IndentingNewLine]", "]"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.41018066859375*^9, 3.410180681046875*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Calcul du domaine"
+}], "Section"],
+
+Cell[TextData[{
+ "On d\[EAcute]termine ici l'ensemble des points sur lesquels on va appliquer \
+la fonction ",
+ StyleBox["iterer", "Input"],
+ ". On englobe ce calcul dans une fonction."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"creerPoints", "[", 
+   RowBox[{"xmin_", ",", "xmax_", ",", "ymin_", ",", "ymax_", ",", "n_"}], 
+   "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"x", ",", "y"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"x", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"xmin", "+", 
+         RowBox[{"k", "*", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"xmax", "-", "xmin"}], ")"}], "/", "n"}]}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"k", ",", "0", ",", "n"}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"y", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"ymin", "+", 
+         RowBox[{"k", "*", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"ymax", "-", "ymin"}], ")"}], "/", "n"}]}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"k", ",", "0", ",", "n"}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Outer", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"#1", "+", 
+         RowBox[{"I", "*", "#2"}]}], "&"}], ",", "x", ",", "y"}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"z", "=", 
+   RowBox[{"creerPoints", "[", 
+    RowBox[{
+     RowBox[{"-", "2."}], ",", "1.", ",", 
+     RowBox[{"-", "1.5"}], ",", "1.5", ",", "400"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.410180191578125*^9, 3.410180234234375*^9}, {
+  3.41018053071875*^9, 3.410180531859375*^9}, {3.4103307175625*^9, 
+  3.4103307184375*^9}, {3.41033124621875*^9, 3.410331246765625*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Calcul de l'ensemble"
+}], "Section"],
+
+Cell[TextData[{
+ "On calcule la vitesse d'\[EAcute]chappement vers l'infini en chacun des \
+points d\[EAcute]termin\[EAcute]s dans le paragraphe \
+pr\[EAcute]c\[EAcute]dent.\nAttention, le temps d'ex\[EAcute]cution de la \
+ligne ci-dessous peut \[EHat]tre long (une dizaine de secondes pour un \
+AMD-2GHz, avec une grille de 400",
+ Cell[BoxData[
+  FormBox["\[Cross]", TraditionalForm]]],
+ "400)."
+}], "Text",
+ CellChangeTimes->{{3.41033126940625*^9, 3.4103312795625*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Timing", "[", 
+  RowBox[{
+   RowBox[{"z1", "=", 
+    RowBox[{"Map", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"iterer", "[", 
+        RowBox[{"#", ",", "#"}], "]"}], "&"}], ",", "z", ",", 
+      RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "]"}]], "Input",
+ CellChangeTimes->{{3.410330821140625*^9, 3.41033082234375*^9}, {
+  3.41033085375*^9, 3.410330854390625*^9}, {3.4103309135625*^9, 
+  3.410330914640625*^9}, {3.410331131796875*^9, 3.4103311325625*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Trac\[EAcute]"
+}], "Section"],
+
+Cell[BoxData[
+ RowBox[{"ArrayPlot", "[", 
+  RowBox[{
+   RowBox[{"108", "-", 
+    RowBox[{"Transpose", "[", "z1", "]"}]}], ",", 
+   RowBox[{"Mesh", "\[Rule]", "False"}], ",", 
+   RowBox[{"ImageSize", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"400", ",", "400"}], "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.410176247546875*^9, 3.410176257515625*^9}, {
+  3.4101802085625*^9, 3.41018020878125*^9}, {3.410180614328125*^9, 
+  3.4101806174375*^9}, {3.4101807308125*^9, 3.4101807335625*^9}, {
+  3.410330662140625*^9, 3.4103307669375*^9}, {3.41033083496875*^9, 
+  3.410330836734375*^9}, {3.410330892390625*^9, 3.410330900515625*^9}, {
+  3.410330945625*^9, 3.4103309916875*^9}, {3.410331053578125*^9, 
+  3.410331054390625*^9}, {3.4103311486875*^9, 3.410331238609375*^9}, {
+  3.410331459625*^9, 3.41033150378125*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Ensembles de Julia"
+}], "Section"],
+
+Cell["\<\
+Les fonctions ci-dessus permettent \[EAcute]galement de cr\[EAcute]er des \
+repr\[EAcute]sentations des ensembles de Julia. Donnons-en deux exemples.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"z", "=", 
+   RowBox[{"creerPoints", "[", 
+    RowBox[{
+     RowBox[{"-", "1.5"}], ",", "1.5", ",", 
+     RowBox[{"-", "1.5"}], ",", "1.5", ",", "400"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.410180249515625*^9, 3.410180250921875*^9}, {
+  3.410331293984375*^9, 3.410331294515625*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Timing", "[", 
+  RowBox[{
+   RowBox[{"zI", "=", 
+    RowBox[{"Map", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"iterer", "[", 
+        RowBox[{"#", ",", "I"}], "]"}], "&"}], ",", "z", ",", 
+      RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ArrayPlot", "[", 
+  RowBox[{
+   RowBox[{"20", "-", 
+    RowBox[{"Transpose", "[", "zI", "]"}]}], ",", 
+   RowBox[{"Mesh", "\[Rule]", "False"}], ",", 
+   RowBox[{"ImageSize", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"400", ",", "400"}], "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.410180263671875*^9, 3.410180265921875*^9}, {
+  3.410180790953125*^9, 3.41018079334375*^9}, {3.410331303890625*^9, 
+  3.41033131534375*^9}, {3.410331364203125*^9, 3.4103313871875*^9}, {
+  3.410331447015625*^9, 3.41033144759375*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"z", "=", 
+   RowBox[{"creerPoints", "[", 
+    RowBox[{
+     RowBox[{"-", "1.5"}], ",", "1.5", ",", 
+     RowBox[{"-", "1.5"}], ",", "1.5", ",", "400"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.410180273359375*^9, 3.41018027390625*^9}, {
+  3.410331321484375*^9, 3.410331321984375*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Timing", "[", 
+  RowBox[{
+   RowBox[{"zM1", "=", 
+    RowBox[{"Map", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"iterer", "[", 
+        RowBox[{"#", ",", 
+         RowBox[{"-", "1"}]}], "]"}], "&"}], ",", "z", ",", 
+      RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ArrayPlot", "[", 
+  RowBox[{
+   RowBox[{"20", "-", 
+    RowBox[{"Transpose", "[", "zM1", "]"}]}], ",", 
+   RowBox[{"Mesh", "\[Rule]", "False"}], ",", 
+   RowBox[{"ImageSize", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"400", ",", "400"}], "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.410180279203125*^9, 3.41018028175*^9}, {
+  3.410180802421875*^9, 3.410180804703125*^9}, {3.410331339765625*^9, 
+  3.4103313489375*^9}, {3.4103314*^9, 3.410331440828125*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{666, 579},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification->1,
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 42, 0, 65, "Title"],
+Cell[624, 24, 991, 36, 67, "Text"],
+Cell[1618, 62, 52, 1, 41, "Input"],
+Cell[CellGroupData[{
+Cell[1695, 67, 90, 4, 75, "Section"],
+Cell[1788, 73, 1445, 47, 123, "Text"],
+Cell[3236, 122, 1267, 35, 182, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4540, 162, 78, 4, 75, "Section"],
+Cell[4621, 168, 197, 5, 48, "Text"],
+Cell[4821, 175, 1216, 37, 122, "Input"],
+Cell[6040, 214, 415, 9, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6492, 228, 81, 4, 75, "Section"],
+Cell[6576, 234, 471, 10, 83, "Text"],
+Cell[7050, 246, 487, 12, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7574, 263, 74, 4, 75, "Section"],
+Cell[7651, 269, 814, 16, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8502, 290, 79, 4, 75, "Section"],
+Cell[8584, 296, 173, 3, 47, "Text"],
+Cell[8760, 301, 328, 8, 41, "Input"],
+Cell[9091, 311, 286, 9, 41, "Input"],
+Cell[9380, 322, 543, 12, 41, "Input"],
+Cell[9926, 336, 327, 8, 41, "Input"],
+Cell[10256, 346, 312, 10, 41, "Input"],
+Cell[10571, 358, 486, 11, 41, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

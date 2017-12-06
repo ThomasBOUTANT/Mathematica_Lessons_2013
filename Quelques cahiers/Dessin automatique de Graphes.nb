@@ -1,0 +1,2186 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     66070,       2176]
+NotebookOptionsPosition[     59702,       1978]
+NotebookOutlinePosition[     60195,       1996]
+CellTagsIndexPosition[     60152,       1993]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Dessin automatique de Graphes", "Title"],
+
+Cell["Marc Lorenzi - 15 juillet 2004", "Author"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ". Repr\[EAcute]sentation matricielle des graphes"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ ". Introduction"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Un graphe non orient\[EAcute] est un couple ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"G", "=", 
+    RowBox[{"(", 
+     RowBox[{"S", ",", "A"}], ")"}]}], TraditionalForm]]],
+ ". L'ensemble ",
+ Cell[BoxData[
+  FormBox["S", TraditionalForm]]],
+ " est l'ensemble des sommets de ",
+ Cell[BoxData[
+  FormBox["G", TraditionalForm]]],
+ ". L'ensemble ",
+ Cell[BoxData[
+  FormBox["A", TraditionalForm]]],
+ ", constitu\[EAcute] de paires de sommets de ",
+ Cell[BoxData[
+  FormBox["G", TraditionalForm]]],
+ ", est l'ensemble des ar\[EHat]tes de ",
+ Cell[BoxData[
+  FormBox["G", TraditionalForm]]],
+ ". Si ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"s", "=", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "y"}], "}"}]}], TraditionalForm]]],
+ " est une ar\[EHat]te du graphe, les sommets ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox["y", TraditionalForm]]],
+ " sont les extr\[EAcute]mit\[EAcute]s de ",
+ Cell[BoxData[
+  FormBox["s", TraditionalForm]]],
+ ". On dira que l'ar\[EHat]te ",
+ Cell[BoxData[
+  FormBox["s", TraditionalForm]]],
+ " m\[EGrave]ne de ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " \[AGrave] ",
+ Cell[BoxData[
+  FormBox["y", TraditionalForm]]],
+ " (ou de ",
+ Cell[BoxData[
+  FormBox["y", TraditionalForm]]],
+ " \[AGrave] ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ ").\nOn remarquera qu'une ar\[EHat]te est une paire de sommets, c'est \
+\[AGrave] dire un ensemble de deux sommets exactement. En particulier, un tel \
+graphe ne contient pas d'ar\[EHat]te allant d'un sommet vers lui-m\[EHat]me, \
+et au plus une ar\[EHat]te peut mener d'un sommet \[AGrave] un autre."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ ". Repr\[EAcute]senter un graphe par une matrice d'adjacence"
+}], "Subsection"],
+
+Cell[TextData[{
+ "On mod\[EAcute]lise dans la suite un graphe ",
+ Cell[BoxData[
+  FormBox["G", TraditionalForm]]],
+ " \[AGrave] ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " sommets par une matrice ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]]],
+ " \[AGrave] ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " lignes et ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " colonnes : sa matrice d'adjacence. En supposant num\[EAcute]rot\[EAcute]s \
+les sommets du graphe de 1 \[AGrave] ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ ", on d\[EAcute]finit la matrice d'adjacence ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]]],
+ " de ",
+ Cell[BoxData[
+  FormBox["G", TraditionalForm]]],
+ " comme suit :\nPour ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"1", " ", "\[LessEqual]", " ", "i"}], ",", 
+    RowBox[{"j", " ", "\[LessEqual]", " ", "n", " "}]}], TraditionalForm]]],
+ ", on a ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["m", "ij"], "=", "1"}], TraditionalForm]]],
+ " s'il y a une ar\[EHat]te menant du sommet ",
+ Cell[BoxData[
+  FormBox["i", TraditionalForm]]],
+ " vers le sommet ",
+ Cell[BoxData[
+  FormBox["j", TraditionalForm]]],
+ ", et 0 sinon.\nCette matrice est sym\[EAcute]trique puisque le graphe est \
+non orient\[EAcute], et a des 0 sur sa diagonale puisqu'il n'y a pas d'ar\
+\[EHat]te menant d'un sommet \[AGrave] lui-m\[EHat]me.\nOn confondra dans la \
+suite le graphe et sa matrice d'adjacence. Voici une fonction renvoyant un \
+graphe \[AGrave] ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " sommets, sans ar\[EHat]te :"
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"graphe", "[", "n_", "]"}], ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{"0.", ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "n"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"j", ",", "1", ",", "n"}], "}"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"graphe", "[", "5", "]"}], "//", "MatrixForm"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ ". Graphe complet \[AGrave] ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " sommets"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Le graphe ci-dessous, not\[EAcute] parfois ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["K", "n"], TraditionalForm]]],
+ ", poss\[EGrave]de n sommets. Chaque sommet est reli\[EAcute] \[AGrave] tous \
+les autres."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"gDemo", "[", "n_", "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "g", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"g", "=", 
+       RowBox[{"graphe", "[", "n", "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Do", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Do", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"j", "\[NotEqual]", "i"}], ",", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"g", "[", 
+               RowBox[{"[", 
+                RowBox[{"i", ",", "j"}], "]"}], "]"}], "=", "1."}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"g", "[", 
+               RowBox[{"[", 
+                RowBox[{"j", ",", "i"}], "]"}], "]"}], "=", "1"}]}]}], 
+           "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "1", ",", 
+            RowBox[{"j", "-", "1"}]}], "}"}]}], "\[IndentingNewLine]", "]"}], 
+        ",", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"j", ",", "1", ",", "n"}], "}"}]}], "\[IndentingNewLine]", 
+       "]"}], ";", "\[IndentingNewLine]", "g"}]}], "\[IndentingNewLine]", 
+    "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"gDemo", "[", "6", "]"}], "//", "MatrixForm"}]], "Input"],
+
+Cell["\<\
+Il sera beaucoup plus agr\[EAcute]able dans la suite de visualiser les \
+matrices, plut\[OHat]t que d'afficher leurs coefficients.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"ListDensityPlot", "[", 
+  RowBox[{"gDemo", "[", "6", "]"}], "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ ". Ajouter des ar\[EHat]tes \[AGrave] un graphe"
+}], "Subsection"],
+
+Cell["\<\
+La fonction qui suit permet d'ajouter facilement une liste de voisins \
+\[AGrave] un sommet d'un graphe.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"SetAttributes", "[", 
+  RowBox[{"ajouterVoisins", ",", "HoldFirst"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"ajouterVoisins", "[", 
+    RowBox[{"g_", ",", "i_", ",", "s_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "k", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Do", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"g", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", ",", 
+             RowBox[{"s", "[", 
+              RowBox[{"[", "k", "]"}], "]"}]}], "]"}], "]"}], "=", "1."}], 
+         ";", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"g", "[", 
+           RowBox[{"[", 
+            RowBox[{
+             RowBox[{"s", "[", 
+              RowBox[{"[", "k", "]"}], "]"}], ",", "i"}], "]"}], "]"}], "=", 
+          "1."}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"k", ",", "1", ",", 
+          RowBox[{"Length", "[", "s", "]"}]}], "}"}]}], "\[IndentingNewLine]",
+        "]"}], ";"}]}], "\[IndentingNewLine]", "]"}]}], ";"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ ". ",
+ "Le graphe du cube"
+}], "Subsection"],
+
+Cell["\<\
+On num\[EAcute]rote les sommets d'un cube. Pour fixer les id\[EAcute]es, la \
+face inf\[EAcute]rieure est form\[EAcute]e par les sommets 1,2,3,4 et la face \
+sup\[EAcute]rieure par les sommets 5,6,7,8. On d\[EAcute]finit ensuite un \
+graphe dont les ar\[EHat]tes correspondent aux ar\[EHat]tes du cube.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"gCube", ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "g", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"g", "=", 
+       RowBox[{"graphe", "[", "8", "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "1", ",", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "4", ",", "5"}], "}"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "2", ",", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", "6"}], "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "3", ",", 
+        RowBox[{"{", 
+         RowBox[{"4", ",", "7"}], "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "4", ",", 
+        RowBox[{"{", "8", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "5", ",", 
+        RowBox[{"{", 
+         RowBox[{"6", ",", "8"}], "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "6", ",", 
+        RowBox[{"{", "7", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "7", ",", 
+        RowBox[{"{", "8", "}"}]}], "]"}], ";", "\[IndentingNewLine]", "g"}]}],
+     "\[IndentingNewLine]", "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListDensityPlot", "[", "gCube", "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ ". ",
+ "Le graphe de l'icosa\[EGrave]dre"
+}], "Subsection"],
+
+Cell["\<\
+Et voici de m\[EHat]me le graphe de l'icosa\[EGrave]dre.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"gIcosaedre", "=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "g", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"g", " ", "=", " ", 
+       RowBox[{"graphe", "[", "12", "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "1", ",", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "3", ",", "4", ",", "5", ",", "6"}], "}"}]}], 
+       "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "12", ",", 
+        RowBox[{"{", 
+         RowBox[{"7", ",", "8", ",", "9", ",", "10", ",", "11"}], "}"}]}], 
+       "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "2", ",", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", "6", ",", "7", ",", "8"}], "}"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "3", ",", 
+        RowBox[{"{", 
+         RowBox[{"4", ",", "8", ",", "9"}], "}"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "4", ",", 
+        RowBox[{"{", 
+         RowBox[{"5", ",", "9", ",", "10"}], "}"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "5", ",", 
+        RowBox[{"{", 
+         RowBox[{"6", ",", "10", ",", "11"}], "}"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "6", ",", 
+        RowBox[{"{", 
+         RowBox[{"11", ",", "7"}], "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "7", ",", 
+        RowBox[{"{", 
+         RowBox[{"8", ",", "11"}], "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "8", ",", 
+        RowBox[{"{", "9", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "9", ",", 
+        RowBox[{"{", "10", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "10", ",", 
+        RowBox[{"{", "11", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      "g"}]}], "\[IndentingNewLine]", "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListDensityPlot", "[", "gIcosaedre", "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ ". Le graphe du dod\[EAcute]ca\[EGrave]dre"
+}], "Subsection"],
+
+Cell["Voici le graphe du dod\[EAcute]ca\[EGrave]dre.", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"gDodecaedre", "=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "g", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"g", " ", "=", " ", 
+       RowBox[{"graphe", "[", "20", "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "1", ",", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "5", ",", "6"}], "}"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "2", ",", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", "7"}], "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "3", ",", 
+        RowBox[{"{", 
+         RowBox[{"4", ",", "8"}], "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "4", ",", 
+        RowBox[{"{", 
+         RowBox[{"5", ",", "9"}], "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "5", ",", 
+        RowBox[{"{", "10", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "6", ",", 
+        RowBox[{"{", 
+         RowBox[{"11", ",", "12"}], "}"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "7", ",", 
+        RowBox[{"{", 
+         RowBox[{"12", ",", "13"}], "}"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "8", ",", 
+        RowBox[{"{", 
+         RowBox[{"13", ",", "14"}], "}"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "9", ",", 
+        RowBox[{"{", 
+         RowBox[{"14", ",", "15"}], "}"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "10", ",", 
+        RowBox[{"{", 
+         RowBox[{"15", ",", "11"}], "}"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "11", ",", 
+        RowBox[{"{", "16", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "12", ",", 
+        RowBox[{"{", "17", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "13", ",", 
+        RowBox[{"{", "18", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "14", ",", 
+        RowBox[{"{", "19", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "15", ",", 
+        RowBox[{"{", "20", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "16", ",", 
+        RowBox[{"{", 
+         RowBox[{"17", ",", "20"}], "}"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "17", ",", 
+        RowBox[{"{", "18", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "18", ",", 
+        RowBox[{"{", "19", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ajouterVoisins", "[", 
+       RowBox[{"g", ",", "19", ",", 
+        RowBox[{"{", "20", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      "g"}]}], "\[IndentingNewLine]", "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListDensityPlot", "[", "gDodecaedre", "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Laplacien de la matrice d'adjacence"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ ". Introduction"
+}], "Subsection"],
+
+Cell[TextData[{
+ "\[CapitalEAcute]tant donn\[EAcute] un graphe ",
+ Cell[BoxData[
+  FormBox["G", TraditionalForm]]],
+ " de matrice d'adjacence ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]]],
+ ", on introduit le laplacien de ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]]],
+ " : c'est la matrice ",
+ Cell[BoxData[
+  FormBox["L", TraditionalForm]]],
+ ", de m\[EHat]me taille que ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]]],
+ ", dont les coefficients sont donn\[EAcute]s par :"
+}], "Text",
+ TextAlignment->Left],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["L", "ii"], "=", 
+    RowBox[{
+     SubscriptBox["\[Sum]", "k"], 
+     SubscriptBox["m", "ik"]}]}], TraditionalForm]]],
+ "et ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["L", "ij"], "=", 
+    RowBox[{"-", 
+     SubscriptBox["m", "ij"]}]}], TraditionalForm]]],
+ " si ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"i", " ", "\[NotEqual]", " ", "j"}], TraditionalForm]]],
+ "."
+}], "Text",
+ TextAlignment->Center],
+
+Cell[TextData[{
+ "Le calcul des vecteurs propres et des valeurs propres de cette matrice sera \
+la cl\[EAcute] du trac\[EAcute] du graphe ",
+ Cell[BoxData[
+  FormBox["G", TraditionalForm]]],
+ "."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ ". Calcul du Laplacien"
+}], "Subsection"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"coefLap", "[", 
+   RowBox[{"m_", ",", "i_", ",", "i_"}], "]"}], ":=", 
+  RowBox[{"Sum", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"m", "[", 
+      RowBox[{"[", "i", "]"}], "]"}], "[", 
+     RowBox[{"[", "k", "]"}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", "1", ",", 
+      RowBox[{"Length", "[", "m", "]"}]}], "}"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"coefLap", "[", 
+   RowBox[{"m_", ",", "i_", ",", "j_"}], "]"}], ":=", 
+  RowBox[{"-", 
+   RowBox[{
+    RowBox[{"m", "[", 
+     RowBox[{"[", "i", "]"}], "]"}], "[", 
+    RowBox[{"[", "j", "]"}], "]"}]}]}]}], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"laplacien", "[", "m_", "]"}], ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"coefLap", "[", 
+     RowBox[{"m", ",", "i", ",", "j"}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"j", ",", "1", ",", 
+      RowBox[{"Length", "[", "m", "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", 
+      RowBox[{"Length", "[", "m", "]"}]}], "}"}]}], "]"}]}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ ". ",
+ "Exemple"
+}], "Subsection"],
+
+Cell[BoxData[
+ RowBox[{"ListDensityPlot", "[", 
+  RowBox[{"laplacien", "[", "gDodecaedre", "]"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListDensityPlot", "[", 
+  RowBox[{"laplacien", "[", "gIcosaedre", "]"}], "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Dessin du graphe"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ ". Aper\[CCedilla]u du probl\[EGrave]me"
+}], "Subsection"],
+
+Cell["\<\
+Le probl\[EGrave]me pos\[EAcute] est le suivant : placer les points du graphe \
+dans le plan, ou dans l'espace, de fa\[CCedilla]on \[AGrave] faire ressortir \
+les propri\[EAcute]t\[EAcute]s du graphe le plus clairement possible. Un \
+certain nombre de crit\[EGrave]res peuvent \[EHat]tre pris en compte :\
+\>", "Text"],
+
+Cell["\<\
+- Des sommets reli\[EAcute]s par une ar\[EHat]te devraient \[EHat]tre proches \
+sur le dessin final. Plus g\[EAcute]n\[EAcute]ralement, plus des sommets sont \
+\"proches\" dans le graphe, plus les points correspondants devraient \
+\[EHat]tre proche sur le dessin.
+- Il ne devrait pas y avoir d'intersections inutiles d'ar\[EHat]tes (on pense \
+surtout aux dessins dans le plan. Dans l'espace, deux ar\[EHat]tes ont peu de \
+chances de se couper).
+- L'angle entre deux ar\[EHat]tes issues d'un m\[EHat]me sommet ne devrait \
+pas \[EHat]tre trop petit.
+- Les sym\[EAcute]tries du graphe \"abstrait\" devraient donner des sym\
+\[EAcute]tries g\[EAcute]om\[EAcute]triques visibles sur le dessin.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ ". Une approche \[EAcute]nerg\[EAcute]tique"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Le probl\[EGrave]me ci-dessus n'admet pas de solution simple. On s'int\
+\[EAcute]resse ici \[AGrave] une approche \[EAcute]nerg\[EAcute]tique, \
+\[EAcute]voqu\[EAcute]e pour simplifier en dimension 1. Soient ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["x", "1"], ",", "...", ",", 
+    SubscriptBox["x", "n"]}], TraditionalForm]]],
+ "les abscisses des points du dessin du graphe, ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " \[EAcute]tant le nombre de sommets. On consid\[EGrave]re la fonction d'\
+\[EAcute]nergie"
+}], "Text"],
+
+Cell[TextData[{
+ " ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"E", "=", 
+    RowBox[{
+     FractionBox["1", "2"], 
+     RowBox[{
+      SubscriptBox["\[Sum]", 
+       RowBox[{"i", ",", "j"}]], 
+      SuperscriptBox[
+       RowBox[{
+        SubscriptBox["w", "ij"], "(", 
+        RowBox[{
+         SubscriptBox["x", "i"], "-", 
+         SubscriptBox["x", "j"]}], ")"}], "2"]}]}]}], TraditionalForm]]]
+}], "Text",
+ TextAlignment->Center],
+
+Cell[TextData[{
+ "o\[UGrave] les ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["w", "ij"], TraditionalForm]]],
+ " sont les coefficients de la matrice d'adjacence du graphe.\nPhysiquement, \
+les points voisins du graphe s'attirent, avec des forces proportionnelles \
+\[AGrave] leurs distances respectives. On cherche \[AGrave] minimiser L'\
+\[EAcute]nergie ",
+ Cell[BoxData[
+  FormBox["E", TraditionalForm]]],
+ ".\nUne solution \[EAcute]vidente du probl\[EGrave]me est de choisir tous \
+les ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "i"], TraditionalForm]]],
+ " \[EAcute]gaux, ce qui donne un minimum absolu de l'\[EAcute]nergie. C'est \
+\[EAcute]videmment une solution peu int\[EAcute]ressante. On contraint donc \
+le vecteur ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"x", "=", 
+    RowBox[{"(", 
+     RowBox[{
+      SubscriptBox["x", "1"], ",", "...", ",", 
+      SubscriptBox["x", "n"]}], ")"}]}], TraditionalForm]]],
+ " \[AGrave] \[EHat]tre de norme 1. On montre alors, avec une m\[EAcute]thode \
+de multiplicateurs de Lagrange, que les extrema de l'\[EAcute]nergie sont les \
+vecteurs propres du laplacien de la matrice d'adjacence."
+}], "Text"],
+
+Cell[TextData[{
+ "Une heuristique pour le trac\[EAcute] du graphe est la suivante :",
+ StyleBox["\n",
+  FontSize->16],
+ "On calcule les vecteurs propres du laplacien ",
+ Cell[BoxData[
+  FormBox["L", TraditionalForm]]],
+ " de la matrice d'adjacence, et on trie ces vecteurs par valeur propre \
+croissante (on peut montrer que le laplacien est sym\[EAcute]trique \
+semi-positif, ses valeurs propres sont donc des r\[EAcute]els positifs. Il \
+est \[EAcute]galement \[AGrave] remarquer que 0 est toujours valeur propre, \
+de vecteur propre associ\[EAcute] ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{"1", ",", "...", ",", "1"}], ")"}], TraditionalForm]]],
+ ".\nOn choisit pour coordonn\[EAcute]es ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{
+     SubscriptBox["x", "k"], ",", 
+     SubscriptBox["y", "k"], ",", 
+     SubscriptBox["z", "k"]}], ")"}], TraditionalForm]]],
+ " des points de la repr\[EAcute]sentation 3D du graphe les \
+coordonn\[EAcute]es des vecteurs ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["v", "1"], ",", 
+    SubscriptBox["v", "2"]}], TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["v", "3"], TraditionalForm]]],
+ ", respectivement second, troisi\[EGrave]me et quatri\[EGrave]me vecteur \
+propre du Laplacien de la matrice d'adjacence. Pr\[EAcute]cis\[EAcute]ment, ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["v", "1"], "=", 
+    RowBox[{"(", 
+     RowBox[{
+      SubscriptBox["x", "1"], ",", "...", ",", 
+      SubscriptBox["x", "n"]}], ")"}]}], TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["v", "2"], "=", 
+    RowBox[{"(", 
+     RowBox[{
+      SubscriptBox["y", "1"], ",", "...", ",", 
+      SubscriptBox["y", "n"]}], ")"}]}], TraditionalForm]]],
+ "  et ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["v", "3"], "=", 
+    RowBox[{"(", 
+     RowBox[{
+      SubscriptBox["z", "1"], ",", "...", ",", 
+      SubscriptBox["z", "n"]}], ")"}]}], TraditionalForm]]],
+ " o\[UGrave] ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " est le nombre de sommets du graphe."
+}], "Text"],
+
+Cell["\<\
+Cette m\[EAcute]thode donne souvent des r\[EAcute]sultats acceptables. Elle \
+est \[EAcute]videmment assez simpliste et ne demande qu'\[AGrave] \[EHat]tre \
+am\[EAcute]lior\[EAcute]e.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ ". ",
+ "Fonction de dessin"
+}], "Subsection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"calculVecteursPropres", "[", "g_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"v", ",", "lapg", ",", "egv", ",", "n", ",", "i", ",", "u"}], 
+     "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"lapg", " ", "=", " ", 
+      RowBox[{"laplacien", "[", "g", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"egv", " ", "=", " ", 
+      RowBox[{"Eigenvectors", "[", "lapg", "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"n", " ", "=", " ", 
+      RowBox[{"Length", "[", "g", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"v", "[", "i", "]"}], "=", 
+        RowBox[{
+         RowBox[{"u", "/", 
+          RowBox[{"Norm", "[", "u", "]"}]}], "/.", 
+         RowBox[{"u", "->", 
+          RowBox[{"egv", "[", 
+           RowBox[{"[", 
+            RowBox[{"n", "-", "i"}], "]"}], "]"}]}]}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", "3"}], "}"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"v", "[", "i", "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "3"}], "}"}]}], "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListDensityPlot", "[", 
+  RowBox[{"calculVecteursPropres", "[", "gIcosaedre", "]"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"dessinGraphe", "[", 
+    RowBox[{"g_", ",", "delta_"}], "]"}], ":=", " ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "t", ",", "t2", ",", "lpts", ",", "i", ",", "j", ",", "k", ",", "n"}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"n", "=", 
+       RowBox[{"Length", "[", "g", "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"vecteursPropres", " ", "=", 
+       RowBox[{"calculVecteursPropres", "[", "g", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"lpts", " ", "=", " ", 
+       RowBox[{"Transpose", "[", "vecteursPropres", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"sommets", " ", "=", " ", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"Cuboid", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"lpts", "[", 
+             RowBox[{"[", "k", "]"}], "]"}], "-", "delta"}], ",", 
+           RowBox[{
+            RowBox[{"lpts", "[", 
+             RowBox[{"[", "k", "]"}], "]"}], "+", "delta"}]}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"k", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"t2", "=", 
+       RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Do", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Do", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"If", "[", " ", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"g", "[", 
+               RowBox[{"[", "i", "]"}], "]"}], "[", 
+              RowBox[{"[", "j", "]"}], "]"}], " ", ">", " ", "0.5"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"t2", "=", 
+             RowBox[{"Append", "[", 
+              RowBox[{"t2", ",", 
+               RowBox[{"Line", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"lpts", "[", 
+                   RowBox[{"[", "i", "]"}], "]"}], ",", 
+                  RowBox[{"lpts", "[", 
+                   RowBox[{"[", "j", "]"}], "]"}]}], "}"}], "]"}]}], 
+              "]"}]}]}], "\[IndentingNewLine]", "]"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "\[IndentingNewLine]", 
+         "]"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"j", ",", "1", ",", "n"}], "}"}]}], "\[IndentingNewLine]", 
+       "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Graphics3D", "[", 
+       RowBox[{"Join", "[", 
+        RowBox[{"sommets", ",", "t2"}], "]"}], "]"}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]"}]], "Input"],
+
+Cell["Voici une fonction permettant d'animer le dessin.", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"animer", "[", "g_", "]"}], ":=", 
+   RowBox[{"Animate", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Show", "[", 
+      RowBox[{"g", ",", 
+       RowBox[{"ViewPoint", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Cos", "[", "t", "]"}], "+", 
+           RowBox[{"0.5", "*", 
+            RowBox[{"Sin", "[", "t", "]"}]}]}], ",", 
+          RowBox[{
+           RowBox[{"Sin", "[", "t", "]"}], "-", 
+           RowBox[{"Cos", "[", "t", "]"}]}], ",", 
+          RowBox[{
+           RowBox[{"Cos", "[", "t", "]"}], "+", 
+           RowBox[{"Sin", "[", "t", "]"}]}]}], "}"}]}], ",", 
+       RowBox[{"SphericalRegion", "\[Rule]", "True"}], ",", 
+       RowBox[{"Boxed", "\[Rule]", "False"}], ",", 
+       RowBox[{"Background", "\[Rule]", 
+        RowBox[{"RGBColor", "[", 
+         RowBox[{"0.2", ",", "0.2", ",", "0.4"}], "]"}]}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"400", ",", "400"}], "}"}]}]}], "]"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"t", ",", "0", ",", 
+       RowBox[{"2", "*", "Pi"}], ",", 
+       RowBox[{"Pi", "/", "20"}]}], "}"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.4101727700625*^9, 3.4101727710625*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ ". ",
+ "Trac\[EAcute] des exemples"
+}], "Subsection"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"dessinGraphe", "[", 
+   RowBox[{
+    RowBox[{"gDemo", "[", "5", "]"}], ",", "0.05"}], "]"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"dessinGraphe", "[", 
+   RowBox[{"gCube", ",", "0.05"}], "]"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"dessinGraphe", "[", 
+   RowBox[{"gIcosaedre", ",", "0.03"}], "]"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"dessinGraphe", "[", 
+   RowBox[{"gDodecaedre", ",", "0.02"}], "]"}], "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Le parcours du cavalier"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ ". Pr\[EAcute]sentation du probl\[EGrave]me"
+}], "Subsection"],
+
+Cell["\<\
+Un cavalier est plac\[EAcute] au d\[EAcute]part sur une case de \
+l'\[EAcute]chiquier. Il s'agit de faire parcourir au cavalier toutes les \
+cases de l'\[EAcute]chiquier, sans passer deux fois par la m\[EHat]me case.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ ". Interpr\[EAcute]tation en th\[EAcute]orie des graphes"
+}], "Subsection"],
+
+Cell["\<\
+On peut interpr\[EAcute]ter le probl\[EGrave]me ci-dessus comme un probl\
+\[EGrave]me de th\[EAcute]orie des graphes : on dispose d'un graphe \[AGrave] \
+64 sommets, correspondant aux 64 cases de l'\[EAcute]chiquier. Une \
+ar\[EHat]te relie deux sommets lorsque ces deux sommets correspondent \
+\[AGrave] un d\[EAcute]placement valide du cavalier sur l'\[EAcute]chiquier. \
+Il s'agit alors de d\[EAcute]terminer un \"parcours hamiltonien\" du graphe, \
+c'est \[AGrave] dire une exploration exhaustive des sommets du graphe, sans \
+passer deux fois par le m\[EHat]me sommet.\
+\>", "Text"],
+
+Cell["\<\
+Le probl\[EGrave]me de la recherche d'un parcours hamiltonien dans un graphe \
+est un probl\[EGrave]me difficile. On n'en conna\[IHat]t pas de solution \
+efficace. Notre but n'est pas de r\[EAcute]soudre le probl\[EGrave]me du \
+parcours hamiltonien, mais simplement de dessiner le graphe.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ ". Cr\[EAcute]ation du graphe"
+}], "Subsection"],
+
+Cell[TextData[{
+ "La fonction ci-dessous teste si un couple ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"{", 
+    RowBox[{"i", ",", "j"}], "}"}], TraditionalForm]]],
+ " correspond effectivement \[AGrave] une case de l'\[EAcute]chiquer. On \
+prend pour plus de souplesse un \[EAcute]chiquer ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"n", "\[Cross]", "n"}], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"admissible", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"i_", ",", "j_"}], "}"}], ",", "n_"}], "]"}], ":=", 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"1", "\[LessEqual]", " ", "i"}], " ", "&&", " ", 
+   RowBox[{"i", " ", "\[LessEqual]", "  ", "n"}], " ", "&&", " ", 
+   RowBox[{"1", " ", "\[LessEqual]", " ", "j"}], " ", "&&", " ", 
+   RowBox[{"j", " ", "\[LessEqual]", " ", "n"}]}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"admissible", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"2", ",", "9"}], "}"}], ",", "8"}], "]"}]], "Input"],
+
+Cell[TextData[{
+ "On v\[EAcute]rifie que la fonction fonctionne sur un \[EAcute]chiquier ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"8", "\[Cross]", "8"}], TraditionalForm]]],
+ " (en blanc, les cases admissibles)."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"ListDensityPlot", "[", 
+  RowBox[{
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"admissible", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"i", ",", "j"}], "}"}], ",", "8"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", 
+       RowBox[{"-", "2"}], ",", "11"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"j", ",", 
+       RowBox[{"-", "2"}], ",", "11"}], "}"}]}], "]"}], "/.", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"False", "\[Rule]", "0"}], ",", 
+     RowBox[{"True", "\[Rule]", "1"}]}], "}"}]}], "]"}]], "Input"],
+
+Cell[TextData[{
+ "Les \[EAcute]tiquettes des sommets des graphes que nous consid\[EAcute]rons \
+ici doivent \[EHat]tre des nombres entiers. On \[EAcute]crit donc une \
+fonction convertissant un couple ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"{", 
+    RowBox[{"i", ",", "j"}], "}"}], TraditionalForm]]],
+ " en un entier entre 1 et ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["n", "2"], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"coupleVersEntier", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"i_", ",", "j_"}], "}"}], ",", "n_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"n", "*", 
+    RowBox[{"(", 
+     RowBox[{"i", "-", "1"}], ")"}]}], "+", "j"}]}]], "Input"],
+
+Cell["\<\
+Voici enfin une fonction renvoyant la liste des cases accessibles \[AGrave] \
+partir d'une case donn\[EAcute]e, par un saut du cavalier.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"voisinsEchiquier", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"i_", ",", "j_"}], "}"}], ",", "n_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "s", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"s", "=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"i", "-", "1"}], ",", 
+          RowBox[{"j", "-", "2"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"i", "+", "1"}], ",", 
+          RowBox[{"j", "-", "2"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"i", "-", "1"}], ",", 
+          RowBox[{"j", "+", "2"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"i", "+", "1"}], ",", 
+          RowBox[{"j", "+", "2"}]}], "}"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"i", "-", "2"}], ",", 
+          RowBox[{"j", "-", "1"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"i", "-", "2"}], ",", 
+          RowBox[{"j", "+", "1"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"i", "+", "2"}], ",", 
+          RowBox[{"j", "-", "1"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"i", "+", "2"}], ",", 
+          RowBox[{"j", "+", "1"}]}], "}"}]}], "}"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Map", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"coupleVersEntier", "[", 
+         RowBox[{"#", ",", "n"}], "]"}], "&"}], ",", 
+       RowBox[{"Select", "[", 
+        RowBox[{"s", ",", 
+         RowBox[{
+          RowBox[{"admissible", "[", 
+           RowBox[{"#", ",", "n"}], "]"}], "&"}]}], "]"}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"voisinsEchiquier", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"8", ",", "8"}], "}"}], ",", "8"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"voisinsEchiquier", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"5", ",", "3"}], "}"}], ",", "8"}], "]"}]], "Input"],
+
+Cell[TextData[StyleBox["Le graphe du parcours du cavalier est maintenant \
+facile \[AGrave] d\[EAcute]crire.",
+ FontSize->16]], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"cavalier", "[", "n_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"g", ",", "i", ",", "j"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"g", "=", 
+      RowBox[{"graphe", "[", 
+       RowBox[{"n", "*", "n"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Do", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"ajouterVoisins", "[", 
+          RowBox[{"g", ",", 
+           RowBox[{
+            RowBox[{"n", "*", 
+             RowBox[{"(", 
+              RowBox[{"i", "-", "1"}], ")"}]}], "+", "j"}], ",", 
+           RowBox[{"voisinsEchiquier", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"i", ",", "j"}], "}"}], ",", "n"}], "]"}]}], "]"}], ",",
+          "\[IndentingNewLine]", 
+         RowBox[{"{", 
+          RowBox[{"j", ",", "1", ",", "n"}], "}"}]}], "\[IndentingNewLine]", 
+        "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "\[IndentingNewLine]", 
+      "]"}], ";", "\[IndentingNewLine]", "g"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListDensityPlot", "[", 
+  RowBox[{"cavalier", "[", "8", "]"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"dessinGraphe", "[", 
+   RowBox[{
+    RowBox[{"cavalier", "[", "8", "]"}], ",", "0.02"}], "]"}], "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Repr\[EAcute]sentation de quelques vari\[EAcute]t\[EAcute]s topologiques"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ ". Introduction"
+}], "Subsection"],
+
+Cell["\<\
+Un certain nombre de vari\[EAcute]t\[EAcute]s topologiques classiques sont \
+obtenues en prenant un carr\[EAcute] et en identifiant d'une certaine mani\
+\[EGrave]re les c\[OHat]t\[EAcute]s oppos\[EAcute]s du carr\[EAcute]. Un \
+cylindre, par exemple, est obtenu en recollant deux c\[OHat]t\[EAcute]s oppos\
+\[EAcute]s du carr\[EAcute]. \
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ ". Le cylindre"
+}], "Subsection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"cylindre", "[", 
+   RowBox[{"p_", ",", "q_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"g", ",", "k"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"g", "=", 
+      RowBox[{"graphe", "[", 
+       RowBox[{"p", "*", "q"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ajouterVoisins", "[", 
+        RowBox[{"g", ",", "k", ",", 
+         RowBox[{"{", 
+          RowBox[{"k", "+", "p"}], "}"}]}], "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", 
+         RowBox[{"p", "*", 
+          RowBox[{"(", 
+           RowBox[{"q", "-", "1"}], ")"}]}]}], "}"}]}], "\[IndentingNewLine]",
+       "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Mod", "[", 
+           RowBox[{"k", ",", "p"}], "]"}], "\[NotEqual]", " ", "0"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"ajouterVoisins", "[", 
+          RowBox[{"g", ",", "k", ",", 
+           RowBox[{"{", 
+            RowBox[{"k", "+", "1"}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+        "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", 
+         RowBox[{"p", "*", "q"}]}], "}"}]}], "\[IndentingNewLine]", "]"}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ajouterVoisins", "[", 
+        RowBox[{"g", ",", 
+         RowBox[{"p", "*", "k"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"p", "*", "k"}], "-", "p", "+", "1"}], "}"}]}], "]"}], ",",
+        "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", "q"}], "}"}]}], "\[IndentingNewLine]", 
+      "]"}], ";", "\[IndentingNewLine]", "g"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListDensityPlot", "[", 
+  RowBox[{"cylindre", "[", 
+   RowBox[{"10", ",", "10"}], "]"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"dessinGraphe", "[", 
+  RowBox[{
+   RowBox[{"cylindre", "[", 
+    RowBox[{"10", ",", "10"}], "]"}], ",", "0.005"}], "]"}]], "Input"],
+
+Cell["\<\
+Plut\[OHat]t d\[EAcute]cevant, n'est-ce pas ? On essaie autre chose.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"dessinGraphe", "[", 
+   RowBox[{
+    RowBox[{"cylindre", "[", 
+     RowBox[{"10", ",", "5"}], "]"}], ",", "0.005"}], "]"}], "]"}]], "Input"],
+
+Cell["C'est franchement mieux.", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ ". Le tore"
+}], "Subsection"],
+
+Cell["\<\
+On identifie cette fois-ci les c\[OHat]t\[EAcute]s gauche et droit du carr\
+\[EAcute], mais aussi les c\[OHat]t\[EAcute]s haut et bas.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"tore", "[", 
+   RowBox[{"p_", ",", "q_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"g", ",", "k"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"g", "=", 
+      RowBox[{"graphe", "[", 
+       RowBox[{"p", "*", "q"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ajouterVoisins", "[", 
+        RowBox[{"g", ",", "k", ",", 
+         RowBox[{"{", 
+          RowBox[{"k", "+", "p"}], "}"}]}], "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", 
+         RowBox[{"p", "*", 
+          RowBox[{"(", 
+           RowBox[{"q", "-", "1"}], ")"}]}]}], "}"}]}], "\[IndentingNewLine]",
+       "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Mod", "[", 
+           RowBox[{"k", ",", "p"}], "]"}], "\[NotEqual]", " ", "0"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"ajouterVoisins", "[", 
+          RowBox[{"g", ",", "k", ",", 
+           RowBox[{"{", 
+            RowBox[{"k", "+", "1"}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+        "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", 
+         RowBox[{"p", "*", "q"}]}], "}"}]}], "\[IndentingNewLine]", "]"}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ajouterVoisins", "[", 
+        RowBox[{"g", ",", 
+         RowBox[{"p", "*", "k"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"p", "*", 
+            RowBox[{"(", 
+             RowBox[{"k", "-", "1"}], ")"}]}], "+", "1"}], "}"}]}], "]"}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", "q"}], "}"}]}], "\[IndentingNewLine]", 
+      "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ajouterVoisins", "[", 
+        RowBox[{"g", ",", "k", ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"p", "*", 
+            RowBox[{"(", 
+             RowBox[{"q", "-", "1"}], ")"}]}], "+", "k"}], "}"}]}], "]"}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", "p"}], "}"}]}], "\[IndentingNewLine]", 
+      "]"}], ";", "\[IndentingNewLine]", "g"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListDensityPlot", "[", 
+  RowBox[{"tore", "[", 
+   RowBox[{"5", ",", "10"}], "]"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"dessinGraphe", "[", 
+   RowBox[{
+    RowBox[{"tore", "[", 
+     RowBox[{"5", ",", "10"}], "]"}], ",", "0.01"}], "]"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"dessinGraphe", "[", 
+   RowBox[{
+    RowBox[{"tore", "[", 
+     RowBox[{"9", ",", "9"}], "]"}], ",", "0.005"}], "]"}], "]"}]], "Input"],
+
+Cell["\<\
+C'est joli, mais on se serait attendus \[AGrave] \"autre chose\". Laissons \
+pour l'instant les choses en l'\[EAcute]tat.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ ". ",
+ "Le ruban de Moebius"
+}], "Subsection"],
+
+Cell["\<\
+On identifie les c\[OHat]t\[EAcute]s gauche et droit du carr\[EAcute], mais \
+en inversant le sens des c\[OHat]t\[EAcute]s.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"moebius", "[", 
+   RowBox[{"p_", ",", "q_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"g", ",", "k"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"g", "=", 
+      RowBox[{"graphe", "[", 
+       RowBox[{"p", "*", "q"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ajouterVoisins", "[", 
+        RowBox[{"g", ",", "k", ",", 
+         RowBox[{"{", 
+          RowBox[{"k", "+", "p"}], "}"}]}], "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", 
+         RowBox[{"p", "*", 
+          RowBox[{"(", 
+           RowBox[{"q", "-", "1"}], ")"}]}]}], "}"}]}], "\[IndentingNewLine]",
+       "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Mod", "[", 
+           RowBox[{"k", ",", "p"}], "]"}], "\[NotEqual]", " ", "0"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"ajouterVoisins", "[", 
+          RowBox[{"g", ",", "k", ",", 
+           RowBox[{"{", 
+            RowBox[{"k", "+", "1"}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+        "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", 
+         RowBox[{"p", "*", "q"}]}], "}"}]}], "\[IndentingNewLine]", "]"}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ajouterVoisins", "[", 
+        RowBox[{"g", ",", 
+         RowBox[{"p", "*", "k"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"p", "*", 
+            RowBox[{"(", 
+             RowBox[{"q", "-", "k"}], ")"}]}], "+", "1"}], "}"}]}], "]"}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", "q"}], "}"}]}], "\[IndentingNewLine]", 
+      "]"}], ";", "\[IndentingNewLine]", "g"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListDensityPlot", "[", 
+  RowBox[{"moebius", "[", 
+   RowBox[{"10", ",", "10"}], "]"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"dessinGraphe", "[", 
+   RowBox[{
+    RowBox[{"moebius", "[", 
+     RowBox[{"10", ",", "10"}], "]"}], ",", "0.004"}], "]"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"dessinGraphe", "[", 
+   RowBox[{
+    RowBox[{"moebius", "[", 
+     RowBox[{"10", ",", "5"}], "]"}], ",", "0.01"}], "]"}], "]"}]], "Input"],
+
+Cell["\<\
+Pas mal. Mais on fera bient\[OHat]t mieux.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ ". ",
+ "La bouteille de Klein"
+}], "Subsection"],
+
+Cell["\<\
+Comme pour le ruban de Moebius (identification invers\[EAcute]e des c\[OHat]t\
+\[EAcute]s gauche et droit), plus identification des c\[OHat]t\[EAcute]s haut \
+et bas.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"klein", "[", 
+   RowBox[{"p_", ",", "q_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"g", ",", "k"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"g", "=", 
+      RowBox[{"graphe", "[", 
+       RowBox[{"p", "*", "q"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ajouterVoisins", "[", 
+        RowBox[{"g", ",", "k", ",", 
+         RowBox[{"{", 
+          RowBox[{"k", "+", "p"}], "}"}]}], "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", 
+         RowBox[{"p", "*", 
+          RowBox[{"(", 
+           RowBox[{"q", "-", "1"}], ")"}]}]}], "}"}]}], "\[IndentingNewLine]",
+       "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Mod", "[", 
+           RowBox[{"k", ",", "p"}], "]"}], "\[NotEqual]", " ", "0"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"ajouterVoisins", "[", 
+          RowBox[{"g", ",", "k", ",", 
+           RowBox[{"{", 
+            RowBox[{"k", "+", "1"}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+        "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", 
+         RowBox[{"p", "*", "q"}]}], "}"}]}], "\[IndentingNewLine]", "]"}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ajouterVoisins", "[", 
+        RowBox[{"g", ",", 
+         RowBox[{"p", "*", "k"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"p", "*", 
+            RowBox[{"(", 
+             RowBox[{"q", "-", "k"}], ")"}]}], "+", "1"}], "}"}]}], "]"}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", "q"}], "}"}]}], "\[IndentingNewLine]", 
+      "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ajouterVoisins", "[", 
+        RowBox[{"g", ",", "k", ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"p", "*", 
+            RowBox[{"(", 
+             RowBox[{"q", "-", "1"}], ")"}]}], "+", "k"}], "}"}]}], "]"}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", "p"}], "}"}]}], "\[IndentingNewLine]", 
+      "]"}], ";", "\[IndentingNewLine]", "g"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"dessinGraphe", "[", 
+   RowBox[{
+    RowBox[{"klein", "[", 
+     RowBox[{"5", ",", "10"}], "]"}], ",", "0.01"}], "]"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"dessinGraphe", "[", 
+   RowBox[{
+    RowBox[{"klein", "[", 
+     RowBox[{"10", ",", "10"}], "]"}], ",", "0.01"}], "]"}], "]"}]], "Input"],
+
+Cell["\<\
+Les r\[EAcute]sultats sont d\[EAcute]cevants : certains sommets du graphe se \
+retrouvent au m\[EHat]me endroit. On d\[EAcute]cide de perturber la matrice \
+d'adjacence du graphe pour \"briser les sym\[EAcute]tries\".\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"perturber", "[", 
+   RowBox[{"m_", ",", "r_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"m1", ",", "i", ",", "j"}], "}"}], ",", 
+    RowBox[{
+     RowBox[{"m1", "=", "m"}], ";", 
+     RowBox[{"Do", "[", 
+      RowBox[{
+       RowBox[{"Do", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"m1", "\[LeftDoubleBracket]", 
+            RowBox[{"i", ",", "j"}], "\[RightDoubleBracket]"}], "=", 
+           RowBox[{
+            RowBox[{"m1", "\[LeftDoubleBracket]", 
+             RowBox[{"i", ",", "j"}], "\[RightDoubleBracket]"}], "+", 
+            RowBox[{"r", " ", 
+             RowBox[{"RandomReal", "[", "]"}]}]}]}], ";", 
+          RowBox[{
+           RowBox[{"m1", "\[LeftDoubleBracket]", 
+            RowBox[{"j", ",", "i"}], "\[RightDoubleBracket]"}], "=", 
+           RowBox[{"m1", "\[LeftDoubleBracket]", 
+            RowBox[{"i", ",", "j"}], "\[RightDoubleBracket]"}]}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"j", ",", "1", ",", 
+           RowBox[{"i", "-", "1"}]}], "}"}]}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", 
+         RowBox[{"Length", "[", "m1", "]"}]}], "}"}]}], "]"}], ";", "m1"}]}], 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"dessinGraphe", "[", 
+   RowBox[{
+    RowBox[{"perturber", "[", 
+     RowBox[{
+      RowBox[{"klein", "[", 
+       RowBox[{"10", ",", "10"}], "]"}], ",", "0.05"}], "]"}], ",", "0."}], 
+   "]"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"dessinGraphe", "[", 
+   RowBox[{
+    RowBox[{"perturber", "[", 
+     RowBox[{
+      RowBox[{"moebius", "[", 
+       RowBox[{"10", ",", "5"}], "]"}], ",", "0.08"}], "]"}], ",", "0."}], 
+   "]"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"dessinGraphe", "[", 
+   RowBox[{
+    RowBox[{"perturber", "[", 
+     RowBox[{
+      RowBox[{"tore", "[", 
+       RowBox[{"10", ",", "7"}], "]"}], ",", "0.08"}], "]"}], ",", "0."}], 
+   "]"}], "]"}]], "Input"],
+
+Cell["\<\
+Si quelqu'un a une id\[EAcute]e pour afficher un joli tore, je suis preneur.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ ". ",
+ "Le plan projectif"
+}], "Subsection"],
+
+Cell["\<\
+Identification invers\[EAcute]e des c\[OHat]t\[EAcute]s gauche et droit, plus \
+identification invers\[EAcute]e des c\[OHat]t\[EAcute]s haut et bas.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"projectif", "[", 
+   RowBox[{"p_", ",", "q_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"g", ",", "k"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"g", "=", 
+      RowBox[{"graphe", "[", 
+       RowBox[{"p", "*", "q"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ajouterVoisins", "[", 
+        RowBox[{"g", ",", "k", ",", 
+         RowBox[{"{", 
+          RowBox[{"k", "+", "p"}], "}"}]}], "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", 
+         RowBox[{"p", "*", 
+          RowBox[{"(", 
+           RowBox[{"q", "-", "1"}], ")"}]}]}], "}"}]}], "\[IndentingNewLine]",
+       "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Mod", "[", 
+           RowBox[{"k", ",", "p"}], "]"}], "\[NotEqual]", " ", "0"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"ajouterVoisins", "[", 
+          RowBox[{"g", ",", "k", ",", 
+           RowBox[{"{", 
+            RowBox[{"k", "+", "1"}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+        "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", 
+         RowBox[{"p", "*", "q"}]}], "}"}]}], "\[IndentingNewLine]", "]"}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ajouterVoisins", "[", 
+        RowBox[{"g", ",", 
+         RowBox[{"p", "*", "k"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"p", "*", 
+            RowBox[{"(", 
+             RowBox[{"q", "-", "k"}], ")"}]}], "+", "1"}], "}"}]}], "]"}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", "q"}], "}"}]}], "\[IndentingNewLine]", 
+      "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ajouterVoisins", "[", 
+        RowBox[{"g", ",", "k", ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"p", "*", "q"}], "-", "k", "+", "1"}], "}"}]}], "]"}], ",",
+        "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", "p"}], "}"}]}], "\[IndentingNewLine]", 
+      "]"}], ";", "\[IndentingNewLine]", "g"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"dessinGraphe", "[", 
+   RowBox[{
+    RowBox[{"perturber", "[", 
+     RowBox[{
+      RowBox[{"projectif", "[", 
+       RowBox[{"10", ",", "10"}], "]"}], ",", "0.07"}], "]"}], ",", "0.005"}],
+    "]"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"dessinGraphe", "[", 
+   RowBox[{
+    RowBox[{"perturber", "[", 
+     RowBox[{
+      RowBox[{"projectif", "[", 
+       RowBox[{"7", ",", "15"}], "]"}], ",", "0.08"}], "]"}], ",", "0.005"}], 
+   "]"}], "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+ScreenStyleEnvironment->"Working",
+PrintingStyleEnvironment->"Printout",
+WindowSize->{666, 579},
+WindowMargins->{{5, Automatic}, {Automatic, 0}},
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 46, 0, 65, "Title"],
+Cell[628, 24, 48, 0, 23, "Author"],
+Cell[CellGroupData[{
+Cell[701, 28, 108, 4, 75, "Section"],
+Cell[CellGroupData[{
+Cell[834, 36, 112, 7, 36, "Subsection"],
+Cell[949, 45, 1655, 56, 137, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2641, 106, 157, 7, 36, "Subsection"],
+Cell[2801, 115, 1618, 51, 158, "Text"],
+Cell[4422, 168, 273, 8, 41, "Input"],
+Cell[4698, 178, 92, 2, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4827, 185, 188, 10, 36, "Subsection"],
+Cell[5018, 197, 241, 7, 47, "Text"],
+Cell[5262, 206, 1376, 35, 302, "Input"],
+Cell[6641, 243, 91, 2, 41, "Input"],
+Cell[6735, 247, 154, 3, 47, "Text"],
+Cell[6892, 252, 100, 2, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7029, 259, 144, 7, 36, "Subsection"],
+Cell[7176, 268, 128, 3, 29, "Text"],
+Cell[7307, 273, 110, 2, 41, "Input"],
+Cell[7420, 277, 1033, 29, 162, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8490, 311, 122, 8, 36, "Subsection"],
+Cell[8615, 321, 326, 5, 65, "Text"],
+Cell[8944, 328, 1474, 35, 242, "Input"],
+Cell[10421, 365, 72, 1, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10530, 371, 137, 8, 36, "Subsection"],
+Cell[10670, 381, 80, 2, 29, "Text"],
+Cell[10753, 385, 2339, 56, 322, "Input"],
+Cell[13095, 443, 77, 1, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13209, 449, 139, 7, 36, "Subsection"],
+Cell[13351, 458, 62, 0, 29, "Text"],
+Cell[13416, 460, 3485, 83, 482, "Input"],
+Cell[16904, 545, 78, 1, 41, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17031, 552, 96, 4, 75, "Section"],
+Cell[CellGroupData[{
+Cell[17152, 560, 112, 7, 36, "Subsection"],
+Cell[17267, 569, 524, 18, 47, "Text"],
+Cell[17794, 589, 487, 21, 32, "Text"],
+Cell[18284, 612, 207, 6, 47, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18528, 623, 119, 7, 36, "Subsection"],
+Cell[18650, 632, 643, 21, 62, "Input"],
+Cell[19296, 655, 421, 12, 62, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19754, 672, 112, 8, 36, "Subsection"],
+Cell[19869, 682, 114, 2, 41, "Input"],
+Cell[19986, 686, 113, 2, 41, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20148, 694, 77, 4, 75, "Section"],
+Cell[CellGroupData[{
+Cell[20250, 702, 136, 7, 36, "Subsection"],
+Cell[20389, 711, 328, 5, 65, "Text"],
+Cell[20720, 718, 715, 12, 155, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21472, 735, 140, 7, 36, "Subsection"],
+Cell[21615, 744, 568, 14, 65, "Text"],
+Cell[22186, 760, 431, 17, 39, "Text"],
+Cell[22620, 779, 1154, 29, 158, "Text"],
+Cell[23777, 810, 2125, 67, 173, "Text"],
+Cell[25905, 879, 207, 4, 47, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26149, 888, 123, 8, 36, "Subsection"],
+Cell[26275, 898, 1276, 35, 162, "Input"],
+Cell[27554, 935, 125, 2, 41, "Input"],
+Cell[27682, 939, 2709, 69, 382, "Input"],
+Cell[30394, 1010, 65, 0, 29, "Text"],
+Cell[30462, 1012, 1311, 34, 122, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[31810, 1051, 131, 8, 36, "Subsection"],
+Cell[31944, 1061, 157, 4, 41, "Input"],
+Cell[32104, 1067, 127, 3, 41, "Input"],
+Cell[32234, 1072, 132, 3, 41, "Input"],
+Cell[32369, 1077, 133, 3, 41, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[32551, 1086, 84, 4, 75, "Section"],
+Cell[CellGroupData[{
+Cell[32660, 1094, 140, 7, 36, "Subsection"],
+Cell[32803, 1103, 240, 4, 47, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[33080, 1112, 153, 7, 36, "Subsection"],
+Cell[33236, 1121, 597, 9, 101, "Text"],
+Cell[33836, 1132, 313, 5, 65, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34186, 1142, 126, 7, 36, "Subsection"],
+Cell[34315, 1151, 386, 12, 47, "Text"],
+Cell[34704, 1165, 443, 11, 62, "Input"],
+Cell[35150, 1178, 135, 4, 41, "Input"],
+Cell[35288, 1184, 223, 6, 29, "Text"],
+Cell[35514, 1192, 578, 18, 62, "Input"],
+Cell[36095, 1212, 424, 13, 49, "Text"],
+Cell[36522, 1227, 269, 9, 41, "Input"],
+Cell[36794, 1238, 160, 3, 47, "Text"],
+Cell[36957, 1243, 1820, 56, 122, "Input"],
+Cell[38780, 1301, 141, 4, 41, "Input"],
+Cell[38924, 1307, 141, 4, 41, "Input"],
+Cell[39068, 1313, 135, 2, 32, "Text"],
+Cell[39206, 1317, 1227, 32, 242, "Input"],
+Cell[40436, 1351, 103, 2, 41, "Input"],
+Cell[40542, 1355, 160, 4, 41, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[40751, 1365, 133, 4, 75, "Section"],
+Cell[CellGroupData[{
+Cell[40909, 1373, 112, 7, 36, "Subsection"],
+Cell[41024, 1382, 360, 6, 65, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[41421, 1393, 111, 7, 36, "Subsection"],
+Cell[41535, 1402, 2004, 53, 382, "Input"],
+Cell[43542, 1457, 129, 3, 41, "Input"],
+Cell[43674, 1462, 155, 4, 41, "Input"],
+Cell[43832, 1468, 92, 2, 29, "Text"],
+Cell[43927, 1472, 188, 5, 41, "Input"],
+Cell[44118, 1479, 40, 0, 29, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[44195, 1484, 107, 7, 36, "Subsection"],
+Cell[44305, 1493, 158, 3, 29, "Text"],
+Cell[44466, 1498, 2545, 68, 462, "Input"],
+Cell[47014, 1568, 124, 3, 41, "Input"],
+Cell[47141, 1573, 183, 5, 41, "Input"],
+Cell[47327, 1580, 183, 5, 41, "Input"],
+Cell[47513, 1587, 145, 3, 29, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[47695, 1595, 124, 8, 36, "Subsection"],
+Cell[47822, 1605, 147, 3, 29, "Text"],
+Cell[47972, 1610, 2060, 55, 382, "Input"],
+Cell[50035, 1667, 128, 3, 41, "Input"],
+Cell[50166, 1672, 188, 5, 41, "Input"],
+Cell[50357, 1679, 186, 5, 41, "Input"],
+Cell[50546, 1686, 66, 2, 29, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[50649, 1693, 126, 8, 36, "Subsection"],
+Cell[50778, 1703, 190, 4, 47, "Text"],
+Cell[50971, 1709, 2546, 68, 462, "Input"],
+Cell[53520, 1779, 184, 5, 41, "Input"],
+Cell[53707, 1786, 185, 5, 41, "Input"],
+Cell[53895, 1793, 241, 4, 47, "Text"],
+Cell[54139, 1799, 1273, 34, 102, "Input"],
+Cell[55415, 1835, 258, 8, 41, "Input"],
+Cell[55676, 1845, 259, 8, 41, "Input"],
+Cell[55938, 1855, 256, 8, 41, "Input"],
+Cell[56197, 1865, 100, 2, 29, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[56334, 1872, 122, 8, 36, "Subsection"],
+Cell[56459, 1882, 172, 3, 29, "Text"],
+Cell[56634, 1887, 2493, 66, 462, "Input"],
+Cell[59130, 1955, 265, 8, 41, "Input"],
+Cell[59398, 1965, 264, 8, 41, "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

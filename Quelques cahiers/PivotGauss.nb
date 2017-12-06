@@ -1,0 +1,1581 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     45221,       1571]
+NotebookOptionsPosition[     39645,       1401]
+NotebookOutlinePosition[     40100,       1418]
+CellTagsIndexPosition[     40057,       1415]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Pivot de Gauss", "Title"],
+
+Cell["\<\
+
+Ce notebook est une petite introduction \[AGrave] l'algorithme du pivot de \
+Gauss. \
+\>", "Text"],
+
+Cell["\<\
+On ne cherche pas, dans ce qui suit, \[AGrave] \[EAcute]crire des fonctions \
+rus\[EAcute]es ou rapides, mais \[AGrave] essayer de bien voir le \
+fonctionnement de la m\[EAcute]thode du pivot. On se contentetout d'abord d'\
+\[EAcute]crire un algorithme \"kamikaze\", qui esp\[EGrave]re, \[AGrave] \
+chaque \[EAcute]tape, ne pas tomber sur un pivot nul. Puis, on r\[EAcute]dige \
+un algorithme fonctionnant \[AGrave] tous les coups.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Op\[EAcute]rations \[EAcute]l\[EAcute]mentaires sur les lignes"
+}], "Section"],
+
+Cell["\<\
+ On examine dans cette section comment effectuer des op\[EAcute]rations \
+\[EAcute]l\[EAcute]mentaires sur les lignes d'une matrice. On d\[EAcute]finit \
+tout d'abord une matrice \"exemple\" qui servira \[AGrave] tester les \
+fonctions.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " La matrice \"exemple\""
+}], "Subsection"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"matEx", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"5", ",", "6", ",", "7", ",", "8"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"9", ",", "10", ",", "11", ",", "12"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"13", ",", "14", ",", "15", ",", "16"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"17", ",", "18", ",", "19", ",", "20"}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"matEx", "//", "MatrixForm"}]}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Echanger deux lignes"
+}], "Subsection"],
+
+Cell[TextData[{
+ "La fonction ",
+ StyleBox["echangerLignes", "Input"],
+ " \[EAcute]change la ligne ",
+ Cell[BoxData[
+  FormBox["i", TraditionalForm]]],
+ " et la ligne ",
+ Cell[BoxData[
+  FormBox["j", TraditionalForm]]],
+ " de la matrice ",
+ Cell[BoxData[
+  FormBox["a", TraditionalForm]]],
+ ". "
+}], "Text"],
+
+Cell[TextData[{
+ "Plus exactement, cette fonction renvoie une nouvelle matrice, qui est la \
+matrice r\[EAcute]sultant de l'\[EAcute]change en question. Cette remarque \
+vaut pour toutes les fonctions que nous \[EAcute]crirons : elles ne modifient \
+jamais physiquement la matrice de d\[EAcute]part. On peut \[EAcute]crire avec \
+",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " des fonctions modifiant leurs arguments, mais ceci est une autre histoire \
+..."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"echangerLignes", "[", 
+   RowBox[{"a_", ",", "i_", ",", "j_"}], "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"m", "=", "a"}], ",", "s"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"s", "=", 
+      RowBox[{"m", "[", 
+       RowBox[{"[", "i", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"m", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], "=", 
+      RowBox[{"m", "[", 
+       RowBox[{"[", "j", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"m", "[", 
+       RowBox[{"[", "j", "]"}], "]"}], "=", "s"}], ";", "\[IndentingNewLine]",
+      "m"}]}], "\[IndentingNewLine]", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"echangerLignes", "[", 
+   RowBox[{"matEx", ",", "1", ",", "3"}], "]"}], "//", 
+  "MatrixForm"}]], "Input"],
+
+Cell["\<\
+C'\[EAcute]tait facile. Les autres op\[EAcute]rations ne sont pas plus \
+compliqu\[EAcute]es.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Multiplier une ligne par un scalaire"
+}], "Subsection"],
+
+Cell[TextData[{
+ "La fonction ",
+ StyleBox["multiplierLigne", "Input"],
+ " multiplie la ligne ",
+ Cell[BoxData[
+  FormBox["i", TraditionalForm]]],
+ " de la matrice ",
+ Cell[BoxData[
+  FormBox["a", TraditionalForm]]],
+ " par le scalaire ",
+ Cell[BoxData[
+  FormBox["\[Lambda]", TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"multiplierLigne", "[", 
+   RowBox[{"a_", ",", "i_", ",", "\[Lambda]_"}], "]"}], ":=", 
+  "\[IndentingNewLine]", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"m", "=", "a"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"m", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], "=", 
+      RowBox[{"\[Lambda]", "*", 
+       RowBox[{"m", "[", 
+        RowBox[{"[", "i", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+     "m"}]}], "\[IndentingNewLine]", "]"}]}]], "Input"],
+
+Cell[TextData[{
+ "Remarquer que l'on a profit\[EAcute] du fait que ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " sait faire des op\[EAcute]rations globalement sur les listes (comme par \
+exemple multiplier une liste par une constante)."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"multiplierLigne", "[", 
+   RowBox[{"matEx", ",", "2", ",", 
+    RowBox[{"-", "1"}]}], "]"}], "//", "MatrixForm"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Ajouter \[AGrave] une ligne un multiple d'une autre"
+}], "Subsection"],
+
+Cell[TextData[{
+ "La fonction ",
+ StyleBox["ajoutMult", "Input"],
+ " ajoute \[AGrave] la ligne ",
+ Cell[BoxData[
+  FormBox["i", TraditionalForm]]],
+ " de la matrice ",
+ Cell[BoxData[
+  FormBox["a", TraditionalForm]]],
+ " la ligne ",
+ Cell[BoxData[
+  FormBox["j", TraditionalForm]]],
+ " multipli\[EAcute]e par ",
+ Cell[BoxData[
+  FormBox["\[Lambda]", TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ajoutMult", "[", 
+   RowBox[{"a_", ",", "i_", ",", "\[Lambda]_", ",", "j_"}], "]"}], ":=", 
+  "\[IndentingNewLine]", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"m", "=", "a"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"m", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], "=", 
+      RowBox[{
+       RowBox[{"m", "[", 
+        RowBox[{"[", "i", "]"}], "]"}], "+", 
+       RowBox[{"\[Lambda]", "*", 
+        RowBox[{"m", "[", 
+         RowBox[{"[", "j", "]"}], "]"}]}]}]}], ";", "\[IndentingNewLine]", 
+     "m"}]}], "\[IndentingNewLine]", "]"}]}]], "Input"],
+
+Cell["\<\
+Eh oui, on peut aussi ajouter ou soustraire des listes sans \[EHat]tre oblig\
+\[EAcute] d'\[EAcute]crire des boucles.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ajoutMult", "[", 
+   RowBox[{"matEx", ",", "2", ",", 
+    RowBox[{"-", "5"}], ",", "1"}], "]"}], "//", "MatrixForm"}]], "Input"],
+
+Cell[TextData[{
+ "Le coefficient multiplicateur \[EAcute]gal \[AGrave] ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"-", "5"}], TraditionalForm]]],
+ " n'a \[EAcute]videmment pas \[EAcute]t\[EAcute] choisi au hasard : il a \
+permis d'annuler le coefficient situ\[EAcute] ligne 2, colonne 1. On g\
+\[EAcute]n\[EAcute]ralise au paragraphe suivant cette op\[EAcute]ration \
+d'annulation de coefficients : c'est la cl\[EAcute] de l'algorithme du pivot."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Pivoter suivant une ligne"
+}], "Subsection"],
+
+Cell[TextData[{
+ "La fonction ",
+ StyleBox["pivoter", "Input"],
+ " normalise la ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ " \[EGrave]me ligne de la matrice ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]]],
+ " en divisant la ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ "i\[EGrave]me ligne de ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]]],
+ " par le scalaire ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"m", "[", 
+    RowBox[{"[", 
+     RowBox[{"k", ",", "k"}], "]"}], "]"}], TraditionalForm]]],
+ " (suppos\[EAcute] non nul). Puis elle combine cette ligne avec les autres \
+lignes de ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]]],
+ " pour faire appara\[IHat]tre des z\[EAcute]ros sur la ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ "\[EGrave]me colonne (sauf, bien entendu, sur la ligne ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ "). Bien que cette fonction puisse clairement \[EHat]tre \[EAcute]crite \
+\[AGrave] l'aide des fonctions pr\[EAcute]c\[EAcute]dentes, nous ne le ferons \
+pas (en fait, nous essay\[AHat]mes, et nous obt\[IHat]nmes une fonction trois \
+fois plus lente que celle que nous allons \[EAcute]crire)."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"pivoter", "[", 
+   RowBox[{"m_", ",", "k_"}], "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"a", "=", "m"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"a", "[", 
+       RowBox[{"[", "k", "]"}], "]"}], "=", 
+      RowBox[{
+       RowBox[{"a", "[", 
+        RowBox[{"[", "k", "]"}], "]"}], "/", 
+       RowBox[{"a", "[", 
+        RowBox[{"[", 
+         RowBox[{"k", ",", "k"}], "]"}], "]"}]}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"i", "\[NotEqual]", "k"}], ",", 
+         RowBox[{
+          RowBox[{"a", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "=", 
+          RowBox[{
+           RowBox[{"a", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], "-", 
+           RowBox[{
+            RowBox[{"a", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "k"}], "]"}], "]"}], "*", 
+            RowBox[{"a", "[", 
+             RowBox[{"[", "k", "]"}], "]"}]}]}]}]}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", 
+         RowBox[{"Length", "[", "a", "]"}]}], "}"}]}], "\[IndentingNewLine]", 
+      "]"}], ";", "\[IndentingNewLine]", "a"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input"],
+
+Cell["Faisons l'essai avec notre matrice exemple.", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"matEx1", "=", 
+   RowBox[{"pivoter", "[", 
+    RowBox[{"matEx", ",", "1"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"matEx1", "//", "MatrixForm"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"matEx2", "=", 
+   RowBox[{"pivoter", "[", 
+    RowBox[{"matEx1", ",", "2"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"matEx2", "//", "MatrixForm"}]}], "Input"],
+
+Cell["\<\
+Les op\[EAcute]rations de pivot conservent le rang des matrices. On constate \
+donc que notre matrice exemple \[EAcute]tait de rang 2.\
+\>", "Text"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Pivot optimiste"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " L'algorithme"
+}], "Subsection"],
+
+Cell[TextData[{
+ "On d\[EAcute]crit ci-dessous un algorithme de pivot ultra-optimiste, pour \
+ne pas dire t\[EAcute]m\[EAcute]raire : celui-ci consid\[EGrave]re qu'\
+\[AGrave] l'\[EAcute]tape num\[EAcute]ro ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ ", le coefficient ligne ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ ", colonne ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]]],
+ " est non nul."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"pivotOptimiste", "[", "a_", "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"m", "=", "a"}], ",", "k"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Do", "[", 
+      RowBox[{
+       RowBox[{"m", "=", 
+        RowBox[{"pivoter", "[", 
+         RowBox[{"m", ",", "k"}], "]"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", 
+         RowBox[{"Length", "[", "m", "]"}]}], "}"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", "m"}]}], "\[IndentingNewLine]", "]"}]}]], "Input"],
+
+Cell["\<\
+Un pr\[EAcute]requis minimal pour pouvoir essayer notre fonction sur une \
+matrice, est que celle-ci ait un rang \[EAcute]gal \[AGrave] son nombre de \
+lignes (cette condition n'est d'ailleurs pas suffisante, il est tr\[EGrave]s \
+facile de trouver des matrices, m\[EHat]me inversibles, faisant planter notre \
+pivot optimiste).  Notre matrice \"exemple\", qui est de rang 2 et poss\
+\[EGrave]de 5 lignes, ne peut \[EAcute]videmment plus convenir. Nous testons \
+l'algorithme sur d'autres matrices.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Un exemple"
+}], "Subsection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"a", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"10", ",", "9", ",", "1", ",", 
+       RowBox[{"-", "50"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"9", ",", "10", ",", "5", ",", "40"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "5", ",", "9", ",", "180"}], "}"}]}], "}"}]}], ";", 
+  RowBox[{"a", "//", "MatrixForm"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"pivotOptimiste", "[", "a", "]"}], "//", "MatrixForm"}]], "Input"],
+
+Cell[TextData[{
+ "Une interpr\[EAcute]tation possible (parmi d'autres) du r\[EAcute]sultat \
+ci-dessus est que le syst\[EGrave]me d'\[EAcute]quations ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     RowBox[{"10", "x"}], "+", 
+     RowBox[{"9", "y"}], "+", "z"}], "=", 
+    RowBox[{"-", "50"}]}], TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     RowBox[{"9", "x"}], "+", 
+     RowBox[{"10", "y"}], "+", 
+     RowBox[{"5", "z"}]}], "=", "40"}], TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"x", "+", 
+     RowBox[{"5", "y"}], "+", 
+     RowBox[{"9", "z"}]}], "=", "180"}], TraditionalForm]]],
+ " a pour unique solution ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"x", "=", "10"}], ",", " ", 
+    RowBox[{"y", "=", 
+     RowBox[{"-", "20"}]}], ",", " ", 
+    RowBox[{"z", "=", "30"}]}], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[TextData[{
+ "Juste \[AGrave] titre de sujet de m\[EAcute]ditation, voici le m\[EHat]me \
+syst\[EGrave]me, dans lequel on remplace ",
+ Cell[BoxData[
+  FormBox["40", TraditionalForm]]],
+ " par ",
+ Cell[BoxData[
+  FormBox["41", TraditionalForm]]],
+ ". Le second membre \[EAcute]tant \[AGrave] peine perturb\[EAcute], on peut \
+s'attendre \[AGrave] ce que les solution de ce second syst\[EGrave]me soient \
+\[AGrave] peu pr\[EGrave]s identiques \[AGrave] celles du premier. Il n'en \
+est rien !"
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"a", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"10", ",", "9", ",", "1", ",", 
+       RowBox[{"-", "50"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"9", ",", "10", ",", "5", ",", "41"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "5", ",", "9", ",", "180"}], "}"}]}], "}"}]}], ";", 
+  RowBox[{"a", "//", "MatrixForm"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"pivotOptimiste", "[", "a", "]"}], "//", "MatrixForm"}]], "Input"],
+
+Cell[TextData[{
+ "On trouve ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"-", "66"}], ",", " ", "69", ",", " ", 
+     RowBox[{"-", "11"}]}], ")"}], TraditionalForm]]],
+ " au lieu de ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{"10", ",", 
+     RowBox[{"-", "20"}], ",", "30"}], ")"}], TraditionalForm]]],
+ ". Explication ? ce sera pour une autre fois."
+}], "Text"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Exp\[EAcute]riences sur le temps d'ex\[EAcute]cution"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Matrice al\[EAcute]atoire"
+}], "Subsection"],
+
+Cell[TextData[{
+ "On va \[EAcute]valuer le temps mis par la fonction ",
+ StyleBox["pivotOptimiste", "Input"],
+ " pour s'ex\[EAcute]cuter sur des matrices carr\[EAcute]es \
+al\[EAcute]atoires."
+}], "Text"],
+
+Cell[TextData[{
+ "On commence par cr\[EAcute]er une fonction qui renvoie une matrice al\
+\[EAcute]atoire de taille ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"p", "\[Cross]", "q"}], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"randmat", "[", 
+   RowBox[{"p_", ",", "q_"}], "]"}], ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"RandomReal", "[", "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "p"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"j", ",", "1", ",", "q"}], "}"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"randmat", "[", 
+   RowBox[{"3", ",", "5"}], "]"}], "//", "MatrixForm"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Chop", "[", 
+  RowBox[{
+   RowBox[{"pivotOptimiste", "[", 
+    RowBox[{"randmat", "[", 
+     RowBox[{"6", ",", "7"}], "]"}], "]"}], "//", "MatrixForm"}], 
+  "]"}]], "Input"],
+
+Cell[TextData[{
+ "Pour une explication sur la fonction ",
+ StyleBox["Chop", "Input"],
+ ", consulter l'aide en ligne."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Temps de calcul"
+}], "Subsection"],
+
+Cell["\<\
+Attention, les calculs qui vont suivre peut durer assez longtemps sur des \
+machines lentes ...\
+\>", "Text"],
+
+Cell[TextData[{
+ "Voici tout d'abord les temps mis pour r\[EAcute]soudre 100 syst\[EGrave]mes \
+de ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " \[EAcute]quations \[AGrave] ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " inconnues, pour ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " valant 1,2, ..., 100."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"s", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Timing", "[", 
+      RowBox[{"pivotOptimiste", "[", 
+       RowBox[{"randmat", "[", 
+        RowBox[{"n", ",", 
+         RowBox[{"n", "+", "1"}]}], "]"}], "]"}], "]"}], "[", 
+     RowBox[{"[", "1", "]"}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"n", ",", "1", ",", "100"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.410177020828125*^9, 3.410177083265625*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", 
+  RowBox[{"s", ",", 
+   RowBox[{"Joined", "\[Rule]", "True"}]}], "]"}]], "Input"],
+
+Cell[TextData[{
+ "Les temps mis pour chaque calcul sont trop faibles, donc pas fiables ... On \
+distingue globalement une croissance, mais, pour les petites valeurs de ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ ", des ph\[EAcute]nom\[EGrave]nes impr\[EAcute]visibles deviennent pr\
+\[EAcute]pond\[EAcute]rants (impr\[EAcute]cision de l'horloge, nettoyage de \
+la m\[EAcute]moire, que fait ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " sans me le dire lorsque j'appuie sur Shift+Entr\[EAcute]e, zut j'ai boug\
+\[EAcute] la souris, tiens j'ai re\[CCedilla]u un mail, etc)."
+}], "Text"],
+
+Cell[TextData[{
+ "Essayons avec des matrices de taille plus cons\[EAcute]quente. Attention, \
+le calcul va ",
+ StyleBox["vraiment",
+  FontWeight->"Bold"],
+ " prendre du temps. Allez boire un caf\[EAcute] en attendant, ou alors \
+diminuez les valeurs des param\[EGrave]tres ..."
+}], "Text",
+ CellChangeTimes->{{3.410177635015625*^9, 3.41017763528125*^9}}],
+
+Cell[BoxData[
+ RowBox[{"s", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Timing", "[", 
+      RowBox[{
+       RowBox[{"pivotOptimiste", "[", 
+        RowBox[{"randmat", "[", 
+         RowBox[{
+          RowBox[{"20", "*", "k"}], ",", 
+          RowBox[{
+           RowBox[{"20", "*", "k"}], "+", "1"}]}], "]"}], "]"}], ";"}], "]"}],
+      "[", 
+     RowBox[{"[", "1", "]"}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", "1", ",", "20"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.410177114796875*^9, 3.410177114953125*^9}, {
+  3.410177317359375*^9, 3.410177343390625*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", 
+  RowBox[{"s", ",", 
+   RowBox[{"Joined", "\[Rule]", "True"}]}], "]"}]], "Input"],
+
+Cell[TextData[{
+ "On voit appara\[IHat]tre une courbe qui ressemble \[AGrave] celle d'une \
+fonction du type ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"f", "(", "n", ")"}], "=", 
+    RowBox[{"k", ".", 
+     SuperscriptBox["n", "\[Alpha]"]}]}], TraditionalForm]]],
+ ". (en fait, elle ressemble \[AGrave] n'importe quelle courbe, mais j'adore \
+me rendre int\[EAcute]ressant). En r\[EAcute]alit\[EAcute], la belle th\
+\[EAcute]orie du cours de maths pr\[EAcute]voit que le temps de calcul est en \
+",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"O", "(", 
+    SuperscriptBox["n", "3"], ")"}], TraditionalForm]]],
+ ". Si l'on trace ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["s", 
+    RowBox[{"1", "/", "3"}]], TraditionalForm]]],
+ ", on devrait donc obtenir une quasi-droite."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", 
+  RowBox[{
+   SuperscriptBox["s", 
+    RowBox[{"1", "/", "3"}]], ",", 
+   RowBox[{"Joined", "\[Rule]", "True"}]}], "]"}]], "Input"],
+
+Cell["Ce n'est pas si mal. Quoique ...", "Text"],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", 
+  RowBox[{
+   SuperscriptBox["s", 
+    RowBox[{"1", "/", "2.6`"}]], ",", 
+   RowBox[{"Joined", "\[Rule]", "True"}]}], "]"}]], "Input"],
+
+Cell[TextData[{
+ "Ceci a l'air encore plus droit. Essayez d'autres puissances, pour voir. Au \
+lieu de pifom\[EAcute]trer, on pourrait peut-\[EHat]tre analyser plus \
+finement (il y a des fonctions de r\[EAcute]gression non lin\[EAcute]aire \
+dans ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ "). Mais bon ..."
+}], "Text"],
+
+Cell[TextData[{
+ "Sans \[EAcute]tude compl\[EAcute]mentaire, on ne peut pas donner de r\
+\[EAcute]ponse rigoureuse \[AGrave] cet apparent paradoxe (les faits ne \
+collent pas \[AGrave] la th\[EAcute]orie, ou le contraire, je ne sais). La \
+phrase suivante n'a donc aucun sens : j'aurais envie de r\[EAcute]pondre que \
+les algorithmes (sans doute extr\[EHat]mement efficaces) permettant \[AGrave] \
+",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " d'op\[EAcute]rer sur les listes \"cachent\" en quelque sorte la \
+d\[EAcute]pendance en ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["n", "3"], TraditionalForm]]],
+ " de l'algorithme du pivot pour les petites (si!si!) valeurs de ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " sur lesquelles nous l'avons test\[EAcute]."
+}], "Text"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Algorithme g\[EAcute]n\[EAcute]ral du pivot"
+}], "Section"],
+
+Cell["\<\
+Quittons maintenant notre strat\[EAcute]gie optimiste pour revenir \[AGrave] \
+une situation r\[EAcute]aliste : un pivot peut parfaitement \[EHat]tre nul.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Matrice \"exemple\""
+}], "Subsection"],
+
+Cell["\<\
+Comme pr\[EAcute]c\[EAcute]demment, nous prenons une matrice d'exemple.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"a", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2", ",", "0", ",", "4"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"5", ",", "6", ",", "0", ",", "8"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"9", ",", "10", ",", "0", ",", "12"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"13", ",", "14", ",", "0", ",", "16"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2", ",", "0", ",", "4"}], "}"}]}], "}"}]}], ";", 
+  RowBox[{"a", "//", "MatrixForm"}]}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Recherche d'un pivot \"optimal\""
+}], "Subsection"],
+
+Cell[TextData[{
+ "La fonction ",
+ StyleBox["rechercherPivot[a,p,q,n]", "Input"],
+ " recherche entre la ligne ",
+ Cell[BoxData[
+  FormBox["p", TraditionalForm]]],
+ " et la ligne ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " de la matrice ",
+ Cell[BoxData[
+  FormBox["a", TraditionalForm]]],
+ ", ceci sur la colonne ",
+ Cell[BoxData[
+  FormBox["q", TraditionalForm]]],
+ ", la ligne contenant le plus grand coefficient en valeur absolue. Si un \
+coefficient est non nul, le plus grand est \[EAcute]videmment un tr\[EGrave]s \
+bon candidat. De plus, plus un pivot est grand, moins les erreurs de calculs \
+sont importantes. \nLa fonction ",
+ StyleBox["rechercherPivot", "Input"],
+ " renvoie l'indice de la ligne correspondant au pivot qui nous \
+int\[EAcute]resse."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"rechercherPivot", "[", 
+   RowBox[{"a_", ",", "p_", ",", "q_", ",", "n_"}], "]"}], ":=", 
+  "\[IndentingNewLine]", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"imax", ",", "k"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"imax", "=", "p"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Abs", "[", 
+           RowBox[{"a", "[", 
+            RowBox[{"[", 
+             RowBox[{"k", ",", "q"}], "]"}], "]"}], "]"}], ">", 
+          RowBox[{"Abs", "[", 
+           RowBox[{"a", "[", 
+            RowBox[{"[", 
+             RowBox[{"imax", ",", "q"}], "]"}], "]"}], "]"}]}], ",", 
+         RowBox[{"imax", "=", "k"}]}], "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "p", ",", "n"}], "}"}]}], "\[IndentingNewLine]", 
+      "]"}], ";", "\[IndentingNewLine]", "imax"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"rechercherPivot", "[", 
+  RowBox[{"a", ",", "1", ",", "2", ",", "5"}], "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Une \[EAcute]tape de l'algorithme du pivot"
+}], "Subsection"],
+
+Cell[TextData[{
+ "La fonction ",
+ StyleBox["pivoterSansRisque[m,p,q,n]", "Input"],
+ " effectue une \[EAcute]tape de l'algorithme du pivot sur la matrice ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]]],
+ ". La recherche du pivot se fait en-dessous du coefficient ligne ",
+ Cell[BoxData[
+  FormBox["p", TraditionalForm]]],
+ ", colonne ",
+ Cell[BoxData[
+  FormBox["q", TraditionalForm]]],
+ ", et cette recherche ne d\[EAcute]passe pas la ligne ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " de la matrice. Au cas o\[UGrave] le pivot est nul, la fonction renvoie la \
+matrice ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]]],
+ " inchang\[EAcute]e ainsi qu'un \"drapeau\" ",
+ StyleBox["False", "Input"],
+ ". Sinon, La fonction renvoie la matrice ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]]],
+ " modifi\[EAcute]e et un drapeau ",
+ StyleBox["True", "Input"],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"pivoterSansRisque", "[", 
+   RowBox[{"m_", ",", "p_", ",", "q_", ",", "n_"}], "]"}], ":=", 
+  "\[IndentingNewLine]", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"a", "=", "m"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"p1", "=", 
+      RowBox[{"rechercherPivot", "[", 
+       RowBox[{"a", ",", "p", ",", "q", ",", "n"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"a", "[", 
+         RowBox[{"[", 
+          RowBox[{"p1", ",", "q"}], "]"}], "]"}], "\[Equal]", "0"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"a", ",", "False"}], "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"a", "=", 
+         RowBox[{"echangerLignes", "[", 
+          RowBox[{"a", ",", "p", ",", "p1"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"a", "[", 
+          RowBox[{"[", "p", "]"}], "]"}], "=", 
+         RowBox[{
+          RowBox[{"a", "[", 
+           RowBox[{"[", "p", "]"}], "]"}], "/", 
+          RowBox[{"a", "[", 
+           RowBox[{"[", 
+            RowBox[{"p", ",", "q"}], "]"}], "]"}]}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Do", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"i", "\[NotEqual]", "p"}], ",", 
+            RowBox[{
+             RowBox[{"a", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], "=", 
+             RowBox[{
+              RowBox[{"a", "[", 
+               RowBox[{"[", "i", "]"}], "]"}], "-", 
+              RowBox[{
+               RowBox[{"a", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", "q"}], "]"}], "]"}], "*", 
+               RowBox[{"a", "[", 
+                RowBox[{"[", "p", "]"}], "]"}]}]}]}]}], "]"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "\[IndentingNewLine]", 
+         "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"a", ",", "True"}], "}"}]}]}], "\[IndentingNewLine]", 
+      "]"}]}]}], "\[IndentingNewLine]", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"a1", ",", "v1"}], "}"}], "=", 
+   RowBox[{"pivoterSansRisque", "[", 
+    RowBox[{"a", ",", "1", ",", "1", ",", "5"}], "]"}]}], ";", 
+  RowBox[{"a1", "//", "MatrixForm"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"a2", ",", "v2"}], "}"}], "=", 
+   RowBox[{"pivoterSansRisque", "[", 
+    RowBox[{"a1", ",", "2", ",", "2", ",", "5"}], "]"}]}], ";", 
+  RowBox[{"a2", "//", "MatrixForm"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"a3", ",", "v3"}], "}"}], "=", 
+   RowBox[{"pivoterSansRisque", "[", 
+    RowBox[{"a2", ",", "3", ",", "3", ",", "5"}], "]"}]}], ";", 
+  RowBox[{"a3", "//", "MatrixForm"}]}]], "Input"],
+
+Cell["\<\
+On \"voit\" qu'il est inutile de continuer dans ce cas.  Il reste \[AGrave] \
+automatiser ces t\[AHat]ches r\[EAcute]p\[EAcute]titives.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Pivot de Gauss (algorithme complet)"
+}], "Subsection"],
+
+Cell[TextData[{
+ "La fonction ",
+ StyleBox["pivotGauss[a,n]", "Input"],
+ " effectue ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " fois l'\[EAcute]tape \[EAcute]l\[EAcute]mentaire d\[EAcute]crite \[AGrave] \
+la sous-section pr\[EAcute]c\[EAcute]dente. En fait, il est tr\[EGrave]s fr\
+\[EAcute]quent de \"pivoter\" jusqu'\[AGrave] arriver \[AGrave] la \
+\[LineSeparator]derni\[EGrave]re ligne (ou la derni\[EGrave]re colonne) de la \
+matrice. On propose donc aussi une version ",
+ StyleBox["pivotGauss[a]", "Input"],
+ " \[AGrave] un seul param\[EGrave]tre."
+}], "Text",
+ CellChangeTimes->{3.410177446359375*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"pivotGauss", "[", 
+    RowBox[{"a_", ",", "n_"}], "]"}], ":=", "\[IndentingNewLine]", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"m", "=", "a"}], ",", "k"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"p", "=", "1"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Do", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"m", ",", "v"}], "}"}], "=", 
+          RowBox[{"pivoterSansRisque", "[", 
+           RowBox[{"m", ",", "p", ",", "q", ",", "n"}], "]"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"If", "[", 
+          RowBox[{"v", ",", 
+           RowBox[{"p", "=", 
+            RowBox[{"p", "+", "1"}]}]}], "]"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"q", ",", "1", ",", 
+          RowBox[{"Min", "[", 
+           RowBox[{"n", ",", 
+            RowBox[{"Dimensions", "[", "a", "]"}]}], "]"}]}], "}"}]}], 
+       "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", "m"}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"pivotGauss", "[", "a_", " ", "]"}], ":=", 
+  RowBox[{"pivotGauss", "[", 
+   RowBox[{"a", ",", 
+    RowBox[{"Length", "[", "a", "]"}]}], "]"}]}]}], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"pivotGauss", "[", "a", "]"}], "//", "MatrixForm"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " R\[EAcute]solution de syst\[EGrave]mes"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Une utilisation tr\[EGrave]s fr\[EAcute]quente de l'algorithme du pivot est \
+la r\[EAcute]solution de syst\[EGrave]mes de ",
+ Cell[BoxData[
+  FormBox["p", TraditionalForm]]],
+ " \[EAcute]quations \[AGrave] ",
+ Cell[BoxData[
+  FormBox["q", TraditionalForm]]],
+ " inconnues. Pour r\[EAcute]soudre le syst\[EGrave]me ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"AX", "=", "B"}], TraditionalForm]]],
+ ", on commence par \"recoller\" les matrices ",
+ Cell[BoxData[
+  FormBox["A", TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox["B", TraditionalForm]]],
+ ". Puis on applique le pivot sur la matrice ainsi obtenue. Attention \
+cependant \[AGrave] ne pas \"pivoter\" sur les coefficients de ",
+ Cell[BoxData[
+  FormBox["B", TraditionalForm]]],
+ " ..."
+}], "Text"],
+
+Cell["Voici tout d'abord une fonction de \"recollement\" :", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"recoller", "[", 
+   RowBox[{"a_", ",", "b_"}], "]"}], ":=", 
+  RowBox[{"Transpose", "[", 
+   RowBox[{"Append", "[", 
+    RowBox[{
+     RowBox[{"Transpose", "[", "a", "]"}], ",", "b"}], "]"}], 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"a", "=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"1", ",", "2", ",", "3"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"4", ",", "5", ",", "6"}], "}"}]}], "}"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"b", "=", 
+  RowBox[{"{", 
+   RowBox[{"7", ",", "7"}], "}"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"recoller", "[", 
+   RowBox[{"a", ",", "b"}], "]"}], "//", "MatrixForm"}]], "Input"],
+
+Cell["\<\
+Voici maintenant la fonction de r\[EAcute]solution de syst\[EGrave]me :\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"resoudreSysteme", "[", 
+   RowBox[{"a_", ",", "b_"}], "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "m", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"m", "=", 
+      RowBox[{"recoller", "[", 
+       RowBox[{"a", ",", "b"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"pivotGauss", "[", 
+      RowBox[{"m", ",", 
+       RowBox[{"Length", "[", "m", "]"}]}], "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"a", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"5", ",", "6", ",", "7", ",", "8"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"9", ",", "10", ",", "11", ",", "12"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"13", ",", "14", ",", "15", ",", "16"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"17", ",", "18", ",", "19", ",", "20"}], "}"}]}], "}"}]}], ";", 
+  RowBox[{"a", "//", "MatrixForm"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"b", "=", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "1", ",", "1", ",", "1", ",", "1"}], "}"}]}], 
+  ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"resoudreSysteme", "[", 
+   RowBox[{"a", ",", "b"}], "]"}], "//", "MatrixForm"}]], "Input"],
+
+Cell[TextData[{
+ "Interpr\[EAcute]tons le r\[EAcute]sultat : les solutions du syst\[EGrave]me \
+sont les quadruplets ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{"x", ",", "y", ",", "z", ",", "t"}], ")"}], TraditionalForm]]],
+ " tels que ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"x", "=", 
+    RowBox[{
+     RowBox[{"-", "1"}], "+", "z", "+", 
+     RowBox[{"2", "t"}]}]}], TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"y", "=", 
+    RowBox[{"1", "-", 
+     RowBox[{"2", "z"}], "-", 
+     RowBox[{"3", "t"}]}]}], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell["Voici un syst\[EGrave]me de Cramer :", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"resoudreSysteme", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"0", ",", "1", ",", "1"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "0", ",", "1"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "1", ",", "0"}], "}"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "2", ",", "3"}], "}"}]}], "]"}], "//", 
+  "MatrixForm"}]], "Input"],
+
+Cell["\<\
+Voici pour finir un syst\[EGrave]me incompatible :\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"resoudreSysteme", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"1", ",", "0", ",", "1", ",", "2"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "0", ",", "2", ",", "2"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "0", ",", "3", ",", "4"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"4", ",", "0", ",", "2", ",", "5"}], "}"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"2", ",", "3", ",", "4", ",", "5"}], "}"}]}], "]"}], "//", 
+  "MatrixForm"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " Les \"limites du syst\[EGrave]me\""
+}], "Subsection"],
+
+Cell["\<\
+Certaines matrices, m\[EHat]me inversibles, sont tr\[EGrave]s mal adapt\
+\[EAcute]es \[AGrave] l'algorithme du pivot. D'importantes erreurs d'arrondi \
+peuvent appara\[IHat]tre dans les r\[EAcute]sultats.\
+\>", "Text"],
+
+Cell["Prenons l'exemple des matrices de Hilbert :", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"hilbert", "[", "n_", "]"}], ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"1", "/", 
+     RowBox[{"(", 
+      RowBox[{"i", "+", "j", "-", "1"}], ")"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "n"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"j", ",", "1", ",", "n"}], "}"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"hilbert", "[", "30", "]"}], "//", "MatrixForm"}]], "Input",
+ CellChangeTimes->{{3.410177604359375*^9, 3.410177605046875*^9}}],
+
+Cell["Les matrices de Hilbert sont inversibles.", "Text"],
+
+Cell[BoxData[
+ RowBox[{"Det", "[", 
+  RowBox[{"hilbert", "[", "30", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.410177597875*^9, 3.410177598578125*^9}}],
+
+Cell["\<\
+On applique tout d'abord le pivot \[AGrave] la matrice \"exacte\" : on \
+obtient \[EAcute]videmment la matrice identit\[EAcute] \[AGrave] l'arriv\
+\[EAcute]e.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"pivotGauss", "[", 
+   RowBox[{"hilbert", "[", "30", "]"}], "]"}], "//", "MatrixForm"}]], "Input",
+ CellChangeTimes->{{3.410177591609375*^9, 3.410177592328125*^9}}],
+
+Cell["\<\
+On applique maintenant le pivot \[AGrave] la matrice \"approch\[EAcute]e\" :\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"pivotGauss", "[", 
+   RowBox[{"1.0", "*", 
+    RowBox[{"hilbert", "[", "30", "]"}]}], "]"}], "//", 
+  "MatrixForm"}]], "Input",
+ CellChangeTimes->{{3.410177502359375*^9, 3.410177579125*^9}}],
+
+Cell["\<\
+On remarque des erreurs non n\[EAcute]gligeables dans la troisi\[EGrave]me \
+colonne du r\[EAcute]sultat. Ces erreurs empirent de fa\[CCedilla]on extr\
+\[EHat]mement importante lorsqu'on augmente la taille de la matrice.\
+\>", "Text"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+ScreenStyleEnvironment->"Working",
+WindowSize->{666, 579},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 31, 0, 65, "Title"],
+Cell[613, 24, 109, 4, 47, "Text"],
+Cell[725, 30, 455, 7, 83, "Text"],
+Cell[CellGroupData[{
+Cell[1205, 41, 123, 4, 75, "Section"],
+Cell[1331, 47, 260, 5, 47, "Text"],
+Cell[CellGroupData[{
+Cell[1616, 56, 121, 7, 36, "Subsection"],
+Cell[1740, 65, 595, 16, 82, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2372, 86, 119, 7, 36, "Subsection"],
+Cell[2494, 95, 307, 13, 30, "Text"],
+Cell[2804, 110, 477, 10, 83, "Text"],
+Cell[3284, 122, 770, 21, 162, "Input"],
+Cell[4057, 145, 141, 4, 41, "Input"],
+Cell[4201, 151, 117, 3, 29, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4355, 159, 135, 7, 36, "Subsection"],
+Cell[4493, 168, 313, 13, 30, "Text"],
+Cell[4809, 183, 554, 16, 122, "Input"],
+Cell[5366, 201, 257, 6, 47, "Text"],
+Cell[5626, 209, 159, 4, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5822, 218, 150, 7, 36, "Subsection"],
+Cell[5975, 227, 386, 16, 30, "Text"],
+Cell[6364, 245, 651, 19, 122, "Input"],
+Cell[7018, 266, 141, 3, 29, "Text"],
+Cell[7162, 271, 163, 4, 41, "Input"],
+Cell[7328, 277, 455, 9, 65, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7820, 291, 124, 7, 36, "Subsection"],
+Cell[7947, 300, 1186, 35, 120, "Text"],
+Cell[9136, 337, 1408, 41, 202, "Input"],
+Cell[10547, 380, 59, 0, 29, "Text"],
+Cell[10609, 382, 203, 5, 62, "Input"],
+Cell[10815, 389, 204, 5, 62, "Input"],
+Cell[11022, 396, 158, 3, 47, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11229, 405, 76, 4, 75, "Section"],
+Cell[CellGroupData[{
+Cell[11330, 413, 111, 7, 36, "Subsection"],
+Cell[11444, 422, 431, 13, 47, "Text"],
+Cell[11878, 437, 614, 17, 122, "Input"],
+Cell[12495, 456, 522, 8, 101, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13054, 469, 109, 7, 36, "Subsection"],
+Cell[13166, 478, 412, 12, 62, "Input"],
+Cell[13581, 492, 100, 2, 41, "Input"],
+Cell[13684, 496, 905, 34, 65, "Text"],
+Cell[14592, 532, 508, 12, 65, "Text"],
+Cell[15103, 546, 412, 12, 62, "Input"],
+Cell[15518, 560, 100, 2, 41, "Input"],
+Cell[15621, 564, 404, 15, 29, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16074, 585, 113, 4, 75, "Section"],
+Cell[CellGroupData[{
+Cell[16212, 593, 124, 7, 36, "Subsection"],
+Cell[16339, 602, 204, 5, 48, "Text"],
+Cell[16546, 609, 215, 7, 29, "Text"],
+Cell[16764, 618, 332, 10, 41, "Input"],
+Cell[17099, 630, 117, 3, 41, "Input"],
+Cell[17219, 635, 197, 6, 41, "Input"],
+Cell[17419, 643, 129, 4, 30, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17585, 652, 114, 7, 36, "Subsection"],
+Cell[17702, 661, 119, 3, 29, "Text"],
+Cell[17824, 666, 345, 12, 47, "Text"],
+Cell[18172, 680, 469, 13, 41, "Input"],
+Cell[18644, 695, 122, 3, 41, "Input"],
+Cell[18769, 700, 603, 12, 83, "Text"],
+Cell[19375, 714, 354, 8, 47, "Text"],
+Cell[19732, 724, 614, 18, 41, "Input"],
+Cell[20349, 744, 122, 3, 41, "Input"],
+Cell[20474, 749, 794, 23, 87, "Text"],
+Cell[21271, 774, 172, 5, 43, "Input"],
+Cell[21446, 781, 48, 0, 29, "Text"],
+Cell[21497, 783, 175, 5, 49, "Input"],
+Cell[21675, 790, 330, 8, 65, "Text"],
+Cell[22008, 800, 796, 18, 121, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22853, 824, 104, 4, 75, "Section"],
+Cell[22960, 830, 178, 3, 47, "Text"],
+Cell[CellGroupData[{
+Cell[23163, 837, 118, 7, 36, "Subsection"],
+Cell[23284, 846, 95, 2, 29, "Text"],
+Cell[23382, 850, 554, 15, 62, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23973, 870, 131, 7, 36, "Subsection"],
+Cell[24107, 879, 783, 22, 121, "Text"],
+Cell[24893, 903, 1055, 28, 202, "Input"],
+Cell[25951, 933, 111, 2, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26099, 940, 141, 7, 36, "Subsection"],
+Cell[26243, 949, 891, 27, 104, "Text"],
+Cell[27137, 978, 2207, 60, 282, "Input"],
+Cell[29347, 1040, 247, 7, 41, "Input"],
+Cell[29597, 1049, 248, 7, 41, "Input"],
+Cell[29848, 1058, 248, 7, 41, "Input"],
+Cell[30099, 1067, 159, 3, 29, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[30295, 1075, 134, 7, 36, "Subsection"],
+Cell[30432, 1084, 620, 14, 85, "Text"],
+Cell[31055, 1100, 1363, 36, 242, "Input"],
+Cell[32421, 1138, 96, 2, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[32554, 1145, 137, 7, 36, "Subsection"],
+Cell[32694, 1154, 776, 23, 83, "Text"],
+Cell[33473, 1179, 68, 0, 29, "Text"],
+Cell[33544, 1181, 249, 8, 41, "Input"],
+Cell[33796, 1191, 218, 7, 41, "Input"],
+Cell[34017, 1200, 96, 3, 41, "Input"],
+Cell[34116, 1205, 118, 3, 41, "Input"],
+Cell[34237, 1210, 95, 2, 29, "Text"],
+Cell[34335, 1214, 519, 14, 122, "Input"],
+Cell[34857, 1230, 560, 15, 82, "Input"],
+Cell[35420, 1247, 149, 5, 41, "Input"],
+Cell[35572, 1254, 125, 3, 41, "Input"],
+Cell[35700, 1259, 581, 22, 47, "Text"],
+Cell[36284, 1283, 52, 0, 29, "Text"],
+Cell[36339, 1285, 445, 14, 62, "Input"],
+Cell[36787, 1301, 74, 2, 29, "Text"],
+Cell[36864, 1305, 570, 16, 62, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[37471, 1326, 133, 7, 36, "Subsection"],
+Cell[37607, 1335, 228, 4, 47, "Text"],
+Cell[37838, 1341, 59, 0, 29, "Text"],
+Cell[37900, 1343, 361, 11, 41, "Input"],
+Cell[38264, 1356, 160, 3, 41, "Input"],
+Cell[38427, 1361, 57, 0, 29, "Text"],
+Cell[38487, 1363, 154, 3, 41, "Input"],
+Cell[38644, 1368, 182, 4, 47, "Text"],
+Cell[38829, 1374, 198, 4, 41, "Input"],
+Cell[39030, 1380, 100, 2, 29, "Text"],
+Cell[39133, 1384, 225, 6, 41, "Input"],
+Cell[39361, 1392, 244, 4, 47, "Text"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

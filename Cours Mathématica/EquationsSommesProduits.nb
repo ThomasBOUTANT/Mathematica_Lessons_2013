@@ -1,0 +1,394 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      7103,        292]*)
+(*NotebookOutlinePosition[      7814,        316]*)
+(*  CellTagsIndexPosition[      7770,        312]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell["\<\
+R\[EAcute]soudre des \[CapitalEAcute]quations
+Calculer des sommes et des produits\
+\>", "Title"],
+
+Cell[TextData[{
+  "On pr\[EAcute]sente ici quelques unes des possibilit\[EAcute]s de ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " en calcul alg\[EAcute]brique, au travers de la r\[EAcute]solution d'\
+\[EAcute]quations, et du calcul de sommes et de produits."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " R\[EAcute]solution d'\[EAcute]quations"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Equations alg\[EAcute]briques"
+}], "Subsection"],
+
+Cell["\<\
+La fonction Solve permet de r\[EAcute]soudre, autant que faire se peut, des \
+d'\[EAcute]quations.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Solve[x^2 - x - 1 \[Equal] 0, x]\)], "Input"],
+
+Cell[TextData[{
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " renvoie une liste de deux listes, chaque liste contenant un unique \
+\[EAcute]l\[EAcute]ment, qui est une r\[EGrave]gle. Tout cela a l'air bien \
+compliqu\[EAcute] ... mais on voit bien appara\[IHat]tre les solutions de \
+notre \[EAcute]quation."
+}], "Text"],
+
+Cell[BoxData[
+    \(Solve[x^2 + x + 1 \[Equal] 0, x]\)], "Input"],
+
+Cell["\<\
+Rien n'emp\[EHat]che de demander une valeur approch\[EAcute]e de nos \
+solutions.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(N[%]\)], "Input"],
+
+Cell["Certaines \[EAcute]quations ont des solutions fort \
+compliqu\[EAcute]es.", "Text"],
+
+Cell[BoxData[
+    \(Solve[x^3 - x - 1 \[Equal] 0, x]\)], "Input"],
+
+Cell["Une valeur num\[EAcute]rique s'impose.", "Text"],
+
+Cell[BoxData[
+    \(N[%]\)], "Input"],
+
+Cell["On peut faire pire.", "Text"],
+
+Cell[BoxData[
+    \(sols = Solve[x^4 - x - 1 \[Equal] 0, x]\)], "Input"],
+
+Cell[BoxData[
+    \(N[sols, 20] // TableForm\)], "Input"],
+
+Cell[BoxData[
+    \(Clear[sols]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Syst\[EGrave]mes d'\[EAcute]quations"
+}], "Subsection"],
+
+Cell["\<\
+La m\[EHat]me fonction Solve permet \[EAcute]galement de r\[EAcute]soudre des \
+syst\[EGrave]mes d'\[EAcute]quations.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Solve[{x + y == 5, x - y == 11}, {x, y}]\)], "Input"],
+
+Cell[BoxData[
+    \(Solve[{a\ x\  + \ c\ y\  == \ \[Alpha], 
+        b\ x\  + \ d\ y\  == \ \[Beta]}, {x, y}]\)], "Input"],
+
+Cell[TextData[{
+  "Remarquer que le r\[EAcute]sultat ci-dessus est \
+g\[EAcute]n\[EAcute]ralement exact, SAUF lorsque la quantit\[EAcute] ",
+  Cell[BoxData[
+      \(TraditionalForm\`a\ d - b\ c\)]],
+  " s'annule. Ceci est tr\[EGrave]s fr\[EAcute]quent lors de calculs avec des \
+param\[EGrave]tres."
+}], "Text"],
+
+Cell[BoxData[
+    \(Solve[{x^2 + y^2 \[Equal] 1, x + y \[Equal] 1/2}, {x, y}]\)], "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " Calculs de sommes et de produits"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Sommes"
+}], "Subsection"],
+
+Cell["La fonction Sum permet des calculs de sommes.", "Text"],
+
+Cell[BoxData[
+    \(Sum[i^2, {i, 1, n}]\)], "Input"],
+
+Cell[TextData[{
+  "Les r\[EAcute]sultats renvoy\[EAcute]s par ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " risquent parfois d'\[EHat]tre un peu obscurs :"
+}], "Text"],
+
+Cell[BoxData[
+    \(S[k_, n_] = Sum[i^k, {i, 1, n}]\)], "Input"],
+
+Cell["\<\
+Rien n'emp\[EHat]che (c'est m\[EHat]me fortement recommand\[EAcute] !) \
+d'aller visiter l'aide pour apprendre ce qu'est un nombre harmonique.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Table[S[k, n], {k, 1, 10}] // TableForm\)], "Input"],
+
+Cell[BoxData[
+    \(Factor[%] // TableForm\)], "Input"],
+
+Cell[TextData[{
+  "Voici encore un exemple de calcul o\[UGrave] le r\[EAcute]sultat est \
+presque toujours exact (que se passe-t-il lorsque ",
+  Cell[BoxData[
+      \(TraditionalForm\`X = 1\)]],
+  " ...)."
+}], "Text"],
+
+Cell[BoxData[
+    \(Sum[X^k, {k, 0, n - 1}]\)], "Input"],
+
+Cell[BoxData[
+    \(Sum[\((k^2 - k - 1)\)\ X^k, {k, 0, n - 1}]\)], "Input"],
+
+Cell["Voici un exemple un peu plus compliqu\[EAcute].", "Text"],
+
+Cell[BoxData[
+    \(S = Sum[Cos[k\ x], {k, 0, n}]\)], "Input"],
+
+Cell["\<\
+La valeur de la somme demand\[EAcute]e d\[EAcute]pend d'une condition. On \
+extrait de cette expression le \"cas g\[EAcute]n\[EAcute]ral\".\
+\>", "Text"],
+
+Cell[BoxData[
+    \(S = S[\([3]\)]\)], "Input"],
+
+Cell[BoxData[
+    \(TrigReduce[S]\)], "Input"],
+
+Cell[BoxData[
+    \(Simplify[% - 1/2]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Produits"
+}], "Subsection"],
+
+Cell[TextData[{
+  "La fonction ",
+  StyleBox["Product", "Input"],
+  " calcule quant \[AGrave] elle des produits."
+}], "Text"],
+
+Cell[BoxData[
+    \(Product[Exp[I*k*x], {k, 0, n}]\)], "Input"],
+
+Cell[BoxData[
+    \(Product[1 - 1/k, {k, 2, n}]\)], "Input"],
+
+Cell[BoxData[
+    \(Product[1 - 1/k^2, {k, 2, n}]\)], "Input"],
+
+Cell[TextData[{
+  "Les r\[EAcute]sultats donn\[EAcute]s par ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " ne sont pas forc\[EAcute]ment limpides."
+}], "Text"],
+
+Cell[BoxData[
+    \(Product[1 - 1/k^3, {k, 2, n}]\)], "Input"]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1024}, {0, 687}},
+ScreenStyleEnvironment->"Brackets",
+WindowSize->{522, 654},
+WindowMargins->{{Automatic, 4}, {0, Automatic}},
+StyleDefinitions -> "Style.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 106, 3, 118, "Title"],
+Cell[1863, 56, 284, 6, 48, "Text"],
+
+Cell[CellGroupData[{
+Cell[2172, 66, 102, 4, 67, "Section"],
+
+Cell[CellGroupData[{
+Cell[2299, 74, 140, 8, 52, "Subsection"],
+Cell[2442, 84, 122, 3, 29, "Text"],
+Cell[2567, 89, 65, 1, 50, "Input"],
+Cell[2635, 92, 330, 7, 67, "Text"],
+Cell[2968, 101, 65, 1, 50, "Input"],
+Cell[3036, 104, 105, 3, 29, "Text"],
+Cell[3144, 109, 37, 1, 50, "Input"],
+Cell[3184, 112, 89, 1, 29, "Text"],
+Cell[3276, 115, 65, 1, 50, "Input"],
+Cell[3344, 118, 54, 0, 29, "Text"],
+Cell[3401, 120, 37, 1, 50, "Input"],
+Cell[3441, 123, 35, 0, 29, "Text"],
+Cell[3479, 125, 72, 1, 50, "Input"],
+Cell[3554, 128, 57, 1, 50, "Input"],
+Cell[3614, 131, 44, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[3695, 137, 147, 8, 36, "Subsection"],
+Cell[3845, 147, 141, 3, 29, "Text"],
+Cell[3989, 152, 73, 1, 50, "Input"],
+Cell[4065, 155, 122, 2, 50, "Input"],
+Cell[4190, 159, 311, 7, 48, "Text"],
+Cell[4504, 168, 90, 1, 50, "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4643, 175, 96, 4, 67, "Section"],
+
+Cell[CellGroupData[{
+Cell[4764, 183, 117, 8, 52, "Subsection"],
+Cell[4884, 193, 61, 0, 29, "Text"],
+Cell[4948, 195, 52, 1, 50, "Input"],
+Cell[5003, 198, 180, 5, 29, "Text"],
+Cell[5186, 205, 64, 1, 50, "Input"],
+Cell[5253, 208, 166, 3, 48, "Text"],
+Cell[5422, 213, 72, 1, 50, "Input"],
+Cell[5497, 216, 55, 1, 50, "Input"],
+Cell[5555, 219, 217, 6, 48, "Text"],
+Cell[5775, 227, 56, 1, 50, "Input"],
+Cell[5834, 230, 75, 1, 50, "Input"],
+Cell[5912, 233, 63, 0, 29, "Text"],
+Cell[5978, 235, 62, 1, 50, "Input"],
+Cell[6043, 238, 163, 3, 48, "Text"],
+Cell[6209, 243, 47, 1, 50, "Input"],
+Cell[6259, 246, 46, 1, 50, "Input"],
+Cell[6308, 249, 50, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[6395, 255, 119, 8, 36, "Subsection"],
+Cell[6517, 265, 125, 4, 30, "Text"],
+Cell[6645, 271, 63, 1, 50, "Input"],
+Cell[6711, 274, 60, 1, 50, "Input"],
+Cell[6774, 277, 62, 1, 50, "Input"],
+Cell[6839, 280, 171, 5, 29, "Text"],
+Cell[7013, 287, 62, 1, 50, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

@@ -1,0 +1,516 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      9949,        398]*)
+(*NotebookOutlinePosition[     10662,        422]*)
+(*  CellTagsIndexPosition[     10618,        418]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell["Notions avanc\[EAcute]es sur les expressions", "Title"],
+
+Cell[TextData[{
+  "Tous les objets manipul\[EAcute]s par ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " sont b\[AHat]tis selon une m\[EHat]me structure. On d\[EAcute]crit dans \
+ce qui suit la structure en question."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " La forme compl\[EGrave]te des expressions"
+}], "Section"],
+
+Cell[TextData[{
+  "Tous les objets manipul\[EAcute]s par ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " ont la m\[EHat]me structure. En r\[EAcute]alit\[EAcute], du point de vue \
+du logiciel, il n'y a pas de diff\[EAcute]rence entre une fonction, une \
+expression alg\[EAcute]brique, une liste, un graphique ou un nombre rationnel \
+(j'en oublie certainement). La fonction FullForm permet de se faire une id\
+\[EAcute]e de la \"vraie\" forme d'un objet. Voici quelques exemples :"
+}], "Text"],
+
+Cell[BoxData[
+    \(a + b // FullForm\)], "Input"],
+
+Cell[BoxData[
+    \(1/2 // FullForm\)], "Input"],
+
+Cell[BoxData[
+    \(a*x^2 + b*x + c // FullForm\)], "Input"],
+
+Cell[BoxData[
+    \({1, 2, 3} // FullForm\)], "Input"],
+
+Cell[BoxData[
+    \(If[x \[GreaterEqual] 0, x, \(-x\)] // FullForm\)], "Input"],
+
+Cell[BoxData[
+    \(1 + 1 // FullForm\)], "Input"],
+
+Cell[TextData[{
+  StyleBox["Probl\[EGrave]me ",
+    FontWeight->"Bold"],
+  ": l'expression est \[EAcute]valu\[EAcute]e, avant l'appel \[AGrave] \
+FullForm. On utilise la fonction Hold pour emp\[EHat]cher cette \
+\[EAcute]valuation pr\[EAcute]matur\[EAcute]e."
+}], "Text"],
+
+Cell[BoxData[
+    \(Hold[1 + 1] // FullForm\)], "Input"],
+
+Cell["\<\
+On peut maintenant regarder des expressions un peu plus \
+compliqu\[EAcute]es.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Hold[f[x] /; x < 3 := x^2] // FullForm\)], "Input"],
+
+Cell[TextData[{
+  "On l'a compris : ",
+  StyleBox["tous",
+    FontWeight->"Bold"],
+  " les objets ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " sont construits sur le m\[EHat]me mod\[EGrave]le. On parlera \
+d\[EAcute]sormais d'expressions, dans le sens le plus g\[EAcute]n\[EAcute]ral \
+du terme : TOUT est expression."
+}], "Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " La forme arborescente des expressions"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Introduction"
+}], "Subsection"],
+
+Cell[TextData[{
+  "Il est parfois commode de se repr\[EAcute]senter une expression comme une \
+arborescence. Ainsi, dans l'expression ",
+  Cell[BoxData[
+      \(TraditionalForm\`a + b\)]],
+  ", la racine de l'expression est le ",
+  Cell[BoxData[
+      \(TraditionalForm\`+\)]],
+  ", et les deux fils de la racine sont les symboles ",
+  Cell[BoxData[
+      \(TraditionalForm\`a\)]],
+  " et ",
+  Cell[BoxData[
+      \(TraditionalForm\`b\)]],
+  "."
+}], "Text"],
+
+Cell[TextData[{
+  "La fonction ",
+  StyleBox["TreeForm", "Input"],
+  " permet de visualiser de fa\[CCedilla]on rudimentaire l'arborescence d'une \
+expression."
+}], "Text"],
+
+Cell[BoxData[
+    \(a^2 + 2*a*b + b^2 // TreeForm\)], "Input"],
+
+Cell["\<\
+Cette fonction est assez rudimentaire. On a \[EAcute]crit ci-dessous une \
+fonction plus sophistiqu\[EAcute]e, affichant la repr\[EAcute]sentation \
+arborescente des expressions.\
+\>", "Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " Visualiser l'arborescence"
+}], "Subsection"],
+
+Cell[TextData[{
+  "Nous allons ici charger un ",
+  StyleBox["package",
+    FontSlant->"Italic"],
+  " (biblioth\[EGrave]que) contenant une fonction qui permet l'affichage \
+graphique de l'arborescence d'une expression."
+}], "Text"],
+
+Cell[TextData[{
+  StyleBox["\[CapitalEAcute]tape 1",
+    FontWeight->"Bold"],
+  " : se placer dans le bon r\[EAcute]pertoire. Nous passerons sur les d\
+\[EAcute]tails."
+}], "Text"],
+
+Cell[BoxData[
+    \(<< AuthorTools`\)], "Input"],
+
+Cell[BoxData[
+    \(SetDirectory[NotebookFolder[SelectedNotebook[]]]\)], "Input"],
+
+Cell[TextData[{
+  StyleBox["\[CapitalEAcute]tape 2",
+    FontWeight->"Bold"],
+  " : charger le package ",
+  StyleBox["ArbreGraphique", "Input"],
+  "."
+}], "Text"],
+
+Cell[BoxData[
+    \(<< ArbreGraphique.m\)], "Input"],
+
+Cell[TextData[{
+  "Le package est maintenant charg\[EAcute], et une nouvelle fonction, appel\
+\[EAcute]e ",
+  StyleBox["voir", "Input"],
+  ", est disponible."
+}], "Text"],
+
+Cell[BoxData[
+    \(\(?voir\)\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Quelques exemples"
+}], "Subsection"],
+
+Cell[BoxData[
+    \(voir[a + b]\)], "Input"],
+
+Cell[BoxData[
+    \(voir[a^2 + 2*a*b + b^2]\)], "Input"],
+
+Cell[BoxData[
+    \(voir[Sin[x]/\((x^2 + 3*x - 1)\)]\)], "Input"],
+
+Cell[BoxData[
+    \(voir[Integrate[1/\((x^3 + 1)\), {x, \(-2\), 2}]]\)], "Input"],
+
+Cell[BoxData[
+    \(voir[voir[Integrate[1/\((x^3 + 1)\), {x, \(-2\), 2}]]]\)], "Input"],
+
+Cell[BoxData[
+    \(voir[While[x \[LessEqual] 1000, x = 2*x]]\)], "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " Manipuler les expressions"
+}], "Section"],
+
+Cell["\<\
+On l'a vu, il n'y a aucune diff\[EAcute]rence de structure entre une liste \
+et, par exemple, une expression alg\[EAcute]brique. Ainsi, les fonctions \
+agissant sur les listes agissent tout aussi bien sur les expressions. Par \
+exemple :\
+\>", "Text"],
+
+Cell[BoxData[
+    \(L = {1, 4, {2, 6}, {7, 4, {1, 8}}, 11, 0}\)], "Input"],
+
+Cell[BoxData[
+    \(voir[Evaluate[L]]\)], "Input"],
+
+Cell[BoxData[
+    \(Length[L]\)], "Input"],
+
+Cell[BoxData[
+    \(Depth[L]\)], "Input"],
+
+Cell[BoxData[
+    \(L[\([4]\)]\)], "Input"],
+
+Cell[BoxData[
+    \(L[\([4, 3]\)]\)], "Input"],
+
+Cell[BoxData[
+    \(L[\([4, 3, 2]\)]\)], "Input"],
+
+Cell[TextData[{
+  "On parvient donc \[AGrave] r\[EAcute]cup\[EAcute]rer les \[EAcute]l\
+\[EAcute]ments de la liste ",
+  Cell[BoxData[
+      \(TraditionalForm\`L\)]],
+  ", ainsi que les \[EAcute]l\[EAcute]ments de ses \[EAcute]l\[EAcute]ments, \
+et ainsi de suite. Soit maintenant :"
+}], "Text"],
+
+Cell[BoxData[
+    \(e = \((a + Sin[b + c])\)^Sqrt[3]\)], "Input"],
+
+Cell[BoxData[
+    \(voir[Evaluate[e]]\)], "Input"],
+
+Cell[BoxData[
+    \(Length[e]\)], "Input"],
+
+Cell[BoxData[
+    \(Depth[e]\)], "Input"],
+
+Cell[BoxData[
+    \(e[\([1]\)]\)], "Input"],
+
+Cell[BoxData[
+    \(e[\([1, 2]\)]\)], "Input"],
+
+Cell[BoxData[
+    \(e[\([1, 2, 1]\)]\)], "Input"],
+
+Cell[BoxData[
+    \(e[\([1, 2, 1, 2]\)]\)], "Input"],
+
+Cell[TextData[{
+  "Le principe est donc le m\[EHat]me pour les listes et pour les \
+expressions. Un dernier probl\[EGrave]me subsiste. Lorsqu'on conna\[IHat]t \
+les \[EAcute]l\[EAcute]ments d'une liste, on conna\[IHat]t la liste. Mais \
+lorsqu'on conna\[IHat]t ceux d'une expression, on n'a pas encore compl\
+\[EGrave]tement l'expression. Ainsi, si les \[EAcute]l\[EAcute]ments de ",
+  Cell[BoxData[
+      \(TraditionalForm\`e\)]],
+  " sont ",
+  Cell[BoxData[
+      \(TraditionalForm\`a\)]],
+  " et ",
+  Cell[BoxData[
+      \(TraditionalForm\`b\)]],
+  ", a-t-on ",
+  Cell[BoxData[
+      \(TraditionalForm\`e = a + b\)]],
+  " ? ",
+  Cell[BoxData[
+      \(TraditionalForm\`e = a*b\)]],
+  " ? ou autre chose ? Pas de panique, tout est pr\[EAcute]vu :"
+}], "Text"],
+
+Cell[BoxData[
+    \(e = a + b\)], "Input"],
+
+Cell[BoxData[
+    \(Head[e]\)], "Input"],
+
+Cell["\<\
+En fait, la fonction Head s'applique \[AGrave] TOUTES les expressions :\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Head[{1, 2, 3}]\)], "Input"],
+
+Cell[BoxData[
+    \(Head[5/9]\)], "Input"],
+
+Cell[BoxData[
+    \(Head[1]\)], "Input"],
+
+Cell[BoxData[
+    \(Head[Pi]\)], "Input"],
+
+Cell[BoxData[
+    \(Head[Sin[x]/x]\)], "Input"],
+
+Cell[TextData[{
+  "On peut \[EAcute]videmment continuer \[AGrave] explorer ... Il doit \
+\[EHat]tre possible d'\[EAcute]crire des fonctions qui manipulent directement \
+les expressions \[AGrave] partir de leurs composants \"atomiques\" : c'est le \
+cas de la fonction ",
+  StyleBox["voir", "Input"],
+  " utilis\[EAcute]e au paragraphe pr\[EAcute]c\[EAcute]dent pour visualiser \
+les arborescences syntaxiques."
+}], "Text"]
+}, Closed]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1024}, {0, 687}},
+ScreenStyleEnvironment->"Brackets",
+WindowSize->{544, 656},
+WindowMargins->{{Automatic, 10}, {Automatic, -3}},
+StyleDefinitions -> "Style.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 61, 0, 67, "Title"],
+Cell[1818, 53, 240, 6, 48, "Text"],
+
+Cell[CellGroupData[{
+Cell[2083, 63, 105, 4, 67, "Section"],
+Cell[2191, 69, 504, 9, 86, "Text"],
+Cell[2698, 80, 50, 1, 50, "Input"],
+Cell[2751, 83, 48, 1, 50, "Input"],
+Cell[2802, 86, 60, 1, 50, "Input"],
+Cell[2865, 89, 54, 1, 50, "Input"],
+Cell[2922, 92, 79, 1, 50, "Input"],
+Cell[3004, 95, 50, 1, 50, "Input"],
+Cell[3057, 98, 271, 6, 48, "Text"],
+Cell[3331, 106, 56, 1, 50, "Input"],
+Cell[3390, 109, 102, 3, 29, "Text"],
+Cell[3495, 114, 71, 1, 50, "Input"],
+Cell[3569, 117, 344, 10, 48, "Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[3950, 132, 101, 4, 47, "Section"],
+
+Cell[CellGroupData[{
+Cell[4076, 140, 123, 8, 52, "Subsection"],
+Cell[4202, 150, 457, 15, 67, "Text"],
+Cell[4662, 167, 171, 5, 49, "Text"],
+Cell[4836, 174, 62, 1, 50, "Input"],
+Cell[4901, 177, 202, 4, 48, "Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[5140, 186, 130, 7, 36, "Subsection"],
+Cell[5273, 195, 230, 6, 48, "Text"],
+Cell[5506, 203, 180, 5, 29, "Text"],
+Cell[5689, 210, 48, 1, 50, "Input"],
+Cell[5740, 213, 81, 1, 50, "Input"],
+Cell[5824, 216, 162, 6, 30, "Text"],
+Cell[5989, 224, 52, 1, 50, "Input"],
+Cell[6044, 227, 170, 5, 30, "Text"],
+Cell[6217, 234, 42, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[6296, 240, 128, 8, 36, "Subsection"],
+Cell[6427, 250, 44, 1, 50, "Input"],
+Cell[6474, 253, 56, 1, 50, "Input"],
+Cell[6533, 256, 65, 1, 50, "Input"],
+Cell[6601, 259, 81, 1, 50, "Input"],
+Cell[6685, 262, 87, 1, 50, "Input"],
+Cell[6775, 265, 74, 1, 50, "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[6898, 272, 89, 4, 67, "Section"],
+Cell[6990, 278, 261, 5, 67, "Text"],
+Cell[7254, 285, 74, 1, 50, "Input"],
+Cell[7331, 288, 50, 1, 50, "Input"],
+Cell[7384, 291, 42, 1, 50, "Input"],
+Cell[7429, 294, 41, 1, 50, "Input"],
+Cell[7473, 297, 43, 1, 50, "Input"],
+Cell[7519, 300, 46, 1, 50, "Input"],
+Cell[7568, 303, 49, 1, 50, "Input"],
+Cell[7620, 306, 294, 7, 48, "Text"],
+Cell[7917, 315, 65, 1, 50, "Input"],
+Cell[7985, 318, 50, 1, 50, "Input"],
+Cell[8038, 321, 42, 1, 50, "Input"],
+Cell[8083, 324, 41, 1, 50, "Input"],
+Cell[8127, 327, 43, 1, 50, "Input"],
+Cell[8173, 330, 46, 1, 50, "Input"],
+Cell[8222, 333, 49, 1, 50, "Input"],
+Cell[8274, 336, 52, 1, 50, "Input"],
+Cell[8329, 339, 760, 21, 86, "Text"],
+Cell[9092, 362, 42, 1, 50, "Input"],
+Cell[9137, 365, 40, 1, 50, "Input"],
+Cell[9180, 368, 95, 2, 29, "Text"],
+Cell[9278, 372, 48, 1, 50, "Input"],
+Cell[9329, 375, 42, 1, 50, "Input"],
+Cell[9374, 378, 40, 1, 50, "Input"],
+Cell[9417, 381, 41, 1, 50, "Input"],
+Cell[9461, 384, 47, 1, 50, "Input"],
+Cell[9511, 387, 422, 8, 87, "Text"]
+}, Closed]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

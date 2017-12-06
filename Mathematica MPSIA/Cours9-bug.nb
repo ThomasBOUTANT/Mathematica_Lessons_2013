@@ -1,0 +1,1325 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     45924,       1316]
+NotebookOptionsPosition[     42531,       1205]
+NotebookOutlinePosition[     42867,       1220]
+CellTagsIndexPosition[     42824,       1217]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"f1", "[", "n_", "]"}], ":=", 
+    RowBox[{"n", "!"}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"f2", "[", "n_", "]"}], ":=", 
+    RowBox[{"Product", "[", 
+     RowBox[{"k", ",", 
+      RowBox[{"{", 
+       RowBox[{"k", ",", "1", ",", "n"}], "}"}]}], "]"}]}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"f3", "[", "n_", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"p", "=", "1"}], "}"}], ",", 
+      RowBox[{
+       RowBox[{"Do", "[", 
+        RowBox[{
+         RowBox[{"p", "=", 
+          RowBox[{"p", "*", "k"}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"k", ",", "2", ",", "n"}], "}"}]}], "]"}], ";", "p"}]}], 
+     "]"}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"f4", "[", "n_", "]"}], ":=", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"n", "\[Equal]", "0"}], ",", "1", ",", 
+      RowBox[{"n", "*", 
+       RowBox[{"f4", "[", 
+        RowBox[{"n", "-", "1"}], "]"}]}]}], "]"}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"f5", "[", "0", "]"}], "=", "1"}], ";", 
+    RowBox[{
+     RowBox[{"f", "[", "n_", "]"}], ":=", 
+     RowBox[{"n", "*", 
+      RowBox[{"f", "[", 
+       RowBox[{"n", "-", "1"}], "]"}]}]}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.563791309450856*^9, 3.5637915212149343`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"f1", "[", "12", "]"}]], "Input",
+ CellChangeTimes->{{3.5637915304456863`*^9, 3.563791536723785*^9}}],
+
+Cell[BoxData["479001600"], "Output",
+ CellChangeTimes->{3.563791537318811*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"f4", "[", "12", "]"}]], "Input",
+ CellChangeTimes->{{3.563791538765492*^9, 3.5637915412918167`*^9}}],
+
+Cell[BoxData["479001600"], "Output",
+ CellChangeTimes->{3.563791542029496*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"pm", "[", 
+   RowBox[{"a_", ",", "n_"}], "]"}], ":=", 
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{"n", "\[Equal]", "0"}], ",", "a", ",", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"a", "+", "n"}], ")"}], "*", 
+     RowBox[{"pm", "[", 
+      RowBox[{"a", ",", 
+       RowBox[{"n", "-", "1"}]}], "]"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.563791561744814*^9, 3.563791737198976*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"pm", "[", 
+  RowBox[{"2", ",", "2"}], "]"}]], "Input",
+ CellChangeTimes->{{3.563791740109552*^9, 3.5637917454045753`*^9}}],
+
+Cell[BoxData["24"], "Output",
+ CellChangeTimes->{3.563791746197558*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.5637916568210583`*^9, 3.56379169011528*^9}, {
+  3.5637919752828617`*^9, 3.5637919852272997`*^9}}],
+
+Cell[BoxData["24"], "Output",
+ CellChangeTimes->{3.563791667087538*^9, 3.56379198268568*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"coefbino", "[", 
+    RowBox[{"n_", ",", "k_"}], "]"}], ":=", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"k", "\[Equal]", "0"}], ",", "1", ",", 
+     RowBox[{
+      FractionBox["n", "k"], "*", 
+      RowBox[{"coefbino", "[", 
+       RowBox[{
+        RowBox[{"n", "-", "1"}], ",", 
+        RowBox[{"k", "-", "1"}]}], "]"}]}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{
+  3.5637917615693493`*^9, {3.563791795170671*^9, 3.563791947312145*^9}, {
+   3.563792005503479*^9, 3.563792115904519*^9}, {3.563792195579042*^9, 
+   3.563792196105337*^9}, {3.563792352401903*^9, 3.563792366664487*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"coefbino", "[", 
+  RowBox[{"5", ",", "3"}], "]"}]], "Input",
+ CellChangeTimes->{{3.56379212228458*^9, 3.563792130756715*^9}, {
+  3.563792164005753*^9, 3.563792164293413*^9}, {3.563792205582222*^9, 
+  3.56379222886941*^9}, {3.563792358327291*^9, 3.563792369925712*^9}}],
+
+Cell[BoxData["10"], "Output",
+ CellChangeTimes->{
+  3.5637921315173273`*^9, {3.5637921719070807`*^9, 3.5637922295015697`*^9}, {
+   3.563792359373124*^9, 3.563792370172949*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"coefbino", "[", 
+       RowBox[{"n", ",", "k"}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"k", ",", "0", ",", "n"}], "}"}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"n", ",", "0", ",", "8"}], "}"}]}], "]"}], "//", 
+  "TableForm"}]], "Input",
+ CellChangeTimes->{{3.563792372583112*^9, 3.563792400078401*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[GridBox[{
+    {"1", "\<\"\"\>", "\<\"\"\>", "\<\"\"\>", "\<\"\"\>", "\<\"\"\>", "\<\"\"\
+\>", "\<\"\"\>", "\<\"\"\>"},
+    {"1", 
+     "1", "\<\"\"\>", "\<\"\"\>", "\<\"\"\>", "\<\"\"\>", "\<\"\"\>", "\<\"\"\
+\>", "\<\"\"\>"},
+    {"1", "2", 
+     "1", "\<\"\"\>", "\<\"\"\>", "\<\"\"\>", "\<\"\"\>", "\<\"\"\>", "\<\"\"\
+\>"},
+    {"1", "3", "3", 
+     "1", "\<\"\"\>", "\<\"\"\>", "\<\"\"\>", "\<\"\"\>", "\<\"\"\>"},
+    {"1", "4", "6", "4", 
+     "1", "\<\"\"\>", "\<\"\"\>", "\<\"\"\>", "\<\"\"\>"},
+    {"1", "5", "10", "10", "5", "1", "\<\"\"\>", "\<\"\"\>", "\<\"\"\>"},
+    {"1", "6", "15", "20", "15", "6", "1", "\<\"\"\>", "\<\"\"\>"},
+    {"1", "7", "21", "35", "35", "21", "7", "1", "\<\"\"\>"},
+    {"1", "8", "28", "56", "70", "56", "28", "8", "1"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  TableForm[{{1}, {1, 1}, {1, 2, 1}, {1, 3, 3, 1}, {1, 4, 6, 4, 1}, {1, 5, 10,
+     10, 5, 1}, {1, 6, 15, 20, 15, 6, 1}, {1, 7, 21, 35, 35, 21, 7, 1}, {1, 8,
+     28, 56, 70, 56, 28, 8, 1}}]]], "Output",
+ CellChangeTimes->{3.563792400816345*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Fibo", "[", "n_", "]"}], ":=", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"n", "\[Equal]", "0"}], ",", "0", ",", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"n", "==", "1"}], ",", "1", ",", 
+       RowBox[{
+        RowBox[{"Fibo", "[", 
+         RowBox[{"n", "-", "1"}], "]"}], "+", 
+        RowBox[{"Fibo", "[", 
+         RowBox[{"n", "-", "2"}], "]"}]}]}], "]"}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.563792263415694*^9, 3.563792291053343*^9}, {
+  3.563792420133644*^9, 3.563792507553934*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Fibo", "[", "12", "]"}]], "Input",
+ CellChangeTimes->{{3.5637925455518303`*^9, 3.563792550380117*^9}}],
+
+Cell[BoxData["144"], "Output",
+ CellChangeTimes->{3.563792551101551*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Fibo", "[", "100", "]"}]], "Input",
+ CellChangeTimes->{{3.563792552815332*^9, 3.5637925564922037`*^9}, {
+  3.563792761286294*^9, 3.563792762109025*^9}}],
+
+Cell[BoxData["$Aborted"], "Output",
+ CellChangeTimes->{3.563792557445548*^9, 3.563792769335375*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Flatten", "[", 
+    RowBox[{"Trace", "[", 
+     RowBox[{
+      RowBox[{"Fibo", "[", "10", "]"}], ",", 
+      RowBox[{"Fibo", "[", "3", "]"}]}], "]"}], "]"}], "//", 
+   "Length"}]}]], "Input",
+ CellChangeTimes->{{3.563792581345496*^9, 3.5637926657624807`*^9}}],
+
+Cell[BoxData["21"], "Output",
+ CellChangeTimes->{{3.563792643488456*^9, 3.563792666872992*^9}, 
+   3.5637927181391687`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"Fibo", "[", "12", "]"}]], "Input",
+ CellChangeTimes->{{3.563792682561841*^9, 3.563792685900619*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{"144", "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Fibo", "[", "n_", "]"}], ":=", 
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{"n", "\[Equal]", "0"}], ",", "0", ",", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"n", "==", "1"}], ",", "1", ",", 
+      RowBox[{
+       RowBox[{"Fibo", "[", 
+        RowBox[{"n", "-", "1"}], "]"}], "+", 
+       RowBox[{"Fibo", "[", 
+        RowBox[{"n", "-", "2"}], "]"}]}]}], "]"}]}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.5637931167194977`*^9, 3.563793117498815*^9}}],
+
+Cell[BoxData["144"], "Output",
+ CellChangeTimes->{3.5637931195022573`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Fibo", "[", "n_", "]"}], ":=", 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Fibo", "[", "0", "]"}], "=", "0"}], ",", 
+    RowBox[{
+     RowBox[{"Fibo", "[", "1", "]"}], "=", "1"}], ",", 
+    RowBox[{
+     RowBox[{"Fibo", "[", "n", "]"}], "=", 
+     RowBox[{
+      RowBox[{"Fibo", "[", 
+       RowBox[{"n", "-", "1"}], "]"}], "+", 
+      RowBox[{"Fibo", "[", 
+       RowBox[{"n", "-", "2"}], "]"}]}]}]}], ")"}]}]], "Input",
+ CellChangeTimes->{{3.563792746488874*^9, 3.5637927944679413`*^9}, {
+  3.5637929431972923`*^9, 3.5637929697101107`*^9}, {3.563792999942771*^9, 
+  3.563793058523224*^9}, {3.563793094667598*^9, 3.563793107661973*^9}, {
+  3.563793168797076*^9, 3.563793240055065*^9}, {3.5637932726474943`*^9, 
+  3.5637933469021378`*^9}, {3.563793378093474*^9, 3.5637933795957127`*^9}},
+ EmphasizeSyntaxErrors->True],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Syntax", "::", "sntxf"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"\\\"\[NoBreak]\\!\\((\\)\[NoBreak]\\\" cannot be followed \
+by \\\"\[NoBreak]\\!\\(\\(\\(\\(\\(Fibo[0]\\)\\) = 0\\)\\), \
+\\(\\(\\(\\(Fibo[1]\\)\\) = 1\\)\\), \\(\\(\\(\\(Fibo[n]\\)\\) = \
+\\(\\(\\(\\(Fibo[\\(\\(n - 1\\)\\)]\\)\\) + \\(\\(Fibo[\\(\\(n - \
+2\\)\\)]\\)\\)\\)\\)\\)\\))\\)\[NoBreak]\\\"\[NoBreak]\\!\\(\\\"\\\"\\)\
+\[NoBreak].\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5637933996346693`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Syntax", "::", "tsntxi"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"\\\"\[NoBreak]\\!\\(\\(\\(\\(\\(Fibo[0]\\)\\) = 0\\)\\), \
+\\(\\(\\(\\(Fibo[1]\\)\\) = 1\\)\\), \\(\\(\\(\\(Fibo[n]\\)\\) = \
+\\(\\(\\(\\(Fibo[\\(\\(n - 1\\)\\)]\\)\\) + \\(\\(Fibo[\\(\\(n - \
+2\\)\\)]\\)\\)\\)\\)\\)\\)\\)\[NoBreak]\\\" is incomplete; more input is \
+needed.\[NoBreak]\\!\\(\\\"\\\"\\)\[NoBreak]\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.563793399637012*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Syntax", "::", "sntxi"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Incomplete expression; more input is needed \
+\[NoBreak]\\!\\(\\\"\\\"\\)\[NoBreak].\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.563793399639319*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Fibo", "[", "100", "]"}]], "Input",
+ CellChangeTimes->{{3.5637933074693413`*^9, 3.563793311885046*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  TagBox[
+   PanelBox[GridBox[{
+      {
+       StyleBox[
+        StyleBox[
+         DynamicBox[ToBoxes[
+           FEPrivate`FrontEndResource["FEStrings", "sizeExplanation"], 
+           StandardForm],
+          ImageSizeCache->{407., {3., 11.}}],
+         StripOnInput->False,
+         DynamicUpdating->True], "Panel",
+        StripOnInput->False,
+        Background->None]},
+      {
+       ItemBox[
+        TagBox[
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[LeftSkeleton]", "1", "\[RightSkeleton]"}], 
+                    ")"}], "+", 
+                    RowBox[{"Fibo", "[", 
+                    RowBox[{"95", "-", "2"}], "]"}]}], ")"}], "+", 
+                  RowBox[{"Fibo", "[", 
+                   RowBox[{"96", "-", "2"}], "]"}]}], ")"}], "+", 
+                RowBox[{"Fibo", "[", 
+                 RowBox[{"97", "-", "2"}], "]"}]}], ")"}], "+", 
+              RowBox[{"Fibo", "[", 
+               RowBox[{"98", "-", "2"}], "]"}]}], ")"}], "+", 
+            RowBox[{"Fibo", "[", 
+             RowBox[{"99", "-", "2"}], "]"}]}], ")"}], "+", 
+          RowBox[{"Fibo", "[", 
+           RowBox[{"100", "-", "2"}], "]"}]}],
+         Short[#, 5]& ],
+        Background->GrayLevel[1],
+        BaseStyle->{Deployed -> False},
+        Frame->True,
+        FrameStyle->GrayLevel[0, 0.2],
+        StripOnInput->False]},
+      {
+       RowBox[{
+        ButtonBox[
+         RowBox[{"Style", "[", 
+          RowBox[{
+           RowBox[{
+           "OutputSizeLimit`Dump`rsc", "[", "\<\"sizeShowLess\"\>", "]"}], 
+           ",", "OutputSizeLimit`Dump`textsty"}], "]"}],
+         Appearance->Automatic,
+         ButtonFunction:>OutputSizeLimit`ButtonFunction[
+          Identity, 55, 23355686237426526608, 5/2],
+         Enabled->OutputSizeLimit`Dump`enabled,
+         Evaluator->Automatic,
+         Method->"Queued"], "\[ThinSpace]", 
+        ButtonBox[
+         RowBox[{"Style", "[", 
+          RowBox[{
+           RowBox[{
+           "OutputSizeLimit`Dump`rsc", "[", "\<\"sizeShowMore\"\>", "]"}], 
+           ",", "OutputSizeLimit`Dump`textsty"}], "]"}],
+         Appearance->Automatic,
+         ButtonFunction:>OutputSizeLimit`ButtonFunction[
+          Identity, 55, 23355686237426526608, 5 2],
+         Enabled->OutputSizeLimit`Dump`enabled,
+         Evaluator->Automatic,
+         Method->"Queued"], "\[ThinSpace]", 
+        ButtonBox[
+         RowBox[{"Style", "[", 
+          RowBox[{
+           RowBox[{
+           "OutputSizeLimit`Dump`rsc", "[", "\<\"sizeShowAll\"\>", "]"}], ",",
+            "OutputSizeLimit`Dump`textsty"}], "]"}],
+         Appearance->Automatic,
+         ButtonFunction:>OutputSizeLimit`ButtonFunction[
+          Identity, 55, 23355686237426526608, Infinity],
+         Enabled->OutputSizeLimit`Dump`enabled,
+         Evaluator->Automatic,
+         Method->"Queued"], "\[ThinSpace]", 
+        ButtonBox[
+         RowBox[{"Style", "[", 
+          RowBox[{
+           RowBox[{
+           "OutputSizeLimit`Dump`rsc", "[", "\<\"sizeChangeLimit\"\>", "]"}], 
+           ",", "OutputSizeLimit`Dump`textsty"}], "]"}],
+         Appearance->Automatic,
+         ButtonFunction:>FrontEndExecute[{
+            FrontEnd`SetOptions[
+            FrontEnd`$FrontEnd, 
+             FrontEnd`PreferencesSettings -> {"Page" -> "Evaluation"}], 
+            FrontEnd`FrontEndToken["PreferencesDialog"]}],
+         Evaluator->None,
+         Method->"Preemptive"]}]}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+       "RowsIndexed" -> {}},
+     GridBoxDividers->{
+      "Columns" -> {{False}}, "ColumnsIndexed" -> {}, "Rows" -> {{False}}, 
+       "RowsIndexed" -> {}},
+     GridBoxItemSize->{
+      "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+       "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.5599999999999999]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[1.2]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    DefaultBaseStyle->{},
+    FrameMargins->5],
+   Deploy,
+   DefaultBaseStyle->"Deploy"],
+  Out[55]]], "Output",
+ CellChangeTimes->{3.5637933817631407`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \
+\[NoBreak]\\!\\(\\*StyleBox[\\($RecursionLimit :: reclim\\), \
+\\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this calculation. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/stop\\\", \
+ButtonNote -> \\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.5637933126064243`*^9, {3.5637933521489887`*^9, 3.563793381758165*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(1024\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.5637933126064243`*^9, {3.5637933521489887`*^9, 3.563793381750413*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(256\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.5637933126064243`*^9, {3.5637933521489887`*^9, 3.5637933816555157`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(256\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.5637933126064243`*^9, {3.5637933521489887`*^9, 3.56379338164987*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(256\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.5637933126064243`*^9, {3.5637933521489887`*^9, 3.5637933815347147`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(256\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.5637933126064243`*^9, {3.5637933521489887`*^9, 3.563793359255789*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(256\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5637933126064243`*^9, 3.563793352223703*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(256\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5637933126064243`*^9, 3.563793352318955*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(1024\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5637933126064243`*^9, 3.5637933523210917`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \
+\[NoBreak]\\!\\(\\*StyleBox[\\($RecursionLimit :: reclim\\), \
+\\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this calculation. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/stop\\\", \
+ButtonNote -> \\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5637933126064243`*^9, 3.563793352322888*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  TagBox[
+   PanelBox[GridBox[{
+      {
+       StyleBox[
+        StyleBox[
+         DynamicBox[ToBoxes[
+           FEPrivate`FrontEndResource["FEStrings", "sizeExplanation"], 
+           StandardForm],
+          ImageSizeCache->{407., {3., 11.}}],
+         StripOnInput->False,
+         DynamicUpdating->True], "Panel",
+        StripOnInput->False,
+        Background->None]},
+      {
+       ItemBox[
+        TagBox[
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[LeftSkeleton]", "1", "\[RightSkeleton]"}], 
+                    ")"}], "+", 
+                    RowBox[{"Fibo", "[", 
+                    RowBox[{"95", "-", "2"}], "]"}]}], ")"}], "+", 
+                  RowBox[{"Fibo", "[", 
+                   RowBox[{"96", "-", "2"}], "]"}]}], ")"}], "+", 
+                RowBox[{"Fibo", "[", 
+                 RowBox[{"97", "-", "2"}], "]"}]}], ")"}], "+", 
+              RowBox[{"Fibo", "[", 
+               RowBox[{"98", "-", "2"}], "]"}]}], ")"}], "+", 
+            RowBox[{"Fibo", "[", 
+             RowBox[{"99", "-", "2"}], "]"}]}], ")"}], "+", 
+          RowBox[{"Fibo", "[", 
+           RowBox[{"100", "-", "2"}], "]"}]}],
+         Short[#, 5]& ],
+        Background->GrayLevel[1],
+        BaseStyle->{Deployed -> False},
+        Frame->True,
+        FrameStyle->GrayLevel[0, 0.2],
+        StripOnInput->False]},
+      {
+       RowBox[{
+        ButtonBox[
+         RowBox[{"Style", "[", 
+          RowBox[{
+           RowBox[{
+           "OutputSizeLimit`Dump`rsc", "[", "\<\"sizeShowLess\"\>", "]"}], 
+           ",", "OutputSizeLimit`Dump`textsty"}], "]"}],
+         Appearance->Automatic,
+         ButtonFunction:>OutputSizeLimit`ButtonFunction[
+          Identity, 54, 23355686237426526608, 5/2],
+         Enabled->OutputSizeLimit`Dump`enabled,
+         Evaluator->Automatic,
+         Method->"Queued"], "\[ThinSpace]", 
+        ButtonBox[
+         RowBox[{"Style", "[", 
+          RowBox[{
+           RowBox[{
+           "OutputSizeLimit`Dump`rsc", "[", "\<\"sizeShowMore\"\>", "]"}], 
+           ",", "OutputSizeLimit`Dump`textsty"}], "]"}],
+         Appearance->Automatic,
+         ButtonFunction:>OutputSizeLimit`ButtonFunction[
+          Identity, 54, 23355686237426526608, 5 2],
+         Enabled->OutputSizeLimit`Dump`enabled,
+         Evaluator->Automatic,
+         Method->"Queued"], "\[ThinSpace]", 
+        ButtonBox[
+         RowBox[{"Style", "[", 
+          RowBox[{
+           RowBox[{
+           "OutputSizeLimit`Dump`rsc", "[", "\<\"sizeShowAll\"\>", "]"}], ",",
+            "OutputSizeLimit`Dump`textsty"}], "]"}],
+         Appearance->Automatic,
+         ButtonFunction:>OutputSizeLimit`ButtonFunction[
+          Identity, 54, 23355686237426526608, Infinity],
+         Enabled->OutputSizeLimit`Dump`enabled,
+         Evaluator->Automatic,
+         Method->"Queued"], "\[ThinSpace]", 
+        ButtonBox[
+         RowBox[{"Style", "[", 
+          RowBox[{
+           RowBox[{
+           "OutputSizeLimit`Dump`rsc", "[", "\<\"sizeChangeLimit\"\>", "]"}], 
+           ",", "OutputSizeLimit`Dump`textsty"}], "]"}],
+         Appearance->Automatic,
+         ButtonFunction:>FrontEndExecute[{
+            FrontEnd`SetOptions[
+            FrontEnd`$FrontEnd, 
+             FrontEnd`PreferencesSettings -> {"Page" -> "Evaluation"}], 
+            FrontEnd`FrontEndToken["PreferencesDialog"]}],
+         Evaluator->None,
+         Method->"Preemptive"]}]}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+       "RowsIndexed" -> {}},
+     GridBoxDividers->{
+      "Columns" -> {{False}}, "ColumnsIndexed" -> {}, "Rows" -> {{False}}, 
+       "RowsIndexed" -> {}},
+     GridBoxItemSize->{
+      "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+       "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.5599999999999999]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[1.2]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    DefaultBaseStyle->{},
+    FrameMargins->5],
+   Deploy,
+   DefaultBaseStyle->"Deploy"],
+  Out[54]]], "Output",
+ CellChangeTimes->{3.5637933128093233`*^9, 3.563793352326126*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Fibo", "[", "100", "]"}]], "Input",
+ CellChangeTimes->{{3.563793246687701*^9, 3.5637932495412693`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(256\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.563793250407688*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(256\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5637932505312243`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(256\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5637932505380077`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(1024\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.563793250539741*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \
+\[NoBreak]\\!\\(\\*StyleBox[\\($RecursionLimit :: reclim\\), \
+\\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this calculation. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/stop\\\", \
+ButtonNote -> \\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.56379325054176*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  TagBox[
+   PanelBox[GridBox[{
+      {
+       StyleBox[
+        StyleBox[
+         DynamicBox[ToBoxes[
+           FEPrivate`FrontEndResource["FEStrings", "sizeExplanation"], 
+           StandardForm],
+          ImageSizeCache->{407., {3., 11.}}],
+         StripOnInput->False,
+         DynamicUpdating->True], "Panel",
+        StripOnInput->False,
+        Background->None]},
+      {
+       ItemBox[
+        TagBox[
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[LeftSkeleton]", "1", "\[RightSkeleton]"}], 
+                    ")"}], "+", 
+                    RowBox[{"Fibo", "[", 
+                    RowBox[{"95", "-", "2"}], "]"}]}], ")"}], "+", 
+                  RowBox[{"Fibo", "[", 
+                   RowBox[{"96", "-", "2"}], "]"}]}], ")"}], "+", 
+                RowBox[{"Fibo", "[", 
+                 RowBox[{"97", "-", "2"}], "]"}]}], ")"}], "+", 
+              RowBox[{"Fibo", "[", 
+               RowBox[{"98", "-", "2"}], "]"}]}], ")"}], "+", 
+            RowBox[{"Fibo", "[", 
+             RowBox[{"99", "-", "2"}], "]"}]}], ")"}], "+", 
+          RowBox[{"Fibo", "[", 
+           RowBox[{"100", "-", "2"}], "]"}]}],
+         Short[#, 5]& ],
+        Background->GrayLevel[1],
+        BaseStyle->{Deployed -> False},
+        Frame->True,
+        FrameStyle->GrayLevel[0, 0.2],
+        StripOnInput->False]},
+      {
+       RowBox[{
+        ButtonBox[
+         RowBox[{"Style", "[", 
+          RowBox[{
+           RowBox[{
+           "OutputSizeLimit`Dump`rsc", "[", "\<\"sizeShowLess\"\>", "]"}], 
+           ",", "OutputSizeLimit`Dump`textsty"}], "]"}],
+         Appearance->Automatic,
+         ButtonFunction:>OutputSizeLimit`ButtonFunction[
+          Identity, 50, 23355686237426526608, 5/2],
+         Enabled->OutputSizeLimit`Dump`enabled,
+         Evaluator->Automatic,
+         Method->"Queued"], "\[ThinSpace]", 
+        ButtonBox[
+         RowBox[{"Style", "[", 
+          RowBox[{
+           RowBox[{
+           "OutputSizeLimit`Dump`rsc", "[", "\<\"sizeShowMore\"\>", "]"}], 
+           ",", "OutputSizeLimit`Dump`textsty"}], "]"}],
+         Appearance->Automatic,
+         ButtonFunction:>OutputSizeLimit`ButtonFunction[
+          Identity, 50, 23355686237426526608, 5 2],
+         Enabled->OutputSizeLimit`Dump`enabled,
+         Evaluator->Automatic,
+         Method->"Queued"], "\[ThinSpace]", 
+        ButtonBox[
+         RowBox[{"Style", "[", 
+          RowBox[{
+           RowBox[{
+           "OutputSizeLimit`Dump`rsc", "[", "\<\"sizeShowAll\"\>", "]"}], ",",
+            "OutputSizeLimit`Dump`textsty"}], "]"}],
+         Appearance->Automatic,
+         ButtonFunction:>OutputSizeLimit`ButtonFunction[
+          Identity, 50, 23355686237426526608, Infinity],
+         Enabled->OutputSizeLimit`Dump`enabled,
+         Evaluator->Automatic,
+         Method->"Queued"], "\[ThinSpace]", 
+        ButtonBox[
+         RowBox[{"Style", "[", 
+          RowBox[{
+           RowBox[{
+           "OutputSizeLimit`Dump`rsc", "[", "\<\"sizeChangeLimit\"\>", "]"}], 
+           ",", "OutputSizeLimit`Dump`textsty"}], "]"}],
+         Appearance->Automatic,
+         ButtonFunction:>FrontEndExecute[{
+            FrontEnd`SetOptions[
+            FrontEnd`$FrontEnd, 
+             FrontEnd`PreferencesSettings -> {"Page" -> "Evaluation"}], 
+            FrontEnd`FrontEndToken["PreferencesDialog"]}],
+         Evaluator->None,
+         Method->"Preemptive"]}]}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+       "RowsIndexed" -> {}},
+     GridBoxDividers->{
+      "Columns" -> {{False}}, "ColumnsIndexed" -> {}, "Rows" -> {{False}}, 
+       "RowsIndexed" -> {}},
+     GridBoxItemSize->{
+      "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+       "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.5599999999999999]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[1.2]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    DefaultBaseStyle->{},
+    FrameMargins->5],
+   Deploy,
+   DefaultBaseStyle->"Deploy"],
+  Out[50]]], "Output",
+ CellChangeTimes->{3.56379325054599*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.563793123724286*^9, 3.563793126477441*^9}, 
+   3.563793159867601*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(256\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.563793127199093*^9, 3.563793153357943*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(256\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.563793127199093*^9, 3.563793153433546*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(256\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.563793127199093*^9, 3.5637931534384947`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(1024\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.563793127199093*^9, 3.56379315353234*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \
+\[NoBreak]\\!\\(\\*StyleBox[\\($RecursionLimit :: reclim\\), \
+\\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this calculation. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/stop\\\", \
+ButtonNote -> \\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.563793127199093*^9, 3.563793153535347*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  TagBox[
+   PanelBox[GridBox[{
+      {
+       StyleBox[
+        StyleBox[
+         DynamicBox[ToBoxes[
+           FEPrivate`FrontEndResource["FEStrings", "sizeExplanation"], 
+           StandardForm],
+          ImageSizeCache->{407., {3., 11.}}],
+         StripOnInput->False,
+         DynamicUpdating->True], "Panel",
+        StripOnInput->False,
+        Background->None]},
+      {
+       ItemBox[
+        TagBox[
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[LeftSkeleton]", "1", "\[RightSkeleton]"}], 
+                    ")"}], "+", 
+                    RowBox[{"Fibo", "[", 
+                    RowBox[{"95", "-", "2"}], "]"}]}], ")"}], "+", 
+                  RowBox[{"Fibo", "[", 
+                   RowBox[{"96", "-", "2"}], "]"}]}], ")"}], "+", 
+                RowBox[{"Fibo", "[", 
+                 RowBox[{"97", "-", "2"}], "]"}]}], ")"}], "+", 
+              RowBox[{"Fibo", "[", 
+               RowBox[{"98", "-", "2"}], "]"}]}], ")"}], "+", 
+            RowBox[{"Fibo", "[", 
+             RowBox[{"99", "-", "2"}], "]"}]}], ")"}], "+", 
+          RowBox[{"Fibo", "[", 
+           RowBox[{"100", "-", "2"}], "]"}]}],
+         Short[#, 5]& ],
+        Background->GrayLevel[1],
+        BaseStyle->{Deployed -> False},
+        Frame->True,
+        FrameStyle->GrayLevel[0, 0.2],
+        StripOnInput->False]},
+      {
+       RowBox[{
+        ButtonBox[
+         RowBox[{"Style", "[", 
+          RowBox[{
+           RowBox[{
+           "OutputSizeLimit`Dump`rsc", "[", "\<\"sizeShowLess\"\>", "]"}], 
+           ",", "OutputSizeLimit`Dump`textsty"}], "]"}],
+         Appearance->Automatic,
+         ButtonFunction:>OutputSizeLimit`ButtonFunction[
+          Identity, 48, 23355686237426526608, 5/2],
+         Enabled->OutputSizeLimit`Dump`enabled,
+         Evaluator->Automatic,
+         Method->"Queued"], "\[ThinSpace]", 
+        ButtonBox[
+         RowBox[{"Style", "[", 
+          RowBox[{
+           RowBox[{
+           "OutputSizeLimit`Dump`rsc", "[", "\<\"sizeShowMore\"\>", "]"}], 
+           ",", "OutputSizeLimit`Dump`textsty"}], "]"}],
+         Appearance->Automatic,
+         ButtonFunction:>OutputSizeLimit`ButtonFunction[
+          Identity, 48, 23355686237426526608, 5 2],
+         Enabled->OutputSizeLimit`Dump`enabled,
+         Evaluator->Automatic,
+         Method->"Queued"], "\[ThinSpace]", 
+        ButtonBox[
+         RowBox[{"Style", "[", 
+          RowBox[{
+           RowBox[{
+           "OutputSizeLimit`Dump`rsc", "[", "\<\"sizeShowAll\"\>", "]"}], ",",
+            "OutputSizeLimit`Dump`textsty"}], "]"}],
+         Appearance->Automatic,
+         ButtonFunction:>OutputSizeLimit`ButtonFunction[
+          Identity, 48, 23355686237426526608, Infinity],
+         Enabled->OutputSizeLimit`Dump`enabled,
+         Evaluator->Automatic,
+         Method->"Queued"], "\[ThinSpace]", 
+        ButtonBox[
+         RowBox[{"Style", "[", 
+          RowBox[{
+           RowBox[{
+           "OutputSizeLimit`Dump`rsc", "[", "\<\"sizeChangeLimit\"\>", "]"}], 
+           ",", "OutputSizeLimit`Dump`textsty"}], "]"}],
+         Appearance->Automatic,
+         ButtonFunction:>FrontEndExecute[{
+            FrontEnd`SetOptions[
+            FrontEnd`$FrontEnd, 
+             FrontEnd`PreferencesSettings -> {"Page" -> "Evaluation"}], 
+            FrontEnd`FrontEndToken["PreferencesDialog"]}],
+         Evaluator->None,
+         Method->"Preemptive"]}]}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+       "RowsIndexed" -> {}},
+     GridBoxDividers->{
+      "Columns" -> {{False}}, "ColumnsIndexed" -> {}, "Rows" -> {{False}}, 
+       "RowsIndexed" -> {}},
+     GridBoxItemSize->{
+      "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+       "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.5599999999999999]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[1.2]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    DefaultBaseStyle->{},
+    FrameMargins->5],
+   Deploy,
+   DefaultBaseStyle->"Deploy"],
+  Out[48]]], "Output",
+ CellChangeTimes->{{3.563793127230867*^9, 3.563793153630493*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.563792955543782*^9, 3.563792982805469*^9}, {
+  3.563793110157352*^9, 3.563793110331368*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(256\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{{3.563792972774426*^9, 3.56379300616011*^9}, 
+   3.563793063308201*^9, 3.563793419604693*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.563793417986375*^9, 3.563793418096813*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.563793565382228*^9, 3.5637935805962257`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["1"], "Input",
+ CellChangeTimes->{3.563793598421191*^9}],
+
+Cell[BoxData["1"], "Output",
+ CellChangeTimes->{3.563793598591181*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Fibo", "[", "n_", "]"}], ":=", 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Fibo", "[", "0", "]"}], "=", "0"}], ",", 
+    RowBox[{
+     RowBox[{"Fibo", "[", "1", "]"}], "=", "1"}], ",", 
+    RowBox[{
+     RowBox[{"Fibo", "[", "n", "]"}], "=", 
+     RowBox[{
+      RowBox[{"Fibo", "[", 
+       RowBox[{"n", "-", "1"}], "]"}], "+", 
+      RowBox[{"Fibo", "[", 
+       RowBox[{"n", "-", "2"}], "]"}]}]}]}], ")"}]}]], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Fibo", "[", "12", "]"}]], "Input",
+ CellChangeTimes->{{3.5637935061771803`*^9, 3.5637935099010973`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Fibo", "[", "12", "]"}]], "Output",
+ CellChangeTimes->{
+  3.5637935108140574`*^9, {3.563793578107633*^9, 3.5637935952779207`*^9}}]
+}, Open  ]]
+},
+WindowSize->{1227, 1000},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"8.0 for Linux x86 (64-bit) (October 10, 2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 1444, 44, 164, "Input"],
+Cell[CellGroupData[{
+Cell[2026, 68, 124, 2, 30, "Input"],
+Cell[2153, 72, 78, 1, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2268, 78, 124, 2, 30, "Input"],
+Cell[2395, 82, 78, 1, 30, "Output"]
+}, Open  ]],
+Cell[2488, 86, 431, 13, 30, "Input"],
+Cell[CellGroupData[{
+Cell[2944, 103, 146, 3, 30, "Input"],
+Cell[3093, 108, 71, 1, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3201, 114, 146, 2, 30, "Input"],
+Cell[3350, 118, 92, 1, 30, "Output"]
+}, Open  ]],
+Cell[3457, 122, 662, 17, 72, "Input"],
+Cell[CellGroupData[{
+Cell[4144, 143, 292, 5, 30, "Input"],
+Cell[4439, 150, 176, 3, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4652, 158, 436, 13, 30, "Input"],
+Cell[5091, 173, 1451, 32, 169, "Output"]
+}, Open  ]],
+Cell[6557, 208, 592, 16, 50, "Input"],
+Cell[CellGroupData[{
+Cell[7174, 228, 126, 2, 30, "Input"],
+Cell[7303, 232, 72, 1, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7412, 238, 176, 3, 30, "Input"],
+Cell[7591, 243, 99, 1, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7727, 249, 329, 9, 50, "Input"],
+Cell[8059, 260, 123, 2, 30, "Output"]
+}, Open  ]],
+Cell[8197, 265, 124, 2, 30, "Input"],
+Cell[CellGroupData[{
+Cell[8346, 271, 529, 14, 50, InheritFromParent],
+Cell[8878, 287, 74, 1, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8989, 293, 864, 21, 30, "Input"],
+Cell[9856, 316, 532, 11, 24, "Message"],
+Cell[10391, 329, 503, 10, 24, "Message"],
+Cell[10897, 341, 274, 7, 24, "Message"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11208, 353, 127, 2, 30, "Input"],
+Cell[11338, 357, 4551, 124, 220, "Output"],
+Cell[15892, 483, 643, 14, 24, "Message"],
+Cell[16538, 499, 577, 13, 24, "Message"],
+Cell[17118, 514, 578, 13, 24, "Message"],
+Cell[17699, 529, 575, 13, 24, "Message"],
+Cell[18277, 544, 578, 13, 24, "Message"],
+Cell[18858, 559, 576, 13, 24, "Message"],
+Cell[19437, 574, 497, 10, 24, "Message"],
+Cell[19937, 586, 497, 10, 24, "Message"],
+Cell[20437, 598, 500, 10, 24, "Message"],
+Cell[20940, 610, 564, 11, 24, "Message"],
+Cell[21507, 623, 4573, 124, 220, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26117, 752, 127, 2, 30, "Input"],
+Cell[26247, 756, 473, 10, 24, "Message"],
+Cell[26723, 768, 475, 10, 24, "Message"],
+Cell[27201, 780, 475, 10, 24, "Message"],
+Cell[27679, 792, 474, 10, 24, "Message"],
+Cell[28156, 804, 539, 11, 24, "Message"],
+Cell[28698, 817, 4548, 124, 220, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[33283, 946, 118, 2, 30, "Input"],
+Cell[33404, 950, 497, 10, 24, "Message"],
+Cell[33904, 962, 497, 10, 24, "Message"],
+Cell[34404, 974, 499, 10, 24, "Message"],
+Cell[34906, 986, 497, 10, 24, "Message"],
+Cell[35406, 998, 564, 11, 24, "Message"],
+Cell[35973, 1011, 4573, 124, 220, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[40583, 1140, 141, 2, 30, "Input"],
+Cell[40727, 1144, 594, 13, 24, "Message"]
+}, Open  ]],
+Cell[41336, 1160, 92, 1, 30, InheritFromParent],
+Cell[41431, 1163, 94, 1, 30, "Input"],
+Cell[CellGroupData[{
+Cell[41550, 1168, 69, 1, 30, "Input"],
+Cell[41622, 1171, 70, 1, 30, "Output"]
+}, Open  ]],
+Cell[41707, 1175, 498, 16, 30, "Input"],
+Cell[CellGroupData[{
+Cell[42230, 1195, 128, 2, 30, "Input"],
+Cell[42361, 1199, 154, 3, 30, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

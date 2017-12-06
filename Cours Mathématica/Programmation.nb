@@ -1,0 +1,1395 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     29517,       1107]*)
+(*NotebookOutlinePosition[     30229,       1131]*)
+(*  CellTagsIndexPosition[     30185,       1127]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell["Programmation", "Title"],
+
+Cell[TextData[{
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " est aussi un langage de programmation. On peut \[EHat]tre amen\[EAcute], \
+pour un probl\[EGrave]me sp\[EAcute]cifique, \[AGrave] \[EAcute]crire soi-m\
+\[EHat]me les fonctions permettant la r\[EAcute]solution du \
+probl\[EGrave]me."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " D\[EAcute]finir une fonction"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Notre premi\[EGrave]re fonction"
+}], "Subsection"],
+
+Cell["Voici notre premi\[EGrave]re fonction :", "Text"],
+
+Cell[BoxData[
+    \(\(f[x_]\  = \ Sin[3  x]*Sin[2\ x] + Cos[5  x]*Sin[x];\)\)], "Input"],
+
+Cell[TextData[{
+  "On vient de d\[EAcute]finir une nouvelle fonction, qui s'appelle ",
+  Cell[BoxData[
+      \(TraditionalForm\`f\)]],
+  ". Cette fonction est une fonction d'une variable, appel\[EAcute]e ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\)]],
+  ". Pour l'instant, ne nous occupons pas trop du caract\[EGrave]re de \
+soulignement qui suit la lettre ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\)]],
+  " dans le membre de gauche de l'\[EAcute]galit\[EAcute].\nLa fonction ",
+  Cell[BoxData[
+      \(TraditionalForm\`f\)]],
+  " peut \[EHat]tre utilis\[EAcute]e comme n'importe quelle autre fonction :"
+}], "Text"],
+
+Cell[BoxData[
+    \(Plot[f[x], {x, \(-5\) Pi, 5  Pi}]\)], "Input"],
+
+Cell[BoxData[
+    \(D[f[t], t]\)], "Input"],
+
+Cell[BoxData[
+    \(TrigFactor[%]\)], "Input"],
+
+Cell[BoxData[
+    \(f[Pi/3]\)], "Input"],
+
+Cell[BoxData[
+    \(N[f[Pi/7], 300]\)], "Input"],
+
+Cell[BoxData[
+    \(\(?f\)\)], "Input"],
+
+Cell[TextData[{
+  "Effa\[CCedilla]ons ",
+  Cell[BoxData[
+      \(TraditionalForm\`f\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[
+    \(Clear[f]\)], "Input"],
+
+Cell[BoxData[
+    \(\(?f\)\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Fonctions de plusieurs variables"
+}], "Subsection"],
+
+Cell["\<\
+Il est aussi facile de cr\[EAcute]er une fonction de plusieurs variables.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(\(f[x_, y_]\  = Re[\((x + I\ y)\)^3 - 1];\)\)], "Input"],
+
+Cell[BoxData[
+    \(f[3, 4]\)], "Input"],
+
+Cell[BoxData[
+    \(f[\(-1\)/2, Sqrt[3]/2]\)], "Input"],
+
+Cell[TextData[{
+  "Rien n'oblige d'ailleurs ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\)]],
+  " et ",
+  Cell[BoxData[
+      \(TraditionalForm\`y\)]],
+  " \[AGrave] \[EHat]tre r\[EAcute]els."
+}], "Text"],
+
+Cell[BoxData[
+    \(f[I - 1, 2  I + 1]\)], "Input"],
+
+Cell[BoxData[
+    \(ComplexExpand[f[x, y]]\)], "Input"],
+
+Cell[BoxData[
+    \(<< Default3D`\)], "Input"],
+
+Cell[BoxData[
+    \(Plot3D[f[x, y], {x, \(-1\), 1}, {y, \(-1\), 1}, PlotRange \[Rule] All, 
+      PlotPoints \[Rule] 50, Mesh \[Rule] False]\)], "Input"],
+
+Cell[BoxData[
+    \(Clear[f]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Une fonction d\[EAcute]finie par morceaux"
+}], "Subsection"],
+
+Cell["\<\
+Nous verrons bient\[OHat]t comment effectuer des tests \[AGrave] l'int\
+\[EAcute]rieur du corps d'une fonction. Il existe une fa\[CCedilla]on encore \
+plus simple de proc\[EAcute]der.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Clear[f]\)], "Input"],
+
+Cell[BoxData[{
+    \(\(f[x_] /; \ x\  < \ 0\  := \ 
+        Sqrt[\(-x\)];\)\), "\[IndentingNewLine]", 
+    \(\(f[x_] /; \ x \[GreaterEqual] \ 0 && x \[LessEqual] 2  Pi := \ 
+        Sin[x];\)\), "\[IndentingNewLine]", 
+    \(\(f[x_] /; \ x > Pi := \ 1/10 \((x - 2  Pi)\)^2;\)\)}], "Input"],
+
+Cell[BoxData[
+    \(Plot[f[x], {x, \(-10\), 10}]\)], "Input"],
+
+Cell[TextData[{
+  "Remarque : on a utilis\[EAcute] ci-dessus le symbole ",
+  Cell[BoxData[
+      \(TraditionalForm\` := \)]],
+  " au lieu du symbole ",
+  Cell[BoxData[
+      \(TraditionalForm\` = \)]],
+  " pour d\[EAcute]finir la fonction. Nous reparlerons de ceci plus tard."
+}], "Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Fonctions r\[EAcute]cursives"
+}], "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell["Factorielle", "Subsubsection"],
+
+Cell[TextData[{
+  "La fonction factorielle existe bien entendu dans ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  ", mais elle peut \[EHat]tre facilement r\[EAcute]\[EAcute]crite."
+}], "Text"],
+
+Cell[BoxData[{
+    \(\(facto[0]\  = \ 1;\)\), "\[IndentingNewLine]", 
+    \(\(facto[n_]\  := n\ *\ facto[n - 1];\)\)}], "Input"],
+
+Cell[BoxData[
+    \(facto[100]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Nombres de Fibonacci", "Subsubsection"],
+
+Cell["Un autre exemple, celui des nombres de fibonacci.", "Text"],
+
+Cell[BoxData[{
+    \(\(fibo[0]\  = \ 0;\)\), "\[IndentingNewLine]", 
+    \(\(fibo[1]\  = \ 1;\)\), "\[IndentingNewLine]", 
+    \(\(fibo[n_]\  := \ fibo[n - 1]\  + \ fibo[n - 2];\)\)}], "Input"],
+
+Cell[BoxData[
+    \(Table[{k, fibo[k]}, {k, 0, 20}] // TableForm\)], "Input"],
+
+Cell["\<\
+Cette fonction est exemple de fonction tr\[EGrave]s simple \[AGrave] \
+programmer, mais dont le comportement est tr\[EGrave]s mauvais. Essayons de \
+calculer fibo[30]  :\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Timing[fibo[30]]\)], "Input"],
+
+Cell[TextData[{
+  "Voici une autre fonction calculant le ",
+  Cell[BoxData[
+      \(TraditionalForm\`n\)]],
+  "i\[EGrave]me nombre de Fibonacci :"
+}], "Text"],
+
+Cell[BoxData[
+    \(Clear[fibo]\)], "Input"],
+
+Cell[BoxData[{
+    \(\(fibo[n_, u_, v_, n_]\  = \ u;\)\), "\[IndentingNewLine]", 
+    \(\(fibo[k_, u_, v_, n_] := 
+        fibo[k + 1, v, u + v, n];\)\), "\[IndentingNewLine]", 
+    \(\(fibo[n_] := fibo[0, 0, 1, n];\)\)}], "Input"],
+
+Cell[BoxData[
+    \(Timing[fibo[1000]]\)], "Input"],
+
+Cell["\<\
+Cette fonction para\[IHat]t nettement plus efficace que la pr\[EAcute]c\
+\[EAcute]dente.\
+\>", "Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Fonction de Collatz", "Subsubsection"],
+
+Cell[TextData[{
+  "Soit le probl\[EGrave]me suivant : on se donne un entier ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_0 \[GreaterEqual] \ 2\)]],
+  ". Si ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_0\)]],
+  " est pair, on pose ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_1 = x\_0\/2\)]],
+  ". Sinon, on pose ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_1 = 3  x\_0 + 1\)]],
+  ". On it\[EGrave]re le proc\[EAcute]d\[EAcute] pour fabriquer une suite ",
+  Cell[BoxData[
+      \(TraditionalForm\`\((x\_n)\)\_\(n \[GreaterEqual] 0\)\)]],
+  ". La question est de savoir si, \[AGrave] un certain rang, on a ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_n = 1\)]],
+  ", auquel cas la suite est finie. Sinon, la suite est infinie."
+}], "Text"],
+
+Cell[TextData[{
+  "La fonction ci-dessous prend un entier ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_0\)]],
+  " en param\[EGrave]tre et renvoie la liste associ\[EAcute]e au \
+proc\[EAcute]d\[EAcute] d\[EAcute]crit ci-dessous, du moins si l'on atteint \
+le nombre 1. Sinon, la fonction ne s'arr\[EHat]tra jamais."
+}], "Text"],
+
+Cell[BoxData[{
+    \(\(collatz[1]\  = \ {};\)\), "\[IndentingNewLine]", 
+    \(\(collatz[n_] /; \ Mod[n, 2] \[Equal] 0\  := \ {n, 
+          collatz[n/2]};\)\), "\[IndentingNewLine]", 
+    \(\(collatz[n_]\  := \ {n, collatz[3  n + 1]};\)\)}], "Input"],
+
+Cell[BoxData[
+    \(Flatten[collatz[27]]\)], "Input"],
+
+Cell[BoxData[
+    \(ListPlot[%, PlotJoined \[Rule] True, PlotRange \[Rule] All]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Les tours de Hanoi", "Subsubsection"],
+
+Cell[TextData[{
+  "Voici un exemple plus sophistiqu\[EAcute] de fonction r\[EAcute]cursive : \
+On dispose de trois piquets. Sur l'un des piquets (le num\[EAcute]ro 1, par \
+exemple), sont empil\[EAcute]s ",
+  Cell[BoxData[
+      \(TraditionalForm\`N\)]],
+  " disques de tailles d\[EAcute]croissantes du bas vers le haut. Le but du \
+jeu est d'amener tous les disques sur le piquet num\[EAcute]ro 2, en \
+utilisant si besoin est le piquet num\[EAcute]ro 3. La seule r\[EGrave]gle \
+est : un disque ne doit jamais \[EHat]tre pos\[EAcute] sur un disque de diam\
+\[EGrave]tre inf\[EAcute]rieur."
+}], "Text"],
+
+Cell[BoxData[{
+    \(\(Hanoi[a_, b_, 
+          1] = {{"\<D\[EAcute]placer de\>", a, "\<vers\>", 
+            b}};\)\), "\[IndentingNewLine]", 
+    \(Hanoi[a_, b_, n_] := \[IndentingNewLine]Join[
+        Hanoi[a, 6 - a - b, n - 1], \[IndentingNewLine]Hanoi[a, b, 
+          1], \[IndentingNewLine]Hanoi[6 - a - b, b, n - 1]]\)}], "Input"],
+
+Cell[BoxData[
+    \(Hanoi[1, 2, 4] // TableForm\)], "Input"]
+}, Closed]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " Variables"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Variables Globales"
+}], "Subsection"],
+
+Cell[TextData[{
+  "Nous avons d\[EAcute]j\[AGrave] utilis\[EAcute] des variables, ne \
+serait-ce que chaque fois que nous avons d\[EAcute]fini des fonctions (une \
+fonction est en effet un objet comme les autres).\nOn affecte une valeur \
+\[AGrave] une variable avec le symbole \"",
+  Cell[BoxData[
+      \(TraditionalForm\` = \)]],
+  "\"."
+}], "Text"],
+
+Cell[BoxData[
+    \(t = 3\)], "Input"],
+
+Cell[BoxData[
+    \(5*t + 8\)], "Input"],
+
+Cell[TextData[{
+  "La variable ",
+  Cell[BoxData[
+      \(TraditionalForm\`t\)]],
+  " d\[EAcute]finie ci-dessus est globale : elle est visible dans tout ",
+  StyleBox["Mathematica.",
+    FontSlant->"Italic"]
+}], "Text"],
+
+Cell[BoxData[
+    \(g[x_] = x + t\)], "Input"],
+
+Cell[TextData[{
+  "Si l'on change maintenant la valeur de ",
+  Cell[BoxData[
+      \(TraditionalForm\`t\)]],
+  ", on ne changera rien \[AGrave] la d\[EAcute]finition de ",
+  Cell[BoxData[
+      \(TraditionalForm\`g\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[
+    \(t = 7\)], "Input"],
+
+Cell[BoxData[
+    \(g[x]\)], "Input"],
+
+Cell[TextData[{
+  "Il existe un autre symbole d'affectation : l'affectation diff\[EAcute]r\
+\[EAcute]e \"",
+  Cell[BoxData[
+      \(TraditionalForm\` := \)]],
+  "\". Lors d'une telle affectation, le membre de droite n'est pas \
+\[EAcute]valu\[EAcute]."
+}], "Text"],
+
+Cell[BoxData[
+    \(t = 3\)], "Input"],
+
+Cell[BoxData[
+    \(g[x_] := x + t\)], "Input"],
+
+Cell[BoxData[
+    \(g[x]\)], "Input"],
+
+Cell[BoxData[
+    \(t = 7\)], "Input"],
+
+Cell[BoxData[
+    \(g[x]\)], "Input"],
+
+Cell["\<\
+Le choix entre affectation imm\[EAcute]diate et affectation diff\[EAcute]r\
+\[EAcute]e est souvent clair. Dans un petit nombre de cas, la \
+r\[EAcute]flexion s'impose.\
+\>", "Text"],
+
+Cell["\<\
+Ne pas oublier \"d'effacer\" une variable lorsqu'elle n'est plus utile.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Clear[g]; Clear[x]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Variables Locales"
+}], "Subsection"],
+
+Cell[TextData[{
+  "Il est souvent peu judicieux d'utiliser une variable globale : celle-ci \
+est vue par tous les calculs effectu\[EAcute]s, et si on oublie de l'effacer, \
+elle risque de se rappeler \[AGrave] nous au mauvais moment. Ceci est \
+particuli\[EGrave]rement vrai lorsqu'on d\[EAcute]finit une fonction : les \
+variables auxiliaires n\[EAcute]cessaires \[AGrave] sa d\[EAcute]finition ne \
+devraient jamais \[EHat]tre visibles \[AGrave] l'ext\[EAcute]rieur du corps \
+de la fonction. On dispose avec ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " d'une construction permettant de cr\[EAcute]er des variables locales."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Utilisation simple de variables locales", "Subsubsection"],
+
+Cell["\<\
+Voici une fonction qui calcule la somme et le produit de deux nombres. Le r\
+\[EAcute]sultat est renvoy\[EAcute] dans une liste.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(\(sommeProd[x_, y_]\  = 
+        Module[{temp}, \[IndentingNewLine]temp\  = \ {x + y, 
+              x\ y}; \[IndentingNewLine]temp\[IndentingNewLine]];\)\)], \
+"Input"],
+
+Cell[BoxData[
+    \(sommeProd[7, 3]\)], "Input"],
+
+Cell[TextData[{
+  "Un tel exemple est un peu artificiel. La fonction \
+pr\[EAcute]c\[EAcute]dente aurait pu plus simplement \[EHat]tre \
+\[EAcute]crite ",
+  StyleBox["sommeProd[x_,y_] = {x+y,x y}", "Input"],
+  "."
+}], "Text"],
+
+Cell[TextData[{
+  "La variable ",
+  Cell[BoxData[
+      \(TraditionalForm\`temp\)]],
+  ", utilis\[EAcute]e dans le corps de la fonction, est locale \[AGrave] la \
+fonction : elle est invisible \[AGrave] l'ext\[EAcute]rieur de celle-ci."
+}], "Text"],
+
+Cell[BoxData[
+    \(temp\)], "Input"],
+
+Cell[TextData[{
+  StyleBox["Retenir",
+    FontWeight->"Bold"],
+  " : Lorsqu'on d\[EAcute]sire utiliser des variables auxiliaires dans une \
+fonction, on cr\[EAcute]e un ",
+  StyleBox["module",
+    FontSlant->"Italic"],
+  "."
+}], "Text"],
+
+Cell[BoxData[
+    \(Clear[sommeProd]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Les param\[EGrave]tres d'une fonction", "Subsubsection"],
+
+Cell["\<\
+Il n'est pas conseill\[EAcute] au d\[EAcute]butant d'essayer de modifier l'un \
+des param\[EGrave]tres d'une fonction \[AGrave] l'int\[EAcute]rieur de cette \
+fonction. Essayons pour voir.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(\(truc[x_]\  := \ \(x\  = \ x + 1\);\)\)], "Input"],
+
+Cell["\<\
+Une telle fonction ne saurait marcher que si le param\[EGrave]tre pass\
+\[EAcute] est une variable, et pas une valeur. Essayons :\
+\>", "Text"],
+
+Cell[BoxData[
+    \(x = 8\)], "Input"],
+
+Cell[BoxData[
+    \(truc[x]\)], "Input"],
+
+Cell[TextData[{
+  "L\[AGrave] encore, cela ne fonctionne pas. ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " \[EAcute]value automatiquement ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\)]],
+  " en 8 lors de l'appel \[AGrave] la fonction. Le probl\[EGrave]me est que \
+les arguments des fonctions sont normalement \[EAcute]valu\[EAcute]s avant \
+l'appel de la fonction. Ainsi, taper truc[8], ou taper truc[x] revient au m\
+\[EHat]me.\nIl est possible de modifier le comportement d'une fonction en \
+modifiant ses attributs."
+}], "Text"],
+
+Cell[BoxData[
+    \(SetAttributes[truc, HoldAll]\)], "Input"],
+
+Cell[BoxData[
+    \(truc[x]\)], "Input"],
+
+Cell[BoxData[
+    \(x\)], "Input"],
+
+Cell["\<\
+Voici un exemple un peu plus sophistiqu\[EAcute] : une fonction \
+\[EAcute]changeant le contenu de deux variables.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(echange[x_, y_] := 
+      Module[{z}, \[IndentingNewLine]z = x; \[IndentingNewLine]x = 
+          y; \[IndentingNewLine]y = z;\[IndentingNewLine]]\)], "Input"],
+
+Cell[BoxData[
+    \(SetAttributes[echange, HoldAll]\)], "Input"],
+
+Cell[BoxData[
+    \(p = 124; q = 7;\)], "Input"],
+
+Cell[BoxData[
+    \(echange[p, q]\)], "Input"],
+
+Cell[BoxData[
+    \(p\)], "Input"],
+
+Cell[BoxData[
+    \(q\)], "Input"]
+}, Closed]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " Boucles, Tests"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Boucles"
+}], "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell["Boucles \"Do\"", "Subsubsection"],
+
+Cell[TextData[{
+  "Il arrive fr\[EAcute]quemment que l'on ait \[AGrave] effectuer une \
+m\[EHat]me op\[EAcute]ration un certain nombre de fois, d\[EAcute]termin\
+\[EAcute] \[AGrave] l'avance. La construction \"Do\" permet cette suite d'op\
+\[EAcute]rations. \n\n",
+  StyleBox["Syntaxe",
+    FontWeight->"Bold"],
+  " : Placer le curseur apr\[EGrave]s le \"o\" de Do et appuyer sur F1 !!"
+}], "Text"],
+
+Cell[TextData[{
+  "La fonction ci-dessous prend l'entier ",
+  Cell[BoxData[
+      \(TraditionalForm\`n\)]],
+  " en param\[EGrave]tre et renvoie l'entier ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[Sum]\+\(k = 1\)\%n k\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[
+    \(Clear[f]\)], "Input"],
+
+Cell[BoxData[
+    \(f[n_]\  := 
+      Module[{s, k}, \[IndentingNewLine]s\  = \ 0; \[IndentingNewLine]Do[
+          s\  = \ s\  + \ k, \[IndentingNewLine]{k, 1, 
+            n}]; \[IndentingNewLine]s\[IndentingNewLine]]\)], "Input"],
+
+Cell[BoxData[
+    \(f[10]\)], "Input"],
+
+Cell[TextData[{
+  "La fonction ci-dessous (encore !) calcule le ",
+  Cell[BoxData[
+      \(TraditionalForm\`n\)]],
+  "i\[EGrave]me nombre de Fibonacci."
+}], "Text"],
+
+Cell[BoxData[
+    \(fibo[n_]\  := \ 
+      Module[{u, v, w, k}, \[IndentingNewLine]u\  = \ 
+          0; \[IndentingNewLine]v\  = \ 
+          1; \[IndentingNewLine]Do[\[IndentingNewLine]w\  = \ 
+            u\  + \ v; \[IndentingNewLine]u\  = v; \[IndentingNewLine]v = 
+            w, \[IndentingNewLine]{k, 1, 
+            n}\[IndentingNewLine]]; \
+\[IndentingNewLine]u\[IndentingNewLine]]\)], "Input"],
+
+Cell[BoxData[
+    \(fibo[10]\)], "Input"],
+
+Cell[TextData[{
+  "On vient de d\[EAcute]montrer une formule d'une beaut\[EAcute] incroyable:\
+\n",
+  Cell[BoxData[
+      \(TraditionalForm\`F\_10 = \[Sum]\+\(k = 1\)\%10 k\)]]
+}], "Text",
+  TextAlignment->Center],
+
+Cell["\"Do\" peut avoir des utilisations inattendues. ", "Text"],
+
+Cell[BoxData[
+    \(\(Do[
+        Plot[Sin[t\ x] + Sin[x], {x, \(-2\) \[Pi], 2  \[Pi]}, 
+          PlotRange \[Rule] \ {\(-2\), 2}], {t, 1, 3, 0.2}];\)\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Boucles \"While\"", "Subsubsection"],
+
+Cell[TextData[{
+  "Voici une fonction calculant le PGCD de deux entiers au moyen de \
+l'algorithme d'Euclide. Ici, comme pr\[EAcute]c\[EAcute]demment, on a \
+\[AGrave] effectuer une certaine op\[EAcute]ration (une division euclidienne) \
+un certain nombre de fois. Mais contrairement \[AGrave] ce que l'on faisait \
+plus haut, on ne sait pas combien de fois cette op\[EAcute]ration devra \
+\[EHat]tre r\[EAcute]p\[EAcute]t\[EAcute]e : il faut effectuer des divisions \
+",
+  StyleBox["tant que",
+    FontSlant->"Italic"],
+  " un certain reste n'est pas nul. La construction \"While\" permet cela."
+}], "Text"],
+
+Cell[BoxData[
+    \(pgcd[a_, b_]\  := \ 
+      Module[{u, v, w}, \[IndentingNewLine]u\  = a; \[IndentingNewLine]v = 
+          b; \[IndentingNewLine]While[
+          v\  \[NotEqual] 0, \[IndentingNewLine]w = 
+            Mod[u, v]; \[IndentingNewLine]u = v; \[IndentingNewLine]v = 
+            w;\[IndentingNewLine]]; \
+\[IndentingNewLine]u\[IndentingNewLine]]\)], "Input"],
+
+Cell[BoxData[
+    \(pgcd[51154, 133258]\)], "Input"],
+
+Cell["\<\
+Remarquons qu'une fonction r\[EAcute]cursive plus simple aurait fourni le m\
+\[EHat]me r\[EAcute]sultat :\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Clear[pgcd]\)], "Input"],
+
+Cell[BoxData[{
+    \(\(pgcd[a_, 0] = a;\)\), "\[IndentingNewLine]", 
+    \(\(pgcd[a_, b_] := pgcd[b, Mod[a, b]];\)\)}], "Input"],
+
+Cell[BoxData[
+    \(pgcd[51154, 133258]\)], "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Tests"
+}], "Subsection"],
+
+Cell[TextData[{
+  "Une autre op\[EAcute]ration fr\[EAcute]quente \[AGrave] \
+l'int\[EAcute]rieur d'un programme est le \"test\" : si une certaine \
+condition est vraie, effectuer une certaine action. Sinon, effectuer une \
+autre action. C'est la construction \"If\" qui permet de r\[EAcute]aliser \
+cela avec ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  "."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Tests \[EAcute]l\[EAcute]mentaires", "Subsubsection"],
+
+Cell["\<\
+Voici un test tr\[EGrave]s simple. On affiche \"Oui\" si 1 < 2, et \"Non\" \
+dans le cas contraire.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(If[1 < 2, Print["\<oui\>"], Print["\<Non\>"]]\)], "Input"],
+
+Cell[BoxData[
+    \(If[1 > \ 2\  || \ 3\  \[Equal] \ 4 - 1, Print["\<oui\>"], 
+      Print["\<Non\>"]]\)], "Input"],
+
+Cell[BoxData[
+    \(If[1 < 2 && Pi\  < \ 4, Print["\<oui\>"]]\)], "Input"],
+
+Cell[TextData[{
+  StyleBox["A noter",
+    FontWeight->"Bold"],
+  " : les symboles ",
+  Cell[BoxData[
+      \(TraditionalForm\` || \)]],
+  " et ",
+  Cell[BoxData[
+      \(TraditionalForm\` && \)]],
+  " pour \"ou\" et \"et\". Le symbole ",
+  Cell[BoxData[
+      \(TraditionalForm\` == \)]],
+  " pour les tests d'\[EAcute]galit\[EAcute]s, \[AGrave] ne pas confondre \
+avec ",
+  Cell[BoxData[
+      \(TraditionalForm\` = \)]],
+  " qui est le symbole d'affectation."
+}], "Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["R\[EAcute]\[EAcute]crivons la fonction de Collatz", "Subsubsection"],
+
+Cell[BoxData[
+    \(Quit[]\)], "Input"],
+
+Cell[BoxData[
+    \(\(collatz[n_]\  := \ 
+        Module[{l, 
+            m}, \[IndentingNewLine]l\  = \ {}; \[IndentingNewLine]m\  = \ 
+            n; \[IndentingNewLine]While[
+            m \[NotEqual] 1, \[IndentingNewLine]l\  = \ 
+              Append[l, m]; \[IndentingNewLine]If[
+              Mod[m, 2] \[Equal] 0, \[IndentingNewLine]m\  = \ 
+                m/2, \[IndentingNewLine]m = 
+                3  m + 1\[IndentingNewLine]]\[IndentingNewLine]]; \
+\[IndentingNewLine]l\[IndentingNewLine]];\)\)], "Input"],
+
+Cell[BoxData[
+    \(collatz[2004]\)], "Input"],
+
+Cell[BoxData[
+    \(ListPlot[collatz[2004], PlotJoined \[Rule] True, 
+      PlotRange \[Rule] All]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Plus grand \[EAcute]l\[EAcute]ment d'une liste", "Subsubsection"],
+
+Cell["\<\
+Voici une fonction renvoyant le plus grand \[EAcute]l\[EAcute]ment d'une \
+liste.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(\(plusGrand[L_] := 
+        Module[{tempmax}, \[IndentingNewLine]tempmax = 
+            1; \[IndentingNewLine]Do[\[IndentingNewLine]If[
+              L[\([i]\)] > L[\([tempmax]\)], \[IndentingNewLine]tempmax = 
+                L[\([i]\)]\[IndentingNewLine]], \[IndentingNewLine]{i, 1, 
+              Length[L]}\[IndentingNewLine]]; \[IndentingNewLine]Return[
+            L[\([tempmax]\)]]\[IndentingNewLine]];\)\)], "Input"],
+
+Cell[BoxData[
+    \(plusGrand[{1, 4, 2, 8, 5, 7}]\)], "Input"]
+}, Closed]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " Diff\[EAcute]rents styles de programmation"
+}], "Section"],
+
+Cell[TextData[{
+  "Il existe un grand nombre de \"fa\[CCedilla]ons de programmer\" en ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  ". Pour illustrer nos propos, nous ellons nous int\[EAcute]resser \[AGrave] \
+l'algorithme du tri rapide."
+}], "Text"],
+
+Cell[TextData[{
+  "Soit \[AGrave] trier une liste. Nous allons pr\[EAcute]senter deux \
+versions diff\[EAcute]rentes de l'algorithme dit \"du tri rapide\" : l'une, \
+imp\[EAcute]rative, modifiant les \[EAcute]l\[EAcute]ments de la liste en les \
+permutant physiquement, et l'autre, fonctionnelle, qui laisse agir ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  "."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Version imp\[EAcute]rative - Fonction de Partition"
+}], "Subsection"],
+
+Cell[TextData[{
+  "La fonction de partition prend en param\[EGrave]tres une liste ",
+  Cell[BoxData[
+      \(TraditionalForm\`t\)]],
+  " et deux indices ",
+  Cell[BoxData[
+      \(TraditionalForm\`p\)]],
+  " et ",
+  Cell[BoxData[
+      \(TraditionalForm\`q\)]],
+  ". Elle r\[EAcute]ordonne les \[EAcute]l\[EAcute]ments de la liste et \
+renvoie un entier ",
+  Cell[BoxData[
+      \(TraditionalForm\`n\)]],
+  " de sorte que, apr\[EGrave]s partition :\n- les \[EAcute]lements de ",
+  Cell[BoxData[
+      \(TraditionalForm\`t\)]],
+  " d'indice inf\[EAcute]rieur \[AGrave] ",
+  Cell[BoxData[
+      \(TraditionalForm\`n\)]],
+  " sont tous inf\[EAcute]rieurs ou \[EAcute]gaux \[AGrave] ",
+  Cell[BoxData[
+      \(TraditionalForm\`t[\([q]\)]\)]],
+  " (valeur initiale).\n- les \[EAcute]lements de ",
+  Cell[BoxData[
+      \(TraditionalForm\`t\)]],
+  " d'indice strictement sup\[EAcute]rieur \[AGrave] ",
+  Cell[BoxData[
+      \(TraditionalForm\`n\)]],
+  " sont tous strictement sup\[EAcute]rieurs \[AGrave] ",
+  Cell[BoxData[
+      \(TraditionalForm\`t[\([q]\)]\)]],
+  " (valeur initiale)."
+}], "Text"],
+
+Cell["\<\
+Les attributs de la fonction sont modifi\[EAcute]s afin de trier la liste \
+\"sur place\".\
+\>", "Text"],
+
+Cell[BoxData[
+    \(SetAttributes[partition, HoldFirst]\)], "Input"],
+
+Cell[BoxData[
+    \(\(\(partition[t_, p_, q_] := 
+        Module[{i, j, x}, \[IndentingNewLine]i = 
+            p - 1; \[IndentingNewLine]x = 
+            t[\([q]\)]; \[IndentingNewLine]Do[\[IndentingNewLine]If[
+              t[\([j]\)] \[LessEqual] x, \[IndentingNewLine]i += 
+                1; \[IndentingNewLine]{t[\([i]\)], t[\([j]\)]} = {t[\([j]\)], 
+                  t[\([i]\)]}\[IndentingNewLine]], \[IndentingNewLine]{j, p, 
+              q - 1}\[IndentingNewLine]]; \[IndentingNewLine]{t[\([i + 1]\)], 
+              t[\([q]\)]} = {t[\([q]\)], 
+              t[\([i + 1]\)]}; \[IndentingNewLine]i + 
+            1\[IndentingNewLine]];\)\(\[IndentingNewLine]\)
+    \)\)], "Input"],
+
+Cell["Voicui un exemple d'ex\[EAcute]cution.", "Text"],
+
+Cell[BoxData[
+    \(\(t = {3, 2, 1, 5, 4, 7, 8, 1, 2, 4, 4};\)\)], "Input"],
+
+Cell[BoxData[
+    \(partition[t, 1, Length[t]]\)], "Input"],
+
+Cell[BoxData[
+    \(t\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Version imp\[EAcute]rative - Fonction de tri"
+}], "Subsection"],
+
+Cell[TextData[{
+  "Pour trier la liste ",
+  Cell[BoxData[
+      \(TraditionalForm\`t\)]],
+  ", on appelle tout d'abord la fonction de partition. Puis on appelle r\
+\[EAcute]cursivement la fonction de tri sur les deux \"moiti\[EAcute]s\" de \
+liste distingu\[EAcute]es par la partition.\nLe tri est \[EAcute]videmment \
+trivial si la liste est vide, ou ne contient qu'un \[EAcute]l\[EAcute]ment."
+}], "Text"],
+
+Cell[BoxData[
+    \(SetAttributes[tri, HoldFirst]\)], "Input"],
+
+Cell[BoxData[{
+    \(\(tri[t_, p_, q_] := 
+        Module[{j}, \[IndentingNewLine]If[
+            p < q, \[IndentingNewLine]j = 
+              partition[t, p, q]; \[IndentingNewLine]tri[t, p, 
+              j - 1]; \[IndentingNewLine]tri[t, j + 1, 
+              q];\[IndentingNewLine]]\[IndentingNewLine]];\)\), "\
+\[IndentingNewLine]", 
+    \(\(tri[t_] := tri[t, 1, Length[t]];\)\)}], "Input"],
+
+Cell["\<\
+On trie \[AGrave] titre d'exemple une liste al\[EAcute]atoire de 10000 \
+\[EAcute]l\[EAcute]ments.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(\(t = Table[Random[], {k, 1, 10000}];\)\)], "Input"],
+
+Cell[BoxData[
+    \(ListPlot[t]\)], "Input"],
+
+Cell[BoxData[
+    \(Timing[tri[t]]\)], "Input"],
+
+Cell[BoxData[
+    \(ListPlot[t]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Version fonctionnelle du tri rapide"
+}], "Subsection"],
+
+Cell[TextData[{
+  "On utilise ici les possibilit\[EAcute]s que ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " offre pour la manipulation de listes."
+}], "Text"],
+
+Cell["\<\
+Cette fois ci, la liste n'est plus tri\[EAcute]e sur place : la fonction \
+renvoie une liste qui est la \"version tri\[EAcute]e\" de la liste de d\
+\[EAcute]part.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\(triFonc[{}] = {};\)\), "\[IndentingNewLine]", 
+    \(\(triFonc[{x_}] := {x};\)\), "\[IndentingNewLine]", 
+    \(\(triFonc[t_] := 
+        Join[\[IndentingNewLine]triFonc[
+            Select[t, # < t[\([1]\)] &]], \[IndentingNewLine]Select[
+            t, # \[Equal] t[\([1]\)] &], \[IndentingNewLine]triFonc[
+            Select[t, # > t[\([1]\)] &]]\[IndentingNewLine]];\)\)}], "Input"],
+
+Cell[TextData[{
+  "Les performances de la version fonctionnelle sont meilleures, avec ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  ", que celles de la version classique du tri rapide."
+}], "Text"],
+
+Cell[BoxData[
+    \(\(t = Table[Random[], {k, 1, 10000}];\)\)], "Input"],
+
+Cell[BoxData[
+    \(Timing[\(tri[t];\)]\)], "Input"],
+
+Cell[BoxData[
+    \(\(t = Table[Random[], {k, 1, 10000}];\)\)], "Input"],
+
+Cell[BoxData[
+    \(Timing[\(triFonc[t];\)]\)], "Input"]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1024}, {0, 687}},
+ScreenStyleEnvironment->"Brackets",
+WindowSize->{524, 656},
+WindowMargins->{{Automatic, 0}, {Automatic, -1}},
+StyleDefinitions -> "Style.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 30, 0, 67, "Title"],
+Cell[1787, 53, 316, 7, 67, "Text"],
+
+Cell[CellGroupData[{
+Cell[2128, 64, 92, 4, 67, "Section"],
+
+Cell[CellGroupData[{
+Cell[2245, 72, 142, 8, 52, "Subsection"],
+Cell[2390, 82, 55, 0, 29, "Text"],
+Cell[2448, 84, 88, 1, 50, "Input"],
+Cell[2539, 87, 623, 15, 98, "Text"],
+Cell[3165, 104, 66, 1, 50, "Input"],
+Cell[3234, 107, 43, 1, 50, "Input"],
+Cell[3280, 110, 46, 1, 50, "Input"],
+Cell[3329, 113, 40, 1, 50, "Input"],
+Cell[3372, 116, 48, 1, 50, "Input"],
+Cell[3423, 119, 39, 1, 50, "Input"],
+Cell[3465, 122, 106, 5, 29, "Text"],
+Cell[3574, 129, 41, 1, 50, "Input"],
+Cell[3618, 132, 39, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[3694, 138, 143, 8, 36, "Subsection"],
+Cell[3840, 148, 97, 2, 29, "Text"],
+Cell[3940, 152, 76, 1, 50, "Input"],
+Cell[4019, 155, 40, 1, 50, "Input"],
+Cell[4062, 158, 55, 1, 50, "Input"],
+Cell[4120, 161, 205, 8, 29, "Text"],
+Cell[4328, 171, 51, 1, 50, "Input"],
+Cell[4382, 174, 55, 1, 50, "Input"],
+Cell[4440, 177, 46, 1, 50, "Input"],
+Cell[4489, 180, 153, 2, 70, "Input"],
+Cell[4645, 184, 41, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[4723, 190, 152, 8, 36, "Subsection"],
+Cell[4878, 200, 207, 4, 48, "Text"],
+Cell[5088, 206, 41, 1, 50, "Input"],
+Cell[5132, 209, 289, 5, 90, "Input"],
+Cell[5424, 216, 61, 1, 50, "Input"],
+Cell[5488, 219, 288, 8, 48, "Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[5813, 232, 139, 8, 36, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[5977, 244, 36, 0, 45, "Subsubsection"],
+Cell[6016, 246, 203, 5, 48, "Text"],
+Cell[6222, 253, 128, 2, 70, "Input"],
+Cell[6353, 257, 43, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[6433, 263, 45, 0, 37, "Subsubsection"],
+Cell[6481, 265, 65, 0, 29, "Text"],
+Cell[6549, 267, 193, 3, 90, "Input"],
+Cell[6745, 272, 77, 1, 50, "Input"],
+Cell[6825, 275, 193, 4, 48, "Text"],
+Cell[7021, 281, 49, 1, 50, "Input"],
+Cell[7073, 284, 158, 5, 29, "Text"],
+Cell[7234, 291, 44, 1, 50, "Input"],
+Cell[7281, 294, 231, 4, 90, "Input"],
+Cell[7515, 300, 51, 1, 50, "Input"],
+Cell[7569, 303, 112, 3, 29, "Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[7718, 311, 44, 0, 37, "Subsubsection"],
+Cell[7765, 313, 747, 20, 67, "Text"],
+Cell[8515, 335, 328, 7, 48, "Text"],
+Cell[8846, 344, 251, 4, 90, "Input"],
+Cell[9100, 350, 53, 1, 50, "Input"],
+Cell[9156, 353, 92, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[9285, 359, 43, 0, 37, "Subsubsection"],
+Cell[9331, 361, 603, 11, 105, "Text"],
+Cell[9937, 374, 338, 6, 130, "Input"],
+Cell[10278, 382, 60, 1, 50, "Input"]
+}, Closed]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[10399, 390, 73, 4, 67, "Section"],
+
+Cell[CellGroupData[{
+Cell[10497, 398, 129, 8, 52, "Subsection"],
+Cell[10629, 408, 352, 8, 79, "Text"],
+Cell[10984, 418, 38, 1, 50, "Input"],
+Cell[11025, 421, 40, 1, 50, "Input"],
+Cell[11068, 424, 219, 7, 29, "Text"],
+Cell[11290, 433, 46, 1, 50, "Input"],
+Cell[11339, 436, 237, 8, 29, "Text"],
+Cell[11579, 446, 38, 1, 50, "Input"],
+Cell[11620, 449, 37, 1, 50, "Input"],
+Cell[11660, 452, 264, 7, 48, "Text"],
+Cell[11927, 461, 38, 1, 50, "Input"],
+Cell[11968, 464, 47, 1, 50, "Input"],
+Cell[12018, 467, 37, 1, 50, "Input"],
+Cell[12058, 470, 38, 1, 50, "Input"],
+Cell[12099, 473, 37, 1, 50, "Input"],
+Cell[12139, 476, 191, 4, 48, "Text"],
+Cell[12333, 482, 95, 2, 29, "Text"],
+Cell[12431, 486, 51, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[12519, 492, 128, 8, 36, "Subsection"],
+Cell[12650, 502, 652, 11, 124, "Text"],
+
+Cell[CellGroupData[{
+Cell[13327, 517, 64, 0, 45, "Subsubsection"],
+Cell[13394, 519, 152, 3, 48, "Text"],
+Cell[13549, 524, 189, 4, 110, "Input"],
+Cell[13741, 530, 48, 1, 50, "Input"],
+Cell[13792, 533, 225, 6, 49, "Text"],
+Cell[14020, 541, 248, 6, 48, "Text"],
+Cell[14271, 549, 37, 1, 50, "Input"],
+Cell[14311, 552, 236, 8, 29, "Text"],
+Cell[14550, 562, 49, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[14636, 568, 62, 0, 37, "Subsubsection"],
+Cell[14701, 570, 212, 4, 48, "Text"],
+Cell[14916, 576, 71, 1, 50, "Input"],
+Cell[14990, 579, 153, 3, 48, "Text"],
+Cell[15146, 584, 38, 1, 50, "Input"],
+Cell[15187, 587, 40, 1, 50, "Input"],
+Cell[15230, 590, 548, 12, 98, "Text"],
+Cell[15781, 604, 61, 1, 50, "Input"],
+Cell[15845, 607, 40, 1, 50, "Input"],
+Cell[15888, 610, 34, 1, 50, "Input"],
+Cell[15925, 613, 138, 3, 48, "Text"],
+Cell[16066, 618, 179, 3, 130, "Input"],
+Cell[16248, 623, 64, 1, 50, "Input"],
+Cell[16315, 626, 48, 1, 50, "Input"],
+Cell[16366, 629, 46, 1, 50, "Input"],
+Cell[16415, 632, 34, 1, 50, "Input"],
+Cell[16452, 635, 34, 1, 50, "Input"]
+}, Closed]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[16547, 643, 78, 4, 67, "Section"],
+
+Cell[CellGroupData[{
+Cell[16650, 651, 118, 8, 52, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[16793, 663, 39, 0, 45, "Subsubsection"],
+Cell[16835, 665, 398, 8, 110, "Text"],
+Cell[17236, 675, 242, 8, 29, "Text"],
+Cell[17481, 685, 41, 1, 50, "Input"],
+Cell[17525, 688, 232, 4, 150, "Input"],
+Cell[17760, 694, 38, 1, 50, "Input"],
+Cell[17801, 697, 164, 5, 29, "Text"],
+Cell[17968, 704, 404, 8, 250, "Input"],
+Cell[18375, 714, 41, 1, 50, "Input"],
+Cell[18419, 717, 213, 6, 58, "Text"],
+Cell[18635, 725, 64, 0, 29, "Text"],
+Cell[18702, 727, 164, 3, 70, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[18903, 735, 42, 0, 37, "Subsubsection"],
+Cell[18948, 737, 608, 11, 105, "Text"],
+Cell[19559, 750, 373, 7, 230, "Input"],
+Cell[19935, 759, 52, 1, 50, "Input"],
+Cell[19990, 762, 129, 3, 29, "Text"],
+Cell[20122, 767, 44, 1, 50, "Input"],
+Cell[20169, 770, 128, 2, 70, "Input"],
+Cell[20300, 774, 52, 1, 50, "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[20401, 781, 116, 8, 52, "Subsection"],
+Cell[20520, 791, 381, 9, 67, "Text"],
+
+Cell[CellGroupData[{
+Cell[20926, 804, 59, 0, 45, "Subsubsection"],
+Cell[20988, 806, 123, 3, 29, "Text"],
+Cell[21114, 811, 78, 1, 50, "Input"],
+Cell[21195, 814, 115, 2, 50, "Input"],
+Cell[21313, 818, 74, 1, 50, "Input"],
+Cell[21390, 821, 473, 17, 48, "Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[21900, 843, 74, 0, 37, "Subsubsection"],
+Cell[21977, 845, 39, 1, 50, "Input"],
+Cell[22019, 848, 519, 10, 270, "Input"],
+Cell[22541, 860, 46, 1, 50, "Input"],
+Cell[22590, 863, 111, 2, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[22738, 870, 71, 0, 37, "Subsubsection"],
+Cell[22812, 872, 105, 3, 29, "Text"],
+Cell[22920, 877, 444, 7, 230, "Input"],
+Cell[23367, 886, 62, 1, 50, "Input"]
+}, Closed]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[23490, 894, 106, 4, 67, "Section"],
+Cell[23599, 900, 261, 6, 48, "Text"],
+Cell[23863, 908, 385, 8, 67, "Text"],
+
+Cell[CellGroupData[{
+Cell[24273, 920, 161, 8, 52, "Subsection"],
+Cell[24437, 930, 1094, 33, 129, "Text"],
+Cell[25534, 965, 114, 3, 29, "Text"],
+Cell[25651, 970, 68, 1, 50, "Input"],
+Cell[25722, 973, 690, 12, 310, "Input"],
+Cell[26415, 987, 54, 0, 29, "Text"],
+Cell[26472, 989, 75, 1, 50, "Input"],
+Cell[26550, 992, 59, 1, 50, "Input"],
+Cell[26612, 995, 34, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[26683, 1001, 155, 8, 36, "Subsection"],
+Cell[26841, 1011, 407, 8, 79, "Text"],
+Cell[27251, 1021, 62, 1, 50, "Input"],
+Cell[27316, 1024, 395, 8, 190, "Input"],
+Cell[27714, 1034, 122, 3, 29, "Text"],
+Cell[27839, 1039, 72, 1, 50, "Input"],
+Cell[27914, 1042, 44, 1, 50, "Input"],
+Cell[27961, 1045, 47, 1, 50, "Input"],
+Cell[28011, 1048, 44, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[28092, 1054, 146, 8, 36, "Subsection"],
+Cell[28241, 1064, 172, 5, 29, "Text"],
+Cell[28416, 1071, 186, 4, 48, "Text"],
+Cell[28605, 1077, 409, 7, 170, "Input"],
+Cell[29017, 1086, 208, 5, 48, "Text"],
+Cell[29228, 1093, 72, 1, 50, "Input"],
+Cell[29303, 1096, 52, 1, 50, "Input"],
+Cell[29358, 1099, 72, 1, 50, "Input"],
+Cell[29433, 1102, 56, 1, 50, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

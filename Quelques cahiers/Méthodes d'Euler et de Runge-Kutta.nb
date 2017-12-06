@@ -1,0 +1,774 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     21621,        764]
+NotebookOptionsPosition[     19780,        703]
+NotebookOutlinePosition[     20218,        720]
+CellTagsIndexPosition[     20175,        717]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+Solution approch\[EAcute]e d'\[EAcute]quations diff\[EAcute]rentielles\
+\>", "Title"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Equations d'ordre 1"
+}], "Section"],
+
+Cell[TextData[{
+ "On cherche une solution approch\[EAcute]e de l'\[EAcute]quation diff\
+\[EAcute]rentielle ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"y", "'"}], "=", 
+    RowBox[{"f", "(", 
+     RowBox[{"x", ",", "y"}], ")"}]}], TraditionalForm]]],
+ " avec la condition initiale ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"y", "(", 
+     SubscriptBox["x", "0"], ")"}], "=", 
+    SubscriptBox["y", "0"]}], TraditionalForm]]],
+ ". Diff\[EAcute]rentes m\[EAcute]thodes existent. Nous allons examiner la m\
+\[EAcute]thode d'Euler et celle de Runge-Kutta. La premi\[EGrave]re est \
+facile \[AGrave] d\[EAcute]crire, mais donne des r\[EAcute]sultats peu pr\
+\[EAcute]cis. La seconde est un peu plus compliqu\[EAcute]e, mais donne \
+d'excellentes approximations."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " M\[EAcute]thode d'Euler"
+}], "Subsection"],
+
+Cell[TextData[{
+ "On choisit un pas ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"h", ">", "0"}], TraditionalForm]]],
+ ". Puis, on pose ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["x", "n"], "=", 
+    RowBox[{
+     SubscriptBox["x", "0"], "+", 
+     RowBox[{"n", " ", "h"}]}]}], TraditionalForm]]],
+ ", et ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["y", 
+     RowBox[{"n", "+", "1"}]], "=", 
+    RowBox[{
+     SubscriptBox["y", "n"], "+", 
+     RowBox[{"h", " ", 
+      RowBox[{"f", "(", 
+       RowBox[{
+        SubscriptBox["x", "n"], ",", 
+        SubscriptBox["y", "n"]}], ")"}]}]}]}], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"euler", "[", 
+   RowBox[{"f_", ",", "h_", ",", "n_", ",", "x0_", ",", "y0_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"x", ",", "y", ",", "result"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"x", " ", "=", " ", "x0"}], ";", 
+     RowBox[{"result", "=", " ", 
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{"x0", ",", "y0"}], "}"}], "}"}]}], ";", 
+     RowBox[{"y", " ", "=", " ", "y0"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"y", "=", 
+         RowBox[{"y", "+", 
+          RowBox[{"h", "*", 
+           RowBox[{"f", "[", 
+            RowBox[{"x", ",", "y"}], "]"}]}]}]}], ";", 
+        RowBox[{"x", "=", 
+         RowBox[{"x", "+", "h"}]}], ";", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"result", ",", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", "y"}], "}"}]}], "]"}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", "n", "}"}]}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", "result"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"result", "=", 
+   RowBox[{"euler", "[", 
+    RowBox[{
+     RowBox[{"Function", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"x", ",", "y"}], "}"}], ",", "y"}], "]"}], ",", "0.1", ",", 
+     "30.", ",", "0.", ",", "1."}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"exact", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       RowBox[{"Exp", "[", "x", "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0.", ",", "3.", ",", "0.1"}], "}"}]}], "]"}]}], 
+  ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"result", "[", 
+        RowBox[{"[", "k", "]"}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], ",", 
+      RowBox[{
+       RowBox[{"result", "[", 
+        RowBox[{"[", "k", "]"}], "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}], ",", 
+      RowBox[{
+       RowBox[{"exact", "[", 
+        RowBox[{"[", "k", "]"}], "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}], ",", 
+      RowBox[{"100", "*", 
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"result", "[", 
+            RowBox[{"[", "k", "]"}], "]"}], "[", 
+           RowBox[{"[", "2", "]"}], "]"}], "/", 
+          RowBox[{
+           RowBox[{"exact", "[", 
+            RowBox[{"[", "k", "]"}], "]"}], "[", 
+           RowBox[{"[", "2", "]"}], "]"}]}]}], ")"}]}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", "1", ",", 
+      RowBox[{"Length", "[", "result", "]"}]}], "}"}]}], "]"}], "//", 
+  "TableForm"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", 
+  RowBox[{
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+        "result", "\[LeftDoubleBracket]", "k", "\[RightDoubleBracket]"}], 
+        "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], ",", 
+       RowBox[{"100", " ", 
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          FractionBox[
+           RowBox[{
+            RowBox[{
+            "result", "\[LeftDoubleBracket]", "k", "\[RightDoubleBracket]"}], 
+            "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}], 
+           RowBox[{
+            RowBox[{
+            "exact", "\[LeftDoubleBracket]", "k", "\[RightDoubleBracket]"}], 
+            "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]]}], 
+         ")"}]}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", "1", ",", 
+       RowBox[{"Length", "[", "result", "]"}]}], "}"}]}], "]"}], ",", 
+   RowBox[{"Joined", "\[Rule]", "True"}]}], "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " M\[EAcute]thode de Runge-Kutta"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Cet algorithme donne de bien meilleurs r\[EAcute]sultats que la \
+m\[EAcute]thode d'Euler. On pose ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["x", "n"], "=", 
+    RowBox[{
+     SubscriptBox["x", "0"], "+", 
+     RowBox[{"n", " ", "h"}]}]}], TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["y", 
+     RowBox[{"n", "+", "1"}]], "=", 
+    RowBox[{
+     SubscriptBox["y", "n"], "+", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        SubscriptBox["k", "1"], "+", 
+        RowBox[{"2", 
+         SubscriptBox["k", "2"]}], "+", 
+        RowBox[{"2", 
+         SubscriptBox["k", "3"]}], "+", 
+        SubscriptBox["k", "4"]}], ")"}], "/", "6"}]}]}], TraditionalForm]]],
+ ", o\[UGrave]\n",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["k", "1"], "=", 
+    RowBox[{"h", " ", 
+     RowBox[{"f", "(", 
+      RowBox[{
+       SubscriptBox["x", "n"], ",", 
+       SubscriptBox["y", "n"]}], ")"}]}]}], TraditionalForm]]],
+ "\n",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["k", "2"], "=", 
+    RowBox[{"h", " ", 
+     RowBox[{"f", "(", 
+      RowBox[{
+       RowBox[{
+        SubscriptBox["x", "n"], "+", 
+        RowBox[{"h", "/", "2"}]}], ",", 
+       RowBox[{
+        SubscriptBox["y", "n"], "+", 
+        RowBox[{
+         SubscriptBox["k", "1"], "/", "2"}]}]}], ")"}]}]}], TraditionalForm]]],
+ "\n",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["k", "3"], "=", 
+    RowBox[{"h", " ", 
+     RowBox[{"f", "(", 
+      RowBox[{
+       RowBox[{
+        SubscriptBox["x", "n"], "+", 
+        RowBox[{"h", "/", "2"}]}], ",", 
+       RowBox[{
+        SubscriptBox["y", "n"], "+", 
+        RowBox[{
+         SubscriptBox["k", "2"], "/", "2"}]}]}], ")"}]}]}], TraditionalForm]]],
+ "\n",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["k", "4"], "=", 
+    RowBox[{"h", " ", 
+     RowBox[{"f", "(", 
+      RowBox[{
+       RowBox[{
+        SubscriptBox["x", "n"], "+", "h"}], ",", 
+       RowBox[{
+        SubscriptBox["y", "n"], "+", 
+        SubscriptBox["k", "3"]}]}], ")"}]}]}], TraditionalForm]]]
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"rk4", "[", 
+   RowBox[{"f_", ",", "h_", ",", "n_", ",", "x0_", ",", "y0_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "x", ",", "y", ",", "result", ",", "k1", ",", "k2", ",", "k3", ",", 
+      "k4"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"x", " ", "=", " ", "x0"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"result", "=", " ", 
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{"x0", ",", "y0"}], "}"}], "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"y", " ", "=", " ", "y0"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"k1", "=", 
+         RowBox[{"h", "*", 
+          RowBox[{"f", "[", 
+           RowBox[{"x", ",", "y"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"k2", "=", 
+         RowBox[{"h", "*", 
+          RowBox[{"f", "[", 
+           RowBox[{
+            RowBox[{"x", "+", 
+             RowBox[{"h", "/", "2"}]}], ",", 
+            RowBox[{"y", "+", 
+             RowBox[{"k1", "/", "2"}]}]}], "]"}]}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"k3", "=", 
+         RowBox[{"h", "*", 
+          RowBox[{"f", "[", 
+           RowBox[{
+            RowBox[{"x", "+", 
+             RowBox[{"h", "/", "2"}]}], ",", 
+            RowBox[{"y", "+", 
+             RowBox[{"k2", "/", "2"}]}]}], "]"}]}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"k4", "=", 
+         RowBox[{"h", "*", 
+          RowBox[{"f", "[", 
+           RowBox[{
+            RowBox[{"x", "+", "h"}], ",", 
+            RowBox[{"y", "+", "k3"}]}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"y", "=", 
+         RowBox[{"y", "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"k1", "+", 
+             RowBox[{"2", "*", "k2"}], "+", 
+             RowBox[{"2", "*", "k3"}], "+", "k4"}], ")"}], "/", "6"}]}]}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"x", "=", 
+         RowBox[{"x", "+", "h"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"result", ",", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", "y"}], "}"}]}], "]"}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", "n", "}"}]}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", "result"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"result", "=", 
+   RowBox[{"rk4", "[", 
+    RowBox[{
+     RowBox[{"Function", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"x", ",", "y"}], "}"}], ",", "y"}], "]"}], ",", "0.1", ",", 
+     "30", ",", "0.", ",", "1."}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"result", "[", 
+        RowBox[{"[", "k", "]"}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], ",", 
+      RowBox[{
+       RowBox[{"result", "[", 
+        RowBox[{"[", "k", "]"}], "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}], ",", 
+      RowBox[{
+       RowBox[{"exact", "[", 
+        RowBox[{"[", "k", "]"}], "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}], ",", 
+      RowBox[{"100", "*", 
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"result", "[", 
+            RowBox[{"[", "k", "]"}], "]"}], "[", 
+           RowBox[{"[", "2", "]"}], "]"}], "/", 
+          RowBox[{
+           RowBox[{"exact", "[", 
+            RowBox[{"[", "k", "]"}], "]"}], "[", 
+           RowBox[{"[", "2", "]"}], "]"}]}]}], ")"}]}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", "1", ",", 
+      RowBox[{"Length", "[", "result", "]"}]}], "}"}]}], "]"}], "//", 
+  "TableForm"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", 
+  RowBox[{
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+        "result", "\[LeftDoubleBracket]", "k", "\[RightDoubleBracket]"}], 
+        "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], ",", 
+       RowBox[{"100", " ", 
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          FractionBox[
+           RowBox[{
+            RowBox[{
+            "result", "\[LeftDoubleBracket]", "k", "\[RightDoubleBracket]"}], 
+            "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}], 
+           RowBox[{
+            RowBox[{
+            "exact", "\[LeftDoubleBracket]", "k", "\[RightDoubleBracket]"}], 
+            "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]]}], 
+         ")"}]}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", "1", ",", 
+       RowBox[{"Length", "[", "result", "]"}]}], "}"}]}], "]"}], ",", 
+   RowBox[{"Joined", "\[Rule]", "True"}]}], "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ " Equations d'ordre 2"
+}], "Section"],
+
+Cell[TextData[{
+ "Pour r\[EAcute]soudre l'\[EAcute]quation diff\[EAcute]rentielle ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"y", "''"}], " ", "=", " ", 
+    RowBox[{"f", "(", 
+     RowBox[{"x", ",", "y", ",", 
+      RowBox[{"y", "'"}]}], ")"}]}], TraditionalForm]]],
+ " avec les conditions initiales ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"y", "(", 
+     SubscriptBox["x", "0"], ")"}], "=", 
+    SubscriptBox["y", "0"]}], TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     RowBox[{"y", "'"}], 
+     RowBox[{"(", 
+      SubscriptBox["x", "0"], ")"}]}], "=", 
+    SubscriptBox["y", "1"]}], TraditionalForm]]],
+ ", on transforme cette \[EAcute]quation en une \[EAcute]quation d'ordre 1, \
+dont la fonction inconnue est une fonction \[AGrave] valeurs vectorielles."
+}], "Text"],
+
+Cell[TextData[{
+ "On pose ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"Y", "=", 
+    RowBox[{"[", 
+     RowBox[{"y", ",", 
+      RowBox[{"y", "'"}]}], "]"}]}], TraditionalForm]]],
+ " et ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"F", "(", 
+     RowBox[{"x", ",", 
+      RowBox[{"[", 
+       RowBox[{"u", ",", "v"}], "]"}]}], ")"}], "=", 
+    RowBox[{"[", 
+     RowBox[{"v", ",", 
+      RowBox[{"f", "(", 
+       RowBox[{"x", ",", "u", ",", "v"}], ")"}]}], "]"}]}], TraditionalForm]]],
+ ". Il suffit de r\[EAcute]soudre l'\[EAcute]quation ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"Y", "'"}], "=", 
+    RowBox[{"F", "(", 
+     RowBox[{"x", ",", "Y"}], ")"}]}], TraditionalForm]]],
+ " avec la condition initiale ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"Y", "(", 
+     SubscriptBox["x", "0"], ")"}], "=", 
+    RowBox[{"[", 
+     RowBox[{
+      SubscriptBox["y", "0"], ",", 
+      SubscriptBox["y", "1"]}], "]"}]}], TraditionalForm]]],
+ " en utilisant la m\[EAcute]thode d'Euler ou celle de Runge-Kutta \
+d\[EAcute]velopp\[EAcute]es dans la premi\[EGrave]re partie."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " M\[EAcute]thode d'Euler"
+}], "Subsection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"euler2", "[", 
+   RowBox[{"f_", ",", "h_", ",", "n_", ",", "x0_", ",", "y0_", ",", "y1_"}], 
+   "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"g", "[", 
+       RowBox[{"x_", ",", 
+        RowBox[{"{", 
+         RowBox[{"u_", ",", "v_"}], "}"}]}], "]"}], "=", 
+      RowBox[{"{", 
+       RowBox[{"v", ",", 
+        RowBox[{"f", "[", 
+         RowBox[{"x", ",", "u", ",", "v"}], "]"}]}], "}"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Map", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"#", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], ",", 
+          RowBox[{
+           RowBox[{"#", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}]}], "}"}], "&"}], ",", 
+       RowBox[{"euler", "[", 
+        RowBox[{"g", ",", "h", ",", "n", ",", "x0", ",", 
+         RowBox[{"{", 
+          RowBox[{"y0", ",", "y1"}], "}"}]}], "]"}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"res", "=", 
+   RowBox[{"euler2", "[", 
+    RowBox[{
+     RowBox[{"Function", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"x", ",", "y", ",", "y1"}], "}"}], ",", 
+       RowBox[{"-", "y"}]}], "]"}], ",", "0.1", ",", "200", ",", "0.", ",", 
+     "0.", ",", "1."}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"res", "//", "TableForm"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"exact", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       RowBox[{"Sin", "[", "x", "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0.", ",", "20.", ",", "0.1"}], "}"}]}], "]"}]}], 
+  ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"g1", "=", 
+  RowBox[{"ListPlot", "[", 
+   RowBox[{"res", ",", 
+    RowBox[{"Joined", "\[Rule]", "True"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"g2", "=", 
+  RowBox[{"ListPlot", "[", 
+   RowBox[{"exact", ",", 
+    RowBox[{"Joined", "\[Rule]", "True"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"{", 
+   RowBox[{"g1", ",", "g2"}], "}"}], "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ 
+ CounterBox["Section"],
+ ".",
+ 
+ CounterBox["Subsection"],
+ " M\[EAcute]thode de Runge-Kutta"
+}], "Subsection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"rk42", "[", 
+   RowBox[{"f_", ",", "h_", ",", "n_", ",", "x0_", ",", "y0_", ",", "y1_"}], 
+   "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"g", "[", 
+       RowBox[{"x_", ",", 
+        RowBox[{"{", 
+         RowBox[{"u_", ",", "v_"}], "}"}]}], "]"}], "=", 
+      RowBox[{"{", 
+       RowBox[{"v", ",", 
+        RowBox[{"f", "[", 
+         RowBox[{"x", ",", "u", ",", "v"}], "]"}]}], "}"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Map", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"#", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], ",", 
+          RowBox[{
+           RowBox[{"#", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}]}], "}"}], "&"}], ",", 
+       RowBox[{"rk4", "[", 
+        RowBox[{"g", ",", "h", ",", "n", ",", "x0", ",", 
+         RowBox[{"{", 
+          RowBox[{"y0", ",", "y1"}], "}"}]}], "]"}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"res", "=", 
+   RowBox[{"rk42", "[", 
+    RowBox[{
+     RowBox[{"Function", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"x", ",", "y", ",", "y1"}], "}"}], ",", 
+       RowBox[{"-", "y"}]}], "]"}], ",", "0.1", ",", "200", ",", "0.", ",", 
+     "0.", ",", "1."}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"res", "//", "TableForm"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"g1", "=", 
+  RowBox[{"ListPlot", "[", 
+   RowBox[{"res", ",", 
+    RowBox[{"Joined", "\[Rule]", "True"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"{", 
+   RowBox[{"g1", ",", "g2"}], "}"}], "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{666, 579},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification->1,
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 95, 2, 111, "Title"],
+Cell[CellGroupData[{
+Cell[699, 28, 80, 4, 75, "Section"],
+Cell[782, 34, 789, 21, 83, "Text"],
+Cell[CellGroupData[{
+Cell[1596, 59, 122, 7, 36, "Subsection"],
+Cell[1721, 68, 650, 27, 29, "Text"],
+Cell[2374, 97, 1189, 33, 182, "Input"],
+Cell[3566, 132, 294, 9, 41, "Input"],
+Cell[3863, 143, 297, 10, 41, "Input"],
+Cell[4163, 155, 1072, 33, 82, "Input"],
+Cell[5238, 190, 1002, 27, 86, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6277, 222, 129, 7, 36, "Subsection"],
+Cell[6409, 231, 2106, 80, 107, "Text"],
+Cell[8518, 313, 2426, 65, 342, "Input"],
+Cell[10947, 380, 291, 9, 41, "Input"],
+Cell[11241, 391, 1072, 33, 82, "Input"],
+Cell[12316, 426, 1002, 27, 86, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13367, 459, 80, 4, 75, "Section"],
+Cell[13450, 465, 832, 27, 65, "Text"],
+Cell[14285, 494, 1104, 39, 65, "Text"],
+Cell[CellGroupData[{
+Cell[15414, 537, 122, 7, 36, "Subsection"],
+Cell[15539, 546, 1126, 34, 102, "Input"],
+Cell[16668, 582, 337, 10, 41, "Input"],
+Cell[17008, 594, 60, 1, 41, "Input"],
+Cell[17071, 597, 298, 10, 41, "Input"],
+Cell[17372, 609, 150, 4, 41, "Input"],
+Cell[17525, 615, 152, 4, 41, "Input"],
+Cell[17680, 621, 106, 3, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17823, 629, 129, 7, 36, "Subsection"],
+Cell[17955, 638, 1122, 34, 102, "Input"],
+Cell[19080, 674, 335, 10, 41, "Input"],
+Cell[19418, 686, 60, 1, 41, "Input"],
+Cell[19481, 689, 150, 4, 41, "Input"],
+Cell[19634, 695, 106, 3, 41, "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

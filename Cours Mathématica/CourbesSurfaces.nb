@@ -1,0 +1,550 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     11355,        421]*)
+(*NotebookOutlinePosition[     12066,        445]*)
+(*  CellTagsIndexPosition[     12022,        441]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell["Graphisme", "Title"],
+
+Cell["\<\
+Outre les simples trac\[EAcute]s de courbes et de surfaces, les graphiques \
+sont un moyen direct de pr\[EAcute]sentation et de synth\[EGrave]se de r\
+\[EAcute]sultats math\[EAcute]matiques.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " Trac\[EAcute] de courbes"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Courbes repr\[EAcute]sentatives de fonctions"
+}], "Subsection"],
+
+Cell[TextData[{
+  "La fonction ",
+  StyleBox["Plot", "Input"],
+  " permet de tracer des courbes."
+}], "Text"],
+
+Cell[BoxData[
+    \(Plot[Sin[x]/x, {x, \(-10\), 10}]\)], "Input"],
+
+Cell["\<\
+On peut bien entendu tracer plusieurs courbes sur un m\[EHat]me graphe.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Plot[{Cos[x], Sin[x]}, {x, \(-Pi\), Pi}]\)], "Input"],
+
+Cell["\<\
+Il existe un grand nombre d'options possibles pour la fonction Plot. Citons \
+en particulier la possibilit\[EAcute] de tracer des courbes de couleurs diff\
+\[EAcute]rentes.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Plot[{Cos[x], Sin[x]}, {x, \(-Pi\), Pi}, 
+      PlotStyle \[Rule] {{RGBColor[1, 0, 0]}, {RGBColor[0, 0, 
+              1]}}]\)], "Input"],
+
+Cell["\<\
+Il est \[EAcute]galement possible de changer l'\[EAcute]paisseur des courbes \
+trac\[EAcute]es.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Plot[{Cos[x], Sin[x]}, {x, \(-Pi\), Pi}, 
+      PlotStyle \[Rule] {{Thickness[0.02]}, {Thickness[0.01]}}]\)], "Input"],
+
+Cell["On peut bien entendu combiner le tout.", "Text"],
+
+Cell[BoxData[
+    \(Plot[{Cos[x], Sin[x]}, {x, \(-Pi\), Pi}, 
+      PlotStyle \[Rule] {{RGBColor[1, 0, 0], 
+            Thickness[0.02]}, {RGBColor[1, 1, 0], 
+            Thickness[0.01]}}]\)], "Input"],
+
+Cell["\<\
+Pour une liste exhaustive des options de Plot, on peut consulter l'aide. On \
+peut \[EAcute]galement taper la ligne suivante, qui fournit la liste des \
+options, ainsi que leur valeur par d\[EAcute]faut.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Options[Plot]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Courbes param\[EAcute]tr\[EAcute]es"
+}], "Subsection"],
+
+Cell[TextData[{
+  "La fonction ",
+  StyleBox["ParametricPlot", "Input"],
+  " permet le trac\[EAcute] de courbes param\[EAcute]tr\[EAcute]es."
+}], "Text"],
+
+Cell[BoxData[
+    \(ParametricPlot[{Sin[5*x], Sin[8*x]}, {x, 0, 2  Pi}]\)], "Input"],
+
+Cell["\<\
+Un peu de couleur ne peut pas nuire. Des axes orthonorm\[EAcute]s non plus.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(ParametricPlot[{Sin[5*x + 3], Sin[4*x - 3*Sin[2*x]]}, {x, 0, 2  Pi}, 
+      AspectRatio \[Rule] 1, PlotStyle \[Rule] {{RGBColor[1, 1, 0]}}, 
+      Background \[Rule] GrayLevel[0]]\)], "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " Trac\[EAcute] de surfaces"
+}], "Section"],
+
+Cell["Voici une surface.", "Text"],
+
+Cell[BoxData[
+    \(Plot3D[x^2 + y^2, {x, \(-2\), 2}, {y, \(-2\), 2}]\)], "Input"],
+
+Cell["\<\
+La ligne ci-dessous permet de faire pivoter les surfaces avec la souris. \
+Cette commande est exp\[EAcute]rimentale, et un certain nombre d'options \
+graphiques ne fonctionnent pas avec cet environnement.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(<< RealTime3D`\)], "Input"],
+
+Cell[BoxData[
+    \(Plot3D[x^2 - y^2, {x, \(-2\), 2}, {y, \(-2\), 2}]\)], "Input"],
+
+Cell["Revenons \[AGrave] l'environnement \"normal\".", "Text"],
+
+Cell[BoxData[
+    \(<< Default3D`\)], "Input"],
+
+Cell["\<\
+Un grand nombre d'options permettent d'am\[EAcute]liorer ou modifier l'aspect \
+du r\[EAcute]sultat. Voici quelques exemples.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Plot3D[
+      x^2 + y^2, {x, \(-2\), 2}, {y, \(-2\), 
+        2}, \[IndentingNewLine]Boxed \[Rule] 
+        True, \[IndentingNewLine]PlotPoints \[Rule] 
+        50, \[IndentingNewLine]Mesh \[Rule] 
+        False, \[IndentingNewLine]Background \[Rule] 
+        RGBColor[0.3, 0.3, 0.2], \[IndentingNewLine]BoxRatios \[Rule] {1, 1, 
+          1.5}]\)], "Input"],
+
+Cell[BoxData[
+    \(Plot3D[x^2 - y^2 + Sin[5  x\ y], {x, \(-2\), 2}, {y, \(-2\), 2}, 
+      PlotPoints \[Rule] 50, \[IndentingNewLine]Mesh \[Rule] 
+        True, \[IndentingNewLine]Background \[Rule] 
+        GrayLevel[0.3], \[IndentingNewLine]ImageSize \[Rule] {400, 
+          400}]\)], "Input"],
+
+Cell["", "Text"],
+
+Cell["\<\
+Il est \[EAcute]galement possible de tracer des surfaces param\[EAcute]tr\
+\[EAcute]es.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(ParametricPlot3D[{\((2 + Cos[u])\)*Cos[v], \((2 + Cos[u])\)*Sin[v], 
+        Sin[u]}, {u, 0, 2\ Pi}, {v, 0, 
+        2\ Pi}, \[IndentingNewLine]Background \[Rule] 
+        RGBColor[0.2, 0.2, 0.1], \[IndentingNewLine]ImageSize \[Rule] {400, 
+          400}]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " Trac\[EAcute] de Listes"
+}], "Section"],
+
+Cell["\<\
+On dispose souvent de donn\[EAcute]es brutes sous forme de liste ou de \
+tableau. Typiquement, un calcul renvoie une liste ou un tableau de valeurs, \
+qu'il s'agit d'interpr\[EAcute]ter.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " Listes unidimensionnelles"
+}], "Subsection"],
+
+Cell["\<\
+Voici par exemple une liste contenant le nombre de diviseurs des entiers de 1 \
+\[AGrave] 1000.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(\(L = Table[Length[Divisors[k]], {k, 1, 1000}];\)\)], "Input"],
+
+Cell[TextData[{
+  "Affichons le contenu de ",
+  Cell[BoxData[
+      \(TraditionalForm\`L\)]],
+  ":"
+}], "Text"],
+
+Cell[BoxData[
+    \(ListPlot[L]\)], "Input"],
+
+Cell["\<\
+Et voici un trac\[EAcute] de la m\[EHat]me liste, o\[UGrave] l'on a joint les \
+points successifs.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(ListPlot[L, PlotJoined -> True]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " Tableaux"
+}], "Subsection"],
+
+Cell["\<\
+Voici maintenant un tableau contenant les PGCD des entiers de 1 \[AGrave] 20.\
+\
+\>", "Text"],
+
+Cell[BoxData[
+    \(\(L = Table[GCD[i, j], {i, 1, 20}, {j, 1, 20}];\)\)], "Input"],
+
+Cell[BoxData[
+    \(ListPlot3D[L, ColorFunction \[Rule] Hue]\)], "Input"],
+
+Cell["\<\
+Le r\[EAcute]sultat est int\[EAcute]ressant. Une autre possibilit\[EAcute] \
+est de tracer une matrice de densit\[EAcute], ce qui donnera un autre point \
+devue.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(ListDensityPlot[L, ColorFunction \[Rule] Hue]\)], "Input"],
+
+Cell["Un dernier exemple (attention aux temps de calcul !) ...", "Text"],
+
+Cell[BoxData[
+    \(ListDensityPlot[
+      Table[Sin[i^1.5/30. ]*Sin[j/30], {i, 1, 400}, {j, 1, 400}], 
+      Mesh \[Rule] False, ImageSize \[Rule] {400, 400}]\)], "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " Graphiques complexes"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " Animations"
+}], "Subsection"],
+
+Cell[TextData[{
+  "On peut effectuer des animations de la fa\[CCedilla]on suivante :\nOn \
+commence par cr\[EAcute]er une suite de graphiques avec la fonction ",
+  StyleBox["Do", "Input"],
+  ". On referme ensuite la cellule contenant tous les graphiques en cliquant \
+sur la barre verticale, \[AGrave] droite. Puis on clique deux fois sur le \
+dessin, qui s'anime alors."
+}], "Text"],
+
+Cell[BoxData[
+    \(Do[Plot[Sin[k*x], {x, \(-Pi\), Pi}], {k, 1, 10}]\)], "Input"],
+
+Cell["\<\
+Un autre exemple. Cette fois-ci, on fait tourner une surface param\[EAcute]tr\
+\[EAcute]e.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Do[ParametricPlot3D[{\((3 + 2*Cos[u])\)*Cos[v]*Cos[k*Pi/20] - 
+            Sin[u]*Sin[k*Pi/20], \((2 + Cos[u])\)*
+            Sin[v], \((3 + 2*Cos[u])\)*Cos[v]*Sin[k*Pi/20] + 
+            Sin[u]*Cos[k*Pi/20]}, {u, 0, 2\ Pi}, {v, 0, 2*\ Pi}, 
+        Background \[Rule] GrayLevel[0], ImageSize \[Rule] {400, 400}, 
+        SphericalRegion \[Rule] True, Boxed \[Rule] False, 
+        Axes \[Rule] False, ViewPoint \[Rule] {1, 1, 4}], {k, 0, 
+        19}]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " Combinaisons de graphiques"
+}], "Subsection"],
+
+Cell[TextData[{
+  "On peut combiner plusieurs graphiques diff\[EAcute]rents. La \
+d\[EAcute]marche \[AGrave] suivre est la suivante.\n",
+  StyleBox["\[CapitalEAcute]tape 1",
+    FontWeight->"Bold"],
+  " : cr\[EAcute]er les graphiques en leur donnant un nom. L'option ",
+  StyleBox["DisplayFunction->Identity", "Input"],
+  " \[EAcute]vite l'affichage des graphiques."
+}], "Text"],
+
+Cell[BoxData[
+    \(gr1 = 
+      ParametricPlot[{Sin[2*t], Sin[3*t]}, {t, 0, 2*Pi}, 
+        DisplayFunction \[Rule] Identity, 
+        PlotStyle \[Rule] {RGBColor[1, 0, 0], Thickness[0.01]}]\)], "Input"],
+
+Cell[BoxData[
+    \(gr2 = \ 
+      ParametricPlot[{Sin[3*t], Sin[2*t]}, {t, 0, 2*Pi}, 
+        DisplayFunction \[Rule] Identity, 
+        PlotStyle \[Rule] {RGBColor[1, 1, 0], Thickness[0.01]}]\)], "Input"],
+
+Cell[TextData[{
+  StyleBox["\[CapitalEAcute]tape 2",
+    FontWeight->"Bold"],
+  " : on utilise la fonction Show pour afficher les graphiques en m\[EHat]me \
+temps. On r\[EAcute]tablit cette fois-ci la valeur par d\[EAcute]faut pour \
+l'option ",
+  StyleBox["DisplayFunction", "Input"],
+  "."
+}], "Text"],
+
+Cell[BoxData[
+    \(Show[{gr2, gr1}, DisplayFunction \[Rule] $DisplayFunction, 
+      AspectRatio \[Rule] Automatic, 
+      Background \[Rule] GrayLevel[0]]\)], "Input"]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1024}, {0, 687}},
+ScreenStyleEnvironment->"Brackets",
+WindowSize->{559, 655},
+WindowMargins->{{Automatic, 4}, {Automatic, 0}},
+StyleDefinitions -> "Style.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 26, 0, 67, "Title"],
+Cell[1783, 53, 214, 4, 48, "Text"],
+
+Cell[CellGroupData[{
+Cell[2022, 61, 88, 4, 67, "Section"],
+
+Cell[CellGroupData[{
+Cell[2135, 69, 155, 8, 52, "Subsection"],
+Cell[2293, 79, 109, 4, 30, "Text"],
+Cell[2405, 85, 65, 1, 50, "Input"],
+Cell[2473, 88, 95, 2, 29, "Text"],
+Cell[2571, 92, 73, 1, 50, "Input"],
+Cell[2647, 95, 196, 4, 48, "Text"],
+Cell[2846, 101, 157, 3, 70, "Input"],
+Cell[3006, 106, 119, 3, 29, "Text"],
+Cell[3128, 111, 138, 2, 70, "Input"],
+Cell[3269, 115, 54, 0, 29, "Text"],
+Cell[3326, 117, 202, 4, 90, "Input"],
+Cell[3531, 123, 227, 4, 48, "Text"],
+Cell[3761, 129, 46, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[3844, 135, 146, 8, 36, "Subsection"],
+Cell[3993, 145, 153, 4, 30, "Text"],
+Cell[4149, 151, 84, 1, 50, "Input"],
+Cell[4236, 154, 99, 2, 29, "Text"],
+Cell[4338, 158, 212, 3, 90, "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4599, 167, 89, 4, 67, "Section"],
+Cell[4691, 173, 34, 0, 29, "Text"],
+Cell[4728, 175, 82, 1, 50, "Input"],
+Cell[4813, 178, 228, 4, 67, "Text"],
+Cell[5044, 184, 47, 1, 50, "Input"],
+Cell[5094, 187, 82, 1, 50, "Input"],
+Cell[5179, 190, 62, 0, 29, "Text"],
+Cell[5244, 192, 46, 1, 50, "Input"],
+Cell[5293, 195, 149, 3, 48, "Text"],
+Cell[5445, 200, 378, 8, 150, "Input"],
+Cell[5826, 210, 297, 5, 130, "Input"],
+Cell[6126, 217, 16, 0, 29, "Text"],
+Cell[6145, 219, 111, 3, 29, "Text"],
+Cell[6259, 224, 289, 5, 110, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[6585, 234, 87, 4, 47, "Section"],
+Cell[6675, 240, 210, 4, 48, "Text"],
+
+Cell[CellGroupData[{
+Cell[6910, 248, 130, 7, 52, "Subsection"],
+Cell[7043, 257, 119, 3, 29, "Text"],
+Cell[7165, 262, 82, 1, 50, "Input"],
+Cell[7250, 265, 111, 5, 29, "Text"],
+Cell[7364, 272, 44, 1, 50, "Input"],
+Cell[7411, 275, 122, 3, 29, "Text"],
+Cell[7536, 280, 64, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[7637, 286, 113, 7, 36, "Subsection"],
+Cell[7753, 295, 103, 3, 29, "Text"],
+Cell[7859, 300, 82, 1, 50, "Input"],
+Cell[7944, 303, 73, 1, 50, "Input"],
+Cell[8020, 306, 185, 4, 48, "Text"],
+Cell[8208, 312, 78, 1, 50, "Input"],
+Cell[8289, 315, 72, 0, 29, "Text"],
+Cell[8364, 317, 172, 3, 70, "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8585, 326, 84, 4, 67, "Section"],
+
+Cell[CellGroupData[{
+Cell[8694, 334, 115, 7, 52, "Subsection"],
+Cell[8812, 343, 383, 7, 99, "Text"],
+Cell[9198, 352, 81, 1, 50, "Input"],
+Cell[9282, 355, 114, 3, 29, "Text"],
+Cell[9399, 360, 485, 8, 190, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[9921, 373, 131, 7, 36, "Subsection"],
+Cell[10055, 382, 378, 8, 80, "Text"],
+Cell[10436, 392, 204, 4, 90, "Input"],
+Cell[10643, 398, 206, 4, 90, "Input"],
+Cell[10852, 404, 303, 8, 49, "Text"],
+Cell[11158, 414, 169, 3, 70, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

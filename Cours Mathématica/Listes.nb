@@ -1,0 +1,734 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     11059,        551]*)
+(*NotebookOutlinePosition[     11770,        575]*)
+(*  CellTagsIndexPosition[     11726,        571]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell["Les Listes", "Title"],
+
+Cell[TextData[{
+  "La liste est une structure de donn\[EAcute]es d'une grande importance pour \
+tout utilisateur de ",
+  StyleBox["Mathematica.",
+    FontSlant->"Italic"],
+  " On d\[EAcute]crit ci-dessous quelques op\[EAcute]rations sur les listes."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " Les bases"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "D\[EAcute]clarer une liste"
+}], "Subsection"],
+
+Cell["\<\
+Une liste est une suite d'expressions s\[EAcute]par\[EAcute]es par des \
+virgules, et encadr\[EAcute]es par des accolades. Voici une liste de nombres \
+entiers.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(L = {1, 4, 2, 8, 5, 7}\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Longueur d'une liste"
+}], "Subsection"],
+
+Cell["Voici la longueur de la liste pr\[EAcute]c\[EAcute]dente.", "Text"],
+
+Cell[BoxData[
+    \(Length[L]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " R\[EAcute]cup\[EAcute]rer des morceaux d'une liste"
+}], "Subsection"],
+
+Cell["Voici le 3\[EGrave]me \[EAcute]l\[EAcute]ment de la liste L.", "Text"],
+
+Cell[BoxData[
+    \(L[\([3]\)]\)], "Input"],
+
+Cell["\<\
+Sans vouloir \[EHat]tre exhaustifs (nous en sommes tr\[EGrave]s loin), voici \
+trois fonctions potentiellement utiles.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Head[L]\)], "Input"],
+
+Cell[BoxData[
+    \(First[L]\)], "Input"],
+
+Cell[BoxData[
+    \(Rest[L]\)], "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " Cr\[EAcute]er et Combiner les listes"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " Cr\[EAcute]er automatiquement des listes"
+}], "Subsection"],
+
+Cell[TextData[{
+  "La fonction ",
+  StyleBox["Table", "Input"],
+  " permet de cr\[EAcute]er automatiquement des listes."
+}], "Text"],
+
+Cell[BoxData[
+    \(L = Table[Binomial[10, k], {k, 1, 10}]\)], "Input"],
+
+Cell[BoxData[
+    \(M = Table[Sin[2  k\ Pi/40] + 1/5*Random[], {k, 0, 40}]\)], "Input"],
+
+Cell[TextData[{
+  "La fonction ",
+  StyleBox["ListPlot", "Input"],
+  " permet d'afficher graphiquement une liste de nombres r\[EAcute]els."
+}], "Text"],
+
+Cell[BoxData[
+    \(ListPlot[M, PlotJoined \[Rule] True]\)], "Input"],
+
+Cell[BoxData[
+    \(Clear[L, M]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " Concat\[EAcute]ner des listes"
+}], "Subsection"],
+
+Cell["La fonction Join permet de recoller des listes entre-elles.", "Text"],
+
+Cell[BoxData[
+    \(L = {1, 2}; M = {3, 4, 5};\)], "Input"],
+
+Cell[BoxData[
+    \(Join[L, M]\)], "Input"],
+
+Cell["Ajouter un objet \[AGrave] une liste", "SubsectionIcon"],
+
+Cell[BoxData[
+    \(L = {4, 1, 2, 3}\)], "Input"],
+
+Cell[BoxData[
+    \(Append[L, 9]\)], "Input"],
+
+Cell[BoxData[
+    \(Prepend[L, 9]\)], "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " Op\[EAcute]rer sur les listes"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Op\[EAcute]rateurs arithm\[EAcute]tiques"
+}], "Subsection"],
+
+Cell["\<\
+Les op\[EAcute]rateurs sur les nombres agissent aussi sur les listes.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\(L = {1, 4, 2, 8, 5, 7};\)\), "\[IndentingNewLine]", 
+    \(\(M = {2, 8, 5, 7, 1, 4};\)\)}], "Input"],
+
+Cell[BoxData[
+    \(L + M\)], "Input"],
+
+Cell[BoxData[
+    \(M\ *L\)], "Input"],
+
+Cell[BoxData[
+    \(M/L\)], "Input"],
+
+Cell[BoxData[
+    \(L^M\)], "Input"],
+
+Cell["\<\
+Le point est aussi un op\[EAcute]rateur, et d\[EAcute]signe le produit \
+scalaire.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(M . L\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Combinaisons de listes et de nombres"
+}], "Subsection"],
+
+Cell["On peut \[EAcute]galement faire op\[EAcute]rer les nombres sur les \
+listes", "Text"],
+
+Cell[BoxData[
+    \(3*L\)], "Input"],
+
+Cell[BoxData[
+    \(L*2\)], "Input"],
+
+Cell[BoxData[
+    \(L + 1\)], "Input"],
+
+Cell[BoxData[
+    \(L^3\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Fonctions usuelles"
+}], "Subsection"],
+
+Cell[TextData[{
+  "Les fonctions usuelles agissent aussi sur les listes. Ainsi, par exemple, \
+la fonction ",
+  StyleBox["Log", "Input"],
+  " est \"Listable\", c'est \[AGrave] dire que le log d'une liste est \
+\[EAcute]gal (dans ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  "!) \[AGrave] la liste des logs."
+}], "Text"],
+
+Cell[BoxData[
+    \(Attributes[Log]\)], "Input"],
+
+Cell[BoxData[
+    \(Log[L]\)], "Input"],
+
+Cell[BoxData[
+    \(Sin[L\ Pi/6]\)], "Input"],
+
+Cell[BoxData[
+    \(N[%]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Appliquer une fonction \[AGrave] une liste"
+}], "Subsection"],
+
+Cell[TextData[{
+  "Lorsqu'une fonction ne s'applique pas directement \[AGrave] une liste, la \
+fonction ",
+  StyleBox["Map", "Input"],
+  " permet d'effectuer le calcul."
+}], "Text"],
+
+Cell[BoxData[
+    \(\(f[x_] := If[x \[GreaterEqual] 0, 3  x, \(-x\)];\)\)], "Input"],
+
+Cell[BoxData[
+    \(Attributes[f]\)], "Input"],
+
+Cell[BoxData[
+    \(L = {1, \(-2\), 3, \(-4\), 5, \(-6\)}\)], "Input"],
+
+Cell["Une tentative de calcul direct \[EAcute]choue.", "Text"],
+
+Cell[BoxData[
+    \(f[L]\)], "Input"],
+
+Cell[TextData[{
+  "En revanche, l'utilisation de ",
+  StyleBox["Map", "Input"],
+  " permet d'obtenir le r\[EAcute]sultat escompt\[EAcute]."
+}], "Text"],
+
+Cell[BoxData[
+    \(Map[f, L]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "It\[EAcute]rer une fonction"
+}], "Subsection"],
+
+Cell[TextData[{
+  "Il existe un certain nombre de fonctions permettant d'effectuer des it\
+\[EAcute]rations. Voici l'exemple de la fonction ",
+  StyleBox["NestList", "Input"],
+  "."
+}], "Text"],
+
+Cell[BoxData[
+    \(\(f[x_] = Sqrt[1 + x];\)\)], "Input"],
+
+Cell[BoxData[
+    \(N[NestList[f, 0, 20], 15] // TableForm\)], "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " Les matrices : des listes de listes"
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Introduction"
+}], "Subsection"],
+
+Cell["\<\
+Rappelons qu'une liste peut contenir n'importe quel type d'expressions. Or, \
+une liste est une expression. Donc, une liste peut contenir des listes. CQFD.\
+\
+\>", "Text"],
+
+Cell[BoxData[
+    \(L = {3, {1, 2, 6}, {4, 7}}\)], "Input"],
+
+Cell[BoxData[
+    \(Length[L]\)], "Input"],
+
+Cell[BoxData[
+    \(L[\([2]\)]\)], "Input"],
+
+Cell[BoxData[
+    \(Depth[L]\)], "Input"],
+
+Cell[TextData[{
+  "Les objets math\[EAcute]matiques que sont les matrices sont \
+repr\[EAcute]sent\[EAcute]s par ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " comme des listes de listes."
+}], "Text"],
+
+Cell[BoxData[
+    \(M = {{1, 2, 3}, {4, 5, 6}, {7, 8, a}}\)], "Input"],
+
+Cell[BoxData[
+    \(M // MatrixForm\)], "Input"],
+
+Cell[BoxData[
+    \(Clear[L, M]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Op\[EAcute]rations matricielles"
+}], "Subsection"],
+
+Cell["\<\
+Addition et soustraction s'effectuent avec les op\[EAcute]rateurs usuels\
+\>", "Text"],
+
+Cell[BoxData[
+    \(A = Table[i + j, {i, 1, 3}, {j, 1, 3}]\)], "Input"],
+
+Cell[BoxData[
+    \(A // MatrixForm\)], "Input"],
+
+Cell[BoxData[
+    \(B = Table[i*j, {i, 1, 3}, {j, 1, 3}]\)], "Input"],
+
+Cell[BoxData[
+    \(B // MatrixForm\)], "Input"],
+
+Cell[BoxData[
+    \(A + B // MatrixForm\)], "Input"],
+
+Cell[BoxData[
+    \(A - B // MatrixForm\)], "Input"],
+
+Cell[BoxData[
+    \(2*A // MatrixForm\)], "Input"],
+
+Cell["\<\
+Le produit matriciel, quant \[AGrave] lui, est effectu\[EAcute] avec l'op\
+\[EAcute]rateur 'point'.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(A . B // MatrixForm\)], "Input"],
+
+Cell[BoxData[
+    \(Clear[A, B]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  ".",
+  
+  CounterBox["Subsection"],
+  " ",
+  "Inverse, d\[EAcute]terminant"
+}], "Subsection"],
+
+Cell[TextData[{
+  "Reprenons la matrice ",
+  Cell[BoxData[
+      \(TraditionalForm\`M\)]],
+  " d\[EAcute]finie au d\[EAcute]but de ce chapitre."
+}], "Text"],
+
+Cell[BoxData[
+    \(M = {{1, 2, 3}, {4, 5, 6}, {7, 8, a}}\)], "Input"],
+
+Cell[BoxData[
+    \(M // MatrixForm\)], "Input"],
+
+Cell[BoxData[
+    \(Det[M]\)], "Input"],
+
+Cell[TextData[{
+  "On voit donc que ",
+  Cell[BoxData[
+      \(TraditionalForm\`M\)]],
+  " est inversible tant que ",
+  Cell[BoxData[
+      \(TraditionalForm\`a \[NotEqual] 9\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[
+    \(Inverse[M] // MatrixForm\)], "Input"]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1024}, {0, 687}},
+ScreenStyleEnvironment->"Brackets",
+WindowSize->{564, 657},
+WindowMargins->{{Automatic, 2}, {1, Automatic}},
+StyleDefinitions -> "Style.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 27, 0, 67, "Title"],
+Cell[1784, 53, 261, 6, 48, "Text"],
+
+Cell[CellGroupData[{
+Cell[2070, 63, 73, 4, 67, "Section"],
+
+Cell[CellGroupData[{
+Cell[2168, 71, 137, 8, 52, "Subsection"],
+Cell[2308, 81, 184, 4, 48, "Text"],
+Cell[2495, 87, 55, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[2587, 93, 131, 8, 36, "Subsection"],
+Cell[2721, 103, 73, 0, 29, "Text"],
+Cell[2797, 105, 42, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[2876, 111, 155, 7, 36, "Subsection"],
+Cell[3034, 120, 76, 0, 29, "Text"],
+Cell[3113, 122, 43, 1, 50, "Input"],
+Cell[3159, 125, 142, 3, 48, "Text"],
+Cell[3304, 130, 40, 1, 50, "Input"],
+Cell[3347, 133, 41, 1, 50, "Input"],
+Cell[3391, 136, 40, 1, 50, "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3480, 143, 100, 4, 67, "Section"],
+
+Cell[CellGroupData[{
+Cell[3605, 151, 145, 7, 52, "Subsection"],
+Cell[3753, 160, 132, 4, 30, "Text"],
+Cell[3888, 166, 71, 1, 50, "Input"],
+Cell[3962, 169, 87, 1, 50, "Input"],
+Cell[4052, 172, 151, 4, 30, "Text"],
+Cell[4206, 178, 69, 1, 50, "Input"],
+Cell[4278, 181, 44, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[4359, 187, 134, 7, 36, "Subsection"],
+Cell[4496, 196, 75, 0, 29, "Text"],
+Cell[4574, 198, 59, 1, 50, "Input"],
+Cell[4636, 201, 43, 1, 50, "Input"],
+Cell[4682, 204, 62, 0, 25, "SubsectionIcon"],
+Cell[4747, 206, 49, 1, 46, "Input"],
+Cell[4799, 209, 45, 1, 50, "Input"],
+Cell[4847, 212, 46, 1, 50, "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4942, 219, 93, 4, 67, "Section"],
+
+Cell[CellGroupData[{
+Cell[5060, 227, 151, 8, 52, "Subsection"],
+Cell[5214, 237, 93, 2, 29, "Text"],
+Cell[5310, 241, 123, 2, 70, "Input"],
+Cell[5436, 245, 38, 1, 50, "Input"],
+Cell[5477, 248, 38, 1, 50, "Input"],
+Cell[5518, 251, 36, 1, 50, "Input"],
+Cell[5557, 254, 36, 1, 50, "Input"],
+Cell[5596, 257, 106, 3, 29, "Text"],
+Cell[5705, 262, 38, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[5780, 268, 147, 8, 36, "Subsection"],
+Cell[5930, 278, 91, 1, 29, "Text"],
+Cell[6024, 281, 36, 1, 50, "Input"],
+Cell[6063, 284, 36, 1, 50, "Input"],
+Cell[6102, 287, 38, 1, 50, "Input"],
+Cell[6143, 290, 36, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[6216, 296, 129, 8, 36, "Subsection"],
+Cell[6348, 306, 331, 9, 49, "Text"],
+Cell[6682, 317, 48, 1, 50, "Input"],
+Cell[6733, 320, 39, 1, 50, "Input"],
+Cell[6775, 323, 45, 1, 50, "Input"],
+Cell[6823, 326, 37, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[6897, 332, 153, 8, 36, "Subsection"],
+Cell[7053, 342, 181, 5, 49, "Text"],
+Cell[7237, 349, 84, 1, 50, "Input"],
+Cell[7324, 352, 46, 1, 50, "Input"],
+Cell[7373, 355, 70, 1, 50, "Input"],
+Cell[7446, 358, 62, 0, 29, "Text"],
+Cell[7511, 360, 37, 1, 50, "Input"],
+Cell[7551, 363, 151, 4, 30, "Text"],
+Cell[7705, 369, 42, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[7784, 375, 138, 8, 36, "Subsection"],
+Cell[7925, 385, 193, 5, 49, "Text"],
+Cell[8121, 392, 57, 1, 50, "Input"],
+Cell[8181, 395, 71, 1, 50, "Input"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8301, 402, 137, 7, 67, "Section"],
+
+Cell[CellGroupData[{
+Cell[8463, 413, 123, 8, 52, "Subsection"],
+Cell[8589, 423, 181, 4, 48, "Text"],
+Cell[8773, 429, 59, 1, 50, "Input"],
+Cell[8835, 432, 42, 1, 50, "Input"],
+Cell[8880, 435, 43, 1, 50, "Input"],
+Cell[8926, 438, 41, 1, 50, "Input"],
+Cell[8970, 441, 212, 6, 48, "Text"],
+Cell[9185, 449, 70, 1, 50, "Input"],
+Cell[9258, 452, 48, 1, 50, "Input"],
+Cell[9309, 455, 44, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[9390, 461, 142, 8, 36, "Subsection"],
+Cell[9535, 471, 96, 2, 29, "Text"],
+Cell[9634, 475, 71, 1, 50, "Input"],
+Cell[9708, 478, 48, 1, 50, "Input"],
+Cell[9759, 481, 69, 1, 50, "Input"],
+Cell[9831, 484, 48, 1, 50, "Input"],
+Cell[9882, 487, 52, 1, 50, "Input"],
+Cell[9937, 490, 52, 1, 50, "Input"],
+Cell[9992, 493, 50, 1, 50, "Input"],
+Cell[10045, 496, 123, 3, 29, "Text"],
+Cell[10171, 501, 52, 1, 50, "Input"],
+Cell[10226, 504, 44, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[10307, 510, 139, 8, 36, "Subsection"],
+Cell[10449, 520, 156, 5, 29, "Text"],
+Cell[10608, 527, 70, 1, 50, "Input"],
+Cell[10681, 530, 48, 1, 50, "Input"],
+Cell[10732, 533, 39, 1, 50, "Input"],
+Cell[10774, 536, 197, 8, 29, "Text"],
+Cell[10974, 546, 57, 1, 50, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

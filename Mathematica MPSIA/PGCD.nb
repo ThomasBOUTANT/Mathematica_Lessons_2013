@@ -1,0 +1,113 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      3205,        104]
+NotebookOptionsPosition[      2733,         84]
+NotebookOutlinePosition[      3069,         99]
+CellTagsIndexPosition[      3026,         96]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Pgcd", "[", 
+    RowBox[{"a1_", ",", "b1_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"a", "=", "a1"}], ",", 
+       RowBox[{"b", "=", "b1"}]}], "}"}], ",", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"b", "==", "0"}], ",", "a", ",", 
+       RowBox[{
+        RowBox[{"a", "=", 
+         RowBox[{"Quotient", "[", 
+          RowBox[{"a", ",", "b"}], "]"}]}], ";", 
+        RowBox[{"b", "=", 
+         RowBox[{"Mod", "[", 
+          RowBox[{"a", ",", "b"}], "]"}]}], ";", 
+        RowBox[{"Pgcd", "[", 
+         RowBox[{"a", ",", "b"}], "]"}]}]}], "]"}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.5637937399133863`*^9, 3.563793863483089*^9}, {
+  3.5637939230355062`*^9, 3.563793924003751*^9}, {3.563793962923057*^9, 
+  3.563793989929936*^9}, {3.563794047239048*^9, 3.563794080891527*^9}, {
+  3.5637942156759768`*^9, 3.5637943096808767`*^9}, {3.563794460277905*^9, 
+  3.563794498325473*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Pgcd", "[", 
+  RowBox[{"20", ",", "0"}], "]"}]], "Input",
+ CellChangeTimes->{{3.563794317593689*^9, 3.563794324701572*^9}, {
+  3.563794511743363*^9, 3.563794514157506*^9}}],
+
+Cell[BoxData["20"], "Output",
+ CellChangeTimes->{
+  3.563794325835225*^9, 3.5637944656684303`*^9, {3.563794503449423*^9, 
+   3.563794515142891*^9}}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Bezout", "[", 
+   RowBox[{"a1_", ",", "b1_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"a", "=", "a1"}], ",", 
+      RowBox[{"b", "=", "b1"}]}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"If", "[", "b", "\[IndentingNewLine]", "]"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.5637944171035013`*^9, 3.563794417404975*^9}, {
+  3.563794520478404*^9, 3.5637945219887133`*^9}, {3.5637945589887247`*^9, 
+  3.563794618677278*^9}, {3.56379471717314*^9, 3.563794726523884*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.563794415727955*^9, 3.563794416109026*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.563794405051271*^9, 3.5637944054927*^9}}]
+},
+WindowSize->{1227, 1000},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"8.0 for Linux x86 (64-bit) (October 10, 2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 1035, 27, 50, "Input"],
+Cell[CellGroupData[{
+Cell[1617, 51, 196, 4, 30, "Input"],
+Cell[1816, 57, 148, 3, 30, "Output"]
+}, Open  ]],
+Cell[1979, 63, 562, 13, 69, "Input"],
+Cell[2544, 78, 92, 1, 30, InheritFromParent],
+Cell[2639, 81, 90, 1, 30, InheritFromParent]
+}
+]
+*)
+
+(* End of internal cache information *)

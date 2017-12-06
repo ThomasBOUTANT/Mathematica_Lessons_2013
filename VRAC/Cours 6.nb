@@ -1,0 +1,150 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      4108,        141]
+NotebookOptionsPosition[      3235,        107]
+NotebookOutlinePosition[      3579,        122]
+CellTagsIndexPosition[      3536,        119]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Math\[EAcute]matica Cours 6", "Title",
+ CellChangeTimes->{{3.5700222874758387`*^9, 3.570022301469063*^9}},
+ Background->RGBColor[1, 0.9, 0.8]],
+
+Cell["Q1", "Subtitle",
+ CellChangeTimes->{{3.5700223125138817`*^9, 3.570022312981883*^9}, 
+   3.570022352793152*^9},
+ Background->RGBColor[1, 1, 0.85]],
+
+Cell[BoxData["\"\<PrimeQ[n]=True si et seulement si n est un nombre \
+premier.\>"], "Input",
+ CellChangeTimes->{{3.5700223730107875`*^9, 3.570022403571241*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SommeNbPremier", "[", "N_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "S", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"S", "=", 
+      RowBox[{"Sum", "[", 
+       RowBox[{
+        RowBox[{"PrimeQ", "[", "k", "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"k", ",", "2", ",", "N"}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", "S"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.5700224543337293`*^9, 3.570022482242178*^9}, {
+  3.5700225572159085`*^9, 3.5700225703511314`*^9}, {3.570022600927185*^9, 
+  3.570022740906229*^9}, {3.5700227710610814`*^9, 3.5700227716070824`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SommeNbPremier", "[", "100", "]"}]], "Input",
+ CellChangeTimes->{{3.570022774867488*^9, 3.570022783353903*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"74", " ", "False"}], "+", 
+  RowBox[{"25", " ", "True"}]}]], "Output",
+ CellChangeTimes->{3.570022784601905*^9}]
+}, Open  ]],
+
+Cell[BoxData["\"\<Ceci est donc faux mais interessant, donc je le \
+laisse.\>"], "Input",
+ CellChangeTimes->{{3.570022814990758*^9, 3.570022834319192*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Clear", "[", "SommeNbPremier", "]"}]], "Input",
+ CellChangeTimes->{{3.570022839623201*^9, 3.5700228501688194`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Q2", "Subtitle",
+ CellChangeTimes->{{3.5700223146354856`*^9, 3.5700223153530865`*^9}, 
+   3.570022352793152*^9},
+ Background->RGBColor[1, 1, 0.85]],
+
+Cell["Q3", "Subtitle",
+ CellChangeTimes->{{3.5700223174122906`*^9, 3.5700223177086906`*^9}, 
+   3.570022352793152*^9},
+ Background->RGBColor[1, 1, 0.85]],
+
+Cell["While", "Section",
+ CellChangeTimes->{{3.5700223329967175`*^9, 3.5700223429027348`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Q4", "Subtitle",
+ CellChangeTimes->{{3.570022322341899*^9, 3.5700223226070995`*^9}, 
+   3.570022352793152*^9},
+ Background->RGBColor[1, 1, 0.85]],
+
+Cell["Q5", "Subtitle",
+ CellChangeTimes->{{3.570022323808302*^9, 3.570022352793152*^9}},
+ Background->RGBColor[1, 1, 0.85]],
+
+Cell["Q6", "Subtitle",
+ CellChangeTimes->{{3.570022325103104*^9, 3.570022352793152*^9}},
+ Background->RGBColor[1, 1, 0.85]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{707, 505},
+WindowMargins->{{Automatic, 4}, {Automatic, 10}},
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 148, 2, 99, "Title"],
+Cell[730, 26, 151, 3, 65, "Subtitle"],
+Cell[884, 31, 160, 2, 31, "Input"],
+Cell[1047, 35, 667, 16, 72, "Input"],
+Cell[CellGroupData[{
+Cell[1739, 55, 135, 2, 31, "Input"],
+Cell[1877, 59, 147, 4, 30, "Output"]
+}, Open  ]],
+Cell[2039, 66, 155, 2, 31, "Input"],
+Cell[2197, 70, 139, 2, 31, "Input"],
+Cell[CellGroupData[{
+Cell[2361, 76, 153, 3, 65, "Subtitle"],
+Cell[2517, 81, 153, 3, 65, "Subtitle"],
+Cell[2673, 86, 94, 1, 71, "Section"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2804, 92, 151, 3, 65, "Subtitle"],
+Cell[2958, 97, 123, 2, 65, "Subtitle"],
+Cell[3084, 101, 123, 2, 65, "Subtitle"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

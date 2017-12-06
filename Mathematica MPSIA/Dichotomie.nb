@@ -1,0 +1,178 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      5788,        168]
+NotebookOptionsPosition[      5331,        147]
+NotebookOutlinePosition[      5668,        162]
+CellTagsIndexPosition[      5625,        159]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"g", "[", "x_", "]"}], ":=", 
+    RowBox[{
+     RowBox[{"Cos", "[", "x", "]"}], "-", "x"}]}], "\[IndentingNewLine]", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"g", "[", "x", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", 
+       RowBox[{"\[Pi]", "/", "2"}]}], "}"}]}], "]"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{
+  3.560158952051293*^9, {3.56015899479123*^9, 3.560159055817412*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {}, 
+   {Hue[0.67, 0.6, 0.6], LineBox[CompressedData["
+1:eJwVzHs41XccB/ATVhLtkPRIMqELmlbP1oTem4Vi6VAtcwknmo5yq9ym5NJJ
+tew4Lg85Mm2oFiW5jFNfW7kknSkn5E6u4Rzk8DsU++2Pz/N+ns/zfr/02YHO
+vgoMBmM/ff+nIlERvf3Se/fWdfWSxUUpjEYeW6xPBg4Zj3iofZBi7r6Zzxv+
+AWQKT7HWUlIMaPpRpXxPiCLzyfYJKdps4//J5QeiwbCrxqNHitee/E1Z/Gjs
+yvYJF1RJ4XxSuy2d/yusP8/yE16QImnKvTiNnw1+lukV7qIEFtX2Ktan70N3
+sCTiXs84giIdvYuDynH8lCAns2EMp8p9ExUMqnDx4oKhZekoxMP7luezn+Kg
+p573neh3uGI2wyj9sQ6i8recusMjCDapS63KbcDqQzgKlWHMHfMv7AxoxPMq
+G3+GcBDsRz+weMdfwSKZ0382agDHJsVVVQliOK7abJes3Y9ftpUF5nGbIQw9
+1hJe0weFqrKd8ZGt0BG4ev8b0gt1YwdRd3obkmZUedemu7E32/r3CX4HYnvW
+hX66qRNrpA220WVdiNZNPuKn1obrtRVLFE/0YPN2Q67/VDMsdb9d/MynF5In
+2qFrF5tg0sPsP3emDy4pN/oWhI0ouKXhVxLyFixZ5eG4fc8R1eXRZMLtxx6m
+gZNP2FMEW37tcCNlAMOFlR1urErMZe9hj/IGMfFJq6p60100Bl33Crs5BMZY
+14EAvgPM7TYsdOYMg7c0/PK7s3fIMxvzW98IRrA3Ln+sO7WC5BZlmPf9+Q6H
+Ep3uJOQ8JasNTDlHb4/CK8vZNJr3nLxaohyrLRzD9yLKLSP1JSlRPp3X+Gwc
+7qphF1zdXxPT1UwOu1qCkxrNtjdHW4k0cUZzR7MU9ltr0ttedhCDS5fMAjkT
+iKk9t/YAekifa3ub9dAEKsZrd51g9pG9A03ykoBJSF5ydjir9ZPwEF8/rfFJ
+xOs+mO0bHSCOpZn2WqFT6BFZlMXMDBHJB06U4swUJthxxt29IySnJeZhwOn3
+WJlQZMetGSVzflZeEfPvUeBuvcOqZZzofkxyC46cRr1N2oBtrZQM2l2tV1aS
+IT1YWFkwOUGebGzA+qsypG6Tm03OTxKOcp6S/vIZLLjzxTtlU6TsN0OrJ0kz
+UPAVdLsoTRORhWW1s/osVpZr5uoryAjFyTzolTgL3pAw+OS8jNSxsg+raVE4
+b7VrN0tllrDNLfPzUyi8CBFvcltGkRPjL2QdaRTCpk2CqldQJCjHc49GBgXv
+0i2VZkyKRC+P643KovuSMRclbYoI3jzTcc6jwGzzeVBgTJHmiCO8D2UUZMX3
+mhiOFLGvCIlwaqewZY1L/K0UijgFKNVxOyn4DwtUV2VQxGVDmpawm8L+eLO0
+c1kU+enKX8Ub+ymorlhVQLsk3pUhmR+j8LAjd5h2yeO5a+y8BQqtfydeo11S
+XahX1M6QI+yrP4xohzSwixaZinKUm7k9ph3SXi8W/LxMDu0bsZO0Q6jrOi0s
+phyOo5c9aIcsOhYYcTXkMFp6Xk7vyFJFnKnUlMMm5lEqvSOa/mz1jdpyqHLf
+i+gd0dGb9nTTkSOBK/ane2RD08VCnq4cMvFrZbpHjC+t+VitJwe5O5ZL/8kX
+Frcd5vXlsN+38js6yX+fYpWI
+     "]]}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 0},
+  PlotRange->
+   NCache[{{0, Rational[1, 2] Pi}, {-1.5707962626807608`, 
+     0.9999999679429316}}, {{0, 1.5707963267948966`}, {-1.5707962626807608`, 
+     0.9999999679429316}}],
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], 
+    Scaled[0.02]}]], "Output",
+ CellChangeTimes->{3.560159057487194*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"dicho", "[", 
+    RowBox[{"f_", ",", "a1_", ",", "b1_", ",", "eps_"}], "]"}], ":=", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"a", "=", "a1"}], ",", 
+       RowBox[{"b", "=", "b1"}], ",", "c"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"While", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"b", "-", "a"}], ">", "eps"}], ",", 
+        RowBox[{
+         RowBox[{"c", "=", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"a", "+", "b"}], ")"}], "/", "2"}]}], ";", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"f", "[", "a", "]"}], "*", 
+             RowBox[{"f", "[", "c", "]"}]}], "\[LessEqual]", "0"}], ",", 
+           RowBox[{"b", "=", "c"}], ",", 
+           RowBox[{"a", "=", "c"}]}], "]"}]}]}], "]"}], ";", 
+      RowBox[{"Print", "[", 
+       RowBox[{"a", ",", "b"}], "]"}]}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.560159059448247*^9, 3.560159326905467*^9}, {
+  3.560159386459942*^9, 3.560159422132325*^9}, {3.560159453837693*^9, 
+  3.560159457950107*^9}, {3.560159513805488*^9, 3.560159515569536*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"dicho", "[", 
+   RowBox[{"g", ",", "0", ",", 
+    RowBox[{"Pi", "/", "2"}], ",", "0.001"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.5601593329699287`*^9, 3.56015935785847*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  InterpretationBox[
+   RowBox[{
+    FractionBox[
+     RowBox[{"963", " ", "\[Pi]"}], "4096"], "\[InvisibleSpace]", 
+    FractionBox[
+     RowBox[{"241", " ", "\[Pi]"}], "1024"]}],
+   SequenceForm[Rational[963, 4096] Pi, Rational[241, 1024] Pi],
+   Editable->False], "\[IndentingNewLine]"}]], "Print",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.560159461785248*^9, {3.560159519690126*^9, 3.560159528058449*^9}}]
+}, Open  ]]
+},
+WindowSize->{740, 855},
+WindowMargins->{{142, Automatic}, {Automatic, 24}},
+FrontEndVersion->"8.0 for Linux x86 (64-bit) (October 10, 2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 517, 15, 88, "Input"],
+Cell[1099, 39, 2189, 43, 225, "Output"]
+}, Open  ]],
+Cell[3303, 85, 1283, 35, 88, "Input"],
+Cell[CellGroupData[{
+Cell[4611, 124, 235, 5, 50, "Input"],
+Cell[4849, 131, 466, 13, 60, "Print"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

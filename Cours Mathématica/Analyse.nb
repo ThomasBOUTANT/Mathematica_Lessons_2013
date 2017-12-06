@@ -1,0 +1,373 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      7003,        274]*)
+(*NotebookOutlinePosition[      7714,        298]*)
+(*  CellTagsIndexPosition[      7670,        294]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[TextData[{
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " et l'Analyse"
+}], "Title"],
+
+Cell[TextData[{
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " permet bien entendu de faire des calculs en Analyse. On passe ici en \
+revue les calculs de limites, de d\[EAcute]riv\[EAcute]es et \
+d'int\[EAcute]grales, ainsi que la r\[EAcute]solution des \[EAcute]quations \
+diff\[EAcute]rentielles."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " Limites"
+}], "Section"],
+
+Cell["\<\
+La fonction Limit calcule des limites de fonctions ou de suites.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Limit[Sin[x]/x, x \[Rule] 0]\)], "Input"],
+
+Cell[BoxData[
+    \(Limit[n\ *\((5^\((1/n)\) - 1)\), n \[Rule] Infinity]\)], "Input"],
+
+Cell[BoxData[
+    \(Limit[\((3\ *2^\((1/n)\) - 2\ *3^\((1/n)\))\)^n, 
+      n \[Rule] Infinity]\)], "Input"],
+
+Cell[TextData[{
+  "Par d\[EAcute]faut, ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " renvoie la limite \[AGrave] droite."
+}], "Text"],
+
+Cell[BoxData[
+    \(Limit[1/x, x \[Rule] 0]\)], "Input"],
+
+Cell["On peut bien entendu demander la limite \[AGrave] gauche.", "Text"],
+
+Cell[BoxData[
+    \(Limit[1/x, x \[Rule] 0, Direction \[Rule] 1]\)], "Input"],
+
+Cell["\<\
+Dans certains cas, la limite n'existe pas. Le r\[EAcute]sultat peut tout de m\
+\[EHat]me \[EHat]tre instructif.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Limit[Sin[x], x \[Rule] \[Infinity]]\)], "Input"],
+
+Cell[TextData[{
+  "Bien entendu, un calcul de limite trop compliqu\[EAcute] peut \
+\[EAcute]chouer. ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " renvoie alors la question pos\[EAcute]e."
+}], "Text"],
+
+Cell[BoxData[
+    \(Limit[Sum[1/\(\((k^2)\)!\), {k, 0, n}], 
+      n \[Rule] \[Infinity]]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " D\[EAcute]riv\[EAcute]es"
+}], "Section"],
+
+Cell["La fonction D permet les calculs de d\[EAcute]riv\[EAcute]es.", "Text"],
+
+Cell[BoxData[
+    \(D[\((x^2 + 3  x + 1)\)/\((x^3 - 2)\), x]\)], "Input"],
+
+Cell[BoxData[
+    \(Simplify[%]\)], "Input"],
+
+Cell[BoxData[
+    \(Factor[%]\)], "Input"],
+
+Cell["Voici la d\[EAcute]riv\[EAcute]e 10\[EGrave]me de la fonction \
+tangente.", "Text"],
+
+Cell[BoxData[
+    \(D[Tan[x], {x, 10}]\)], "Input"],
+
+Cell[BoxData[
+    \(Simplify[%]\)], "Input"],
+
+Cell["\<\
+On peut bien entendu effectuer des d\[EAcute]rivations successives par \
+rapport \[AGrave] plusieurs variables.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(D[x^3  y^2, x, y]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " Int\[EAcute]grales"
+}], "Section"],
+
+Cell[TextData[{
+  "La fonction ",
+  StyleBox["Integrate", "Input"],
+  " permet le calcul de primitives et d'int\[EAcute]grales."
+}], "Text"],
+
+Cell["\<\
+Voici un calcul de primitive. Remarquer que la constante \
+d'int\[EAcute]gration n'appara\[IHat]t pas dans le r\[EAcute]sultat.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Integrate[1/\((x^3 + 1)\), x]\)], "Input"],
+
+Cell["Voici maintenant une int\[EAcute]grale.", "Text"],
+
+Cell[BoxData[
+    \(Integrate[1/\((x^3 + 1)\), {x, 0, 1}]\)], "Input"],
+
+Cell["\<\
+Comme pour les calculs de sommes ou les r\[EAcute]solutions \
+d'\[EAcute]quations, on peut parfois \[EHat]tre surpris par le \
+r\[EAcute]sultat renvoy\[EAcute]. Rien n'emp\[EHat]che alors d'aller \
+consulter l'aide en ligne.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(j = Integrate[Sin[x]/x, {x, 0, Pi}]\)], "Input"],
+
+Cell[BoxData[
+    \(\(?SinIntegral\)\)], "Input"],
+
+Cell[BoxData[
+    \(N[j, 100]\)], "Input"],
+
+Cell[BoxData[
+    \(Clear[j]\)], "Input"],
+
+Cell["Voici encore un r\[EAcute]sultat un peu obscur. ", "Text"],
+
+Cell[BoxData[
+    \(j = Integrate[1/Sqrt[\((x - a)\) \((b - x)\)], {x, a, b}]\)], "Input"],
+
+Cell[TextData[{
+  "Mais oui ! Il faudrait dire \[AGrave] ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " que ",
+  Cell[BoxData[
+      \(TraditionalForm\`a < b\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[
+    \(Simplify[j, a < b]\)], "Input"],
+
+Cell[BoxData[
+    \(Clear[j]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  
+  CounterBox["Section"],
+  " \[CapitalEAcute]quations diff\[EAcute]rentielles"
+}], "Section"],
+
+Cell[TextData[{
+  "La fonction ",
+  StyleBox["DSolve", "Input"],
+  " permet de r\[EAcute]soudre des \[EAcute]quations diff\[EAcute]rentielles. \
+Des constantes d'int\[EAcute]gration apparaissent dans le r\[EAcute]sultat."
+}], "Text"],
+
+Cell[BoxData[
+    \(DSolve[\(y'\)[x] == y[x] + 1, y[x], x]\)], "Input"],
+
+Cell[BoxData[
+    \(DSolve[\(y''\)[x] + y[x] \[Equal] Sin[2  x], y[x], x]\)], "Input"],
+
+Cell["\<\
+On peut \[EAcute]galement incorporer des conditions initiales \[AGrave] l'\
+\[EAcute]quation diff\[EAcute]rentielle.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(DSolve[{\(y'\)[x] == y[x], y[0] \[Equal] 1}, y[x], x]\)], "Input"],
+
+Cell[BoxData[
+    \(solution = 
+      DSolve[{\(y''\)[x] + y[x] \[Equal] Sin[2  x], \(y'\)[0] \[Equal] 0, 
+          y[0] \[Equal] 1}, y[x], x]\)], "Input"],
+
+Cell["Extirpons l'expression de la solution ...", "Text"],
+
+Cell[BoxData[
+    \(y[x] /. solution[\([1]\)]\)], "Input"],
+
+Cell["Et faisons r\[EAcute]duire le tout : c'est pr\[EHat]t.", "Text"],
+
+Cell[BoxData[
+    \(TrigReduce[%]\)], "Input"]
+}, Closed]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1024}, {0, 687}},
+ScreenStyleEnvironment->"Brackets",
+WindowSize->{539, 653},
+WindowMargins->{{Automatic, 2}, {1, Automatic}},
+StyleDefinitions -> "Style.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 98, 4, 68, "Title"],
+Cell[1855, 57, 321, 7, 67, "Text"],
+
+Cell[CellGroupData[{
+Cell[2201, 68, 71, 4, 67, "Section"],
+Cell[2275, 74, 88, 2, 29, "Text"],
+Cell[2366, 78, 61, 1, 50, "Input"],
+Cell[2430, 81, 85, 1, 50, "Input"],
+Cell[2518, 84, 108, 2, 50, "Input"],
+Cell[2629, 88, 146, 5, 29, "Text"],
+Cell[2778, 95, 56, 1, 50, "Input"],
+Cell[2837, 98, 73, 0, 29, "Text"],
+Cell[2913, 100, 77, 1, 50, "Input"],
+Cell[2993, 103, 135, 3, 29, "Text"],
+Cell[3131, 108, 69, 1, 50, "Input"],
+Cell[3203, 111, 212, 6, 48, "Text"],
+Cell[3418, 119, 102, 2, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[3557, 126, 88, 4, 47, "Section"],
+Cell[3648, 132, 77, 0, 29, "Text"],
+Cell[3728, 134, 73, 1, 50, "Input"],
+Cell[3804, 137, 44, 1, 50, "Input"],
+Cell[3851, 140, 42, 1, 50, "Input"],
+Cell[3896, 143, 89, 1, 29, "Text"],
+Cell[3988, 146, 51, 1, 50, "Input"],
+Cell[4042, 149, 44, 1, 50, "Input"],
+Cell[4089, 152, 135, 3, 48, "Text"],
+Cell[4227, 157, 50, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[4314, 163, 82, 4, 47, "Section"],
+Cell[4399, 169, 140, 4, 30, "Text"],
+Cell[4542, 175, 151, 3, 48, "Text"],
+Cell[4696, 180, 62, 1, 50, "Input"],
+Cell[4761, 183, 55, 0, 29, "Text"],
+Cell[4819, 185, 70, 1, 50, "Input"],
+Cell[4892, 188, 248, 5, 48, "Text"],
+Cell[5143, 195, 68, 1, 50, "Input"],
+Cell[5214, 198, 49, 1, 50, "Input"],
+Cell[5266, 201, 42, 1, 50, "Input"],
+Cell[5311, 204, 41, 1, 50, "Input"],
+Cell[5355, 207, 64, 0, 29, "Text"],
+Cell[5422, 209, 90, 1, 50, "Input"],
+Cell[5515, 212, 192, 8, 29, "Text"],
+Cell[5710, 222, 51, 1, 50, "Input"],
+Cell[5764, 225, 41, 1, 50, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[5842, 231, 112, 4, 47, "Section"],
+Cell[5957, 237, 233, 5, 49, "Text"],
+Cell[6193, 244, 71, 1, 50, "Input"],
+Cell[6267, 247, 86, 1, 50, "Input"],
+Cell[6356, 250, 140, 3, 29, "Text"],
+Cell[6499, 255, 86, 1, 50, "Input"],
+Cell[6588, 258, 156, 3, 90, "Input"],
+Cell[6747, 263, 57, 0, 29, "Text"],
+Cell[6807, 265, 58, 1, 50, "Input"],
+Cell[6868, 268, 70, 0, 29, "Text"],
+Cell[6941, 270, 46, 1, 50, "Input"]
+}, Closed]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

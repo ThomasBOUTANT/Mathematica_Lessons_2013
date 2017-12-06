@@ -1,0 +1,231 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      5672,        221]
+NotebookOptionsPosition[      4591,        179]
+NotebookOutlinePosition[      5011,        195]
+CellTagsIndexPosition[      4968,        192]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+M\[EAcute]thode de factorisation de Pollard\
+\>", "Title"],
+
+Cell[TextData[{
+ "Recherche d'un facteur premier d'un entier. L'appel \[AGrave] ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"pollard", "[", "n", "]"}], TraditionalForm]],
+  FontWeight->"Bold"],
+ " recherche un facteur premier de l'entier ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]],
+  FontWeight->"Bold"],
+ " "
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Appel principal de la fonction", "Section"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"pollard", "[", "n_", "]"}], ":=", 
+  RowBox[{"pollard", "[", 
+   RowBox[{"0", ",", "1", ",", "1", ",", 
+    RowBox[{"Mod", "[", 
+     RowBox[{"2", ",", "n"}], "]"}], ",", "n"}], "]"}]}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Recherche de la p\[EAcute]riode de ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"x", "\[Rule]", 
+    RowBox[{
+     SuperscriptBox["x", "2"], "+", 
+     RowBox[{"1", " ", "[", 
+      RowBox[{"mod", " ", "n"}], "]"}]}]}], TraditionalForm]]]
+}], "Section"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"pollard", "[", 
+   RowBox[{"i_", ",", "j_", ",", "x_", ",", "y_", ",", "n_"}], " ", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"pollard", "[", 
+    RowBox[{"i", ",", 
+     RowBox[{"j", "+", "1"}], ",", "x", ",", 
+     RowBox[{"Mod", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"y", "^", "2"}], "+", "1"}], ",", "n"}], "]"}], ",", "n"}], 
+    "]"}], " ", "/;", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"GCD", "[", 
+       RowBox[{
+        RowBox[{"Abs", "[", 
+         RowBox[{"x", "-", "y"}], "]"}], ",", "n"}], "]"}], "==", "1"}], " ", 
+     "&&", " ", 
+     RowBox[{"j", "\[LessEqual]", 
+      RowBox[{"2", "i"}]}]}], ")"}]}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"pollard", "[", 
+   RowBox[{"i_", ",", "j_", ",", "x_", ",", "y_", ",", "n_"}], " ", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"pollard", "[", 
+    RowBox[{"j", ",", 
+     RowBox[{"j", "+", "1"}], ",", "y", ",", 
+     RowBox[{"Mod", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"y", "^", "2"}], "+", "1"}], ",", "n"}], "]"}], ",", "n"}], 
+    "]"}], " ", "/;", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"GCD", "[", 
+       RowBox[{
+        RowBox[{"Abs", "[", 
+         RowBox[{"x", "-", "y"}], "]"}], ",", "n"}], "]"}], "==", "1"}], " ", 
+     "&&", "  ", 
+     RowBox[{"j", "==", 
+      RowBox[{
+       RowBox[{"2", "i"}], "+", "1"}]}]}], ")"}]}]}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Un diviseur a \[EAcute]t\[EAcute] trouv\[EAcute]", "Section"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"pollard", "[", 
+   RowBox[{"i_", ",", "j_", ",", "x_", ",", "y_", ",", "n_"}], " ", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"GCD", "[", 
+    RowBox[{
+     RowBox[{"Abs", "[", 
+      RowBox[{"x", "-", "y"}], "]"}], ",", "n"}], "]"}], "/;", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"GCD", "[", 
+      RowBox[{
+       RowBox[{"Abs", "[", 
+        RowBox[{"x", "-", "y"}], "]"}], ",", "n"}], "]"}], "!=", "1"}], " ", 
+    ")"}]}]}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Autoriser un nombre infini d'it\[EAcute]rations\
+\>", "Section"],
+
+Cell[BoxData[
+ RowBox[{"$IterationLimit", "=", "Infinity"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Un exemple", "Section"],
+
+Cell[BoxData[
+ RowBox[{"Timing", "[", 
+  RowBox[{"pollard", "[", 
+   RowBox[{
+    RowBox[{"2", "^", "64"}], "+", "1"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.41017135490625*^9, 3.410171356109375*^9}, {
+   3.41017139071875*^9, 3.410171414359375*^9}, 3.410171469828125*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Comparaison avec la fonction ",
+ StyleBox["\[MathematicaIcon]",
+  FontSize->16],
+ " FactorInteger."
+}], "Section",
+ CellChangeTimes->{{3.410171363609375*^9, 3.410171377625*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Timing", "[", 
+  RowBox[{"FactorInteger", "[", 
+   RowBox[{
+    RowBox[{"2", "^", "128"}], "+", "1"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.410171339921875*^9, 3.410171349453125*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{666, 579},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 68, 2, 65, "Title"],
+Cell[650, 26, 325, 11, 47, "Text"],
+Cell[CellGroupData[{
+Cell[1000, 41, 49, 0, 75, "Section"],
+Cell[1052, 43, 231, 6, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1320, 54, 266, 9, 77, "Section"],
+Cell[1589, 65, 695, 22, 82, "Input"],
+Cell[2287, 89, 714, 23, 82, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3038, 117, 67, 0, 75, "Section"],
+Cell[3108, 119, 472, 15, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3617, 139, 74, 2, 75, "Section"],
+Cell[3694, 143, 70, 1, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3801, 149, 29, 0, 75, "Section"],
+Cell[3833, 151, 279, 6, 41, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4149, 162, 195, 6, 75, "Section"],
+Cell[4347, 170, 216, 5, 41, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
